@@ -6,12 +6,12 @@ Welcome to join Pulsar translation project! Before translating, read translation
 StreamNative Platform 中文文档翻译流程如下。
 
 ### 创建翻译分支
-详情参考[创建分支](CONTRIBUTING.md#contribution-workflow).
+详情参考[创建分支](CONTRIBUTING.md#contribution-workflow)。
 
 ### 选择文件
 选择需要翻译的 md 文件，直接在 md 文件翻译成中文。
 
-> 由于 StreamNative Platform 还在积极开发中，近期会新增很多功能和部署方式。查看[翻译文件优先级]（），优先选择较稳定部分翻译。
+> 由于 StreamNative Platform 还在积极开发中，近期会新增很多功能和部署方式。查看[翻译文件说明](readme.md#中文文件翻译说明)，优先选择 `优先级高`并且`可翻译`（较稳定）部分翻译。
 
 ### 翻译
 译者开始翻译。在打开的翻译界面，文件 id 不需要翻译。翻译中的 tag 和源文件保持一致。
@@ -135,4 +135,4 @@ Reviewer 收到通知后，开始审阅翻译内容。审阅完成后，在 PR �
 语言尽量简单、通顺，翻译完后，读一遍，适合中国人的阅读习惯。英语中有时会用从句，翻译中文时，尽量拆成几个简单的句子。
 
 ## Join contributors
-When your first pull request is merged, feel free to add your name to the [contributor list](https://github.com/apache/pulsar-translation/blob/master/CONTRIBUTORS.md). 
+When your first pull request is merged, feel free to add your name to the [contributor list](CONTRIBUTORS.md). 
