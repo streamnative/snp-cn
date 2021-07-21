@@ -1,0 +1,105 @@
+# StreamNative Platform 文档结构
+
+以下是 StreamNative Platform 文档结构。 
+
+```shell
+├── overview.md
+├── quickstart.md
+├── concepts
+    ├── pub-sub-concepts.md
+    ├── kop-concepts.md
+    ├── pulsar-io-concepts.md
+    ├── pulsar-function-concepts.md
+    ├── functionmesh-concepts.md
+├── operator-guides
+    ├── sn-plan.md
+    ├── sn-prepare.md
+    ├── configure
+        ├── storage.md
+        ├── networking.md
+        ├── security
+            ├── security-overview.md
+            ├── security-auth.md
+            ├── network-encryption
+                ├── tls-proxy.md
+                ├── tls-load-balancer.md
+            ├── audit-log.md
+        ├── kop.md                        
+        ├── backup-restore-metadata-tool.md
+        ├── detector.md
+        ├── monitoring                       
+            ├── prometheus.md
+            ├── grafana.md    
+            ├── alertmanager.md
+        ├── license-update.md
+    ├── deploy 
+        ├── sn-deploy.md
+        ├── deploy-snp-aws.md
+    ├── manage
+        ├── scale-cluster.md
+        ├── restart-cluster.md
+    ├── sn-monitor.md
+    ├── upgrade
+        ├── sn-upgrade.md
+    ├── operator-reference
+        ├── sn-version-matrix.md
+├── configure
+    ├── overview.md
+    ├── pulsar-core
+        ├── zookeeper.md
+        ├── bookkeeper.md
+        ├── broker.md
+        ├── kop.md
+        ├── tiered-storage.md
+        ├── pulsar-functions
+            ├── functions-worker.md
+            ├── functions-runtime.md
+        ├── websocket.md
+        ├── proxy.md
+    ├── control-center
+        ├── pulsar-manager.md
+        ├── prometheus.md
+        ├── grafana.md
+        ├── alertmanager.md
+    ├── tool
+        ├── pulsarctl.md
+        ├── pulsar-cli-tool.md
+├── user-guides
+    ├── connect
+        ├── connect-pulsar-cluster
+            ├── connect-prepare.md
+            ├── cli-tools
+                ├── connect-pulsarctl.md
+                ├── connect-pulsar-client.md
+            ├── pulsar-clients
+                ├── connect-java.md
+                ├── connect-cpp.md
+                ├── connect-python.md
+                ├── connect-go.md
+                ├── connect-nodejs.md
+                ├── connect-pulsar-websocket.md
+            ├── kafka-clients
+                ├── connect-kafka-java.md               
+    ├── admin
+        ├── login-console.md
+        ├── work-with-service-accounts.md
+        ├── work-with-users.md
+        ├── work-with-tenants.md
+        ├── work-with-namespaces.md
+        ├── work-with-topics.md
+        ├── work-with-connectors
+            ├── connector-pulsarctl.md
+            ├── connector-functionmesh
+                ├── connector-crd.md
+                ├── run-connector.md
+        ├── work-with-functions
+            ├── function-pulsarctl.md
+            ├── function-functionmesh
+                ├── function-crd.md
+                ├── java-function.md
+                ├── go-function.md
+                ├── python-function.md 
+├── release-note
+    ├── release-note-v1.md
+    ├── release-note-v1-1.md
+```
