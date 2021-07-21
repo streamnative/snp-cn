@@ -28,9 +28,9 @@ Follow [StreamNative documentation contributing guide](/CONTRIBUTING.md) to make
 
 章节 | 优先级 | 备注  
 :-----|:-----------|:---------
-Overview         | 1 |  可翻译
-Get Started     ｜ 1 |  可能会有小的变动
-Concept         ｜ 1 |  可翻译
-Operator Guides ｜ 1 |  可能会有大的变动
-User Guides     ｜ 1 |  可能会有大的变动
-Release Notes   | 2  |  可翻译 
+Overview         | 1 | 可翻译
+Get Started      | 1 | 可能会有小的变动
+Concept          | 1 | 可翻译
+Operator Guides  | 1 | 可能会有大的变动
+User Guides      | 1 | 可能会有大的变动
+Release Notes    | 2 | 可翻译 
