@@ -18,8 +18,6 @@ StreamNative Platform 中文文档翻译流程如下。
 > **重要  
 > 一定不要修改、遗漏 tag，或者在 tag 后面加空格。tag 遗漏或错位会造成中文网站内容显示错乱。**
 
-![](media/id-tag.jpg)
-
 翻译过程中，如需参考或者追加 Pulsar 文档术语库，可以使用 [Pulsar 文档翻译术语库](https://shimo.im/sheets/5jozGy5WIUQQf5JV/MODOC)。
 
 ### 提 PR
