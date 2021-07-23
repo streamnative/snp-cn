@@ -1,35 +1,29 @@
 # StreamNative 文档贡献指南
 
-Welcome to [StreamNative documentation](https://docs.streamnative.io/platform/latest/overview)! 
+欢迎使用 [StreamNative 文档](https://docs.streamnative.io/platform/latest/overview)！
 
-## What you can contribute
+## 贡献内容
 
-You can make contributions to any of the following items.
+你可以贡献的主要内容如下。
 
-- Add missing contents
-  
-- Fix incorrect or inaccurate contents
-  
-- Fix typos or format (including space, indentation, punctuation, etc.)
+- 增加缺失内容
+- 修正错误或不准确的内容
+- 修正拼写错误和格式（包括空格、缩进、标点符号等）
+- 解决[文档 issues](https://github.com/streamnative/snp-cn/issues?q=is%3Aopen+is%3Aissue+label%3Adoc%2Fissue)
+- 审阅文档 [pull requests](https://github.com/streamnative/snp-cn/pulls)
 
-- Resolve [doc issues](https://github.com/streamnative/snp-cn/issues?q=is%3Aopen+is%3Aissue+label%3Adoc%2Fissue).
+## 文档结构
 
-- Review doc [pull requests](https://github.com/streamnative/snp-cn/pulls).
+了解 [StreamNative Platform 文档](https://github.com/streamnative/snp-cn/blob/master/sn-platform-structure.md)结构有助于你了解该用户手册的整体架构和主要模块。
 
-Taking a look at the following general information can help you get started quickly.
+## 贡献流程
 
-## Learn doc architectures
+[snp-cn](https://github.com/streamnative/doc-platform) 仓库禁用了 `Fork` 功能，所以你不能 fork 此仓库。
 
-Before making a contribution, it is recommended that you read [StreamNative Platform structure](https://github.com/streamnative/snp-cn/blob/master/sn-platform-structure.md) to learn doc architectures.
+### 第 1 步：克隆仓库
 
-## Contribution workflow
-
-The `Fork` button is disabled for [snp-cn](https://github.com/streamnative/doc-platform) repository, so you cannot fork this repository.
-
-### Step 1: Clone repository
-
-1. Visit https://github.com/streamnative/doc-platform.
-2. Clone the repository.
+1. 访问 https://github.com/streamnative/doc-platform
+2. 克隆仓库
 
     ```bash
     mkdir -p $working_dir
@@ -37,9 +31,9 @@ The `Fork` button is disabled for [snp-cn](https://github.com/streamnative/doc-p
     git clone https://github.com/streamnative/doc-platform.git
     ```
 
-### Step 2: Keep your branch in sync
+### 第 2 步：同步分支内容
 
-Get your local master branch up to date.
+同步本地 master 分支内容。
 
 ```bash
 cd $working_dir/doc-platform
@@ -47,31 +41,30 @@ git fetch origin
 git rebase origin/master
 ```
 
-### Step 3: Branch
+### 第 3 步：创建分支
 
-Branch from master. The following steps take `my-branch` as an example.
+基于 master 分支创建新分支。以下代码创建了 `my-branch` 这一分支。
 
 ```bash
 git checkout -b my-branch
 ```
 
-### Step 4: Edit the code
+### 第 4 步：编辑分支
 
-You can now edit the code on the `my-branch` branch.
+基于 `my-branch` 分支，对本地文档进行编辑。
 
-### Step 5: Commit
+### 第 5 步：提交修改
 
-Commit your changes.
+通过以下代码提交修改到新创建的分支。
 
 ```bash
 git add <filename> 
 git commit -m "$add a comment"
 ```
 
-Likely, you'll go back and edit-commit in a few cycles. 
+你可以进行多次提交。
 
-The following commands might be helpful for you.
-
+提交修改时，你可能会用到以下命令：
 ```bash
 git add <filename> (add one file)
 git add -A (add all changes, including new/delete/modified files)
@@ -80,21 +73,16 @@ git add -u (add modified and deleted files, not include new files)
 git add . (add new and modified files, not including deleted files)
 ```
 
-### Step 6: Push
+### 第 6 步：推送分支
 
-When your commit is ready for review, push your branch to the origin repository.
+提交修改到分支后，你可以通过以下代码将此分支推送到原仓库。
 
 ```bash
 git push origin my-branch
 ```
 
-### Step 7: Create a pull request
+### 第 7 步：创建 Pull Request
 
-1. Visit https://github.com/streamnative/doc-platform.
-2. Click the **Compare & pull request** button next to your `my-branch` branch.
+1. 访问 https://github.com/streamnative/doc-platform
+2. 点击 `my-branch` 分支旁边的 **Compare & pull request** 按钮创建 Pull Request。
 
-### Step 8: Get a code review
-
-Once you open your pull request, assign it to at least two reviewers. Those reviewers will conduct a thorough code review, looking for correctness, bugs, opportunities for improvement, documentation and comments, and style.  
-
-When you make any change in this branch, commit changes to the same branch. 
