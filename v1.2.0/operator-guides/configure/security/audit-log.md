@@ -79,6 +79,7 @@ The audit log topic stores the audit log messages. To verify the audit log confi
 
 Each audit log event includes information about the event, event time, and permission status. The supported audit event types include:
 
+
 | Type | Event type | Description | Category | Default value
 |---|---|---|---|---
 | Cluster |

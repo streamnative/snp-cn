@@ -4,7 +4,7 @@
       "level": 1,
       "key": "/overview.md",
       "label": "Overview",
-      "path": "/docs/latest/overview",
+      "path": "/docs/v1.2.0/overview",
       "children": [],
       "active": false,
       "id": 1
@@ -13,7 +13,7 @@
       "level": 1,
       "key": "/quickstart.md",
       "label": "Get started",
-      "path": "/docs/latest/quickstart",
+      "path": "/docs/v1.2.0/quickstart",
       "children": [],
       "active": false,
       "id": 2
@@ -30,7 +30,7 @@
           "level": 2,
           "key": "/concepts/pub-sub-concepts.md",
           "label": "Pub/Sub",
-          "path": "/docs/latest/concepts/pub-sub-concepts",
+          "path": "/docs/v1.2.0/concepts/pub-sub-concepts",
           "children": [],
           "active": false,
           "id": 31
@@ -39,7 +39,7 @@
           "level": 2,
           "key": "/concepts/kop-concepts.md",
           "label": "KoP",
-          "path": "/docs/latest/concepts/kop-concepts",
+          "path": "/docs/v1.2.0/concepts/kop-concepts",
           "children": [],
           "active": false,
           "id": 32
@@ -48,7 +48,7 @@
           "level": 2,
           "key": "/concepts/pulsar-io-concepts.md",
           "label": "Pulsar connectors",
-          "path": "/docs/latest/concepts/pulsar-io-concepts",
+          "path": "/docs/v1.2.0/concepts/pulsar-io-concepts",
           "children": [],
           "active": false,
           "id": 33
@@ -57,7 +57,7 @@
           "level": 2,
           "key": "/concepts/pulsar-function-concepts.md",
           "label": "Pulsar Functions",
-          "path": "/docs/latest/concepts/pulsar-function-concepts",
+          "path": "/docs/v1.2.0/concepts/pulsar-function-concepts",
           "children": [],
           "active": false,
           "id": 34
@@ -66,7 +66,7 @@
           "level": 2,
           "key": "/concepts/functionmesh-concepts.md",
           "label": "Function Mesh",
-          "path": "/docs/latest/concepts/functionmesh-concepts",
+          "path": "/docs/v1.2.0/concepts/functionmesh-concepts",
           "children": [],
           "active": false,
           "id": 35
@@ -85,7 +85,7 @@
           "level": 2,
           "key": "/operator-guides/sn-plan.md",
           "label": "Plan for StreamNative Platform Deployment",
-          "path": "/docs/latest/operator-guides/sn-plan",
+          "path": "/docs/v1.2.0/operator-guides/sn-plan",
           "children": [],
           "active": false,
           "id": 41
@@ -94,7 +94,7 @@
           "level": 2,
           "key": "/operator-guides/sn-prepare.md",
           "label": "Prepare Kubernetes cluster for StreamNative Platform",
-          "path": "/docs/latest/operator-guides/sn-prepare",
+          "path": "/docs/v1.2.0/operator-guides/sn-prepare",
           "children": [],
           "active": false,
           "id": 42
@@ -111,7 +111,7 @@
               "level": 3,
               "key": "/operator-guides/configure/storage.md",
               "label": "Configure storage",
-              "path": "/docs/latest/operator-guides/configure/storage",
+              "path": "/docs/v1.2.0/operator-guides/configure/storage",
               "children": [],
               "active": false,
               "id": 431
@@ -120,7 +120,7 @@
               "level": 3,
               "key": "/operator-guides/configure/networking.md",
               "label": "Configure networking",
-              "path": "/docs/latest/operator-guides/configure/networking",
+              "path": "/docs/v1.2.0/operator-guides/configure/networking",
               "children": [],
               "active": false,
               "id": 432
@@ -137,7 +137,7 @@
                   "level": 4,
                   "key": "/operator-guides/configure/security/security-overview.md",
                   "label": "Overview",
-                  "path": "/docs/latest/operator-guides/configure/security/security-overview",
+                  "path": "/docs/v1.2.0/operator-guides/configure/security/security-overview",
                   "children": [],
                   "active": false,
                   "id": 4331
@@ -146,7 +146,7 @@
                   "level": 4,
                   "key": "/operator-guides/configure/security/security-auth.md",
                   "label": "Authentication and Authorization",
-                  "path": "/docs/latest/operator-guides/configure/security/security-auth",
+                  "path": "/docs/v1.2.0/operator-guides/configure/security/security-auth",
                   "children": [],
                   "active": false,
                   "id": 4332
@@ -163,7 +163,7 @@
                      "level": 5,
                      "key": "/operator-guides/configure/security/network-encryption/tls-proxy.md",
                      "label": "Enable TLS on StreamNative Platform components",
-                     "path": "/docs/latest/operator-guides/configure/security/network-encryption/tls-proxy",
+                     "path": "/docs/v1.2.0/operator-guides/configure/security/network-encryption/tls-proxy",
                      "children": [],
                      "active": false,
                      "id": 51112
@@ -172,7 +172,7 @@
                     "level": 5,
                     "key": "/operator-guides/configure/security/network-encryption/tls-load-balancer.md",
                     "label": "Enable TLS on load balancer",
-                    "path": "/docs/latest/operator-guides/configure/security/network-encryption/tls-load-balancer",
+                    "path": "/docs/v1.2.0/operator-guides/configure/security/network-encryption/tls-load-balancer",
                     "children": [],
                     "active": false,
                     "id": 51111
@@ -183,7 +183,7 @@
                   "level": 4,
                   "key": "/operator-guides/configure/security/audit-log.md",
                   "label": "Audit log",
-                  "path": "/docs/latest/operator-guides/configure/security/audit-log",
+                  "path": "/docs/v1.2.0/operator-guides/configure/security/audit-log",
                   "children": [],
                   "active": false,
                   "id": 4335
@@ -194,7 +194,7 @@
               "level": 3,
               "key": "/operator-guides/configure/kop.md",
               "label": "Configure KoP",
-              "path": "/docs/latest/operator-guides/configure/kop",
+              "path": "/docs/v1.2.0/operator-guides/configure/kop",
               "active": false,
               "id": 434,
               "children": []
@@ -203,7 +203,7 @@
               "level": 3,
               "key": "/operator-guides/configure/backup-restore-metadata-tool.md",
               "label": "Backup and restore",
-              "path": "/docs/latest/operator-guides/configure/backup-restore-metadata-tool",
+              "path": "/docs/v1.2.0/operator-guides/configure/backup-restore-metadata-tool",
               "active": false,
               "id": 435,
               "children": []
@@ -212,7 +212,7 @@
               "level": 3,
               "key": "/operator-guides/configure/detector.md",
               "label": "Pulsar Detector",
-              "path": "/docs/latest/operator-guides/configure/detector",
+              "path": "/docs/v1.2.0/operator-guides/configure/detector",
               "active": false,
               "id": 436,
               "children": []
@@ -229,7 +229,7 @@
                   "level": 4,
                   "key": "/operator-guides/configure/monitoring/prometheus.md",
                   "label": "Prometheus",
-                  "path": "/docs/latest/operator-guides/configure/monitoring/prometheus",
+                  "path": "/docs/v1.2.0/operator-guides/configure/monitoring/prometheus",
                   "children": [],
                   "active": false,
                   "id": 4371
@@ -238,7 +238,7 @@
                   "level": 4,
                   "key": "/operator-guides/configure/monitoring/grafana.md",
                   "label": "Grafana",
-                  "path": "/docs/latest/operator-guides/configure/monitoring/grafana",
+                  "path": "/docs/v1.2.0/operator-guides/configure/monitoring/grafana",
                   "children": [],
                   "active": false,
                   "id": 4372
@@ -247,7 +247,7 @@
                   "level": 4,
                   "key": "/operator-guides/configure/monitoring/alertmanager.md",
                   "label": "Alertmanager",
-                  "path": "/docs/latest/operator-guides/configure/monitoring/alertmanager",
+                  "path": "/docs/v1.2.0/operator-guides/configure/monitoring/alertmanager",
                   "children": [],
                   "active": false,
                   "id": 4373
@@ -258,7 +258,7 @@
               "level": 3,
               "key": "/operator-guides/configure/license-update.md",
               "label": "Update license",
-              "path": "/docs/latest/operator-guides/configure/license-update",
+              "path": "/docs/v1.2.0/operator-guides/configure/license-update",
               "children": [],
               "active": false,
               "id": 438
@@ -267,7 +267,7 @@
               "level": 3,
               "key": "/operator-guides/configure/streamnative-console.md",
               "label": "Configure StreamNative Console",
-              "path": "/docs/latest/operator-guides/configure/streamnative-console",
+              "path": "/docs/v1.2.0/operator-guides/configure/streamnative-console",
               "children": [],
               "active": false,
               "id": 439
@@ -286,7 +286,7 @@
               "level": 3,
               "key": "/operator-guides/deploy/sn-deploy.md",
               "label": "Deploy StreamNative Platform on native Kuberbetes clusters",
-              "path": "/docs/latest/operator-guides/deploy/sn-deploy",
+              "path": "/docs/v1.2.0/operator-guides/deploy/sn-deploy",
               "children": [],
               "active": false,
               "id": 441
@@ -295,7 +295,7 @@
               "level": 3,
               "key": "/operator-guides/deploy/deploy-snp-aws.md",
               "label": "Deploy StreamNative Platform on AWS",
-              "path": "/docs/latest/operator-guides/deploy/deploy-snp-aws",
+              "path": "/docs/v1.2.0/operator-guides/deploy/deploy-snp-aws",
               "children": [],
               "active": false,
               "id": 442
@@ -314,7 +314,7 @@
               "level": 3,
               "key": "/operator-guides/manage/scale-cluster.md",
               "label": "Scale Pulsar clusters",
-              "path": "/docs/latest/operator-guides/manage/scale-cluster",
+              "path": "/docs/v1.2.0/operator-guides/manage/scale-cluster",
               "children": [],
               "active": false,
               "id": 451
@@ -323,7 +323,7 @@
               "level": 3,
               "key": "/operator-guides/manage/restart-cluster.md",
               "label": "Restart Pulsar clusters",
-              "path": "/docs/latest/operator-guides/manage/restart-cluster",
+              "path": "/docs/v1.2.0/operator-guides/manage/restart-cluster",
               "children": [],
               "active": false,
               "id": 452
@@ -334,7 +334,7 @@
           "level": 2,
           "key": "/operator-guides/sn-monitor.md",
           "label": "Monitor StreamNative Platform",
-          "path": "/docs/latest/operator-guides/sn-monitor",
+          "path": "/docs/v1.2.0/operator-guides/sn-monitor",
           "children": [],
           "active": false,
           "id": 46
@@ -351,7 +351,7 @@
               "level": 3,
               "key": "/operator-guides/upgrade/sn-upgrade.md",
               "label": "Upgrade StreamNative Platform",
-              "path": "/docs/latest/operator-guides/upgrade/sn-upgrade",
+              "path": "/docs/v1.2.0/operator-guides/upgrade/sn-upgrade",
               "children": [],
               "active": false,
               "id": 471
@@ -370,7 +370,7 @@
               "level": 3,
               "key": "/operator-guides/operator-reference/sn-version-matrix.md",
               "label": "StreamNative Platform version matrix",
-              "path": "/docs/latest/operator-guides/operator-reference/sn-version-matrix",
+              "path": "/docs/v1.2.0/operator-guides/operator-reference/sn-version-matrix",
               "children": [],
               "active": false,
               "id": 481
@@ -407,7 +407,7 @@
                   "level": 4,
                   "key": "/user-guides/connect/connect-pulsar-cluster/connect-prepare.md",
                   "label": "Prepare to connect to a Pulsar cluster",
-                  "path": "/docs/latest/user-guides/connect/connect-pulsar-cluster/connect-prepare",
+                  "path": "/docs/v1.2.0/user-guides/connect/connect-pulsar-cluster/connect-prepare",
                   "children": [],
                   "active": false,
                   "id": 5111
@@ -424,7 +424,7 @@
                       "level": 5,
                       "key": "/user-guides/connect/connect-pulsar-cluster/cli-tools/connect-pulsarctl.md",
                       "label": "pulsarctl",
-                      "path": "/docs/latest/user-guides/connect/connect-pulsar-cluster/cli-tools/connect-pulsarctl",
+                      "path": "/docs/v1.2.0/user-guides/connect/connect-pulsar-cluster/cli-tools/connect-pulsarctl",
                       "children": [],
                       "active": false,
                       "id": 51121
@@ -433,7 +433,7 @@
                       "level": 5,
                       "key": "/user-guides/connect/connect-pulsar-cluster/connect-pulsar-client.md",
                       "label": "pulsar-client",
-                      "path": "/docs/latest/user-guides/connect/connect-pulsar-cluster/cli-tools/connect-pulsar-client",
+                      "path": "/docs/v1.2.0/user-guides/connect/connect-pulsar-cluster/cli-tools/connect-pulsar-client",
                       "children": [],
                       "active": false,
                       "id": 51122
@@ -452,7 +452,7 @@
                       "level": 5,
                       "key": "/user-guides/connect/connect-pulsar-cluster/pulsar-clients/connect-java.md",
                       "label": "Java client",
-                      "path": "/docs/latest/user-guides/connect/connect-pulsar-cluster/pulsar-clients/connect-java",
+                      "path": "/docs/v1.2.0/user-guides/connect/connect-pulsar-cluster/pulsar-clients/connect-java",
                       "children": [],
                       "active": false,
                       "id": 51131
@@ -461,7 +461,7 @@
                       "level": 5,
                       "key": "/user-guides/connect/connect-pulsar-cluster/pulsar-clients/connect-cpp.md",
                       "label": "C++ client",
-                      "path": "/docs/latest/user-guides/connect/connect-pulsar-cluster/pulsar-clients/connect-cpp",
+                      "path": "/docs/v1.2.0/user-guides/connect/connect-pulsar-cluster/pulsar-clients/connect-cpp",
                       "children": [],
                       "active": false,
                       "id": 51132
@@ -470,7 +470,7 @@
                       "level": 5,
                       "key": "/user-guides/connect/connect-pulsar-cluster/pulsar-clients/connect-python.md",
                       "label": "Python client",
-                      "path": "/docs/latest/user-guides/connect/connect-pulsar-cluster/pulsar-clients/connect-python",
+                      "path": "/docs/v1.2.0/user-guides/connect/connect-pulsar-cluster/pulsar-clients/connect-python",
                       "children": [],
                       "active": false,
                       "id": 51133
@@ -479,7 +479,7 @@
                       "level": 5,
                       "key": "/user-guides/connect/connect-pulsar-cluster/pulsar-clients/connect-go.md",
                       "label": "Go client",
-                      "path": "/docs/latest/user-guides/connect/connect-pulsar-cluster/pulsar-clients/connect-go",
+                      "path": "/docs/v1.2.0/user-guides/connect/connect-pulsar-cluster/pulsar-clients/connect-go",
                       "children": [],
                       "active": false,
                       "id": 51134
@@ -488,7 +488,7 @@
                       "level": 5,
                       "key": "/user-guides/connect/connect-pulsar-cluster/pulsar-clients/connect-nodejs.md",
                       "label": "Node.js client",
-                      "path": "/docs/latest/user-guides/connect/connect-pulsar-cluster/pulsar-clients/connect-nodejs",
+                      "path": "/docs/v1.2.0/user-guides/connect/connect-pulsar-cluster/pulsar-clients/connect-nodejs",
                       "children": [],
                       "active": false,
                       "id": 51135
@@ -497,7 +497,7 @@
                       "level": 5,
                       "key": "/user-guides/connect/connect-pulsar-cluster/pulsar-clients/connect-websocket.md",
                       "label": "WebSocket API",
-                      "path": "/docs/latest/user-guides/connect/connect-pulsar-cluster/pulsar-clients/connect-websocket",
+                      "path": "/docs/v1.2.0/user-guides/connect/connect-pulsar-cluster/pulsar-clients/connect-websocket",
                       "children": [],
                       "active": false,
                       "id": 51136
@@ -516,7 +516,7 @@
                       "level": 5,
                       "key": "/user-guides/connect/connect-pulsar-cluster/kafka-clients/connect-kafka-java.md",
                       "label": "Java client",
-                      "path": "/docs/latest/user-guides/connect/connect-pulsar-cluster/kafka-clients/connect-kafka-java",
+                      "path": "/docs/v1.2.0/user-guides/connect/connect-pulsar-cluster/kafka-clients/connect-kafka-java",
                       "children": [],
                       "active": false,
                       "id": 51141
@@ -539,7 +539,7 @@
               "level": 3,
               "key": "/user-guides/admin/login-console.md",
               "label": "Log in to StreamNative Console",
-              "path": "/docs/latest/user-guides/admin/login-console",
+              "path": "/docs/v1.2.0/user-guides/admin/login-console",
               "children": [],
               "active": false,
               "id": 521
@@ -548,7 +548,7 @@
               "level": 3,
               "key": "/user-guides/admin/work-with-service-accounts.md",
               "label": "Work with service accounts",
-              "path": "/docs/latest/user-guides/admin/work-with-service-accounts",
+              "path": "/docs/v1.2.0/user-guides/admin/work-with-service-accounts",
               "children": [],
               "active": false,
               "id": 522
@@ -557,7 +557,7 @@
               "level": 3,
               "key": "/user-guides/admin/work-with-users.md",
               "label": "Work with users",
-              "path": "/docs/latest/user-guides/admin/work-with-users",
+              "path": "/docs/v1.2.0/user-guides/admin/work-with-users",
               "children": [],
               "active": false,
               "id": 523
@@ -566,7 +566,7 @@
               "level": 3,
               "key": "/user-guides/admin/work-with-tenants.md",
               "label": "Work with tenants",
-              "path": "/docs/latest/user-guides/admin/work-with-tenants",
+              "path": "/docs/v1.2.0/user-guides/admin/work-with-tenants",
               "children": [],
               "active": false,
               "id": 524
@@ -575,7 +575,7 @@
               "level": 3,
               "key": "/user-guides/admin/work-with-namespaces.md",
               "label": "Work with namespaces",
-              "path": "/docs/latest/user-guides/admin/work-with-namespaces",
+              "path": "/docs/v1.2.0/user-guides/admin/work-with-namespaces",
               "children": [],
               "active": false,
               "id": 525
@@ -584,7 +584,7 @@
               "level": 3,
               "key": "/user-guides/admin/work-with-service-topics.md",
               "label": "Work with topics",
-              "path": "/docs/latest/user-guides/admin/work-with-topics",
+              "path": "/docs/v1.2.0/user-guides/admin/work-with-topics",
               "children": [],
               "active": false,
               "id": 526
@@ -601,7 +601,7 @@
                   "level": 4,
                   "key": "/user-guides/admin/work-with-connectors/connector-pulsarctl.md",
                   "label": "Work with connectors using pulsarctl",
-                  "path": "/docs/latest/user-guides/admin/work-with-connectors/connector-pulsarctl",
+                  "path": "/docs/v1.2.0/user-guides/admin/work-with-connectors/connector-pulsarctl",
                   "active": false,
                   "id": 5271,
                   "children": []
@@ -618,7 +618,7 @@
                       "level": 5,
                       "key": "/user-guides/admin/work-with-connectors/connector-functionmesh/connector-crd.md",
                       "label": "Connector CRD configurations",
-                      "path": "/docs/latest/user-guides/admin/work-with-connectors/connector-functionmesh/connector-crd",
+                      "path": "/docs/v1.2.0/user-guides/admin/work-with-connectors/connector-functionmesh/connector-crd",
                       "active": false,
                       "id": 52731,
                       "children": [ ]
@@ -627,7 +627,7 @@
                       "level": 5,
                       "key": "/user-guides/admin/work-with-connectors/connector-functionmesh/run-connector.md",
                       "label": "Run connectors",
-                      "path": "/docs/latest/user-guides/admin/work-with-connectors/connector-functionmesh/run-connector",
+                      "path": "/docs/v1.2.0/user-guides/admin/work-with-connectors/connector-functionmesh/run-connector",
                       "children": [ ],
                       "active": false,
                       "id": 52732
@@ -648,7 +648,7 @@
                   "level": 4,
                   "key": "/user-guides/admin/work-with-functions/function-pulsarctl.md",
                   "label": "Work with Pulsar Functions using pulsatctl CLI tool",
-                  "path": "/docs/latest/user-guides/admin/work-with-functions/function-pulsarctl",
+                  "path": "/docs/v1.2.0/user-guides/admin/work-with-functions/function-pulsarctl",
                   "active": false,
                   "id": 5282,
                   "children": []
@@ -665,7 +665,7 @@
                       "level": 5,
                       "key": "/user-guides/admin/work-with-functions/function-functionmesh/function-crd.md",
                       "label": "Pulsar Functions CRD configurations",
-                      "path": "/docs/latest/user-guides/admin/work-with-functions/function-functionmesh/function-crd",
+                      "path": "/docs/v1.2.0/user-guides/admin/work-with-functions/function-functionmesh/function-crd",
                       "active": false,
                       "id": 52831,
                       "children": [ ]
@@ -674,7 +674,7 @@
                       "level": 5,
                       "key": "/user-guides/admin/work-with-functions/function-functionmesh/java-function.md",
                       "label": "Run Java Functions",
-                      "path": "/docs/latest/user-guides/admin/work-with-functions/function-functionmesh/java-function",
+                      "path": "/docs/v1.2.0/user-guides/admin/work-with-functions/function-functionmesh/java-function",
                       "children": [ ],
                       "active": false,
                       "id": 52832
@@ -682,7 +682,7 @@
                       "level": 5,
                       "key": "/user-guides/admin/work-with-functions/function-functionmesh/go-function.md",
                       "label": "Run Go Functions",
-                      "path": "/docs/latest/user-guides/admin/work-with-functions/function-functionmesh/go-function",
+                      "path": "/docs/v1.2.0/user-guides/admin/work-with-functions/function-functionmesh/go-function",
                       "children": [ ],
                       "active": false,
                       "id": 52833
@@ -691,7 +691,7 @@
                       "level": 5,
                       "key": "/user-guides/admin/work-with-functions/function-functionmesh/python-function.md",
                       "label": "Run Python Functions",
-                      "path": "/docs/latest/user-guides/admin/work-with-functions/function-functionmesh/python-function",
+                      "path": "/docs/v1.2.0/user-guides/admin/work-with-functions/function-functionmesh/python-function",
                       "children": [ ],
                       "active": false,
                       "id": 52834
@@ -716,7 +716,7 @@
           "level": 2,
           "key": "/release-note/release-note-v1.md",
           "label": "V1.0.0",
-          "path": "/docs/latest/release-note/release-note-v1",
+          "path": "/docs/v1.2.0/release-note/release-note-v1",
           "children": [],
           "active": false,
           "id": 61
@@ -725,7 +725,7 @@
           "level": 2,
           "key": "/release-note/release-note-v1-1.md",
           "label": "V1.1.0",
-          "path": "/docs/latest/release-note/release-note-v1-1",
+          "path": "/docs/v1.2.0/release-note/release-note-v1-1",
           "children": [],
           "active": false,
           "id": 62
@@ -734,7 +734,7 @@
           "level": 2,
           "key": "/release-note/release-note-v1-2.md",
           "label": "V1.2.0",
-          "path": "/docs/latest/release-note/release-note-v1-2",
+          "path": "/docs/v1.2.0/release-note/release-note-v1-2",
           "children": [],
           "active": false,
           "id": 63
