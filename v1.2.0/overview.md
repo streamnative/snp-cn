@@ -96,19 +96,19 @@ StreamNative Platform 的每个版本都包含最新版本的 Pulsar，以及额
 
 | 功能 | Apache Pulsar | StreamNative Platform |
 |----------|---------------|-----------------------|
-|Pulsar Functions| Yes     | Yes                   |
-|Pulsar IO       | Yes     | Yes                   |
-|跨地域复制       | Yes     | Yes                   |
-|多租户          | Yes     | Yes                   |
-|事务            | Yes     | Yes                   |
-|Pulsar Manager  | Yes     | Yes                   |
-|StreamNative 控制台：Pulsar Manager 的升级版|    | Yes    |
-|监控堆栈：集成仪表板及 Pulsar 警报规则（基于 Prometheus/Grafana/Alertmanager）|    | Yes    |
-|多集群管理：同时管理多个 Pulsar 集群| | Yes                   |
-|[pulsarctl](https://docs.streamnative.io/pulsarctl/v2.7.0.7/)：用于管理 Pulsar 集群的 CLI（命令行工具）。       |         | Yes                   |
-|[Function Mesh](/concepts/functionmesh-concepts.md)：在 Kubernetes 上运行 Pulsar Functions 和连接器的无服务器（Serverless）框架  |         | Yes                   |
-|[KoP](/concepts/kop-concepts.md)：将现有的 Kafka 应用和服务迁移到 Pulsar，无需修改代码 |   | Yes  |
-|[备份和恢复](/operator-guides/configure/backup-restore-metadata-tool.md)：用于备份 Pulsar 集群元数据并将集群恢复到备份点的工具|         | Yes         |
-|[Pulsar 侦查器](/operator-guides/configure/detector.md)：用于监测 Pulsar 健康状况的新工具 | | Yes  |
+|Pulsar Functions| √    | √                  |
+|Pulsar IO       | √    | √                  |
+|跨地域复制       | √    | √                  |
+|多租户          | √    | √                  |
+|事务            | √    | √                  |
+|Pulsar Manager  | √    | √                  |
+|StreamNative 控制台：Pulsar Manager 的升级版|    | √   |
+|监控堆栈：集成仪表板及 Pulsar 警报规则（基于 Prometheus/Grafana/Alertmanager）|    | √   |
+|多集群管理：同时管理多个 Pulsar 集群| | √                  |
+|[pulsarctl](https://docs.streamnative.io/pulsarctl/v2.7.0.7/)：用于管理 Pulsar 集群的 CLI（命令行工具）。       |         | √                  |
+|[Function Mesh](/concepts/functionmesh-concepts.md)：在 Kubernetes 上运行 Pulsar Functions 和连接器的无服务器（Serverless）框架  |         | √                  |
+|[KoP](/concepts/kop-concepts.md)：将现有的 Kafka 应用和服务迁移到 Pulsar，无需修改代码 |   | √ |
+|[备份和恢复](/operator-guides/configure/backup-restore-metadata-tool.md)：用于备份 Pulsar 集群元数据并将集群恢复到备份点的工具|         | √        |
+|[Pulsar 侦查器](/operator-guides/configure/detector.md)：用于监测 Pulsar 健康状况的新工具 | | √ |
 
 [开始使用](/quickstart.md) StreamNative Platform。
