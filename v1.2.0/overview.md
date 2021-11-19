@@ -45,7 +45,7 @@ category: overview
 
 - **灵活部署**：在本地、私有云或公共云中部署，从裸机到 Kubernetes，或使用 StreamNative Platform 的完全托管云服务。
 
-- **提交者驱动的专业知识**：Pulsar 专家和提交者的丰富经验，将在整个应用程序开发生命周期中为你提供支持。
+- **Committer 的专业知识**：Pulsar 专家和提交者的丰富经验，将在整个应用程序开发生命周期中为你提供支持。
 
 # 什么是 Apache Pulsar？
 
