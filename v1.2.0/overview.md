@@ -12,7 +12,7 @@ category: overview
 
 # 什么是 StreamNative Platform？
 
-作为一个云原生批流融合数据平台，StreamNative Platform 可以帮助你为实时和历史事件创建实时应用程序和数据基础架构。[StreamNative](https://streamnative.io/) 由 [Apache Pulsar](https://pulsar.apache.org/en/) 和 [Apache BookKeeper](https://bookkeeper.apache.org/) 的原始团队打造，提供了一个完整的、可自我管理的平台。StreamNative Platform 提供丰富的顾客体验，可在整个组织中持续流转数据，支撑由数据驱动的业务。用户可以选择将 StreamNative Platform 部署在本地或云端。
+作为一个云原生批流融合数据平台，StreamNative Platform 可以帮助你为实时和历史事件创建实时应用程序和数据基础架构。[StreamNative](https://streamnative.io/) 由 [Apache Pulsar](https://pulsar.apache.org/en/) 和 [Apache BookKeeper](https://bookkeeper.apache.org/) 的创始团队打造，提供了一个完整的、可自我管理的平台。StreamNative Platform 提供丰富的顾客体验，可在整个组织中持续流转数据，支撑由数据驱动的业务。用户可以选择将 StreamNative Platform 部署在本地或云端。
 
 借助 Apache Pulsar，StreamNative Platform 将不同来源的数据整合到公司统一的批流融合数据平台中，从而可以轻松创建关键性任务消息、流应用与实时数据通道。 StreamNative Platform 让你可以专注于从实时数据中最大化业务价值，而无需担心底层机制上数据如何在各个系统之间传递，以及如何可靠地存储数据以供处理等问题。
 
@@ -49,7 +49,7 @@ category: overview
 
 # 什么是 Apache Pulsar？
 
-StreamNative Platform 的核心是 [Apache Pulsar](https://pulsar.apache.org)，一个开源的分布式云原生批流融合数据平台。
+StreamNative Platform 的核心是开源的分布式云原生消息流平台 [Apache Pulsar](https://pulsar.apache.org)。
 
 Apache Pulsar 的主要功能包括：
 
@@ -75,7 +75,7 @@ Pulsar 的主要组件包括：
 
 - [Proxy](https://pulsar.apache.org/docs/en/next/administration-proxy/)
 
-    Pulsar proxy 是一个可选网关，运行在 Pulsar 集群的 broker 之前。
+    Pulsar proxy 作为可选装的网关，位于 Pulsar 集群中 broker 的前端。
 
 - [ZooKeeper](https://zookeeper.apache.org/)
 
@@ -103,7 +103,7 @@ StreamNative Platform 的每个版本都包含最新版本的 Pulsar 的全部�
 |事务            | √    | √                  |
 |Pulsar Manager  | √    | √                  |
 |StreamNative 控制台：Pulsar Manager 的升级版|    | √   |
-|监控堆栈：集成仪表板及 Pulsar 警报规则（基于 Prometheus/Grafana/Alertmanager）|    | √   |
+|监控堆栈：集成仪表板及 Pulsar 告警规则（基于 Prometheus/Grafana/Alertmanager）|    | √   |
 |多集群管理：同时管理多个 Pulsar 集群| | √                  |
 |[pulsarctl](https://docs.streamnative.io/pulsarctl/v2.7.0.7/)：用于管理 Pulsar 集群的 CLI（命令行工具）。       |         | √                  |
 |[Function Mesh](/concepts/functionmesh-concepts.md)：在 Kubernetes 上运行 Pulsar Functions 和连接器的无服务器（Serverless）框架  |         | √                  |
