@@ -6,15 +6,15 @@ category: overview
 
 本节介绍以下内容：
 - [什么是 StreamNative Platform？](#什么是-streamnative-platform)
-- [为什么要使用 StreamNative Platform？](#为什么要使用-streamnative-platform)
+- [为什么选择 StreamNative Platform？](#为什么选择-streamnative-platform)
 - [什么是 Apache Pulsar？](#什么是-apache-pulsar)
 - [StreamNative Platform 与 Apache Pulsar 主要功能对比](#streamnative-platform-与-apache-pulsar-主要功能对比)
 
 # 什么是 StreamNative Platform？
 
-作为一个云原生批流融合数据平台，StreamNative Platform 可以帮助你为实时和历史事件创建实时应用程序和数据基础架构。[StreamNative](https://streamnative.io/) 由 [Apache Pulsar](https://pulsar.apache.org/en/) 和 [Apache BookKeeper](https://bookkeeper.apache.org/) 的原始团队打造，提供了一个完整的、可自我管理的平台，用于在整个组织中持续流转数据，以提供丰富的客户体验和由数据驱动的业务。你可以将 StreamNative Platform 部署在本地或云端。
+作为一个云原生批流融合数据平台，StreamNative Platform 可以帮助你为实时和历史事件创建实时应用程序和数据基础架构。[StreamNative](https://streamnative.io/) 由 [Apache Pulsar](https://pulsar.apache.org/en/) 和 [Apache BookKeeper](https://bookkeeper.apache.org/) 的原始团队打造，提供了一个完整的、可自我管理的平台。StreamNative Platform 提供丰富的顾客体验，可在整个组织中持续流转数据，支撑由数据驱动的业务。用户可以选择将 StreamNative Platform 部署在本地或云端。
 
-在 Apache Pulsar 的支持下，StreamNative Platform 将不同来源的数据整合到公司统一的批流融合数据平台中，从而可以轻松创建关键性任务消息和流应用以及实时数据通道。 StreamNative Platform 让你可以专注于如何从实时数据中最大化业务价值，而无需担心底层机制，比如数据如何在各个系统之间传递，以及如何可靠地存储数据以供处理。
+借助 Apache Pulsar，StreamNative Platform 将不同来源的数据整合到公司统一的批流融合数据平台中，从而可以轻松创建关键性任务消息、流应用与实时数据通道。 StreamNative Platform 让你可以专注于从实时数据中最大化业务价值，而无需担心底层机制上数据如何在各个系统之间传递，以及如何可靠地存储数据以供处理等问题。
 
 具体而言，StreamNative Platform 带来了以下便利：
 
@@ -34,14 +34,14 @@ category: overview
 
 每个 StreamNative Platform 版本都包含了 Pulsar 的最新功能和 StreamNative 的附加功能。
 
-# 为什么要使用 StreamNative Platform？
+# 为什么选择 StreamNative Platform？
 使用 StreamNative Platform 可为你带来以下好处：
 
 - **无限生产力**：让更多开发人员通过使用 Pulsar 提高构建事件流应用程序的效率。
 
 - **规模化的高效运作**：随着组织中事件流的增长，最大限度地减少操作的复杂性，并确保高性能和可扩展性。
 
-- **生产阶段**：在生产中实现具有企业级功能的事件流。
+- **企业级生产**：在生产中实现具有企业级功能的事件流。
 
 - **灵活部署**：在本地、私有云或公共云中部署，从裸机到 Kubernetes，或使用 StreamNative Platform 的完全托管云服务。
 
@@ -57,7 +57,7 @@ Apache Pulsar 的主要功能包括：
 - 使用 [Apache BookKeeper](https://bookkeeper.apache.org) 和层级存储，以可靠且可扩展的方式存储无限的事件流
 - 使用 serverless 函数处理和查询事件流
 
-Apache Pulsar 已经得到许多[主流技术公司](https://pulsar.apache.org/en/powered-by/)的全球采用，如 Verizon Media、Narvar、Overstock、Nutanix、Yahoo！JAPAN、腾讯、OVHCloud 和Clever Cloud 等，Apache Pulsar 为这些公司提供在性能、可扩展性和弹性方面的能力。Pulsar 的普及是市场对实时数据支持技术不断增长的需求所推动的，这些需求包括异步应用程序、核心业务应用程序以及 ETL 等。
+Apache Pulsar 已经得到许多全球[主流技术公司](https://pulsar.apache.org/en/powered-by/)的采用，如 Verizon Media、Narvar、Overstock、Nutanix、Yahoo！JAPAN、腾讯、OVHCloud 和 Clever Cloud 等，Apache Pulsar 为这些公司提供其在性能、可扩展性和弹性方面的能力。Pulsar 的普及是市场对实时数据支持技术不断增长的需求所推动的，这些需求包括异步应用程序、核心业务应用程序以及 ETL 等。
 
 Pulsar 的主要组件包括：
 
@@ -90,9 +90,9 @@ Pulsar 的主要组件包括：
 
 # StreamNative Platform 与 Apache Pulsar 主要功能对比
 
-StreamNative Platform 的每个版本都包含最新版本的 Pulsar，以及额外的工具和服务。这些工具和服务让创建和管理云原生批流融合数据平台变得更加简单。StreamNative Platform 同时包含了社区版和商业版的功能，可以很好地补充和加强你的 Pulsar 部署。
+StreamNative Platform 的每个版本都包含最新版本的 Pulsar 的全部功能与特性，并包含 StreamNative 额外的工具和服务。这些工具和服务让创建和管理云原生批流融合平台变得更加简单。StreamNative Platform 同时包含了社区版和商业版的功能，可以很好地补充并加强你的 Pulsar 部署。
 
-下表对比了 Apache Pulsar 和 StreamNative Platform 所支持的功能。
+下表为 Apache Pulsar 和 StreamNative Platform 功能对比。
 
 | 功能 | Apache Pulsar | StreamNative Platform |
 |----------|---------------|-----------------------|
