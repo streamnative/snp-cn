@@ -1,115 +1,114 @@
 ---
-title: Overview
+title: 概述
 id: overview
 category: overview
 ---
 
-This section introduce the following content:
-- [What is StreamNative Platform](#what-is-streamnative-platform)
-- [Why use StreamNative Platform?](#why-use-streamnative-platform)
-- [What is Apache Pulsar](#what-is-apache-pulsar)
-- [StreamNative Platform vs Apache Pulsar: key features](#streamnative-platform-vs-apache-pulsar-key-features)
+本节介绍以下内容：
+- [什么是 StreamNative Platform？](#什么是-streamnative-platform)
+- [为什么选择 StreamNative Platform？](#为什么选择-streamnative-platform)
+- [什么是 Apache Pulsar？](#什么是-apache-pulsar)
+- [StreamNative Platform 与 Apache Pulsar 主要功能对比](#streamnative-platform-与-apache-pulsar-主要功能对比)
 
-# What is StreamNative Platform
+# 什么是 StreamNative Platform？
 
-StreamNative Platform is a cloud-native messaging and event-streaming platform that enables you to build a real-time application and data infrastructure for both real-time and historical events. Founded by the original developers of [Apache Pulsar](https://pulsar.apache.org/en/) and [Apache BookKeeper](https://bookkeeper.apache.org/), [StreamNative](https://streamnative.io/) offers a complete, self-managed platform for continuously streaming data across your organization to power rich customer experiences and data-driven operations. You can deploy StreamNative Platform on-premise or in-cloud.
+作为一个云原生批流融合数据平台，StreamNative Platform 可以帮助你为实时和历史事件创建实时应用程序和数据基础架构。[StreamNative](https://streamnative.io/) 由 [Apache Pulsar](https://pulsar.apache.org/en/) 和 [Apache BookKeeper](https://bookkeeper.apache.org/) 的创始团队打造，提供了一个完整的、可自我管理的平台。StreamNative Platform 提供丰富的顾客体验，可在整个组织中持续流转数据，支撑由数据驱动的业务。用户可以选择将 StreamNative Platform 部署在本地或云端。
 
-Powered by Apache Pulsar, StreamNative Platform makes it easy to build mission-critical messaging and streaming applications and real-time data pipelines by integrating data from multiple sources into a single, central messaging and event streaming platform for your company. StreamNative Platform lets you focus on how to maximize business value from real-time data rather than worrying about the underlying mechanisms such as how data is messaged between various systems and how data is stored reliably for processing. 
+借助 Apache Pulsar，StreamNative Platform 将不同来源的数据整合到公司统一的批流融合数据平台中，从而可以轻松创建关键性任务消息、流应用与实时数据通道。 StreamNative Platform 让你可以专注于从实时数据中最大化业务价值，而无需担心底层机制上数据如何在各个系统之间传递，以及如何可靠地存储数据以供处理等问题。
 
-Specifically, StreamNative Platform simplifies:
+具体而言，StreamNative Platform 带来了以下便利：
 
-- Publishing-and-consuming messages using popular messaging protocols (including Apache Pulsar and Apache Kafka)
-- Connecting various data sources to Pulsar
-- Building real-time applications with Pulsar
-- Integrating your data processing infrastructure with Pulsar
-- Securing, monitoring, and managing your Pulsar deployments
+- 用流行的消息传递协议（包括 Apache Pulsar 和 Apache Kafka）发布和消费消息
+- 将各种数据源连接到 Pulsar
+- 用 Pulsar 构建实时应用程序
+- 将数据处理基础设施与 Pulsar 集成
+- 保护、监控和管理 Pulsar 部署
 
-Most importantly, StreamNative Platform enables you to:
+最重要的是，StreamNative Platform 可以让你：
 
-- Deploy and manage Pulsar in your private cloud environment
-- Deploy and manage your platform as a cloud-native system on Kubernetes
-- Monitor the health and performance of Pulsar clusters using dedicated tools such as [Pulsar detector](/operator-guides/configure/backup-restore/detector.md) and StreamNative console.
+- 在你的私有云环境中部署和管理 Pulsar
+- 将平台作为 Kubernetes 上的云原生系统进行部署和管理
+- 使用 [Pulsar 侦查器](/operator-guides/configure/backup-restore/detector.md)和 StreamNative 控制台等专用工具监控 Pulsar 集群的健康和性能
 
 ![](../../image/sn-platform-architecture.png)
 
-Out of the box, the latest features of Pulsar and the add-on StreamNative features are shipped in each StreamNative Platform release.
+每个 StreamNative Platform 版本都包含了 Pulsar 的最新功能和 StreamNative 的附加功能。
 
-# Why use StreamNative Platform?
-With StreamNative Platform, you can enjoy the following benefits:
+# 为什么选择 StreamNative Platform？
+使用 StreamNative Platform 可为你带来以下好处：
 
-- **Infinite productivity**: Empower more developers to use Pulsar and improve the efficiency to build event streaming applications.
+- **无限生产力**：让更多开发人员通过使用 Pulsar 提高构建事件流应用程序的效率。
 
-- **Efficient operations at scale**: Minimize operational complexity and ensure high performance and scalability as event streaming grows in your organization.
+- **规模化的高效运作**：随着组织中事件流的增长，最大限度地减少操作的复杂性，并确保高性能和可扩展性。
 
-- **Production-stage**: Implement event streaming in production with enterprise-level functionalities.
+- **企业级生产**：在生产中实现具有企业级功能的事件流。
 
-- **Flexible deployment**: Deploy on-premises, in private or public cloud, from bare-metal to Kubernetes, or leverage a fully managed cloud service with StreamNative Platform.
+- **灵活部署**：在本地、私有云或公共云中部署，从裸机到 Kubernetes，或使用 StreamNative Platform 的完全托管云服务。
 
-- **Committer-driven expertise**: Leverage the rich experience of Pulsar experts and committers to support you throughout the application development lifecycle.
+- **Committer 的专业知识**：Pulsar 专家和提交者的丰富经验，将在整个应用程序开发生命周期中为你提供支持。
 
-# What is Apache Pulsar
+# 什么是 Apache Pulsar？
 
-At the core of StreamNative Platform is [Apache Pulsar](https://pulsar.apache.org), an open source distributed cloud-native messaging and streaming platform. 
+StreamNative Platform 的核心是开源的分布式云原生消息流平台 [Apache Pulsar](https://pulsar.apache.org)。
 
-The key capabilities of Apache Pulsar are:
+Apache Pulsar 的主要功能包括：
 
-- Publish and subscribe to event streams at scale
-- Store infinite event streams in a reliable and scalable way with [Apache BookKeeper](https://bookkeeper.apache.org) and tiered storage
-- Process and query event streams using serverless functions
+- 规模化地发布和订阅事件流
+- 使用 [Apache BookKeeper](https://bookkeeper.apache.org) 和层级存储，以可靠且可扩展的方式存储无限的事件流
+- 使用 serverless 函数处理和查询事件流
 
-Apache Pulsar has received global adoption from [major technology companies](https://pulsar.apache.org/en/powered-by/) such
-as Verizon Media, Narvar, Overstock, Nutanix, Yahoo! JAPAN, Tencent, OVHCloud, and Clever Cloud, who rely on its ability to deliver on performance, scalability, and resiliency. Pulsar adoption is  driven by the market’s increased demand for real-time, data-enabled technologies, from asynchronous applications to core business applications to ETL.
+Apache Pulsar 已经得到许多全球[主流技术公司](https://pulsar.apache.org/en/powered-by/)的采用，如 Verizon Media、Narvar、Overstock、Nutanix、Yahoo！JAPAN、腾讯、OVHCloud 和 Clever Cloud 等，Apache Pulsar 为这些公司提供其在性能、可扩展性和弹性方面的能力。Pulsar 的普及是市场对实时数据支持技术不断增长的需求所推动的，这些需求包括异步应用程序、核心业务应用程序以及 ETL 等。
 
-The key components of Pulsar are:
+Pulsar 的主要组件包括：
 
-- [Brokers](https://pulsar.apache.org/docs/en/concepts-architecture-overview/#brokers)
+- [Broker](https://pulsar.apache.org/docs/en/concepts-architecture-overview/#brokers)
 
-    Brokers form the messaging and serving tier for Pulsar.
+    Broker 构成了 Pulsar 的消息传递和服务层。
 
-- [Bookies](https://bookkeeper.apache.org)
+- [Bookie](https://bookkeeper.apache.org)
 
-    Bookies form the storage tier for Pulsar.
+    Bookie 构成了 Pulsar 的存储层。
 
-- [Functions Workers](https://pulsar.apache.org/docs/en/functions-overview/)
+- [Functions Worker](https://pulsar.apache.org/docs/en/functions-overview/)
 
-    Functions Workers form the serverless processing tier for Pulsar.
+    Functions Worker 构成了 Pulsar 的无服务器（Serverless）处理层。
 
 - [Proxy](https://pulsar.apache.org/docs/en/next/administration-proxy/)
 
-    Pulsar proxy is an optional gateway that you can run in front of the brokers in a Pulsar cluster.
+    Pulsar proxy 作为可选装的网关，位于 Pulsar 集群中 broker 的前端。
 
 - [ZooKeeper](https://zookeeper.apache.org/)
 
-    Pulsar relies on ZooKeeper for a wide variety of configuration-related and coordination-related tasks.
+    Pulsar 依靠 ZooKeeper 来完成各种与配置和协调相关的任务。
 
-- Client APIs
-    - [Producer](https://pulsar.apache.org/docs/en/concepts-messaging/#producers) API: allows an application to publish a stream of events to one or more Pulsar topics.
-    - [Consumer](https://pulsar.apache.org/docs/en/concepts-messaging/#consumers) API: allows an application to subscribe to one or more topics and receive the stream of events produced to them.
-    - [Functions](https://pulsar.apache.org/docs/en/next/functions-overview/) API: allows an application to create, deploy, and manage serverless functions that consume events from one or more Pulsar topics, apply a user-supplied processing logic to each event, and publish the results of the computation to another topic.
-    - [Connector](https://pulsar.apache.org/docs/en/next/io-overview/) API: allows an application to create, deploy, and manage connectors that interact with external systems, such as Apache Cassandra, Aerospike, and many others.
-    - [Admin API](https://pulsar.apache.org/docs/en/admin-api-overview/): allows an application to manage Pulsar resources (for example, namespaces, topics, functions, connectors, and so on) in a programmable way.
+- 客户端 API
+    - [生产者](https://pulsar.apache.org/docs/en/concepts-messaging/#producers) API：允许应用程序将事件流发布到一个或多个 Pulsar 主题。
+    - [消费者](https://pulsar.apache.org/docs/en/concepts-messaging/#consumers) API：允许应用程序订阅一个或多个主题，并接收为其生成的事件流。
+    - [Functions](https://pulsar.apache.org/docs/en/next/functions-overview/) API：允许应用程序创建、部署和管理 serverless 函数，这些函数从一个或多个 Pulsar 主题消费事件，将用户提供的处理逻辑应用于每个事件，并将计算结果发布到另一个主题。
+    - [连接器](https://pulsar.apache.org/docs/en/next/io-overview/) API：允许应用程序创建、部署和管理与外部系统（如 Apache Cassandra、Aerospike 等等）交互的连接器。
+    - [Admin API](https://pulsar.apache.org/docs/en/admin-api-overview/)：允许应用程序以可编程方式管理 Pulsar 资源（例如，命名空间、主题、functions、连接器等）。
 
-# StreamNative Platform vs Apache Pulsar: key features
+# StreamNative Platform 与 Apache Pulsar 主要功能对比
 
-Each release of StreamNative Platform includes the latest release of Pulsar as well as additional tools and services that make it easier to build and manage a cloud-native messaging and event-streaming platform. StreamNative Platform delivers both community and commercially licensed features that complement and enhance your Pulsar deployment.
+StreamNative Platform 的每个版本都包含最新版本的 Pulsar 的全部功能与特性，并包含 StreamNative 额外的工具和服务。这些工具和服务让创建和管理云原生批流融合平台变得更加简单。StreamNative Platform 同时包含了社区版和商业版的功能，可以很好地补充并加强你的 Pulsar 部署。
 
-The following table lists features supported in Apache Pulsar and StreamNative Platform.
+下表为 Apache Pulsar 和 StreamNative Platform 功能对比。
 
-| Features | Apache Pulsar | StreamNative Platform |
+| 功能 | Apache Pulsar | StreamNative Platform |
 |----------|---------------|-----------------------|
-|Pulsar Functions| Yes     | Yes                   |
-|Pulsar IO       | Yes     | Yes                   |
-|Geo-replication | Yes     | Yes                   |
-|Multi-tenancy   | Yes     | Yes                   |
-|Transactions    | Yes     | Yes                   |
-|Pulsar Manager  | Yes     | Yes                   |
-|StreamNative Console: upgraded Pulsar Manager|    | Yes    |
-|Monitoring Stack: Integrated Dashboard and alerting rules for Pulsar based on Prometheus/Grafana/Alertmanager|    | Yes    |
-|Multi-Cluster Management: Manage multiple Pulsar clusters at the same time| | Yes                   |
-|[pulsarctl](https://docs.streamnative.io/pulsarctl/v2.7.0.7/): a CLI tool to manage Pulsar clusters       |         | Yes                   |
-|[Function Mesh](/concepts/functionmesh-concepts.md): a serverless framework to run Pulsar Functions and Connectors on Kubernetes   |         | Yes                   |
-|[KoP](/concepts/kop-concepts.md): enables you to migrate your existing Kafka applications and services to Pulsar without modifying the code |   | Yes  |
-|[Backup and restore](/operator-guides/configure/backup-restore-metadata-tool.md): a tool to backup Pulsar cluster's metadata, and restore cluster to a backup point |         | Yes         |
-|[Pulsar detector](/operator-guides/configure/detector.md): a new tool to monitor the health of Pulsar | | Yes  |
+|Pulsar Functions| √    | √                  |
+|Pulsar IO       | √    | √                  |
+|跨地域复制       | √    | √                  |
+|多租户          | √    | √                  |
+|事务            | √    | √                  |
+|Pulsar Manager  | √    | √                  |
+|StreamNative 控制台：Pulsar Manager 的升级版|    | √   |
+|监控堆栈：集成仪表板及 Pulsar 告警规则（基于 Prometheus/Grafana/Alertmanager）|    | √   |
+|多集群管理：同时管理多个 Pulsar 集群| | √                  |
+|[pulsarctl](https://docs.streamnative.io/pulsarctl/v2.7.0.7/)：用于管理 Pulsar 集群的 CLI（命令行工具）。       |         | √                  |
+|[Function Mesh](/concepts/functionmesh-concepts.md)：在 Kubernetes 上运行 Pulsar Functions 和连接器的无服务器（Serverless）框架  |         | √                  |
+|[KoP](/concepts/kop-concepts.md)：将现有的 Kafka 应用和服务迁移到 Pulsar，无需修改代码 |   | √ |
+|[备份和恢复](/operator-guides/configure/backup-restore-metadata-tool.md)：用于备份 Pulsar 集群元数据并将集群恢复到备份点的工具|         | √        |
+|[Pulsar 侦查器](/operator-guides/configure/detector.md)：用于监测 Pulsar 健康状况的新工具 | | √ |
 
-[Get started](/quickstart.md) with StreamNative Platform.
+[开始使用](/quickstart.md) StreamNative Platform。
