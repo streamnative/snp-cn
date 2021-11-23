@@ -56,7 +56,7 @@ category: quickstart
 
    cert-manager 是本地 [Kubernetes](https://kubernetes.io/) 证书管理控制器。用于从 [HashiCorp Vault](https://www.vaultproject.io/) 发布证书。cert-manager 可以确保证书是有效的和最新的。在设定的时间，cert-manager 会更新证书，以免证书过期。
 
-   在安装 cert-manager 时，需要在 Helm 安装命令中添加 `--set installCRDs=true` 标志，从而将 cert-manager 所需的 CRD 资源一并安装到集群中。
+   在安装 cert-manager 时，需要在 Helm 安装命令中添加 `--set installCRDs=true` 参数，从而将 cert-manager 所需的 CRD 资源一并安装到集群中。
 
     ```
     helm upgrade --install cert-manager jetstack/cert-manager -n $NAMESPACE --set installCRDs=true
