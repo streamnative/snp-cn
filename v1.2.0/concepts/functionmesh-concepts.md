@@ -49,17 +49,17 @@ Function Mesh 中的 **functions** 是在 Pulsar Functions 的基础上实现的
 
 Function Mesh 的**连接器**是基于 Pulsar IO 连接器实现的。访问 [StreamNative Hub](https://hub.streamnative.io/) 可查看可用的 Pulsar I/O 连接器。
 
-## FunctionMesh
+## Function Mesh
 
-**FunctionMesh**，又称为 Mesh，是 **function** 和**连接器**的集合，而这些 **function** 和**连接器**是通过**流**来连接的，它们相互协调，共同实现强大的流处理逻辑。
+**Function Mesh**，又称为 Mesh，是 **function** 和**连接器**的集合，而这些 **function** 和**连接器**是通过**流**来连接的，它们相互协调，共同实现强大的流处理逻辑。
 
-**FunctionMesh** 中的所有 **function** 和**连接器**都有共同的生命周期，即均在 **FunctionMesh** 创建时启动，销毁时终止。所有的事件处理器都是长期运行的进程，Function Mesh 控制器根据它们的负载进行自动扩缩调整。 
+**Function Mesh** 中的所有 **function** 和**连接器**都有共同的生命周期，即均在 **Function Mesh** 创建时启动，销毁时终止。所有的事件处理器都是长期运行的进程，Function Mesh 控制器根据它们的负载进行自动扩缩调整。 
 
-**FunctionMesh** 可以是有向无环图（Directed Acyclic Graph，DAG），也可以是流连接的 function 和/或连接器的循环图。图 5 是一个 **FunctionMesh** 的例子，这个 **FunctionMesh** 由 Debezium source 连接器、enrichement function 和 Elastic sink 连接器组成。
+**Function Mesh** 可以是有向无环图（Directed Acyclic Graph，DAG），也可以是流连接的 function 和/或连接器的循环图。图 5 是一个 **Function Mesh** 的例子，这个 **Function Mesh** 由 Debezium source 连接器、enrichement function 和 Elastic sink 连接器组成。
 
 ![Function Mesh](../../image/function-mesh.png)
 
-图 5. FunctionMesh 是由流连接的 function 和/或连接器的集合
+图 5. Function Mesh 是由流连接的 function 和/或连接器的集合
 
 # API
 
@@ -74,7 +74,7 @@ Function Mesh 与包含 Kubernetes 工具的通用语言和框架匹配，为解
 - [**Function**](/user-guides/admin/work-with-functions/function-functionmesh.md#function-crd)：`Function`  资源对 Pulsar Function 的整个生命周期进行自动管理。
 - [**Source**](/user-guides/admin/work-with-connectors/connector-functionmesh/connector-crd.md#source-crd-configurations)：`Source`  资源对 Pulsar Source 连接器的整个生命周期进行自动管理。 
 - [**Sink**](/user-guides/admin/work-with-connectors/connector-functionmesh/connector-crd.md#sink-crd-configurations)：`Sink` 资源对 Pulsar Sink 连接器的整个生命周期进行自动管理。 
-- **FunctionMesh**：`FunctionMesh` 资源自动管理事件流应用程序的整个生命周期。**FunctionMesh** 自动控制其他对象的创建，确保 Mesh 中定义的 **Function** 和**连接器**正常运行，并且由定义的**流**进行连接。 
+- **FunctionMesh**：`FunctionMesh` 资源自动管理事件流应用程序的整个生命周期。**Function Mesh** 自动控制其他对象的创建，确保 Mesh 中定义的 **Function** 和**连接器**正常运行，并且由定义的**流**进行连接。 
 
 # Function Mesh 如何运行
 

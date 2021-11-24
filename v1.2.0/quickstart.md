@@ -70,11 +70,11 @@ category: quickstart
     helm upgrade --install pulsar-operator streamnative/pulsar-operator -n $NAMESPACE
     ```
 
-6. 安装 FunctionMesh operator。
+6. 安装 Function Mesh operator。
 
-    FunctionMesh operator 用于配置和管理 Pulsar IO 连接器和 Pulsar Functions。
+    Function Mesh operator 用于配置和管理 Pulsar IO 连接器和 Pulsar Functions。
 
-   [Function Mesh](/concepts/functionmesh-concepts.md) 是一个无服务器（Serverless）框架，用于协调多个 [Pulsar Functions](/concepts/pulsar-function-concepts.md) 和 [Pulsar IO 连接器](/concepts/pulsar-io-concepts.md)的流处理应用程序。
+   [Function Mesh](/concepts/functionmesh-concepts.md) 作为无服务器（Serverless）框架，协调多个 [Pulsar Functions](/concepts/pulsar-function-concepts.md) 和 [Pulsar IO 连接器](/concepts/pulsar-io-concepts.md)，以支持流处理应用程序。
 
     ```
     helm upgrade --install function-mesh streamnative/function-mesh-operator -n $NAMESPACE 
@@ -89,7 +89,7 @@ category: quickstart
     2. 使用 YAML 文件部署 Pulsar 集群。
 
         ```
-        helm install -f /path/to/pulsar-cluster/file.yaml $RELEASE_NAME streamnative/SN-platform --set initialize=true
+        helm install -f /path/to/pulsar-cluster/file.yaml $RELEASE_NAME streamnative/sn-platform --set initialize=true
         ```
 
 # 步骤 2：创建 Pulsar 租户/命名空间/主题
@@ -182,7 +182,7 @@ StreamNative Platform 支持 Pulsar 官方的所有客户端。你可以使用 p
 
 # 步骤 4：使用 Kafka 客户端生产和消费事件
 
-通过  Kafka on Pulsar (KoP) ， StreamNative Platform 中的 Pulsar brokers 支持原生的 Kafka 协议。因此，无需修改代码，就可以将现有的 Kafka 应用程序和服务迁移到 Apache Pulsar 上。
+通过  Kafka on Pulsar (KoP) ， StreamNative Platform 中的 Pulsar broker  就可以支持原生的 Kafka 协议。因此，无需修改代码，就可以将现有的 Kafka 应用程序和服务迁移到 Apache Pulsar 上。
 
 目前，StreamNative Platform 支持 [Kafka 客户端 v1.0.0 - v2.6.0](https://github.com/streamnative/kop/tree/master/integrations#readme)。
 
@@ -212,7 +212,7 @@ StreamNative Platform 支持 Pulsar 官方的所有客户端。你可以使用 p
 
     | 选项 |  描述 | 默认值 |
     | --- | --- | --- |
-    | `username`| Kafka 客户端连接到 Pulsar 集群的用户名。设置为存储 Kafka 主题的 Pulsar 租户和命名空间（`TENANT_NAME/NAMESPACE_NAME`）的名称。 | `public/default` |
+    | `username`| Kafka 客户端连接到 Pulsar 集群的用户名。使用 Pulsar 租户和命名空间的名称（`TENANT_NAME/NAMESPACE_NAME`）进行设置，Kafka 主题存储在此 Pulsar 租户和命名空间中。 | `public/default` |
     | `password` | Kafka 客户端连接到 Pulsar 集群的密码。设置为从 StreamNative 控制台获得的令牌。详情请见[准备连接 Pulsar 集群](/user-guides/connect/connect-pulsar-cluster/connect-prepare.md)。 | N/A |
 
 4. 打开一个新的终端窗口，进入 Kafka Pod。
@@ -233,7 +233,7 @@ StreamNative Platform 支持 Pulsar 官方的所有客户端。你可以使用 p
 
 # 步骤 5：验证 Pulsar 和 Kafka 间的互操作性
 
-在完成[步骤 3 ](#step-3 use-pulsar-client-to-produce and-consume-events)和[步骤 4 ](#step-4 use-kafka-client-to-produce and-consume-events)后，Pulsar 生产者、Pulsar 消费者、Kafka 生产者和 Kafka 消费者都可正常运行。Pulsar 消费者可以从Pulsar 生产者那里获得消息，Kafka 消费者也可以从 Kafka 生产者那里接收消息。下面将进一步验证 Pulsar 和 Kafka 之间的互操作性。
+在完成[步骤 3 ](#步骤-3使用-pulsar-client-生产和消费事件)和[步骤 4 ](#步骤-4使用-kafka-客户端生产和消费事件)后，Pulsar 生产者、Pulsar 消费者、Kafka 生产者和 Kafka 消费者都可正常运行。Pulsar 消费者可以从Pulsar 生产者那里获得消息，Kafka 消费者也可以从 Kafka 生产者那里接收消息。下面将进一步验证 Pulsar 和 Kafka 之间的互操作性。
 
 1. 启动 Pulsar 消费者。
 
@@ -288,7 +288,7 @@ StreamNative Platform 支持 Pulsar 官方的所有客户端。你可以使用 p
 
         你可以同时接收来自 Pulsar 消费者和 Kafka 消费者的消息。
 
-        * Pulsar 消费者
+        * Pulsar 消费者端
 
             **输出**
 
@@ -297,7 +297,7 @@ StreamNative Platform 支持 Pulsar 官方的所有客户端。你可以使用 p
             message-for-both-pulsar-and-kafka-client
             ```
 
-        *  Kafka 消费者
+        *  Kafka 消费者端
 
             **输出**
 
@@ -313,7 +313,7 @@ StreamNative Platform 支持 Pulsar 官方的所有客户端。你可以使用 p
 
    你可以同时接收来自 Pulsar 消费者和 Kafka 消费者的消息。
 
-   * Pulsar 消费者
+   * Pulsar 消费者端
 
        **输出**
 
@@ -322,7 +322,7 @@ StreamNative Platform 支持 Pulsar 官方的所有客户端。你可以使用 p
        message-from-pulsar-producer
        ```
 
-   * Kafka 消费者
+   * Kafka 消费者端
 
        **输出**
 
@@ -332,7 +332,7 @@ StreamNative Platform 支持 Pulsar 官方的所有客户端。你可以使用 p
 
 # 步骤 6：使用 StreamNative 控制台管理 Pulsar 集群
 
-StreamNative 控制台是基于 Web 的图形化界面（GUI）管理工具，用于管理和监控 Pulsar 。
+StreamNative 控制台是基于 Web 的图形化界面（GUI）管理工具，用于管理和监控 Pulsar。
 
 本节介绍了如何用 StreamNative 控制台管理 Pulsar 集群，包括创建和管理租户、命名空间和主题。
 
@@ -352,7 +352,7 @@ StreamNative 控制台是基于 Web 的图形化界面（GUI）管理工具，�
 
    2. 点击**创建命名空间**，出现一个对话框。
 
-   3. 为命名空间输入一个名称，然后点击**确定**。名称空间的名称最多包含 40 个字符，支持小写字母（a-z），数字字符（0-9），以及特殊字符连字符（-）。
+   3. 为命名空间输入一个名称，然后点击**确定**。命名空间的名称最多包含 40 个字符，支持小写字母（a-z），数字字符（0-9），以及特殊字符连字符（-）。
 
 4. 创建主题。关于 StreamNative 控制台中主题相关操作的完整列表，请参见[此处](/user-guides/admin/work-with-topics.md#work-with-topics-using-streamnative-console)。
 
@@ -386,7 +386,7 @@ Prometheus 是一个开源的系统监控和告警工具包，用于收集和存
 
     **输出**
 
-    `sn-prometheus` 已暴露，其外部 IP 是 `{PROM-EXTERNAL-IP}`。
+    `sn-prometheus` is exposed and the external IP is `{PROM-EXTERNAL-IP}`.
 
     ```shell
     NAME                                        TYPE           CLUSTER-IP     EXTERNAL-IP        PORT
@@ -417,7 +417,7 @@ Apache Pulsar Grafana 仪表板是一个开源的可视化工具，包含独有�
 
     **输出**
 
-    `sn-grafana` 已暴露，其外部 IP 是`{GRAFANA-EXTERNAL-IP}`。
+     `sn-grafana` is exposed and the external IP is `{GRAFANA-EXTERNAL-IP}`.
 
     ```shell
     NAME                                        TYPE           CLUSTER-IP     EXTERNAL-IP            PORT(S)                      AGE
