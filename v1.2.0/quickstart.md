@@ -417,7 +417,7 @@ Apache Pulsar Grafana 仪表板是一个开源的可视化工具，包含独有�
 
     **输出**
 
-     `sn-grafana` is exposed and the external IP is `{GRAFANA-EXTERNAL-IP}`.
+    `sn-grafana` is exposed and the external IP is `{GRAFANA-EXTERNAL-IP}`.
 
     ```shell
     NAME                                        TYPE           CLUSTER-IP     EXTERNAL-IP            PORT(S)                      AGE
@@ -429,7 +429,7 @@ Apache Pulsar Grafana 仪表板是一个开源的可视化工具，包含独有�
    * 帐户：pulsar
    * 密码：pulsar
 
-   现在你可以用 Grafana 仪表板查看组件的详细指标了，如 bookie、JVM、消息、节点、代理、Zookeeper、pulsar 主题等。
+   现在你可以用 Grafana 仪表板查看组件的详细指标了，如 bookie、JVM、消息、节点、代理、ZooKeeper、Pulsar 主题等。
 
 # 步骤 8：卸载
 
