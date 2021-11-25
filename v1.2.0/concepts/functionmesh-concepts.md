@@ -6,9 +6,7 @@ category: concepts
 
 Function Mesh 是一个 Kubernetes 的 operator，用于帮助用户在 Kubernetes 上原生运行 Pulsar Functions 和 Pulsar 连接器，以充分利用 Kubernetes 的强大功能和丰富资源。
 
-通过 Function Mesh 提供的无服务器（Serverless）框架，用户可以组织 Pulsar Functions 和连接器。Function Mesh 简化了创建复杂流式作业的过程。对于寻求云原生无服务器（Serverless）流计算解决方案的用户来说，Function Mesh 是非常有价值的工具。
-
- 
+通过 Function Mesh 提供的无服务器（Serverless）框架，用户可以组织 Pulsar Functions 和连接器。Function Mesh 简化了创建复杂流式作业的过程。对于寻求云原生无服务器（Serverless）流计算解决方案的用户来说，Function Mesh 提供了巨大的价值。
 
 # 概念
 

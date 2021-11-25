@@ -23,7 +23,7 @@ KoP 通过利用 Pulsar 已有的组件（如主题发现、分布式日志库�
 
 在 Kafka 中，所有的主题都存储在一个平面的命名空间中。而在 Pulsar 中，主题被分层组织到多租户命名空间中。KoP 在 broker 配置中引入 `kafkaNamespace` 设置，这一设置允许管理员将 Kafka 主题映射到 Pulsar 主题。
 
-为了让 Kafka 用户利用 Apache Pulsar 的多租户功能，Kafka 用户在使用 SASL （“Simple Authentication and Security Layer” 的缩写，即“简单认证和安全层”）认证机制对 Kafka 客户端进行认证时，可以指定 Pulsar 租户和命名空间作为其 SASL用户名。
+为了让 Kafka 用户利用 Apache Pulsar 的多租户功能，Kafka 用户在使用 SASL （“Simple Authentication and Security Layer” 的缩写，即“简单认证和安全层”）认证机制对 Kafka 客户端进行认证时，可以指定 Pulsar 租户和命名空间作为其 SASL 用户名。
 
 ## 主题查找
 
@@ -49,4 +49,4 @@ Kafka 中，一旦消息被成功输出到某个主题分区，即会对这条�
 
 最具挑战性的部分是部署组协调器和偏移量管理。Pulsar 没有集中的组协调器来为每个消费者组中的消费者分配分区或管理每个消费者组的偏移量。在 Pulsar 中，分区的分配是由 broker 在每个分区的基础上进行管理的，而偏移量的管理则是由该分区的所有者 broker 通过在游标中存储确认来完成的。
 
-要使 Pulsar 模型与 Kafka 模型保持一致难度很高。因此，为了与 Kafka 客户端完全兼容，KoP 通过在 Pulsar 的名为 `public/kafka/__offsets` 的系统主题中存储协调器组的变化和偏移量，部署了 Kafka 组协调器。这样就搭建了连接 Pulsar 和 Kafka 的桥梁，我们可以使用现有的 Pulsar 工具和策略，管理订阅和监控 Kafka 消费者。KoP 在已经部署的组协调器中添加了后台线程，定期将偏移量更新从系统主题同步到 Pulsar 游标。因此，Kafka 消费者组实际上被视为 Pulsar 订阅。所有现有的 Pulsar 工具也可用于管理 Kafka 消费者组。
+要将 Pulsar 模型与 Kafka 模型进行对应匹配是很有难度的。因此，为了与 Kafka 客户端完全兼容，KoP 通过在 Pulsar 的名为 `public/kafka/__offsets` 的系统主题中存储协调器组的变化和偏移量，部署了 Kafka 组协调器。这样就搭建了连接 Pulsar 和 Kafka 的桥梁，我们可以使用现有的 Pulsar 工具和策略，管理订阅和监控 Kafka 消费者。KoP 在已经部署的组协调器中添加了后台线程，定期将偏移量更新从系统主题同步到 Pulsar 游标。因此，Kafka 消费者组实际上被视为 Pulsar 订阅。所有现有的 Pulsar 工具也可用于管理 Kafka 消费者组。
