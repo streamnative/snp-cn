@@ -1,37 +1,37 @@
 ---
-title: Pulsar connectors
+title: Pulsar 连接器
 id: pulsar-io-concepts
 category: concepts
 ---
 
-Messaging systems are most powerful when you can easily use them with external systems like databases and other messaging systems.
+如果消息系统可以方便地和外部系统（如数据库和其他消息系统）一起使用，就能最大程度地发挥消息系统的作用。
 
-**Pulsar IO connectors** enable you to easily create, deploy, and manage connectors that interact with external systems, such as [Apache Cassandra](https://cassandra.apache.org) and [Aerospike](https://www.aerospike.com).
+**Pulsar IO 连接器** 能让你轻松创建、部署和管理与外部系统互动的连接器，如 [Apache Cassandra](https://cassandra.apache.org) 和 [Aerospike](https://www.aerospike.com)。
 
-A **connector** is a processor that ingresses or egresses events from and to **streams**. Pulsar IO connectors consists **source** and **sink**. This diagram illustrates the relationship between source, Pulsar, and sink.
+**连接器**是一种处理器，它从**流**中输入或输出事件。Pulsar IO 连接器由 **source** 和 **sink** 组成。下图说明了 source、Pulsar 和 sink 之间的关系。
 
 ![Pulsar IO connector](../../image/pulsar-io.png)
 
 ## Source
 
-A source is an application that ingests data from an external system into Pulsar. Common sources include other messaging systems and firehose-style data pipeline APIs.
+Source 是指将数据从外部系统传入到 Pulsar 的应用程序。常见的 source 包括其他消息系统和 firehose 式数据管道 API。
 
-For a complete list of source connectors, see [source connector](https://hub.streamnative.io/).
+关于 source 连接器的完整列表，参见 [source 连接器](https://hub.streamnative.io/)。 
 
 ## Sink
 
-A sink is an application that egresses data from Pulsar to an external system. Common sinks include other messaging systems, as well as SQL and NoSQL databases.
+Sink 是指将数据从 Pulsar 传出到外部系统的应用程序。常见的 sink 包括其他消息系统，以及 SQL 和 NoSQL 数据库。
 
-For a complete list of sink connectors, see [sink connector](https://hub.streamnative.io/).
+关于 sink 连接器的完整列表，参见 [sink 连接器](https://hub.streamnative.io/)。
 
-## Processing guarantee
+## 处理保证
 
-Processing guarantees are used to handle errors when writing messages to Pulsar topics. Pulsar connectors and Functions use the same processing guarantees.
+处理保证的作用是处理向 Pulsar 主题写入消息时发生的错误。Pulsar 连接器和 Functions 使用相同的处理保证。
 
-| Delivery semantics | Description |
+| 传递语义                       | 描述 |
 | ------------------| ------- |
-| `at-most-once` | Each message sent to a connector is processed at most once. Therefore, there is a chance that the message is not processed. |
-| `at-least-once`  | Each message sent to a connector is processed more than once. Therefore, there is a chance that the message is processed redundantly. |
-| `effectively-once` | Each message sent to a connectors is processed only once and has one output associated with it.|
+| 至多一次（`at-most-once`） | 发送到连接器的消息最多被处理一次。也可能出现消息不被处理的情况。                   |
+| 至少一次（`at-least-once`） | 发送到连接器的消息都会被处理至少一次。也可能出现消息被重复处理的情况。 |
+| 有效一次（`effectively-once`） | 发送到连接器的消息只被处理一次，并有一个与之关联的输出。 |
 
-Processing guarantees for connectors do not just rely on Pulsar guarantee but also **relate to external systems**, that is, **the implementation of source and sink**. For the source, Pulsar ensures that writing messages to Pulsar topics respects to the processing guarantees. It is under Pulsar's control. For the sink, the processing guarantees rely on the sink implementation. If the sink implementation does not handle retries in an idempotent way, the sink does not respect to the processing guarantees.
+连接器的处理保证不仅依赖于 Pulsar 保证，还**与外部系统有关**，即 **source 和 sink 的实现**。对于 source，Pulsar 可以确保向 Pulsar 主题写入消息时遵从处理保证。这是 Pulsar 可以控制的。然而对于 sink 来说，处理保证依赖于 sink 的实现。如果 sink 的实现不以幂等方式来处理重试，则 sink 不遵从处理保证。
