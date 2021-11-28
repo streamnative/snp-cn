@@ -212,7 +212,7 @@ StreamNative Platform 支持 Pulsar 官方的所有客户端。你可以使用 p
 
     | 选项 |  描述 | 默认值 |
     | --- | --- | --- |
-    | `username`| Kafka 客户端连接到 Pulsar 集群的用户名。使用 Pulsar 租户和命名空间的名称（`TENANT_NAME/NAMESPACE_NAME`）进行设置，Kafka 主题存储在此 Pulsar 租户和命名空间中。 | `public/default` |
+    | `username`| Kafka 客户端连接到 Pulsar 集群的用户名。该用户名会被设为 Pulsar 租户和命名空间的名称，Kafka 主题也将存储在此 Pulsar 租户和命名空间中。 | `public/default` |
     | `password` | Kafka 客户端连接到 Pulsar 集群的密码。设置为从 StreamNative 控制台获得的令牌。详情请见[准备连接 Pulsar 集群](/user-guides/connect/connect-pulsar-cluster/connect-prepare.md)。 | N/A |
 
 4. 打开一个新的终端窗口，进入 Kafka Pod。
