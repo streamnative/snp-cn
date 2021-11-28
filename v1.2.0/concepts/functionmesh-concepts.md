@@ -6,7 +6,7 @@ category: concepts
 
 Function Mesh 是一个 Kubernetes 的 operator，用于帮助用户在 Kubernetes 上原生运行 Pulsar Functions 和 Pulsar 连接器，以充分利用 Kubernetes 的强大功能和丰富资源。
 
-通过 Function Mesh 提供的无服务器（Serverless）框架，用户可以组织 Pulsar Functions 和连接器。Function Mesh 简化了创建复杂流式作业的过程。对于寻求云原生无服务器（Serverless）流计算解决方案的用户来说，Function Mesh 提供了巨大的价值。
+通过 Function Mesh 提供的无服务器（Serverless）框架，用户可以管理一组 Pulsar Functions 和连接器。Function Mesh 简化了创建复杂流式作业的过程。对于寻求云原生无服务器（Serverless）流计算解决方案的用户来说，Function Mesh 提供了巨大的价值。
 
 # 概念
 
@@ -14,7 +14,7 @@ Function Mesh 是一个 Kubernetes 的 operator，用于帮助用户在 Kubernet
 
 ## 流
 
-“流”是分区的、不可修改的、仅附加的事件序列，代表一系列过去的事实。例如，流事件可以模拟金融交易的序列，如先发生了“杰克借给爱丽丝一百美元”，然后发生了“爱丽丝借给鲍勃五十美元”。
+“流”是分区的、不可修改的、仅附加的事件序列，代表一系列过去的事实。例如，流事件可以模拟金融交易的序列，如先发生了“Jack 借给 Alice 一百美元”，然后发生了“Alice 借给 Bob 五十美元”。
 
 流连接 **Function** 和**连接器**。 
 
@@ -28,7 +28,7 @@ Function Mesh 是一个 Kubernetes 的 operator，用于帮助用户在 Kubernet
 
 ## Function
 
-**Function** 是轻量级的事件处理器，它从一个或多个输入流中得到消息，将用户提供的处理逻辑应用于一个或多个消息，并将处理逻辑的结果输出到另一个流。 
+**Function** 是从单个或多个输入流中消费消息的轻量级的事件处理器，将用户提供的处理逻辑应用于一条或多条消息，并将处理逻辑的结果输出到另一个流。 
 
 Function Mesh 中的 **functions** 是在 Pulsar Functions 的基础上实现的。
 
@@ -36,7 +36,7 @@ Function Mesh 中的 **functions** 是在 Pulsar Functions 的基础上实现的
 
 ![Function](../../image/function.png)
 
-图 2. 图中显示一个 function，它从一个或多个输入流中得到消息，并将结果输出到另一个流。 
+图 2. 图中显示的是一个 function，这个 function 从一个或多个输入流消费消息，并将结果输出到另一个流。 
 
 ## 连接器
 
@@ -63,20 +63,20 @@ Function Mesh 的**连接器**是基于 Pulsar IO 连接器实现的。访问 [S
 
 Function Mesh 的 API 建立在现有的 Kubernetes API 之上，因此 Function Mesh 资源与其他 Kubernetes 原生资源兼容，并且集群管理员可使用现有的 Kubernetes 工具对其进行管理。 
 
-Function Mesh 与包含 Kubernetes 工具的通用语言和框架匹配，为解决常见部署问题节约时间。 
+包含 Kubernetes 工具的通用语言和框架能够方便地与 Function Mesh 配套使用，为解决常见的部署问题节约了时间。  
 
 上述基础概念以 Kubernetes 自定义资源定义（CRD）的形式交付，集群管理员可以对其进行配置，用来开发事件流应用程序。 
 
 可用的 Function Mesh CRD 有：
 
-- [**Function**](/user-guides/admin/work-with-functions/function-functionmesh.md#function-crd)：`Function`  资源对 Pulsar Function 的整个生命周期进行自动管理。
+- [**Function**](/user-guides/admin/work-with-functions/function-functionmesh.md#function-crd)：`Function`  资源对 Pulsar Functions 的整个生命周期进行自动管理。
 - [**Source**](/user-guides/admin/work-with-connectors/connector-functionmesh/connector-crd.md#source-crd-configurations)：`Source`  资源对 Pulsar Source 连接器的整个生命周期进行自动管理。 
 - [**Sink**](/user-guides/admin/work-with-connectors/connector-functionmesh/connector-crd.md#sink-crd-configurations)：`Sink` 资源对 Pulsar Sink 连接器的整个生命周期进行自动管理。 
 - **FunctionMesh**：`FunctionMesh` 资源自动管理事件流应用程序的整个生命周期。**Function Mesh** 自动控制其他对象的创建，确保 Mesh 中定义的 **Function** 和**连接器**正常运行，并且由定义的**流**进行连接。 
 
 # Function Mesh 如何运行
 
-设计 Function Mesh 是为了满足在 Kubernetes 上原生运行 Pulsar Function 和连接器。可以使用 `kubectl` 直接向 Kubernetes 集群提交 Function Mesh CRD，而无需使用 pulsar-admin CLI 工具向 Pulsar 集群发送 function 请求。安装在 Kubernetes 内部相应的 Mesh operator 可单独启动 function 和连接器，组织调度，实现负载平衡。
+设计 Function Mesh 是为了满足在 Kubernetes 上原生运行 Pulsar Functions 和连接器。可以使用 `kubectl` 直接向 Kubernetes 集群提交 Function Mesh CRD，而无需使用 pulsar-admin CLI 工具向 Pulsar 集群发送 function 请求。安装在 Kubernetes 内部相应的 Mesh operator 可单独启动 function 和连接器，组织调度，实现负载平衡。
 
 Function Mesh 的工作原理如下所述，元数据和运行状态直接储存在 Kubernetes 中。
 
