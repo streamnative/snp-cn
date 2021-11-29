@@ -1,34 +1,34 @@
 ---
-title: Get Started
+title: 快速上手
 id: quickstart
 category: quickstart
 ---
 
-This document guides you through every step of installing and running StreamNative Platform with operators on Kubernetes quickly. It includes the following tasks:
+本文档将指导你如何使用 Kubernetes 的 operator 快速安装并运行 StreamNative Platform，具体步骤如下：
 
-- Install the StreamNative Platform on Kubernetes using operators.
-- Start and stop StreamNative Platform.
-- Create tenants, namespaces, and topics using the pulsarctl CLI tool.
-- Produce and consume events using pulsar-client.
-- Produce and consume events using Kafka client.
-- Verify interoperability between Pulsar and Kafka.
-- Monitor StreamNative Platform status with Prometheus and Grafana.
+- 在 Kubernetes 上使用 operator 安装 StreamNative Platform。
+- 启动和停止 StreamNative Platform。
+- 使用 pulsarctl CLI（命令行工具）创建租户、命名空间和主题。
+- 使用 pulsar-client 生产和消费事件。
+- 使用 Kafka 客户端生产和消费事件。
+- 验证 Pulsar 和 Kafka 之间的互操作性。
+- 使用 Prometheus 和 Grafana 监控 StreamNative Platform 的状态。
 
-# Prerequisites
+# 先决条件
 
-- Kubernetes server v1.16 or higher
-- Install [kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl) v1.16 or higher.
-- Install [Helm](https://helm.sh/docs/intro/install/) 3.0 or higher.
-- Install [pulsarctl](https://github.com/streamnative/pulsarctl#install) 2.8.0 or higher.
-- Deploy a Kubernetes cluster.
+- 安装 Kubernetes 服务器 v1.16 或更高版本。
+- 安装 [kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl) v1.16 或更高版本。
+- 安装 [Helm](https://helm.sh/docs/intro/install/) 3.0 或更高版本。
+- 安装 [pulsarctl](https://github.com/streamnative/pulsarctl#install) 2.8.0 或更高版本。
+- 部署一个 Kubernetes 集群。
 
-# Step 1: Install StreamNative Platform
+# 步骤 1：安装 StreamNative Platform
 
-> **Note**
+> **注意**
 >
-> This step uses the original images within the operators. If you want to use customized images to install StreamNative Platform, see [install StreamNative Platform using customized image](/operator-guides/deploy/sn-deploy.md#install-streamnative-platform-using-customized-images).
+> 本步骤使用 operator 的原始镜像。如要使用自定义镜像安装 StreamNative Platform，请参阅[使用自定义镜像安装 StreamNative Platform]（/operator-guides/deploy/sn-deploy.md#install-streamnative-platform-using-customized-images）。
 
-1. Install the StreamNative repositories.
+1. 安装 StreamNative 仓库。
 
     ```
     helm repo add streamnative https://charts.streamnative.io
@@ -37,66 +37,66 @@ This document guides you through every step of installing and running StreamNati
     helm repo update
     ```
 
-2. Create a Kubernetes namespace and add the environment variable for the Kubernetes namespace.
+2. 创建 Kubernetes 命名空间，并为 Kubernetes 命名空间添加环境变量。
 
     ```
     kubectl create namespace KUBERNETES_NAMESPACE
     export NAMESPACE=KUBERNETES_NAMESPACE
     ```
 
-3. Install the Vault operator.
+3. 安装 Vault operator。
    
-    The Vault operator creates and maintains highly-available Vault clusters on Kubernetes, allowing users to easily deploy and manage Vault clusters for their applications.
+    Vault operator 用于在 Kubernetes 上创建和维护高可用的 Vault 集群。通过使用 Vault operator，用户可以轻松地为应用程序部署和管理 Vault 集群。
 
     ```
     helm upgrade --install vault-operator banzaicloud-stable/vault-operator -n $NAMESPACE
     ```
 
-4. Install the cert-manager.
+4. 安装 cert-manager。
 
-    The cert-manager is a native [Kubernetes](https://kubernetes.io/) certificate management controller. It helps issue certificates from [HashiCorp Vault](https://www.vaultproject.io/). The cert-manager ensures that certificates are valid and up-to-date, and attempts to renew certificates at a configured time before expiry.
+   cert-manager 是本地 [Kubernetes](https://kubernetes.io/) 证书管理控制器。用于从 [HashiCorp Vault](https://www.vaultproject.io/) 发布证书。cert-manager 可以确保证书是有效的和最新的。在设定的时间，cert-manager 会更新证书，以免证书过期。
 
-    The cert-manager requires a number of CRD resources to be installed into your cluster as part of installation. To automatically install and manage the CRDs as part of your Helm release, you must add the `--set installCRDs=true` flag to your Helm installation command.
+   在安装 cert-manager 时，需要在 Helm 安装命令中添加 `--set installCRDs=true` 参数，从而将 cert-manager 所需的 CRD 资源一并安装到集群中。
 
     ```
     helm upgrade --install cert-manager jetstack/cert-manager -n $NAMESPACE --set installCRDs=true
     ```
 
-5. Install the Pulsar operator.
+5. 安装 Pulsar operator。
    
-   The Pulsar operator is used to manage Pulsar components, including the Pulsar broker, BookKeeper, ZooKeeper, and Pular proxy.
+   Pulsar operator 用于管理 Pulsar 组件，包括 Pulsar broker、BookKeeper、ZooKeeper 和 Pular proxy。
 
     ```
     helm upgrade --install pulsar-operator streamnative/pulsar-operator -n $NAMESPACE
     ```
 
-6. Install the FunctionMesh operator.
+6. 安装 Function Mesh operator。
 
-    The FunctionMesh operator is used to configure and manage Pulsar IO connectors and Pulsar Functions.
+    Function Mesh operator 用于配置和管理 Pulsar IO 连接器和 Pulsar Functions。
 
-   [Function Mesh](/concepts/functionmesh-concepts.md) is a serverless and purpose-built framework for orchestrating multiple [Pulsar Functions](/concepts/pulsar-function-concepts.md) and [Pulsar IO connectors](/concepts/pulsar-io-concepts.md) for stream processing applications.
+   [Function Mesh](/concepts/functionmesh-concepts.md) 作为无服务器（Serverless）框架，协调多个 [Pulsar Functions](/concepts/pulsar-function-concepts.md) 和 [Pulsar IO 连接器](/concepts/pulsar-io-concepts.md)，以支持流处理应用程序。
 
     ```
     helm upgrade --install function-mesh streamnative/function-mesh-operator -n $NAMESPACE 
     ```
 
-7.  Deploy a Pulsar cluster.
+7.  部署 Pulsar 集群。
 
-    1. Define a Pulsar cluster configuration file. 
+    1. 定义 Pulsar 集群的配置文件。
 
-        [Here](https://raw.githubusercontent.com/streamnative/examples/master/platform/values_cluster.yaml) is an example of the YAML file used for configuring the Pulsar cluster.
+        [点此查看](https://raw.githubusercontent.com/streamnative/examples/master/platform/values_cluster.yaml)配置 Pulsar 集群的 YAML 文件示例。
 
-    2. Deploy the Pulsar cluster using the YAML file.
+    2. 使用 YAML 文件部署 Pulsar 集群。
 
         ```
         helm install -f /path/to/pulsar-cluster/file.yaml $RELEASE_NAME streamnative/sn-platform --set initialize=true
         ```
 
-# Step 2: Create Pulsar tenants/namespaces/topics
+# 步骤 2：创建 Pulsar 租户/命名空间/主题
 
-pulsarctl is a Command-Line Interface (CLI) tool for Pulsar. In this section, you can use the `pulsarctl` CLI tool to create tenants, namespaces, and topics.
+pulsarctl 是 Pulsar 的命令行工具（CLI）。你可以使用 `pulsarctl` 来创建租户、命名空间和主题。
 
-1. Log in to pulsarctl and create a tenant.
+1. 登录 pulsarctl 并创建租户。
 
     ```bash
     pulsarctl \
@@ -105,63 +105,57 @@ pulsarctl is a Command-Line Interface (CLI) tool for Pulsar. In this section, yo
     tenants create TENANT_NAME
     ```
 
-    Replace `WEB_SERVICE_URL` with the Web service URL of your Pulsar cluster. Replace `AUTH_PARAMS` with the token that you get from StreamNative Console. For details, see [prepare to connect to a Pulsar cluster](/user-guides/connect/connect-pulsar-cluster/connect-prepare.md).
+     将 `WEB_SERVICE_URL` 替换为你 Pulsar 集群的 Web 服务 URL。将 `AUTH_PARAMS` 替换为从 StreamNative 控制台获得的令牌。详情请见[准备连接 Pulsar 集群](/user-guides/connect/connect-pulsar-cluster/connect-prepare.md)。
 
-2. Create a tenant.
-
-    ```bash
-    pulsarctl tenants create TENANT_NAME
-    ```
-
-3. Create a namespace.
+3. 创建命名空间。
 
     ```bash
     pulsarctl namespaces create NAMESPACE_NAME -c CLUSTER_NAME
     ```
 
-4. Create a topic.
+4. 创建主题。
 
     ```bash
     pulsarctl topics create TOPIC_NAME
     ```
 
-5. List all the topics.
+5. 列出所有主题。
 
     ```bash
     pulsarctl topics list NAMESPACE_NAME
     ```
 
-# Step 3: Use pulsar-client to produce and consume events 
+# 步骤 3：使用 pulsar-client 生产和消费事件  
 
-StreamNative Platform supports all the official Pulsar clients. You can use the pulsar-client CLI tool to create producers and consumers to simulate a simple production and consumption model.
+StreamNative Platform 支持 Pulsar 官方的所有客户端。你可以使用 pulsar-client 命令行工具（CLI）来创建生产者和消费者，以模拟简单的生产和消费模型。
 
-1. Enter the `toolset` Pod.
+1. 进入 `toolset` Pod。
 
-    To facilitate the usage of the official Pulsar CLI tools, such as pulsar-client, StreamNative Platform provides a `toolset` Pod, which you can use to the `kubectl exec` command to connect to, to directly use the official Pulsar CLI tools.
+    StreamNative Platform 提供了一个 `toolset` Pod 以方便用户使用 Pulsar 命令行工具（CLI），如 pulsar-client。你可以通过 `kubectl exec` 命令连接到这个 Pod，从而直接使用官方的 Pulsar 命令行工具（CLI）。
 
     ```
     kubectl exec -n KUBERNETES_NAMESPACE -it RELEASE_NAME-sn-platform-toolset-0 -- bash
     ```
 
-2. Create a consumer.
+2. 创建消费者。
 
     ```bash
     pulsar-client consume -s SUBSCRIPTION_NAME TOPIC_NAME  -n 0
     ```
 
-3. Create a producer.
+3. 创建生产者。
 
     ```bash
     pulsar-client produce TOPIC_NAME  -m "---------hello streamnative platform-------" -n 10
     ```
 
-   * From the producer side, you can see that the messages have been produced successfully.
+   * 在生产者这边，可以看到消息已经成功生产。
 
         ```shell
         23:04:25.652 [main] INFO  org.apache.pulsar.client.cli.PulsarClientTool - 10 messages successfully produced
         ```
 
-   * From the consumer side, you can receive the following messages.
+   * 在消费者这边，可以收到以下消息。
 
         ```shell
         ----- got message -----
@@ -186,25 +180,25 @@ StreamNative Platform supports all the official Pulsar clients. You can use the 
         ---------hello streamnative platform-------
         ```
 
-# Step 4: Use Kafka client to produce and consume events
+# 步骤 4：使用 Kafka 客户端生产和消费事件
 
-StreamNative Platform brings native Kafka protocol support to Pulsar brokers using Kafka on Pulsar (KoP). Therefore, you can migrate your existing Kafka applications and services to Apache Pulsar without modifying the codes.
+通过  Kafka on Pulsar (KoP) ， StreamNative Platform 中的 Pulsar broker  就可以支持原生的 Kafka 协议。因此，无需修改代码，就可以将现有的 Kafka 应用程序和服务迁移到 Apache Pulsar 上。
 
-Currently, StreamNative Platform supports [Kafka Client v1.0.0 - v2.6.0](https://github.com/streamnative/kop/tree/master/integrations#readme).
+目前，StreamNative Platform 支持 [Kafka 客户端 v1.0.0 - v2.6.0](https://github.com/streamnative/kop/tree/master/integrations#readme)。
 
-1. Grant produce and consume permission to the Admin role on the namespace.
+1. 在命名空间上给 Admin 角色授予生产和消费权限。
 
     ```bash
     pulsarctl namespaces grant-permission --role ROLE_NAME --actions produce,consume NAMESPACE_NAME
     ```
 
-2. Run the Kafka image.
+2. 运行 Kafka 镜像。
 
     ```
     kubectl run kafka --rm -it -n KUBERNETES_NAMESPACE --image bitnami/kafka -- bash
     ```
 
-3. Start a Kafka producer and send a message from the Kafka producer.
+3. 启动 Kafka 生产者，并由 Kafka 生产者发送一条消息。
 
     ```
     kafka-console-producer.sh \
@@ -214,20 +208,20 @@ Currently, StreamNative Platform supports [Kafka Client v1.0.0 - v2.6.0](https:/
     --broker-list RELEASE_NAME-sn-platform-broker:9092 --topic TOPIC_NAME
     ```
 
-    Here are security-related options to be configured.
+    以下是需要配置的安全选项。
 
-    | Option |  Description | Default ｜
+    | 选项 |  描述 | 默认值 |
     | --- | --- | --- |
-    | `username`| The username for the Kafka client connecting to the Pulsar cluster.  It is set to the name of the Pulsar tenant and namespace (`TENANT_NAME/NAMESPACE_NAME`) where Kafka topics are stored. | `public/default` |
-    | `password` | The password for the Kafka client connecting to the Pulsar cluster. It is set to the token that you get from StreamNative Console. For details, see [prepare to connect to a Pulsar cluster](/user-guides/connect/connect-pulsar-cluster/connect-prepare.md).| N/A |
+    | `username`| Kafka 客户端连接到 Pulsar 集群的用户名。该用户名会被设为 Pulsar 租户和命名空间的名称，Kafka 主题也将存储在此 Pulsar 租户和命名空间中。 | `public/default` |
+    | `password` | Kafka 客户端连接到 Pulsar 集群的密码。设置为从 StreamNative 控制台获得的令牌。详情请见[准备连接 Pulsar 集群](/user-guides/connect/connect-pulsar-cluster/connect-prepare.md)。 | N/A |
 
-4. Open a new terminal window and enter the Kafka Pod.
+4. 打开一个新的终端窗口，进入 Kafka Pod。
 
     ```
     kubectl exec -it -n KUBERNETES_NAMESPACE kafka -- bash
     ```
 
-5. Start a Kafka consumer.
+5. 启动 Kafka 消费者。
 
     ```
     kafka-console-consumer.sh \
@@ -237,33 +231,33 @@ Currently, StreamNative Platform supports [Kafka Client v1.0.0 - v2.6.0](https:/
     --bootstrap-server sn-platform-broker:9092 --topic TOPIC_NAME 
     ```
 
-# Step 5: Verify interoperability between Pulsar and Kafka
+# 步骤 5：验证 Pulsar 和 Kafka 间的互操作性
 
-As shown in the [step 3](#step-3-use-pulsar-client-to-produce-and-consume-events) and [step 4](#step-4-use-kafka-client-to-produce-and-consume-events), Pulsar producer, Pulsar consumer, Kafka producer, and Kafka consumer run normally. The Pulsar consumer can get the message from the Pulsar producer and the Kafka consumer can receive the message from the Kafka producer. This section further verifies the interoperability between Pulsar and Kafka.
+在完成[步骤 3 ](#步骤-3使用-pulsar-client-生产和消费事件)和[步骤 4 ](#步骤-4使用-kafka-客户端生产和消费事件)后，Pulsar 生产者、Pulsar 消费者、Kafka 生产者和 Kafka 消费者都可正常运行。Pulsar 消费者可以从Pulsar 生产者那里获得消息，Kafka 消费者也可以从 Kafka 生产者那里接收消息。下面将进一步验证 Pulsar 和 Kafka 之间的互操作性。
 
-1. Start a Pulsar consumer.
+1. 启动 Pulsar 消费者。
 
-   1. Enter the `toolset` Pod.
+   1. 进入 `toolset` Pod.
 
        ```
        kubectl exec -n KUBERNETES_NAMESPACE -it RELEASE_NAME-sn-platform-toolset-0 -- bash
        ```
 
-   2. Create a Pulsar consumer.
+   2. 创建 Pulsar 消费者。
 
        ```bash
        pulsar-client consume -s SUBSCRIPTION_NAME TOPIC_NAME  -n 0
        ```
 
-2. Start a Kafka consumer.
+2. 启动 Kafka 消费者。
 
-   1. Enter the Kafka Pod.
+   1. 进入 Kafka Pod。
 
         ```
         kubectl exec -it -n KUBERNETES_NAMESPACE kafka -- bash
         ```
 
-   2. Start a Kafka consumer.
+   2. 创建 Kafka  消费者。
 
        ```
        kafka-console-consumer.sh \
@@ -273,15 +267,15 @@ As shown in the [step 3](#step-3-use-pulsar-client-to-produce-and-consume-events
        --bootstrap-server sn-platform-broker:9092 --topic TOPIC_NAME 
        ```
 
-3. Start a Kafka producer.
+3. 启动 Kafka 生产者。
 
-   1. Enter the Kafka Pod.
+   1. 进入 Kafka Pod.
 
         ```
         kubectl exec -it -n KUBERNETES_NAMESPACE kafka -- bash
         ```
 
-   2. Start a Kafka producer and send a message.
+   2. 启动 Kafka 生产者并发送一条消息。
 
         ```
         kafka-console-producer.sh \
@@ -292,105 +286,105 @@ As shown in the [step 3](#step-3-use-pulsar-client-to-produce-and-consume-events
         > message-for-both-pulsar-and-kafka-client
         ```
 
-        At the same time, you can receive messages from both Pulsar and Kafka consumers.
+        你可以同时接收来自 Pulsar 消费者和 Kafka 消费者的消息。
 
-        * From Pulsar consumer side
+        * Pulsar 消费者端
 
-            **Output**
+            **输出**
 
             ```shell
             ----- got message -----
             message-for-both-pulsar-and-kafka-client
             ```
 
-        * From Kafka consumer side
+        *  Kafka 消费者端
 
-            **Output**
+            **输出**
 
             ```shell
             > message-for-both-pulsar-and-kafka-client
             ```
 
-4. Start a Pulsar producer and send the message _message-from-pulsar-producer_.
+4. 启动 Pulsar 生产者并发送消息 _message-from-pulsar-producer_。
 
     ```bash
     pulsar-client producer -m "message-from-pulsar-producer" TOPIC_NAME
     ```
 
-   At the same time, you can receive messages from both Pulsar and Kafka consumers.
+   你可以同时接收来自 Pulsar 消费者和 Kafka 消费者的消息。
 
-   * From Pulsar consumer side
+   * Pulsar 消费者端
 
-       **Output**
+       **输出**
 
        ```shell
        ----- got message -----
        message-from-pulsar-producer
        ```
 
-   * From Kafka consumer side
+   * Kafka 消费者端
 
-       **Output**
+       **输出**
 
        ```shell
        > message-from-pulsar-producer
        ```
 
-# Step 6: Use StreamNative Console to manage Pulsar cluster
+# 步骤 6：使用 StreamNative 控制台管理 Pulsar 集群
 
-The StreamNative Console is a web-based GUI management tool for managing and monitoring Pulsar. 
+StreamNative 控制台是基于 Web 的图形化界面（GUI）管理工具，用于管理和监控 Pulsar。
 
-This section describes how to manage a Pulsar cluster, including creating and managing tenants, namespaces, and topics. 
+本节介绍了如何用 StreamNative 控制台管理 Pulsar 集群，包括创建和管理租户、命名空间和主题。
 
-1. Log in to the StreamNative Console. For details, see [here](/user-guides/admin/login-console.md).
+1. 登录 StreamNative 控制台。详情请参见[此处](/user-guides/admin/login-console.md)。
 
-2. Create a tenant. For a full list of operations available for tenants on the StreamNative Console, see [here](/user-guides/admin/work-with-tenants.md#work-with-tenants-using-streamnative-console).
+2. 创建租户。关于 StreamNative 控制台中租户相关操作的完整列表，请参见[此处](/user-guides/admin/work-with-tenants.md#work-with-tenants-using-streamnative-console)。
 
-   1. From the left navigation pane, click **Tenants**.
+   1. 从左边的导航窗格，点击**租户**。
 
-   2. Click **New Tenant** and a dialog box is displayed.
+   2. 点击**创建租户**，出现一个对话框。
 
-   3. Configure the tenant and then click **Confirm**.
+   3. 配置租户，然后点击**确定**。
 
-3. Create a namespace. For a full list of operations available for namespaces on the StreamNative Console, see [here](/user-guides/admin/work-with-namespaces.md#work-with-namespaces-using-streamnative-console).
+3. 创建命名空间。关于 StreamNative 控制台中命名空间相关操作的完整列表，请参见[此处](/user-guides/admin/work-with-namespaces.md#work-with-namespaces-using-streamnative-console)。
 
-   1. From the left navigation pane, click **Namespaces**.
+   1. 从左边的导航窗格，点击**命名空间**。
 
-   2. Click **Create Namespace**. A dialog box is displayed.
+   2. 点击**创建命名空间**，出现一个对话框。
 
-   3. Enter a name for the namespace and then click **Confirm**. The namespace name is a string of up to 40 characters, supporting lowercase letters (a-z), numeric characters (0-9), and the special character hyphen (-).
+   3. 为命名空间输入一个名称，然后点击**确定**。命名空间的名称最多包含 40 个字符，支持小写字母（a-z），数字字符（0-9），以及特殊字符连字符（-）。
 
-4. Create a topic. For a full list of operations available for topics on the StreamNative Console, see [here](/user-guides/admin/work-with-topics.md#work-with-topics-using-streamnative-console).
+4. 创建主题。关于 StreamNative 控制台中主题相关操作的完整列表，请参见[此处](/user-guides/admin/work-with-topics.md#work-with-topics-using-streamnative-console)。
 
-   1. From the left navigation pane, click **Topics**.
+   1. 从左边的导航窗格，点击**主题**。
 
-   2. Click **New Topic** and a dialog box is displayed.
+   2. 点击**添加主题**，出现一个对话框。
 
-   3. Configure the topic and then click **Confirm**.
+   3. 配置主题，然后点击**确定**。
 
-# Step 7: Use Prometheus and Grafana to monitor status
+# 步骤 7：使用 Prometheus 和 Grafana 监控状态
 
-This section describes how to use the Prometheus and Grafana to monitor Pulsar status.
+本节介绍了如何使用 Prometheus 和 Grafana 来监控 Pulsar 的状态。
 
 ## Prometheus
 
-Prometheus is an open-source system monitoring and alerting toolkit, which is used to collect and store Pulsar related metrics.
+Prometheus 是一个开源的系统监控和告警工具包，用于收集和存储 Pulsar 相关的指标。
 
-1. Expose Prometheus service.
+1. 暴露 Prometheus 服务。
 
-    Before accessing the Prometheus website, you need to expose Prometheus service.
+    要访问 Prometheus，需要先暴露 Prometheus 服务。
 
     ```bash
     kubectl expose service PROMETHEUS_SERVICE_NAME --type=LoadBalancer --name=PROMETHEUS_NAME --port=9090 -n KUBERNETES_NAMESPACE
     ```
 
-2. Get the external IP address of Prometheus service.
+2.  获取 Prometheus 服务的外部 IP 地址。
 
     ```bash
     kubectl get service -n KUBERNETES_NAMESPACE
     ```
 
-    **Output**
+    **输出**
 
     `sn-prometheus` is exposed and the external IP is `{PROM-EXTERNAL-IP}`.
 
@@ -399,29 +393,29 @@ Prometheus is an open-source system monitoring and alerting toolkit, which is us
     sn-prometheus                               LoadBalancer   10.12.3.133    {PROM-EXTERNAL-IP} 9090:32556/TCP               9s
     ```
 
-3. Navigate to the Prometheus website at http://{PROM-EXTERNAL-IP}:9090/targets.
+3. 访问 Prometheus 网站： http://{PROM-EXTERNAL-IP}:9090/targets.
 
-   Then you can use Prometheus to view metrics of all Pulsar components.
+   现在你可以用 Prometheus 来查看所有 Pulsar 组件的指标了。
 
 ## Grafana
 
-Apache Pulsar Grafana dashboard is an open-source visualization tool, containing a unique Graphite target parser that enables easy metric and function editing, which is used to visualize time series data of different monitoring indexes.
+Apache Pulsar Grafana 仪表板是一个开源的可视化工具，包含独有的 Graphite 目标解析器，可以轻松地进行指标和函数编辑，用于将不同监测指标的时间序列数据进行可视化显示。
 
-1. Expose Grafana service.
+1. 暴露 Grafana 服务。
 
-    Before accessing Grafana, you need to expose Grafana service. 
+    要访问 Grafana，需要先暴露 Grafana 服务。
 
     ```bash
     kubectl expose service GRAFANA_SERVICE_NAME  --type=LoadBalancer --name=GRAFANA_NAME --port=3000 -n KUBERNETES_NAMESPACE
     ```
 
-2. Get the external IP address of Grafana service.
+2. 获取 Grafana 服务的外部 IP 地址。
 
     ```bash
     kubectl get service -n KUBERNETES_NAMESPACE
     ```
 
-    **Output**
+    **输出**
 
     `sn-grafana` is exposed and the external IP is `{GRAFANA-EXTERNAL-IP}`.
 
@@ -430,30 +424,30 @@ Apache Pulsar Grafana dashboard is an open-source visualization tool, containing
     sn-grafana                                  LoadBalancer   10.12.5.204    {GRAFANA-EXTERNAL-IP}  3000:30307/TCP               5s
     ```
 
-3. Navigate to the Grafana website at http://{GRAFANA-EXTERNAL-IP}:3000 and log into using the default credentials as below.
+3. 访问 Grafana 网站：http://{GRAFANA-EXTERNAL-IP}:3000，并使用用下面的默认账户密码登录。
 
-   * Account: pulsar
-   * Password: pulsar
+   * 帐户：pulsar
+   * 密码：pulsar
 
-    Now you can see the Grafana dashboard showing detailed metrics of components, such as bookie, JVM, messaging, node, proxy, Zookeeper, pulsar topics and so on.
+   现在你可以用 Grafana 仪表板查看组件的详细指标了，如 bookie、JVM、消息、节点、代理、ZooKeeper、Pulsar 主题等。
 
-# Step 8: Uninstallation
+# 步骤 8：卸载
 
-This section describes how to uninstall Pulsar cluster, and Istio, and StreamNative Platform,
+本节介绍如何卸载 Pulsar 集群、Istio 以及 StreamNative Platform。
 
-- Execute the following command to uninstall the Pulsar cluster.
+- 执行以下命令卸载 Pulsar 集群：
 
     ```
     helm uninstall $PULSAR_CLUSTER
     ```
 
-- Execute the following command to uninstall the Istio.
+- 执行以下命令卸载 Istio：
 
     ```
     istioctl x uninstall --purge
     ```
 
-- Execute the following command to uninstall the StreamNative Platform.
+- 执行以下命令卸载 StreamNative Platform：
 
     ```
     export NAMESPACE=KUBERNETES_NAMESPACE
@@ -463,6 +457,6 @@ This section describes how to uninstall Pulsar cluster, and Istio, and StreamNat
     helm uninstall function-mesh -n $NAMESPACE
     ```
 
->**Note**
+>**注意**
 >
-> If you want to delete the PVCs or the Secret, you need to delete them together. Otherwise, you will fail to reinstall the StreamNative Platform. It is recommended that you exercise caution when deleting the PVCs or the Secret because some of your significant information cannot be restored once you have deleted them.
+> 如想删除 PVC 或 Secret，需要将它们同时删除。否则，你将无法重新安装 StreamNative Platform。建议谨慎删除 PVC 或 Secret，因为一旦删除，一些重要信息将无法恢复。
