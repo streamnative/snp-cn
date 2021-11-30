@@ -12,7 +12,7 @@ category: concepts
 
 Pulsar Functions 是 Pulsar 消息系统的计算基础架构。Pulsar Functions 让你能够轻松创建复杂的处理逻辑，而无需部署单独的类似系统（如 [Apache Storm](http://storm.apache.org/)、 [Apache Heron](https://heron.incubator.apache.org/) 或 [Apache Flink](https://flink.apache.org/)）。
 
-可以把 Pulsar Functions 看作是 [Lambda](https://aws.amazon.com/lambda/) 风格的函数，经过专门的设计，将 Pulsar 作为消息总线。
+可以把 Pulsar Functions 看作是 [Lambda](https://aws.amazon.com/lambda/) 风格的函数，专门用于将 Pulsar 作为消息总线来使用。
 
 ## 编程模型
 
