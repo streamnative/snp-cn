@@ -113,17 +113,22 @@ category: operator-guides
 
 ## StreamNative Platform 安全
 
-StreamNative Platform 通过以下过程增强安全性。 
+StreamNative Platform 通过以下流程增强安全性。 
 
 - 验证
+
 - 授权
+
 - 网络加密
+
 - 配置密文
 
 对于生产环境的部署，StreamNative Platform 推荐以下安全机制：
 
 - 为 Kafka 客户端身份验证启用 SSL/Plain。
+
 - 为 Pulsar 客户端身份验证启用 JSON Web Token (JWT) 身份验证。
+
 - 对 StreamNative Platform 组件之间的内部通讯和从客户端到 StreamNative Platform 组件的外部通讯，启用 TLS 进行网络加密。
 
 # 联网
