@@ -121,7 +121,7 @@ StreamNative Platform 通过以下流程增强安全性。
 
 - 网络加密
 
-- 配置密文
+- 配置 Secret
 
 对于生产环境的部署，StreamNative Platform 推荐以下安全机制：
 
