@@ -10,7 +10,7 @@ category: operator-guides
 > 
 > 如果你部署了一个本地 Kubernetes 集群，则需要配置本地[持久卷（PersistentVolume，PV）](https://kubernetes.io/docs/concepts/storage/persistent-volumes/)和存储类，以便将数据持久化到本地存储。
 
-Pulsar 集群组件，如 BookKeeper 和 ZooKeeper，需要持久化存储数据。在 Kubernetes 中持久化数据需要使用 PV。PV 包含可供 Pulsar 集群使用的存储的详细信息。管理员可以使用 [存储类（StorageClass）](https://kubernetes.io/docs/concepts/storage/storage-classes/) 静态或动态地配置 PV。存储类为管理员提供了一种描述其提供的存储 "类"的方法。不同的类可以映射到服务质量 (Quality-of-Service, QoS) 级别、备份策略或由集群管理员决定的任意策略。
+Pulsar 集群组件，如 BookKeeper 和 ZooKeeper，需要持久化存储数据。在 Kubernetes 中持久化数据需要使用 PV。PV 包含可供 Pulsar 集群使用的存储的详细信息。管理员可以使用 [存储类（StorageClass）](https://kubernetes.io/docs/concepts/storage/storage-classes/) 静态或动态地配置 PV。存储类为管理员提供了一种描述其提供的存储 "类"的方法。不同的类可以映射到服务质量（Quality-of-Service，QoS）级别、备份策略或由集群管理员决定的任意策略。
 
 PV 和 Pod 受[持久卷申领（PersistentVolumeClaim，PVC）](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#persistentvolumeclaims)的约束。持久卷申领（PersistentVolumeClaim，PVC）是一种用户对存储的请求，和 Pod 类似。Pod 消耗节点资源，而 PVC 消耗 PV 资源。
 
