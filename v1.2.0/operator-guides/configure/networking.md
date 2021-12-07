@@ -22,7 +22,7 @@ StreamNative Platform 通过 `ingress` 组件来暴露以下服务：
 - `LoadBalancer`：客户端使用 Kubernetes 服务商的负载均衡器连接到 Pulsar proxy、Grafana、StreamNative 控制台。
 - `NodePort`：如果没有 LoadBalancer，可以选择通过 NodePort 暴露服务。NodePort 通过节点的 IP 地址和静态端口来暴露服务。可以通过 NodeIP + NodePort 从集群外部访问 `NodePort` 服务。
 
-以下是运行命令获得 Pulsar 服务信息的例子。 
+以下是运行命令获得 Pulsar 服务信息的例子。
 
 **例子**
 
@@ -61,7 +61,7 @@ pulsar-broker           ClusterIP      None             <none>        8080:31062
     helm upgrade -f /path/to/your/file.yaml CLUSTER_NAME $PULSAR_CHART/
     ```
 
-3. 获得外部 IP 地址或 URL。 
+3. 获得外部 IP 地址或 URL。
 
     ```
     kubectl get svc/RELEASE_NAME-sn-platform-proxy-ingress -n KUBERNETES_NAMESPACE
@@ -97,12 +97,12 @@ StreamNative Platform 为客户端访问 StreamNative 控制台和 Grafana 服�
     helm upgrade -f /path/to/your/file.yaml CLUSTER_NAME $PULSAR_CHART/
     ```
 
-3. 获得外部 IP 地址或 URL。 
+3. 获得外部 IP 地址或 URL。
 
     ```
     kubectl get svc/RELEASE_NAME-sn-platform-nginx-ingress-controller -n KUBERNETES_NAMESPACE
     ```
 
-    可以通过 `nginx-ingress-controller` 的 HOST/IP 地址访问 StreamNative 控制台和 Grafana。相关端口为 `80`。 
+    可以通过 `nginx-ingress-controller` 的 HOST/IP 地址访问 StreamNative 控制台和 Grafana。相关端口为 `80`。
     - StreamNative 控制台 URL：`http://[nginx-ingress-HOST]/`
     - Grafana URL：`http://[nginx-ingress-HOST]/grafana`
