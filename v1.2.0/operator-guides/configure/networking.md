@@ -4,7 +4,7 @@ id: networking
 category: operator-guides
 ---
 
-StreamNative Platform 提供了 `ingress` 组件提供以下服务。 
+StreamNative Platform 通过 `ingress` 组件来暴露以下服务： 
 
 - Pulsar Proxy
 - StreamNative 控制台
