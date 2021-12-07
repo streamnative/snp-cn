@@ -1,30 +1,29 @@
 ---
-title: Configure networking
+title: 配置联网
 id: networking
 category: operator-guides
 ---
 
-StreamNative Platform provides the `ingress` component to expose following services.
+StreamNative Platform 提供了 `ingress` 组件提供以下服务。 
 
 - Pulsar Proxy
-- StreamNative Console
+- StreamNative 控制台
 - Grafana
 
-# Access types
+# 访问类型
 
-You can configure Pulsar service with different types according to the scenarios, such as `ClusterIP`, `NodePort` and `LoadBalancer`, and use different access methods for different types.
+你可以根据场景配置不同类型的 Pulsar 服务，如 `ClusterIP`、`NodePort` 和 `LoadBalancer`，并对不同类型使用不同的访问方法。
 
-- `ClusterIP` exposes services through the internal IP of the cluster. When selecting this type of service, you can only access it within the cluster by the following methods:
-
+- `ClusterIP ` 通过集群的内部 IP 暴露服务。当选择这种类型的服务时，只能通过以下方法在集群内访问服务。
   - ClusterIP + ServicePort
-  - Service domain name (`${serviceName}.${namespace}`) + ServicePort
+  - 服务域名 (`${serviceName}.${namespace}`) + ServicePort
+  
+- `LoadBalancer`：客户端使用 Kubernetes 服务商的负载均衡器连接到 Pulsar proxy、Grafana、StreamNative 控制台。
+- `NodePort`：如果没有 LoadBalancer，可以选择通过 NodePort 暴露服务。NodePort 通过节点的 IP 地址和静态端口来暴露服务。可以通过 NodeIP + NodePort 从集群外部访问 `NodePort` 服务。
 
-- `LoadBalancer`: clients connect to Pulsar proxies, Grafana, StreamNative Console using the Kubernetes provider’s load balancer. 
-- `NodePort`: If there is no LoadBalancer, you can choose to expose the service through NodePort. NodePort exposes services through the node's IP address and static port. You can access a `NodePort` service from outside of the cluster by requesting NodeIP + NodePort
+以下是运行命令获得 Pulsar 服务信息的例子。 
 
-Here is an example about obtaining the Pulsar services information by running the following command.
-
-**Example**
+**例子**
 
 ```
 kubectl get services pulsar-broker -n snpe
@@ -32,13 +31,13 @@ NAME                         TYPE           CLUSTER-IP       EXTERNAL-IP   PORT(
 pulsar-broker           ClusterIP      None             <none>        8080:31062/TCP,6650:32198/TCP             2m22s
 ```
 
-The above example describes the information of the Pulsar broker service in the `snpe` namespace. The type is `ClusterIP`. The ServicePort is `8080` and `6650`. The `NodePort` is `31062` and `32198`.
+上面的例子描述了 `snpe` 命名空间中 Pulsar broker 服务的信息。类型是 `ClusterIP`。服务端口是 `8080` 和 `6650`。`NodePort` 是`31062` 和 `32198`。
 
-# Access Pulsar cluster using load balancer
+# 使用负载均衡器访问 Pulsar 集群
 
-To allow external access to the Pulsar cluster using load balancers, follow these steps.
+要实现通过负载均衡器从外部访问 Pulsar 集群，需完成以下步骤：
 
-1. Set the following in the Pulsar configuration YAML file.
+1. 在 Pulsar 的 YAML 配置文件中设置以下内容。
 
     ```
     ## Ingresses for exposing Pulsar services
@@ -55,27 +54,27 @@ To allow external access to the Pulsar cluster using load balancers, follow thes
         service.beta.kubernetes.io/aws-load-balancer-type: nlb
     ```
 
-2. Apply the new configuration.
+2. 让新配置生效。
 
     ```
     helm upgrade -f /path/to/your/file.yaml CLUSTER_NAME $PULSAR_CHART/
     ```
 
-3. Get the external IP address or the URL. 
+3. 获得外部 IP 地址或 URL。 
 
     ```
     kubectl get svc/RELEASE_NAME-sn-platform-proxy-ingress -n KUBERNETES_NAMESPACE
     ```
 
-    Then you can access the Pulsar cluster through the `proxy-ingress` HOST/IP address. The relative port should be `8080/6650` for non-TLS access and `443/6651` for TLS access.
+    然后，通过 `proxy-ingress` HOST/IP 地址访问 Pulsar 集群。非 TLS 访问的端口为 `8080/6650`，TLS 访问的端口为 `443/6651`。
 
-# Access StreamNative Console and Grafana using load balancer
+#  使用负载均衡器访问 StreamNative 控制器和 Grafana
 
-StreamNative Platform provides the same interface for the client accessing StreamNative Console and Grafana services.
+StreamNative Platform 为客户端访问 StreamNative 控制台和 Grafana 服务提供了相同的接口。
 
-To allow external access to the StreamNative Console and Grafana using load balancers, follow these steps.
+要实现通过负载均衡器从外部访问 StreamNative 控制台和 Grafana，需完成以下步骤：
 
-1. Set the following in the Pulsar configuration YAML file.
+1. 在 Pulsar 的 YAML 配置文件中设置以下内容。
 
     ```
     ## Ingresses for exposing monitoring/management services publicly
@@ -91,18 +90,18 @@ To allow external access to the StreamNative Console and Grafana using load bala
         # external_domain_scheme: https://
     ```
 
-2. Apply the new configuration.
+2. 让新配置生效。
 
     ```
     helm upgrade -f /path/to/your/file.yaml CLUSTER_NAME $PULSAR_CHART/
     ```
 
-3. Get the external IP address or the URL. 
+3. 获得外部 IP 地址或 URL。 
 
     ```
     kubectl get svc/RELEASE_NAME-sn-platform-nginx-ingress-controller -n KUBERNETES_NAMESPACE
     ```
 
-    You can access StreamNative Console and Grafana through `nginx-ingress-controller` HOST/IP address. The relative port is `80`.
-    - StreamNative Console URL: `http://[nginx-ingress-HOST]/`
-    - Grafana URL: `http://[nginx-ingress-HOST]/grafana`
+    可以通过 `nginx-ingress-controller` 的 HOST/IP 地址访问 StreamNative 控制台和 Grafana。相关端口为 `80`。 
+    - StreamNative 控制台 URL：`http://[nginx-ingress-HOST]/`
+    - Grafana URL：`http://[nginx-ingress-HOST]/grafana`
