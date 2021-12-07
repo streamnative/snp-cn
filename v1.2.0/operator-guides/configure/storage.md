@@ -1,28 +1,28 @@
 ---
-title: Configure storage
+title: 配置存储
 id: storage
 category: operator-guides
 ---
 
-# Local PVs and storage classes
+# 本地 PV 和存储类
 
-> **Note**
+> **注意**
 > 
-> If you deploy a local Kubernetes cluster, you need to configure the local [PersistentVolume (PV)](https://kubernetes.io/docs/concepts/storage/persistent-volumes/) and storage classes for persisting data to your local storage.
+> 如果你部署了一个本地 Kubernetes 集群，则需要配置本地[持久卷（PersistentVolume，PV）](https://kubernetes.io/docs/concepts/storage/persistent-volumes/)和存储类，以便将数据持久化到本地存储。
 
-Pulsar cluster components such as the BookKeeper and ZooKeeper require the persistent storage of data. To persist data in Kubernetes, you need to use PVs. A PV contains the details of the storage that is available for use by the Pulsar cluster. A PV can be provisioned by an administrator statically or dynamically using [StorageClass](https://kubernetes.io/docs/concepts/storage/storage-classes/). A StorageClass provides a way for administrators to describe the "classes" of storage they offer. Different classes might map to Quality-of-Service (QoS) levels, to backup policies, or to arbitrary policies determined by the cluster administrators.
+Pulsar 集群组件，如 BookKeeper 和 ZooKeeper，需要持久化存储数据。在 Kubernetes 中持久化数据需要使用 PV。PV 包含可供 Pulsar 集群使用的存储的详细信息。管理员可以使用 [存储类（StorageClass）](https://kubernetes.io/docs/concepts/storage/storage-classes/) 静态或动态地配置 PV。存储类为管理员提供了一种描述其提供的存储 "类"的方法。不同的类可以映射到服务质量 (Quality-of-Service, QoS) 级别、备份策略或由集群管理员决定的任意策略。
 
-PVs and Pods are bound by [PersistentVolumeClaim (PVC)](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#persistentvolumeclaims). A PersistentVolumeClaim (PVC) is a request for storage by a user. It is similar to a Pod. Pods consume node resources and PVCs consume PV resources.
+PV 和 Pod 受[持久卷申领（PersistentVolumeClaim，PVC）](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#persistentvolumeclaims)的约束。持久卷申领（PersistentVolumeClaim，PVC）是一种用户对存储的请求，和 Pod 类似。Pod 消耗节点资源，而 PVC 消耗 PV 资源。
 
-To configure the local PVs and storage classes, follow these steps.
+配置本地 PV 和存储类的步骤如下：
 
-1. Preallocate local storage in each cluster node.
+1. 为每个集群节点预先分配本地存储。 
 
-    The example creates five Solid State Drive (SSD) and Hybrid Hard Drive (HDDs) volumes respectively.
+    下面的例子分别创建了五个固态硬盘（Solid State Drive，SSD）和混合硬盘（Hybrid Hard Drive，HDD）卷。 
 
-    > **Note**
+    > **注意**
     > 
-    > This code example is just for the test environment. You can configure your local storage based on your production environment.
+    > 以下代码举例仅用于测试环境。请根据你的生产环境类来配置本地存储。
 
     ```
     #!/bin/bash
@@ -38,52 +38,52 @@ To configure the local PVs and storage classes, follow these steps.
     done
     ```
 
-2. Install the local volume provisioner.
+2. 安装本地卷配置器。
 
-    > **Note**
+    > **注意**
     >
-    > The local volume provisioner manages the PV lifecycle for pre-allocated disks by detecting and creating PVs for each local disk on the host, and then cleaning up the disks when released. It does not support dynamic provisioning.
+    > 本地卷配置器通过检测并为主机上的每个本地磁盘创建 PV，来管理预先分配的磁盘 PV 的生命周期，然后在释放磁盘时进行清理。不支持动态配置。
 
-    1. Define a YAML file to configure the local volume provisioner.
+    1. 定义 YAML 文件来配置本地卷配置器。
 
-        [Here](https://github.com/streamnative/examples/tree/master/platform) is an example of the YAML file used for configuring the local volume provisioner.
+        [点击此处](https://github.com/streamnative/examples/tree/master/platform)查看用于配置本地卷配置器的 YAML 文件举例。
 
-    2. Apply the YAML file to install the local volume provisioner.
+    2. 使用 YAML 文件来安装本地卷配置器。
 
         ```
         kubectl apply -f /path/to/local-volume-provisioner/file.yaml
         ```
 
-3. Verify that the local volume provisioner is created successfully.
+3. 验证本地卷配置器是否成功创建。
 
      ```
      kubectl get po -n KUBERNETES_NAMESPACE |grep local-volume
      ```
 
-4. Verify that all PVs are created successfully.
+4. 验证所有 PV 是否成功创建。
 
      ```
      kubectl get pv
      ```
 
-5. Verify that all storage classes are created successfully.
+5. 验证所有的存储类是否成功创建。
 
      ```
      kubectl get storageclasses
     ```
 
-# Kubernetes default StorageClass
+# Kubernetes 默认存储类
 
-If you do not provide the `spec.storageClassName` in the CR, the Pulsar operator uses the default storage class.
+如果没有在 CR 中提供 `spec.storageClassName`，Pulsar operator 会使用默认的存储类。
 
-Use the following command to get the name of the current default storage class:
+可以使用以下命令获得当前默认存储类的名称：
 
 ```
 kubectl get sc
 ```
 
-To use the Kubernetes default storage class, it is recommended to set the following properties on the default StorageClasses.
+如要使用 Kubernetes 默认存储类，建议在默认存储类上设置以下属性：
 
 - `volumeBindingMode: WaitForFirstConsumer`
 - `reclaimPolicy: Retain`
-- `allowVolumeExpansion: true` (required field for the production deployments)
+- `allowVolumeExpansion: true` （生产环境必填字段）
