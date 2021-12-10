@@ -115,7 +115,7 @@ Hashing scheme 是一组标准哈希函数的枚举，用于为特定消息进�
 死信主题依赖消息重新分发。消息重新传递的原因可以是：[确认超时](#确认超时)或[否定确认（ negative acknowledgement）](#否定确认)。如果要对消息使用否定确认（negative acknowledgement），需确保在确认超时前进行否定确认（negative acknowledgement）。
 
 > **注意**    
-> 目前，死信主题在 [Shared](#shared) 和 [Key_Shared](#key_shared) 订阅模式下为启用状态。
+> 目前，死信主题在[共享（shared）](#共享shared)和[键共享（key_shared）](#键共享key_shared)订阅模式下为启用状态。
 
 ## 重试主题
 
@@ -191,13 +191,13 @@ TypedMessageBuilder | 用来构建消息。可以通过  `TypedMessageBuilder` �
 
 延迟消息传递使得消费者无需立即消费一条消息，而是可以稍后消费。在这个机制中，消息被存储在 BookKeeper 中，消息被发布给 broker 后，`DelayedDeliveryTracker` 在内存中维护时间索引（time->messageId），一旦超过特定的延迟时间，就会将消息发送给消费者。 
 
-延迟消息发送只在 [Shared](#shared) 订阅模式下有效。在 [Exclusive](#exclusive) 和 [Failover](#failover) 订阅模式下，延迟的消息仍会被立即发送。
+延迟消息发送只在[共享（shared）](#共享shared)订阅模式下有效。在[独占（exclusive）](#独占exclusive)和[灾备（failover）](#灾备failover)订阅模式下，延迟的消息仍会被立即发送。
 
 下图解释了延迟消息传递的概念：
 
 ![Delayed Message Delivery](../../image/message_delay.png)
 
-Broker 保存消息而不做任何检查。当消费者消费消息时，如果该消息被设置为延迟，那么该消息将被添加到 `DelayedDeliveryTracker`。订阅从`DelayedDeliveryTracker` 中检查并获得超时消息。 
+Broker 保存消息而不做任何检查。当消费者消费消息时，如果该消息被设置为延迟，那么该消息将被添加到 `DelayedDeliveryTracker`。订阅从 `DelayedDeliveryTracker` 中检查并获得超时消息。 
 
 # 生产者
 
@@ -218,13 +218,13 @@ Broker 保存消息而不做任何检查。当消费者消费消息时，如果�
 
 | 访问模式           | 描述 |
 |---|---|
-|`Shared`|多个生产者可在同一个主题发布消息。 <br><br>此为**默认**设置。|
-|`Exclusive`|仅一个生产者可在主题上发布消息。 <br><br>如果已经连接了一个生产者，则当其他生产者试图在这个主题上发布时，会立即出现错误。<br><br>如原生产者和 broker 断开，则弃用原生产者，并选取一个新的生产者作为独占生产者。|
-|`WaitForExclusive`|如果已经连接了一个生产者，那么这个生产者的创建将被挂起（而不是超时），直到这个生产者获得  `Exclusive`  访问权限。<br><br>成功成为独占生产者后，这个生产者将被视为领导者。如果你想为应用程序实现领导者选举方案（leader election scheme），则可以使用这种访问模式。|
+|`共享（shared）`|多个生产者可在同一个主题发布消息。 <br><br>此为**默认**设置。|
+|`独占（exclusive）`|仅一个生产者可在主题上发布消息。 <br><br>如果已经连接了一个生产者，则当其他生产者试图在这个主题上发布时，会立即出现错误。<br><br>如原生产者和 broker 断开，则弃用原生产者，并选取一个新的生产者作为独占生产者。|
+|`等待独占（WaitForExclusive）`|如果已经连接了一个生产者，那么这个生产者的创建将被挂起（而不是超时），直到这个生产者获得`独占（exclusive）`访问权限。<br><br>成功成为独占生产者后，这个生产者将被视为领导者。如果你想为应用程序实现领导者选举方案（leader election scheme），则可以使用这种访问模式。|
 
 > **注意**
 >
-> 一旦某个应用程序出现一个生产者成功实现了 `Exclusive`  或  `WaitForExclusive` 访问模式，该应用程序的实例将成为该主题的**唯一写入者**。其他生产者对这一主题进行消息生产时，将立即返回错误，或需要等待以获得 `Exclusive` 访问权限。 
+> 一旦某个应用程序出现一个生产者成功实现了`独占（exclusive）`或`等待独占（WaitForExclusive）`访问模式，该应用程序的实例将成为该主题的**唯一写入者**。其他生产者对这一主题进行消息生产时，将立即返回错误，或需要等待以获得`独占（exclusive）`访问权限。 
 
 # 消费者
 
@@ -256,7 +256,7 @@ Broker 保存消息而不做任何检查。当消费者消费消息时，如果�
 
 > **注意**
 > 
-> 累积确认不能在 [Shared 订阅模式](#shared)中使用，因为 Shared 订阅模式涉及到可以访问同一个订阅的多个消费者。Shared 订阅模式的消息需要单独确认。
+> 累积确认不能在 [共享（shared）订阅模式](#共享shared)中使用，因为共享（shared）订阅模式涉及到可以访问同一个订阅的多个消费者。共享（shared）订阅模式的消息需要单独确认。
 
 ### 确认超时
 
@@ -273,11 +273,11 @@ Broker 保存消息而不做任何检查。当消费者消费消息时，如果�
 
 根据不同的消费订阅模式，可以以单独或累积模式进行否定确认（negative acknowledgement）。
 
-在 Exclusive 和 Failover 订阅模式中，消费者只对最后收到的消息进行否定确认（negative acknowledgement）。
+在独占（exclusive）和灾备（failover）订阅模式中，消费者只对最后收到的消息进行否定确认（negative acknowledgement）。
 
-在 Shared 和 Key_Shared 订阅模式中，可以对消息进行单独否定确认（negative acknowledgement）。
+在共享（shared）和键共享（key_shared）订阅模式中，可以对消息进行单独否定确认（negative acknowledgement）。
 
-需要注意的是，对有序订阅类型（如 Exclusive、Failover、Key_Shared 模式）进行否定确认（negative acknowledgement），可能导致传递失败的消息到达消费者的顺序和原始顺序不同。 
+需要注意的是，对有序订阅类型（如独占、共享、键共享模式）进行否定确认（negative acknowledgement），可能导致传递失败的消息到达消费者的顺序和原始顺序不同。 
 
 > **注意**
 > 
@@ -285,21 +285,21 @@ Broker 保存消息而不做任何检查。当消费者消费消息时，如果�
 
 ## 订阅
 
-订阅是命名好的配置规则，决定了消息将被如何交付给消费者。在 Pulsar 中，有四种订阅模式可用：[Exclusive](#exclusive)、 [Shared](#shared)、[Failover](#failover) 和[Key_Shared](#key_shared)。 
+订阅是命名好的配置规则，决定了消息将被如何交付给消费者。在 Pulsar 中，有四种订阅模式可用：[独占（exclusive）](#独占exclusive)、 [共享（shared）](#共享shared)、[灾备（failover）](#灾备failover) 和[键共享（key_shared）](#键共享key_shared)。 
 
-### Exclusive
+### 独占（exclusive）
 
-*Exclusive* 模式只允许订阅中有一个消费者。如果多个消费者使用相同的订阅来订阅同一个主题，就会发生错误。
+*独占（exclusive）*模式只允许订阅中有一个消费者。如果多个消费者使用相同的订阅来订阅同一个主题，就会发生错误。
 
 如下图中，只允许**消费者 A-0** 消费消息。
 
-> Exclusive 模式为默认订阅模式。
+> 独占（exclusive）模式为默认订阅模式。
 
 ![Exclusive subscriptions](../../image/pulsar-exclusive-subscriptions.png)
 
-### Failover
+### 灾备（failover）
 
-在 *Failover* 模式下，多个消费者可以共同使用同一个订阅。系统会为非分区主题或每个分区主题选择一个主消费者并接收消息。当主消费者断开连接时，所有（未确认和后续的）消息都被发送给排在主消费者随后的消费者。
+在*灾备（failover）*模式下，多个消费者可以共同使用同一个订阅。系统会为非分区主题或每个分区主题选择一个主消费者并接收消息。当主消费者断开连接时，所有（未确认和后续的）消息都被发送给排在主消费者随后的消费者。
 
 对于分区的主题，broker 按照优先级和消费者名称的词汇顺序对消费者进行排序。然后，broker 将尝试将主题均匀地分配给具有最高优先级的消费者。
 
@@ -309,29 +309,29 @@ Broker 保存消息而不做任何检查。当消费者消费消息时，如果�
 
 ![Failover subscriptions](../../image/pulsar-failover-subscriptions.png)
 
-### Shared
+### 共享（shared）
 
-在 *Shared* 或者 *round robin* 模式下，多个消费者可以附加到同一个订阅上。消息通过轮询（round robin）机制分发给不同的消费者，并且每条消息仅会被分发给一个消费者。当消费者断开连接，所有已经发送给该消费者的未确认消息将被重新分发给剩下的消费者。
+在*共享（shared）*或*轮询（round robin）*模式下，多个消费者可以附加到同一个订阅上。消息通过轮询（round robin）机制分发给不同的消费者，并且每条消息仅会被分发给一个消费者。当消费者断开连接，所有已经发送给该消费者的未确认消息将被重新分发给剩下的消费者。
 
 如下图所示，**消费者 C-1 **和**消费者 C-2 **能够订阅该主题，而**消费者 C-3** 和其他消费者同样也可订阅该主题。
 
-> **Shared 模式的局限性**
+> **共享（shared）模式的局限性**
 > 
-> 使用 Shared 模式时，需注意：
+> 使用共享（shared）模式时，需注意：
 > * 消息的顺序是不能保证的。 
-> * Shared 模式下不能使用累积确认。
+> * 共享（shared）模式下不能使用累积确认。
 
 ![Shared subscriptions](../../image/pulsar-shared-subscriptions.png)
 
-### Key_Shared
+### 键共享（key_shared）
 
-在 *Key_Shared*  模式下，多个消费者可以被加到同一个订阅中。消息被分发给多个消费者，有相同 key 的消息、或者有相同排序 key 的消息将只被交付给一个消费者。无论消息被重新传递多少次，它都只能交付给同一个消费者。当消费者进行连接或断开连接时，对于一些消息的 key，消费者将发生改变。
+在*键共享（key_shared）*模式下，多个消费者可以被加到同一个订阅中。消息被分发给多个消费者，有相同 key 的消息、或者有相同排序 key 的消息将只被交付给一个消费者。无论消息被重新传递多少次，它都只能交付给同一个消费者。当消费者进行连接或断开连接时，对于一些消息的 key，消费者将发生改变。
 
-> **Key_Shared 模式的局限性**
-> 使用 Key_Shared  模式时，需注意：
+> **键共享（key_shared）模式的局限性**
+> 使用键共享（key_shared）模式时，需注意：
 >
 > * 需要为消息指定 key 或  `orderingKey`。
-> * Key_Shared 模式下不能使用累积确认。
+> * 键共享（key_shared）模式下不能使用累积确认。
 > * 生产者应当禁用批量，或使用基于 key 的批量生成器。
 
 ![Key_Shared subscriptions](../../image/pulsar-key-shared-subscriptions.png)
@@ -340,7 +340,7 @@ Broker 保存消息而不做任何检查。当消费者消费消息时，如果�
 
 当消费者订阅一个 Pulsar 主题时，默认情况下是订阅一个特定主题，例如 `persistent://public/default/my-topic`。但是，Pulsar 消费者也可同时订阅多个主题。可以通过以下两种方式来定义主题列表：
 
-* 基于 [**正则表达式**](https://en.wikipedia.org/wiki/Regular_expression)（regex），例如：`persistent://public/default/finance-.*`
+* 基于[**正则表达式**](https://en.wikipedia.org/wiki/Regular_expression)（regex），例如：`persistent://public/default/finance-.*`
 * 定义一个包含明确主题的列表。
 
 > **注意**
