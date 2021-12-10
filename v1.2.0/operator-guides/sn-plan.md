@@ -1,42 +1,42 @@
 ---
-title: Plan for StreamNative Platform deployment
+title: 规划 StreamNative Platform 部署
 id: sn-plan
 category: operator-guides
 ---
 
-This document describes recommended options for deploying StreamNative Platform.
+本文介绍了部署 StreamNative Platform 的推荐选项。
 
-# Deployment workflow
+# 部署流程
 
-In general, the workflow for manually installing StreamNative Platform and deploying a Pulsar cluster consists of these steps:
+一般来说，手动安装 StreamNative Platform 和部署 Pulsar 集群的流程包括以下步骤：
 
-> **Note**
+> **注意**
 >
-> Review the prerequisites for StreamNative Platform deployment. For details, see [prerequisites](#prerequisites).
+> 查看 StreamNative Platform 部署的先决条件。详细内容参见[先决条件](#先决条件)。
 
-1. Prepare your Kubernetes environment.
+1. 准备好 Kubernetes 环境。
 
-2. Configure StreamNative Platform.
+2. 配置 StreamNative Platform。
 
-3. Deploy StreamNative Platform.
+3. 部署 StreamNative Platform。
 
-4. Manage StreamNative Platform.
+4. 管理 StreamNative Platform。
 
-5. Monitor StreamNative Platform.
+5. 监控 StreamNative Platform。
 
-# Prerequisites
+# 先决条件
 
-This section lists minimum requirements for installing StreamNative Platform.
+本节列出了安装 StreamNative Platform 的基本要求。
 
-## Software requirements
+## 软件要求
 
-This table lists software requirements for installing StreamNative Platform.
+本表列出了安装 StreamNative Platform 的软件要求。
 
 <table>
   <tr>
-   <td>Software name
+   <td>软件名
    </td>
-   <td>Version
+   <td>版本
    </td>
   </tr>
   <tr>
@@ -48,95 +48,96 @@ This table lists software requirements for installing StreamNative Platform.
   <tr>
    <td>Kubernetes
    </td>
-   <td>v1.16 or higher
+   <td>v1.16 或更高版本
    </td>
   </tr>
   <tr>
    <td>CentOS
    </td>
-   <td>v7.6 and kernel v3.10.0-957 or higher
+   <td>v7.6 和 kernel v3.10.0-957 或更高版本
    </td>
   </tr>
 </table>
 
-## Hardware requirements
 
-This table lists the minimum hardware requirements on a 3-node Kubernetes cluster for test purposes. You can customize your Kubernetes node configuration based on your production environment requirements.
+## 硬件要求
 
-| Item | Value |
+本表列出了用于测试的 3 节点 Kubernetes 集群的基本硬件要求。可根据你的生产环境要求来定制 Kubernetes 的节点配置。 
+
+| 项目 | 数值 |
 | --- | --- |
-| CPU | 4 cores |
-| Memory | 16 GB|
-| Disk | 50 GB |
+| CPU | 4 核 |
+| 内存 | 16 GB|
+| 磁盘 | 50 GB |
 
-## Required tools
+## 所需工具
 
-* [kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl) v1.16 or higher.
-* [Helm](https://helm.sh/docs/intro/install/) v3.0.0 or higher.
-* [pulsarctl](https://github.com/streamnative/pulsarctl#install) v2.8.0 CLI tool.
+* [kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl) v1.16 或更高版本。
+* [Helm](https://helm.sh/docs/intro/install/) v3.0.0 或更高版本。
+* [pulsarctl](https://github.com/streamnative/pulsarctl#install) v2.8.0 CLI（命令行工具）。
 
-## Configure local PVs and storage classes
+## 配置本地 PV 和存储类
 
-If you deploy a local Kubernetes cluster, you need to configure the local PVs and storage classes for persisting data to your local storage. For details, see [local PVs and storage classes](/operator-guides/configure/storage.md#local-pvs-and-storage-classes).
+如果你部署了一个本地的 Kubernetes 集群，则需要配置本地 PV 和存储类，实现数据持久化本地存储。详情参见[本地 PV 和存储类](/operator-guides/configure/storage.md#local-pvs-and-storage-classes)。
 
-# Docker registry
+# Docker Registry
 
-You can get all the Docker images required for deploying StreamNative Platform from a Docker registry and then deploy it on to your Kubernetes cluster. 
+可以从 Docker Registry 获得部署 StreamNative Platform 所需的所有 Docker 镜像，然后将其部署到你的 Kubernetes 集群上。
 
-> **Note**
+> **注意**
 >
-> By default, all publicly-available Docker images are hosted on Docker Hub from the `streamnative` repositories.
+> 默认情况下，所有公开可用的 Docker 镜像都托管在 Docker Hub 的 `streamnative` 镜像仓库中。
 
-If you choose to use your own Docker registry and repositories, you must pull the images from the `streamnative` repositories and upload them to your Docker registry repositories.
+如果选择使用自己的 Docker Registry 和镜像仓库，则必须从 `streamnative` 镜像仓库中提取镜像，并将它们上传到你自己的 Docker 镜像仓库。
 
-## Preload Docker images
+## 预加载 Docker 镜像
 
-If you have limited access to the Internet, you can preload the docker images before installing StreamNative Platform. A Docker image contains application code, libraries, tools, dependencies and other files needed to make an application run. When you run an image, it can become one or many instances of a container. For supported Docker images and their download links, see [here](/operator-guides/operator-reference/sn-version-matrix.md).
+如果无法访问互联网，可以在安装 StreamNative Platform 之前预加载 Docker 镜像。Docker 镜像包含应用程序代码、库、工具、依赖项和其他运行应用程序所需的文件。运行一个镜像时，它将成为一个或多个容器的实例。点击[此处](/operator-guides/operator-reference/sn-version-matrix.md)，查看支持的 Docker 镜像及其下载链接。
 
-You can use the [`docker load`](https://docs.docker.com/engine/reference/commandline/load/) command to upload these images to your Docker registry repositories.
+可以使用 [`docker load`](https://docs.docker.com/engine/reference/commandline/load/) 命令，将这些镜像上传到你自己的 Docker 服务器的镜像仓库。
 
-# Storage
+# 存储
 
-You must provide dynamic persistent storage for all StreamNative Platform components. If you deploy a local Kubernetes cluster, you need to configure the local PVs and storage class for persisting data to your local storage. For details, see [configure storage](/operator-guides/configure/storage.md).
+必须为 StreamNative Platform 的所有组件提供动态的持久化存储。如果部署本地 Kubernetes 集群，则需要配置本地 PV 和存储类，以便将数据持久化到本地存储。详情参见[配置存储](/operator-guides/configure/storage.md)。
 
-# Security
+# 安全
 
-This section includes Kubernetes security and StreamNative Platform security.
+本节介绍 Kubernetes 安全和 StreamNative Platform 安全。
 
-## Kubernetes security
+## Kubernetes 安全
 
-With Kubernetes Role-based access control (RBAC) and namespaces, you can deploy StreamNative Platform in one of two ways:
+借助 Kubernetes 基于角色的访问控制（RBAC）和命名空间，你可以通过以下两种方式之一部署 StreamNative Platform：
 
-- (Recommended) provide access to provision and manage StreamNative Platform resources in one specific namespace.
+- （推荐）提供访问权限，允许在一个指定的命名空间中配置和管理 StreamNative Platform 资源。
 
-- Provide access to provision and manage StreamNative Platform resources across all namespaces in the Kubernetes cluster.
+- 提供访问权限，允许在 Kubernetes 集群的所有命名空间中配置和管理 StreamNative Platform 资源。
 
-## StreamNative Platform security
+## StreamNative Platform 安全
 
-StreamNative Platform supports the following processes to enforce security.
+StreamNative Platform 通过以下流程增强安全性。 
 
-- Authentication
+- 验证
 
-- Authorization
+- 授权
 
-- Network encryption
+- 网络加密
 
-- Configuration Secrets
+- 配置 Secret
 
-For production deployments, StreamNative Platform recommends the following security mechanisms:
+对于生产环境的部署，StreamNative Platform 推荐以下安全机制：
 
-- Enable SSL/Plain for Kafka client authentication.
+- 为 Kafka 客户端身份验证启用 SSL/Plain。
 
-- Enable JSON Web Token (JWT) authentication for Pulsar client authentication.
+- 为 Pulsar 客户端身份验证启用 JSON Web Token（JWT）身份验证。
 
-- Enable TLS for network encryption for both internal traffic between StreamNative Platform components and external traffic from clients to StreamNative Platform components.
+- 对 StreamNative Platform 组件之间的内部通讯和从客户端到 StreamNative Platform 组件的外部通讯，启用 TLS 进行网络加密。
 
-# Networking
+# 联网
 
-StreamNative Platform provides two ways for client applications to access StreamNative Platform components that are deployed in the same Kubernetes cluster or in a different cluster.
+客户端应用程序可以通过以下不同方式，访问部署在同一个或不同 Kubernetes 集群的 StreamNative Platform 组件。
 
-- If StreamNative Platform components are deployed in the same Kubernetes cluster, you can access them through the `ClusterIP` mode.
+- 如果 StreamNative Platform 组件部署在同一个 Kubernetes 集群中，可通过 `ClusterIP` 模式进行访问。
 
-- If StreamNative Platform components are deployed outside the Kubernetes cluster, you can access them through the `NodePort` or `LoadBalancer` mode.
+- 如果 StreamNative Platform 组件部署在 Kubernetes 集群之外，可通过 `NodePort` 或 `LoadBalancer` 模式进行访问。
 
-For details, see [configure networking](/operator-guides/configure/networking.md).
+详情参见[网络配置](/operator-guides/configure/networking.md)。
