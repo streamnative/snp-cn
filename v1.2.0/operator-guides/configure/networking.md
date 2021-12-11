@@ -18,7 +18,7 @@ StreamNative Platform 通过 `ingress` 组件来暴露以下服务：
   - ClusterIP + 服务端口
   - 服务域名 (`${serviceName}.${namespace}`) + 服务端口
   
-- `LoadBalancer`：客户端使用 Kubernetes 服务商的负载均衡器连接到 Pulsar proxy、Grafana、StreamNative 控制台。
+- `LoadBalancer`：客户端使用 Kubernetes provider 的负载均衡器连接到 Pulsar proxy、Grafana、StreamNative 控制台。
 - `NodePort`：如果没有 LoadBalancer，可以选择通过 NodePort 暴露服务。NodePort 通过节点的 IP 地址和静态端口来暴露服务。可以通过 NodeIP + NodePort 从集群外部访问 `NodePort` 服务。
 
 以下是运行命令获得 Pulsar 服务信息的示例。
