@@ -116,5 +116,5 @@ Pulsar broker 在设置后自动重新启动，然后你可以创建一个新的
 | | `Produce` | 向 broker 生产消息。 | 生产 | false|
 | | `NewConsumer` | 新建一个附加于该主题的消费者。 | 消费 | false|
 | | `CloseConsumer` | 关闭一个消费者。               | 消费 | false|
-| | `Consume` | 使用来自主题的消息。 | 消费 | false|
-| | `Acknowledge` | 确认消费者的消息。 | 消费 | false|
+| | `Consume` | 消费来自主题的消息。 | 消费 | false|
+| | `Acknowledge` | 消费者确认消息。 | 消费 | false|
