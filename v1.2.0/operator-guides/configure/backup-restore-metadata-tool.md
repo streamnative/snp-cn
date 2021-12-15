@@ -112,7 +112,7 @@ StreamNative Platform 是具有多层架构的分布式消息系统，使用 Apa
 | 端点 | 描述 | 示例 |
 | -------- | ----------- | ------- |
 | /backup/latest | 获得最新的备份文件 | curl localhost:8088/backup/latest |
-| /backup/list | 获得所有备份文件   | curl localhost:8088/backup/list |
+| /backup/list | 获得所有备份文件 | curl localhost:8088/backup/list |
 
 # 监控
 
