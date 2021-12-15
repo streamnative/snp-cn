@@ -6,7 +6,7 @@ category: operator-guides
 
 Kafka on Pulsar（KoP）通过在 Pulsar broker 上引入 Kafka 协议处理程序，实现了 Apache Pulsar 对原生 Apache Kafka 协议的支持 。通过向现有的 Pulsar 集群添加 KoP 协议处理程序，可以将现有的 Kafka 应用程序和服务迁移到 Pulsar 上，而不需要修改代码。
 
-要在 Kubernetes 集群外访问 KoP ，需要安装 [Istio]((https://istio.io/latest/about/service-mesh/)) 并启用 TLS。
+要在 Kubernetes 集群外访问 KoP ，需要安装 [Istio](https://istio.io/latest/about/service-mesh/) 并启用 TLS。
 
 # 安装 Istio 以实现 KoP 访问
 
@@ -34,7 +34,7 @@ Kafka on Pulsar（KoP）通过在 Pulsar broker 上引入 Kafka 协议处理程�
 
 按照如下步骤启用 KoP：
 
-1. 为 KoP 启用 TLS。详情参见[在 KoP 上启用 TLS](/operator-guides/configure/security/network-encryption/tls-proxy.md#enable-tls-on-kop-with-manuallygenerated-certificates)。
+1. 为 KoP 启用 TLS。详情参见[使用手动生成的证书在 KoP 上启用 TLS](/operator-guides/configure/security/network-encryption/tls-proxy.md#使用手动生成的证书在-KoP-上启用-TLS)。
 
 2. 在 Pulsar 的 YAML 配置文件中设置以下内容：
 
