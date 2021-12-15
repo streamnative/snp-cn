@@ -17,15 +17,15 @@ StreamNative Platform 支持以下机制来启用 TLS 加密：
 
 # 使用 cert-manager 启用 TLS
 
-Cert-manager 将证书和证书颁发者作为资源类型添加到 Kubernetes 集群中，并简化了获取、更新和使用这些证书的过程。
+Cert-manager 将证书和证书签发者作为资源类型添加到 Kubernetes 集群中，并简化了获取、更新和使用这些证书的过程。
 
-在 StreamNative 平台中，cert-manager 支持从内部颁发者和公共颁发者授权证书。以下部分介绍了如何使用内部颁发者和公共颁发者生成证书，然后启用 TLS 加密。
+在 StreamNative 平台中，cert-manager 支持从内部签发者和公共签发者授权证书。以下部分介绍了如何使用内部签发者和公共签发者生成证书，然后启用 TLS 加密。
 
 ::: tabs
 
- @@@ 内部颁发者
+ @@@ 内部签发者
 
-要使用内部颁发者生成证书（自签名），请按如下步骤操作：
+要使用内部签发者生成证书（自签名），请按如下步骤操作：
 
 1. 为 JKS cert 创建密码密钥。 
 
@@ -37,10 +37,11 @@ Cert-manager 将证书和证书颁发者作为资源类型添加到 Kubernetes �
 
 	```
 	tls:
+
  	 enabled: true
  	 proxy:
  	   enabled: true
-
+ 	
  	certs:
  	 internal_issuer:
  	   enabled: true
@@ -87,9 +88,9 @@ Cert-manager 将证书和证书颁发者作为资源类型添加到 Kubernetes �
 
 @@@
 
-@@@ 公共颁发者
+@@@ 公共签发者
 
-要使用公共颁发者（公共签名，let's encrypt）生成证书，请按如下步骤操作：
+要使用公共签发者（公共签名，let's encrypt）生成证书，请按如下步骤操作：
 
 1. 为 JKS cert 创建密码密钥。
 
