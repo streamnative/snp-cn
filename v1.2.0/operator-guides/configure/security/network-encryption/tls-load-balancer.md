@@ -1,32 +1,32 @@
 ---
-title: Enable TLS on load balancer
+title: 在负载均衡器上启用 TLS 
 id: tls-load-balancer
 category: operator-guides
 ---
 
-StreamNative Platform supports enabling TLS with [AWS Certificate Manager (ACM)](https://docs.aws.amazon.com/acm/latest/userguide/acm-overview.html). When you want to perform TLS termination at the load balancer, you can use certificates with ACM. ACM handles the complexity of creating, storing, and renewing public and private SSL/TLS X.509 certificates and keys that protect your AWS websites and applications.
+StreamNative Platform 支持用 [AWS Certificate Manager（ACM）](https://docs.aws.amazon.com/acm/latest/userguide/acm-overview.html)启用 TLS。当你想在负载均衡器上终止 TLS 时，可以使用 ACM 证书。ACM 可以处理各种复杂情况，包括创建、存储和更新公有和私有 SSL/TLS X.509 证书和密钥，以保护 AWS 网站和应用程序。
 
-The load balancer offloads traffic to the backend service via TCP protocols.
+负载均衡器通过 TCP 协议将流量卸载到后端服务。
 
-* One load balancer for Pulsar proxy with ports `6651/443`
-  * The DNS name is `data.pulsar.example.local`
-* One load balancer for nginx ingress controller with port `443`
-  * The DNS name is `admin.pulsar.example.local`
-* One load balancer for istio ingress( to KoP brokers ) with port `9093`
-  * The DNS name is `messaging.pulsar.example.local`
+* 一个用于 Pulsar porxy 的负载均衡器，端口为 `6651/443`。
+  * DNS 名为 `data.pulsar.example.local`
+* 一个用于 Nginx Ingress 控制器的负载均衡器，端口为 `443`。
+  * DNS 名为 `admin.pulsar.example.local`
+* 一个用于 Istio Ingress（连接到 KoP broker）的负载均衡器，端口为 `9093`。
+  * DNS 名为 `messaging.pulsar.example.local`
 
-> **Note**     
-> Enabling TLS with ACM is not applicable to KoP, since KoP needs TLS Server Name Indication (SNI) to route traffic that requires TLS termination on the broker side rather than the load balancer side. 
+> **注意**
+> 通过 ACM 启用 TLS 不适用于 KoP，因为 KoP 需要 TLS 服务器名称指示（SNI）来路由流量，这需要在 broker 端而不是在负载均衡器端终止 TLS。
 
-To use certificates with ACM, complete the following steps.
+要使用 ACM 证书，需完成以下步骤：
 
-1. [Request a public certificate from ACM](https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-request-public.html) for the following domain names, and get the Amazon Resource Names (ARNs) for the certificate.
+1. 为下面的域名[从 ACM 请求公有证书](https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-request-public.html)，并获取证书的 Amazon 资源名称（ARN）。
 
 	```
 	*.pulsar.example.local
 	```
 
-2. In the YAML file, enable domain, configure the annotations, and use the ARN obtained above as shown. 
+2. 在 YAML 文件中启用域，配置注解，并使用上一步中获得的 ARN。
 
    ```
    tls:
@@ -75,9 +75,9 @@ To use certificates with ACM, complete the following steps.
      # Set external domain for the load balancer of the ingress controller
      external_domain: admin.pulsar.example.local
      external_domain_scheme: https://
-     ```
+   ```
 
-3. Apply the changes by restarting the Pulsar proxy.
+3. 重新启动 Pulsar proxy 使更改生效。
 
     ```
     helm upgrade -f /path/to/your/file.yaml CLUSTER_NAME $PULSAR_CHART/
