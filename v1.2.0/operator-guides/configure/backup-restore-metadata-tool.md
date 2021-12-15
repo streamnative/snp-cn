@@ -66,17 +66,17 @@ StreamNative Platform 是具有多层架构的分布式消息系统，使用 Apa
 	```yaml
 
  	restore:
- 	   component: "restore"
- 	   enable: true
- 	   restorePoint: "s3a://<your-bucket-name>/<backup-file>"
- 	   restoreVersion: "1"
- 	   bucket: "s3a://<your-bucket-name>"
- 	   configData:
- 	   secrets:
- 	   	use: true
- 	     aws:
- 	       secretName: "aws-secret"
- 	```
+  	   component: "restore"
+  	   enable: true
+  	   restorePoint: "s3a://<your-bucket-name>/<backup-file>"
+   	   restoreVersion: "1"
+   	   bucket: "s3a://<your-bucket-name>"
+       configData:
+       secrets:
+       	use: true
+         aws:
+           secretName: "aws-secret"
+	```
 
 3. 使用  `values.yaml`  还原集群。
 
@@ -95,15 +95,15 @@ StreamNative Platform 是具有多层架构的分布式消息系统，使用 Apa
 
 下表列出了备份和还原服务的属性、相关描述和默认值。
 
-| 属性 | 描述 | 默认值                |
+| 属性 | 描述 | 默认值|
 | -------- | ----------- | ------------- |
-| webServerPort | 用于指标和管理的备份 HTTP 服务端口。 | 8088 |
-| backupInterval | 备份服务的运行时间间隔。时间单位为秒。                       | 600 |
-| bucket | 保存备份文件的存储桶。                             | s3a://metadata-backup |
-| backupPrefix | 备份文件名的前缀。                                           | metadata-backup |
-| managedLedgerPath | ZooKeeper 中 Pulsar 管理的 ledger 的路径。         | /managed-ledgers |
-| restorePoint | 还原集群的具体时间点。可以将 `restorePoint` 设置为一个云存储文件路径，以便用指定的还原点还原集群。 | |
-| restoreVersion | 用于还原的唯一编号。如果想用同一个还原点多次还原 ZooKeeper，则需要为每次还原指定一个不同的还原版本号。 | 1 |
+| webServerPort | 用于指标和管理的备份 HTTP 服务端口。| 8088 |
+| backupInterval | 备份服务的运行时间间隔。时间单位为秒。| 600 |
+| bucket | 保存备份文件的存储桶。| s3a://metadata-backup |
+| backupPrefix | 备份文件名的前缀。| metadata-backup |
+| managedLedgerPath | ZooKeeper 中 Pulsar 管理的 ledger 的路径。| /managed-ledgers |
+| restorePoint | 还原集群的具体时间点。可以将 `restorePoint` 设置为一个云存储文件路径，以便用指定的还原点还原集群。| |
+| restoreVersion | 用于还原的唯一编号。如果想用同一个还原点多次还原 ZooKeeper，则需要为每次还原指定一个不同的还原版本号。| 1 |
 
 # 管理
 
@@ -121,11 +121,11 @@ StreamNative Platform 是具有多层架构的分布式消息系统，使用 Apa
 | 名称 | 类型 | 描述 |
 | ---- | ---- | ----------- |
 | backup_count | 计数器 | 正在运行的备份的数量。   |
-| backup_failure_count | 计数器 | 失败的备份数量。         |
-| backup_size_non_compressed | 标尺 | 备份文件的大小。         |
-| backup_size_compressed | 标尺 | 备份压缩文件的大小。     |
-| backup_size_total | 标尺 | 所有备份压缩文件的大小。 |
-| backup_execution_time_total | 标尺 | 备份执行过程的时间。     |
-| backup_execution_time_prepare | 标尺 | 备份准备过程的时间。     |
-| backup_execution_time_compression | 标尺 | 压缩备份文件的时间。     |
-| backup_execution_time_upload | 标尺 | 上传备份文件的时间。 |
+| backup_failure_count | 计数器 | 失败的备份数量。|
+| backup_size_non_compressed | 标尺 | 备份文件的大小。|
+| backup_size_compressed | 标尺 | 备份压缩文件的大小。|
+| backup_size_total | 标尺 | 所有备份压缩文件的大小。|
+| backup_execution_time_total | 标尺 | 备份执行过程的时间。|
+| backup_execution_time_prepare | 标尺 | 备份准备过程的时间。|
+| backup_execution_time_compression | 标尺 | 压缩备份文件的时间。|
+| backup_execution_time_upload | 标尺 | 上传备份文件的时间。|
