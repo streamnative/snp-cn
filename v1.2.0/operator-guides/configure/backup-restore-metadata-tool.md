@@ -20,30 +20,30 @@ StreamNative Platform 是具有多层架构的分布式消息系统，使用 Apa
 	kubectl create secret generic aws-secret          --from-literal=AWS_ACCESS_KEY_ID=<YOUR_ACCESS_KEY_ID>    --from-literal=AWS_SECRET_ACCESS_KEY=<YOUR_AWS_SECRET_ACCESS_KEY>
 	```
 
-4. 在 `values.yaml` 文件的 ZooKeeper customTools 部分启用备份服务。 
+4. 在 `values.yaml` 文件的 ZooKeeper customTools 部分启用备份服务。
 
 	```yaml
 
  	backup:
- 	  component: "backup"
- 	  enable: true
- 	  webServerPort: "8088"
- 	  backupInterval: "600"
- 	  bucket: "s3a://<your-bucket-name>"
- 	  backupPrefix: "pulsar-backup"
- 	  managedLedgerPath: "/managed-ledgers"
- 	  configData:
- 	  secrets:
- 	   	use: true
- 	     aws:
- 	       secretName: "aws-secret"
- 	```
+   	  component: "backup"
+      enable: true
+   	  webServerPort: "8088"
+	  backupInterval: "600"
+      bucket: "s3a://<your-bucket-name>"
+      backupPrefix: "pulsar-backup"
+      managedLedgerPath: "/managed-ledgers"
+      configData:
+      secrets:
+       	use: true
+         aws:
+           secretName: "aws-secret"
+	```
 
 5. 用 `values.yaml` 文件创建集群。
 
 	```bash
 	helm install  -f values.yaml snpe $PULSAR_CHART/  --set initialize=true --set namespace=snpe
-  ```
+	```
 
 6. 检查备份服务是否正在运行。 
 
