@@ -25,19 +25,19 @@ StreamNative Platform 是具有多层架构的分布式消息系统，使用 Apa
 	```yaml
 
  	backup:
-   	  component: "backup"
-      enable: true
-   	  webServerPort: "8088"
-	  backupInterval: "600"
-      bucket: "s3a://<your-bucket-name>"
-      backupPrefix: "pulsar-backup"
-      managedLedgerPath: "/managed-ledgers"
-      configData:
-      secrets:
-       	use: true
-         aws:
-           secretName: "aws-secret"
-	```
+ 	  component: "backup"
+ 	  enable: true
+ 	  webServerPort: "8088"
+ 	  backupInterval: "600"
+ 	  bucket: "s3a://<your-bucket-name>"
+ 	  backupPrefix: "pulsar-backup"
+ 	  managedLedgerPath: "/managed-ledgers"
+ 	  configData:
+ 	  secrets:
+ 	   	use: true
+ 	     aws:
+ 	       secretName: "aws-secret"
+ 	```
 
 5. 用 `values.yaml` 文件创建集群。
 
@@ -49,11 +49,11 @@ StreamNative Platform 是具有多层架构的分布式消息系统，使用 Apa
 
 	```bash
 	kubectl get pods snpe-restore-pulsar-backup-0
-  ```
+	```
 
 	如果状态是 `running`，则备份服务已经启用。你也可以检查存储桶中的备份文件。
 
-# 从旧集群中还原元数据 
+# 从旧集群中还原元数据
 
 只有在使用旧的备份元数据来启动新的集群时，还原服务才发挥作用，而且它仅从分层储存中还原数据。如果集群正在运行，则就不能还原该集群。
 
@@ -66,17 +66,17 @@ StreamNative Platform 是具有多层架构的分布式消息系统，使用 Apa
 	```yaml
 
  	restore:
-  	   component: "restore"
-  	   enable: true
-  	   restorePoint: "s3a://<your-bucket-name>/<backup-file>"
-   	   restoreVersion: "1"
-   	   bucket: "s3a://<your-bucket-name>"
-       configData:
-       secrets:
-       	use: true
-         aws:
-           secretName: "aws-secret"
-	```
+ 	   component: "restore"
+ 	   enable: true
+ 	   restorePoint: "s3a://<your-bucket-name>/<backup-file>"
+ 	   restoreVersion: "1"
+ 	   bucket: "s3a://<your-bucket-name>"
+ 	   configData:
+ 	   secrets:
+ 	   	use: true
+ 	     aws:
+ 	       secretName: "aws-secret"
+ 	```
 
 3. 使用  `values.yaml`  还原集群。
 
