@@ -22,4 +22,4 @@ Pulsar 侦查器支持以下指标。可以在 Grafana 中查看指标的完整�
 |pulsar_detector_publish_latency_ms| 总结  | 消息发送的分布延迟。|
 |pulsar_detector_geo_latency_ms| 总结 | 从消息发送到消息被消费的分布延迟（跨集群）。|
 |pulsar_sla_messaging_up | 标尺 | 消息发布服务是否正在运行。|
-|pulsar_sla_webservice_up| 标尺 | Webservice 是否正在运行。值 `1` 表示网络服务正在运行。值 `0` 表示 webservice 没有运行。|
+|pulsar_sla_webservice_up| 标尺 | Webservice 是否正在运行。值 `1` 表示 webservice 正在运行。值 `0` 表示 webservice 没有运行。 |
