@@ -191,7 +191,7 @@ category: operator-guides
         ```
         helm upgrade --install -f value_cert-manager.yaml  cert-manager jetstack/cert-manager -n $NAMESPACE --set installCRDs=true
         ```
-   
+
 5. 安装 Pulsar operator。
 
    1. 检查用于安装 Pulsar operator 的 chart 并将 `values.yaml` 文件的内容保存为本地 YAML 文件。
