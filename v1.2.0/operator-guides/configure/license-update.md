@@ -1,28 +1,28 @@
 ---
-title: Update license
+title: 更新许可证
 id: license-update
 category: operator-guides
 ---
 
-You can try StreamNative Platform with a 30-day trial license. After 30 days, StreamNative Platform requires you to purchase a license. Contact StreamNative Platform sales to apply for your license file from StreamNative. Once you receive the file from StreamNative, you can upload your license.
+StreamNative Platform 提供 30 天的试用许可证让用户体验。30 天后，StreamNative Platform 将要求用户购买许可证。请联系 StreamNative Platform 的销售人员，向 StreamNative 申请你的许可证文件。从 StreamNative 收到文件后，就可以上传许可证。
 
-To update the license for StreamNative Platform, follow these steps.
+按照如下步骤更新 StreamNative Platform 许可证：
 
-1. Enter the `toolset` Pod.
+1. 进入 `toolset` Pod。
 
-    To use the official Pulsar CLI tools, such as pulsar-client, StreamNative Platform provides a `toolset` Pod. you can use the `kubectl exec` command to connect to the Pod.
+    可以通过 StreamNative Platform 提供的 `toolset` Pod，使用官方 Pulsar CLI （命令行工具），例如 pulsar-client。你可以用 `kubectl exec` 命令来连接到这个 Pod。
 
     ```
     kubectl exec -n KUBERNETES_NAMESPACE -it RELEASE_NAME-sn-platform-toolset-0 -- bash
     ```
 
-2. Add the environment variable for the authentication token.
+2. 为认证 token 添加环境变量。
 
     ```
     export AUTH_TOKEN=`cat /pulsar/tokens/client/token`
     ```
 
-3. Update the license information based on the license file that you received from StreamNative.
+3. 根据从 StreamNative 收到的许可证文件，更新许可证信息。
 
     ```
     curl -XPOST -H "Authorization:Bearer $AUTH_TOKEN" http://RELEASE_NAME-sn-platform-broker-headless:8080/snp/admin/v1/license -d '{
@@ -40,9 +40,10 @@ To update the license for StreamNative Platform, follow these steps.
     }'
     ```
 
-    **Output**
+    **输出**
+    
     ```
     active
     ```
-
-    Once you see `active` in the output, it indicates that the license is updated successfully.
+    
+    输出为 `active` 表示许可证已成功更新。
