@@ -26,7 +26,7 @@ grafana:
 
 # 暴露 Grafana 服务
 
-StreamNative Platform 支持使用 [LoadBalancer](/operator-guides/configure/networking.md#loadbalancer) 或 [NodePort](/operator-guides/configure/networking.md#nodeport) 来暴露 Granfana 服务。
+StreamNative Platform 支持使用 [LoadBalancer](/operator-guides/configure/networking.md) 或 [NodePort](/operator-guides/configure/networking.md) 来暴露 Granfana 服务。
 
 1. 启用 Grafana 并在 Pulsar 集群的 YAML 配置文件中配置外部域。
 
