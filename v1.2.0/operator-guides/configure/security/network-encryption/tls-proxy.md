@@ -1,84 +1,85 @@
 ---
-title: Enable TLS on StreamNative Platform components
+title: 在 StreamNative Platform 组件上启用 TLS
 id: tls-proxy
 category: operator-guides
 ---
 
-StreamNative Platform supports Transport Layer Security (TLS), an industry-standard encryption protocol, to protect network communications of StreamNative Platform components.
+StreamNative Platform 支持传输层安全（TLS）协议，一种行业标准的加密协议，以保护 StreamNative Platform 组件的网络通信。
 
-TLS relies on keys and certificates to establish trusted connections. You can perform TLS termination at Pulsar proxy, control center and KoP broker. This section describes how to enable TLS encryption for StreamNative Platform components.
+TLS 依靠密钥和证书来建立可信任连接。可以在 Pulsar proxy、控制中心和 KoP broker 来终止 TLS 。本节介绍如何为 StreamNative Platform 组件启用 TLS 加密。
 
-To enable TLS encryption, StreamNative Platform supports the following mechanisms:
+StreamNative Platform 支持以下机制来启用 TLS 加密：
 
-- Auto-generated certificates: [cert-manager](https://cert-manager.io/docs/) generates the certificates automatically.
-- Manually-generated certificates: Users generate the private key, public key and certificate authority.
+- 自动生成证书：用 [cert-manager](https://cert-manager.io/docs/) 自动生成证书。
+- 手动生成证书：由用户生成私钥、公钥和证书颁发机构。
 
-For scenarios where you don’t need to use your own server certificates, we recommend you use the auto-generated certificate capability.
+对于不需要使用自己的服务器端证书的场景，我们建议使用自动生成证书的方式。
 
-# Enable TLS with cert-manager
+# 使用 cert-manager 启用 TLS
 
-Cert-manager adds certificates and certificate issuers as resource types in Kubernetes clusters, and simplifies the process of obtaining, renewing and using those certificates.
+Cert-manager 将证书和证书签发者作为资源类型添加到 Kubernetes 集群中，并简化了获取、更新和使用这些证书的过程。
 
-In StreamNative Platform, cert-manager supports issuing certificates from the internal issuer and the public issuer. The following section describes how to generate certificates with an internal issuer and a public issuer, and then enable TLS encryption. 
+在 StreamNative Platform 中，cert-manager 支持从内部签发者和公共签发者授权证书。以下部分介绍了如何使用内部签发者和公共签发者生成证书，然后启用 TLS 加密。
 
 ::: tabs
 
- @@@ Internal issuer
+ @@@ 内部签发者
 
-To generate certificates with internal issuer (self-signed), complete the following steps.
+要使用内部签发者生成证书（自签名），请按如下步骤操作：
 
-1. Create the password secret for JKS cert.
+1. 为 JKS cert 创建密码密钥。 
 
 	```
 	kubectl create secret generic cert-jks-passwd --from-literal=password=passwd -n KUBERNETES_NAMESPACE
 	```
 
-2. Enable TLS on the Pulsar proxy. You can set `tls`, `proxy`, `internal_issuer` and related parameters to `true` in your YAML file, shown as follows.
+2. 在 Pulsar proxy 上启用 TLS。可以在 YAML 文件中将 `tls`、`proxy`、`internal_issuer` 和相关参数设置为 `true`，如下所示：
 
 	```
 	tls:
+
  	 enabled: true
-  	 proxy:
-   	   enabled: true
-
-	certs:
+ 	 proxy:
+ 	   enabled: true
+ 	
+ 	certs:
  	 internal_issuer:
-  	   enabled: true
-
-	broker:
-	  # set the domain for accessing KoP 
-	  advertisedDomain: "messaging.pulsar.example.local"
+ 	   enabled: true
+ 	
+ 	broker:
+ 	  # set the domain for accessing KoP 
+ 	  advertisedDomain: "messaging.pulsar.example.local"
  	  kop:
-  	    enabled: true
-  	    tls:
-    	  enabled: true
-
-	domain:
-  	  enabled: true
-  	  suffix: pulsar.example.local
-
-	ingress:
+ 	    enabled: true
+ 	    tls:
+ 		  enabled: true
+ 	
+ 	domain:
+ 	  enabled: true
+ 	  suffix: pulsar.example.local
+ 	
+ 	ingress:
  	  proxy:
-   	  enabled: true
-   	  tls:
-   	    enabled: true
-  	control_center:
-   	  enabled: true
-   	  tls:
-   	    enabled: true
-    ```
+ 	  enabled: true
+ 	  tls:
+ 	    enabled: true
+ 	control_center:
+ 	  enabled: true
+ 	  tls:
+ 	    enabled: true
+ 	```
+ 	
+ 	Cert-manager 自动为自签名证书配置“certName”。
 
-	Cert-manager automatically configures the “certName” for the self-signed certificate. 
-	
-3. Apply the changes by restarting the Pulsar proxy.
+3. 重新启动 Pulsar proxy 使更改生效。
 
     ```
     helm upgrade -f /path/to/your/file.yaml CLUSTER_NAME $PULSAR_CHART/
     ```
     
-    Cert-manager automatically generates all certs and attaches them to Kubernetes pods.
+    Cert-manager 自动生成所有证书并将它们附加到 Kubernetes pod。
 
-4. Download TLS CA cert to your local directory. The `ca.crt` is used to connect Pulsar proxy, and the `truststore.jks` is used for Kafka client to connect KoP. 
+4. 将 TLS CA 证书下载到本地目录。`ca.crt` 用于连接 Pulsar proxy。`truststore.jks` 用于 Kafka 客户端连接 KoP。
 
     ```
     kubectl get secret CLUSTER_NAME-tls-proxy -o=jsonpath='{.data.ca\.crt}' -n KUBERNETES_NAMESPACE | base64 --decode -o ca.crt
@@ -87,19 +88,19 @@ To generate certificates with internal issuer (self-signed), complete the follow
 
 @@@
 
-@@@ Public issuer
+@@@ 公共签发者
 
-To generate certificates with a public issuer (public-signed, let's encrypt), complete the following steps.
+要使用公共签发者（公共签名，let's encrypt）生成证书，请按如下步骤操作：
 
-1. Create the password secret for JKS cert.
+1. 为 JKS cert 创建密码密钥。
 
 	```
 	kubectl create secret generic cert-jks-passwd --from-literal=password=passwd -n KUBERNETES_NAMESPACE
 	```
 
-2. Create a hosted zone in the [Amazon Route 53](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/Welcome.html) and get the hosted ID.
+2. 在 [Amazon Route 53](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/Welcome.html) 中创建托管区域并获取托管 ID。
 
-3. Enable TLS on the Pulsar proxy. You can set `tls`, `proxy`, `public_issuer` and related parameters to `true` in the YAML file, as shown.
+3. 在 Pulsar proxy 上启用 TLS。可以在 YAML 文件中将 `tls`、`proxy`、`public_issuer` 和相关参数设置为 `true`，如下所示：
 
     ```
     tls:
@@ -161,29 +162,29 @@ To generate certificates with a public issuer (public-signed, let's encrypt), co
         external_domain: admin.pulsar.example.local
         external_domain_scheme: https://
     ```
-	Cert-manager automatically configures the `certName` for the self-signed certificate. 
+	Cert-manager 自动为自签名证书配置 `certName`。
 
-4. Apply the changes by restarting the Pulsar proxy.
+4. 重新启动 Pulsar proxy 使更改生效。
 
     ```
     helm upgrade -f /path/to/your/file.yaml CLUSTER_NAME $PULSAR_CHART/
     ```
     
-    Cert-manager automatically generates all certs and attaches them to Kubernetes pods.
+    Cert-manager 自动生成所有证书并将它们附加到 Kubernetes pod。
 
 @@@
 
 :::
 
-# Enable TLS on the Pulsar proxy with manually-generated certificates
+# 使用手动生成的证书在 Pulsar proxy 上启用 TLS
 
-When you enable TLS on the Pulsar proxy without using cert-manager, you need to generate certificate manually first. 
+要在 Pulsar proxy 上启用 TLS（不使用 cert-manager），就需要先手动生成证书。
 
-To enable TLS on the Pulsar proxy, complete the following steps.
+要在 Pulsar proxy 上启用 TLS，请完成以下步骤：
 
-1. Create TLS certification files. For details, see [instructions](#create-tls-certificates).
+1. 创建 TLS 证书文件。详情参见[操作说明](#手动创建-TLS-证书)。
 
-2. Create secrets. 
+2. 创建 secret。
 
     ```
     kubectl create secret generic RELEASE_NAME-sn-platform-proxy-tls -n KUBERNETES_NAMESPACE \
@@ -192,7 +193,7 @@ To enable TLS on the Pulsar proxy, complete the following steps.
       --from-file=ca.crt=$(PWD)/cert/ca.cert.pem
     ```
 
-3. Enable TLS on the Pulsar proxy. You can set both `tls` and `proxy` to `true`, and set `tlsSecretName`.
+3. 在 Pulsar proxy 上启用 TLS。可以把 `tls` 和 `proxy` 都设置为 `true`，并设置 `tlsSecretName`。
 
     ```
     tls:
@@ -203,21 +204,21 @@ To enable TLS on the Pulsar proxy, complete the following steps.
       tlsSecretName: "RELEASE_NAME-sn-platform-proxy-tls"
     ```
 
-4. Restart the Pulsar proxy.
+4. 重新启动 Pulsar proxy。
 
     ```
     helm upgrade -f /path/to/your/file.yaml CLUSTER_NAME $PULSAR_CHART/
     ```
 
-5. Get the proxy URL from the proxy-ingress service. To display the external IP address run the following command. 
+5. 从 proxy-ingress 服务获取 proxy URL。运行如下命令以显示外部 IP 地址：
 
     ```
     kubectl get svc/RELEASE_NAME-sn-platform-proxy-ingress -n KUBERNETES_NAMESPACE
     ```
     
-6. Change the client configuration in the `config/client.conf` file. 
+6. 在 `config/client.conf` 文件中更改客户端配置。
 
-    When TLS is enabled, the connection protocol changes accordingly, for example, `http://` changes into `https://`, `pulsar://` changes into `pulsar+ssl://`.
+    启用 TLS 后，连接协议会相应变化，例如 `http://` 变成 `https://`，`pulsar://` 变成 `pulsar+ssl://`。
 
     ```
     webServiceUrl=https://[PROXY_INGRESS_ADDRESS]/
@@ -226,25 +227,25 @@ To enable TLS on the Pulsar proxy, complete the following steps.
     tlsEnableHostnameVerification=false
     tlsTrustCertsFilePath=[PATH_TO]/ca.cert.pem
     ```
-7. Validate the configuration by producing and consuming data with pulsar-client.
+7. 用 pulsar-client 生产和消费数据来验证配置。
 
-## Create TLS certificates manually
+## 手动创建 TLS 证书
 
-Creating TLS certificates for Pulsar involves creating a certificate authority (CA), server certificate, and client certificate.
+为 Pulsar 创建 TLS 证书包括创建证书颁发机构（CA）、服务器端证书和客户端证书。
 
-You can follow these steps to set up a certificate authority or refer to [this guide](https://jamielinux.com/docs/openssl-certificate-authority/index.html) for details.
+可以按照以下步骤设置证书颁发机构（CA），或参阅[本指南](https://jamielinux.com/docs/openssl-certificate-authority/index.html)了解详细信息。
 
-### Create certificate authority
+### 创建证书颁发机构（CA）
 
-1. Create the certificate for the certificate authority (CA). 
+1. 为证书颁发机构（CA）创建证书。
 
-    > **NOTE**      
-    > You can use a CA to sign both the broker and client certificates. This ensures that each party trusts the other. You should store the CA in a secure location (ideally completely disconnected from networks, air gapped, and fully encrypted).
+    > **注意**      
+    > 可以使用 CA 来签署 broker 和客户端证书。这确保了双方相互信任。应该将 CA 存储在一个安全的位置（理想情况是完全断网、与外界隔离并且完全加密的）。
 
-2. Enter the following command to create a directory for the CA, and place the OpenSSL configuration file in the directory. 
+2. 输入以下命令，为 CA 创建一个目录，并将 OpenSSL 配置文件放在该目录中。
 
-    > **TIP**      
-    > If you need to modify the default values for the company name and department in the configuration file, you can export the location of the CA directory to the environment variable, CA_HOME. The configuration file uses this environment variable to find the files and directories for the CA.
+    > **提示**      
+    > 如果需要修改配置文件中公司名称和部门的默认值，可以将 CA 目录的位置导出到环境变量 CA_HOME 中。配置文件使用此环境变量来查找 CA 所需的文件和目录。
 
     ```bash
     mkdir my-ca
@@ -253,7 +254,7 @@ You can follow these steps to set up a certificate authority or refer to [this g
     export CA_HOME=$(pwd)
     ```
 
-3. Enter the following commands to create the necessary directories, keys and certs.
+3. 输入以下命令，来创建必要的目录、密钥和证书。
 
     ```bash
     mkdir certs crl newcerts private
@@ -268,42 +269,42 @@ You can follow these steps to set up a certificate authority or refer to [this g
     chmod 444 certs/ca.cert.pem
     ```
 
-4. Answer the prompts.         
-   CA-related files are stored in the `./my-ca` directory. 
+4. 回答提示。    
+   CA 相关文件存储在 `./my-ca` 目录中。
 
-   * `certs/ca.cert.pem` is the public certificate that is distributed to all parties involved.
-   * `private/ca.key.pem` is the private key. You only need the key when you are signing a new certificate for either a broker or client. You must safely guard this private key.
+   * `certs/ca.cert.pem` 是分发给所有相关方的公共证书。 
+   * `private/ca.key.pem` 是私钥。只有在为 broker 或客户端签署新证书时才需要这个秘钥。必须安全地保护此私钥。
 
-### Generate server certificate
+### 生成服务器端证书
 
-Server certificates are generated with the same certificate authority. Once you have created a CA certificate, you can create certificate requests and sign them with the CA.
+服务器端证书是由同一个证书机构生成的。创建了 CA 证书之后，就可以创建证书请求并使用 CA 对其进行签名。
 
-> **Tips**     
-> The common name should match the broker. You can also use a wildcard to match a group of broker hostnames, for example, `*.broker.usw.example.com`. This ensures that multiple machines can reuse the same certificate. However, when it is impossible to match the hostname, you can disable TLS hostname verification for the client. 
+> **提示**     
+> 通用名称应与 broker 相匹配。还可以使用通配符来匹配一组 broker 的主机名，例如，`*.broker.usw.example.com`。这样确保了多台机器可以重复使用相同的证书。但是，当无法匹配主机名时，你可以禁用客户端的 TLS 主机名验证。
 
-To create the certificates, complete the following steps:
+要创建证书，请按如下步骤操作：
 
-1. Generate the key.
+1. 生成密钥。
 
     ```bash
     openssl genrsa -out broker.key.pem 2048
     ```
 
-    The key is in [PKCS 8](https://en.wikipedia.org/wiki/PKCS_8) format. You can convert it with the following command.
+    该密钥为 [PKCS 8](https://en.wikipedia.org/wiki/PKCS_8) 格式。可以用下面的命令对其进行转换：
 
     ```bash
     openssl pkcs8 -topk8 -inform PEM -outform PEM \
           -in broker.key.pem -out broker.key-pk8.pem -nocrypt
-      ```
+    ```
 
-2. Generate the certificate request.
+2. 生成证书申请。
 
     ```bash
     openssl req -config openssl.cnf \
         -key broker.key.pem -new -sha256 -out broker.csr.pem
     ```
 
-3. Sign it with the certificate authority.
+3. 用 CA 进行签名。
 
     ```bash
     openssl ca -config openssl.cnf -extensions server_cert \
@@ -311,101 +312,101 @@ To create the certificates, complete the following steps:
         -in broker.csr.pem -out broker.cert.pem
     ```
 
-At this point, you have a certificate, `broker.cert.pem`, and a key, `broker.key-pk8.pem`. You can use the cert and key along with `ca.cert.pem` to configure TLS transport encryption for the broker and proxy nodes.
+现在，你已经得到了证书 `broker.cert.pem` 和密钥 `broker.key-pk8.pem`。可以使用证书和密钥以及 `ca.cert.pem` 来为 broker 和 proxy 节点配置 TLS 传输加密。
 
-# Enable TLS on KoP with manually-generated certificates
+# 使用手动生成的证书在 KoP 上启用 TLS
 
-When you enable TLS on KoP without using cert-manager, you need to first generate the SSL key and certificates for KoP, and then create Kubernetes Secret for KoP certificates and passwords.  
+要在 KoP 上启用 TLS（不使用 cert-manager），首先要为 KoP 生成 SSL 密钥和证书，然后为 KoP 证书和密码创建 Kubernetes Secret。
 
-## Generate SSL key and certificates for KoP
+## 为 KoP 生成 SSL 密钥和证书 
 
-To connect to KoP through SSL, follow these steps.
+要通过 SSL 连接到 KoP，需完成如下步骤：
 
-1. Generate the keys and certificates.
+1. 生成密钥和证书。
 
     ```
     keytool -keystore server.keystore.jks -alias localhost -validity <validity> -keyalg RSA -genkey
     ```
 
-    You need to specify two parameters in the above command:
+    上述命令中，需要指定两个参数：
 
-    - `keystore`: the file that stores the certificate. The keystore contains the private key of the certificate and should be kept in a secure place.
-    - `validity`: Days before the certificate expires. 
+    - `keystore`：存储证书的文件。密钥库（keystore）包含证书的私钥，应该保存在一个安全的地方。
+    - `validity`：证书到期前的剩余天数。
 
-2. Generate the Certificate Authority (CA).
+2. 生成证书颁发机构（CA）。
 
-   1. Generate a CA.
+   1. 生成 CA。
 
-      A CA is a public-private key pair and certificate used to sign other certificates.
+      CA 是指用于签署其他证书的公-私密钥对和证书。
 
       ```
       openssl req -new -x509 -keyout ca-key -out ca-cert -days <validity>
       ```
 
-   2. Add the generated CA to the broker's truststore so that the brokers can trust this CA.
+   2. 将生成的 CA 添加到 broker 的信任库（truststore）中，这样 broker 就可以信任这个 CA。
 
       ```
       keytool -keystore server.truststore.jks -alias CARoot -import -file ca-cert
       ```
 
-   3. Add the generated CA to the client's truststore.
+   3. 将生成的 CA 添加到客户端的信任库（truststore）中。
 
       ```
       keytool -keystore client.truststore.jks -alias CARoot -import -file ca-cert
       ```
 
-3. Sign the certificate.
+3. 对证书进行签名。
 
-    1. Export the certificate from the keystore.
+    1. 将证书从密钥库（keystore）中导出。
 
         ```
         keytool -keystore server.keystore.jks -alias localhost -certreq -file cert-file
         ```
 
-    2. Sign the certificate with the CA.
+    2. 用 CA 对证书签名。
 
         ```
         openssl x509 -req -CA ca-cert -CAkey ca-key -in cert-file -out cert-signed -days <validity> -CAcreateserial -passin pass:<ca-password>
         ```
 
-    3. Import both the certificate of the CA and the signed certificate into the broker keystore.
+    3. 将 CA 的证书和已签名的证书都导入到 broker 的密钥库（keystore）中。
 
         ```
         keytool -keystore server.keystore.jks -alias CARoot -import -file ca-cert
         keytool -keystore server.keystore.jks -alias localhost -import -file cert-signed
         ```
 
-The definitions of the parameters are the following:
+参数的定义如下：
 
-- keystore: the file that stores the certificate
-- ca-cert: the certificate of the CA
-- ca-key: the private key of the CA
-- ca-password: the passphrase of the CA
-- cert-file: the exported, unsigned certificate of the server
-- cert-signed: the signed certificate of the server
+- keystore：储存证书的文件
+- ca-cert：CA 的证书
+- ca-key：CA 的私钥
+- ca-password：CA 的口令
+- cert-file：导出的未签名的服务器端证书
+- cert-signed：已签名的服务器端证书
 
-## Create Kubernetes Secret for KoP certificates and passwords
+## 为 KoP 证书和密码创建 Kubernetes Secret
 
-Kubernetes Secrets let you store and manage sensitive information, such as passwords, tokens, and keys. Storing confidential information in a Secret is safer and more flexible than putting it verbatim in a Pod definition or in a container image.
+Kubernetes Secret 用于存储和管理敏感信息，如密码、token 和密钥。相比于在 Pod 定义或容器镜像中逐字存储，在 Secret 中存储机密信息更加安全和灵活。
 
-1. Create the Kubernetes Secret for KoP certificates.
+1. 为 KoP 证书创建 Kubernetes Secret。
 
     ```
     kubectl create secret generic kop-secret -n KUBERNETES_NAMESPACE --from-file=keystore.jks=$(PWD)/cert/server.keystore.jks --from-file=truststore.jks=$(PWD)/cert/server.truststore.jks
     ```
 
-2. Create the Kubernetes Secret for KoP certification passwords.
+2. 为 KoP 证书密码创建 Kubernetes Secret。
 
     ```
     kubectl create secret generic kop-keystore-password --from-literal=password=<ca-password> -n KUBERNETES_NAMESPACE
-
+    
     ```
 
-## Configure YAML file
+## 配置 YAML 文件
 
-To enable KoP and TLS, follow these steps.
+按如下步骤操作启用 KoP 和 TLS：
 
-1. Set the KoP parameters in the Pulsar configuration YAML file.
+1. 在 Pulsar 的 YAML 配置文件中设置 KoP 参数。
 
     ```
     # The domain name for accessing KoP outside from the Kuberbetes cluster.
@@ -422,7 +423,7 @@ To enable KoP and TLS, follow these steps.
           name: kop-keystore-password
     ```
 
-2. Apply the new configuration.
+2. 使新配置生效。
 
     ```
     helm upgrade -f /path/to/your/file.yaml CLUSTER_NAME $PULSAR_CHART/
