@@ -19,7 +19,7 @@ StreamNative Platform 支持以下机制来启用 TLS 加密：
 
 Cert-manager 将证书和证书签发者作为资源类型添加到 Kubernetes 集群中，并简化了获取、更新和使用这些证书的过程。
 
-在 StreamNative 平台中，cert-manager 支持从内部签发者和公共签发者授权证书。以下部分介绍了如何使用内部签发者和公共签发者生成证书，然后启用 TLS 加密。
+在 StreamNative Platform 中，cert-manager 支持从内部签发者和公共签发者授权证书。以下部分介绍了如何使用内部签发者和公共签发者生成证书，然后启用 TLS 加密。
 
 ::: tabs
 
@@ -269,7 +269,7 @@ Cert-manager 将证书和证书签发者作为资源类型添加到 Kubernetes �
     chmod 444 certs/ca.cert.pem
     ```
 
-4. 根据提示进行回答。    
+4. 回答提示。    
    CA 相关文件存储在 `./my-ca` 目录中。
 
    * `certs/ca.cert.pem` 是分发给所有相关方的公共证书。 
@@ -330,7 +330,7 @@ Cert-manager 将证书和证书签发者作为资源类型添加到 Kubernetes �
 
     上述命令中，需要指定两个参数：
 
-    - `keystore`：存储证书的文件。Keystore（密钥库）包含证书的私钥，应该保存在一个安全的地方。
+    - `keystore`：存储证书的文件。密钥库（keystore）包含证书的私钥，应该保存在一个安全的地方。
     - `validity`：证书到期前的剩余天数。
 
 2. 生成证书颁发机构（CA）。
@@ -343,13 +343,13 @@ Cert-manager 将证书和证书签发者作为资源类型添加到 Kubernetes �
       openssl req -new -x509 -keyout ca-key -out ca-cert -days <validity>
       ```
 
-   2. 将生成的 CA 添加到 broker 的 truststore（信任库）中，这样 broker 就可以信任这个 CA。
+   2. 将生成的 CA 添加到 broker 的信任库（truststore）中，这样 broker 就可以信任这个 CA。
 
       ```
       keytool -keystore server.truststore.jks -alias CARoot -import -file ca-cert
       ```
 
-   3. 将生成的 CA 添加到客户端的 truststore（信任库）中。
+   3. 将生成的 CA 添加到客户端的信任库（truststore）中。
 
       ```
       keytool -keystore client.truststore.jks -alias CARoot -import -file ca-cert
@@ -357,7 +357,7 @@ Cert-manager 将证书和证书签发者作为资源类型添加到 Kubernetes �
 
 3. 对证书进行签名。
 
-    1. 将证书从 keystore（密钥库）中导出。
+    1. 将证书从密钥库（keystore）中导出。
 
         ```
         keytool -keystore server.keystore.jks -alias localhost -certreq -file cert-file
@@ -369,7 +369,7 @@ Cert-manager 将证书和证书签发者作为资源类型添加到 Kubernetes �
         openssl x509 -req -CA ca-cert -CAkey ca-key -in cert-file -out cert-signed -days <validity> -CAcreateserial -passin pass:<ca-password>
         ```
 
-    3. 将 CA 的证书和已签名的证书都导入到 broker 的 keystore（密钥库）中。
+    3. 将 CA 的证书和已签名的证书都导入到 broker 的密钥库（keystore）中。
 
         ```
         keytool -keystore server.keystore.jks -alias CARoot -import -file ca-cert
