@@ -1,16 +1,16 @@
 ---
-title: Configure Grafana
+title: 配置 Grafana
 id: grafana
 category: operator-guides
 ---
 
-[Grafana](https://grafana.com/) is a component in StreamNative Platform. It provides observability for StreamNative Platform. Grafana provides dashboards including brokers, bookies, zookeeper, proxy, topic, and messages. 
+[Grafana](https://grafana.com/) 是 StreamNative Platform 的一个组件，为 StreamNative Platform 提供了可观察性。Grafana 提供的仪表板包括 broker、bookie、ZooKeeper、代理（proxy）、主题和消息。
 
-By default, Grafana is enabled with StreamNative Platform. To disable it, you can set `monitoring.grafana: false` in the Pulsar cluster configuration YAML file.
+默认情况下，Grafana 在 StreamNative Platform 处在启用状态。如果要禁用 Grafana，可以在 Pulsar 集群的 YAML 配置文件中设置 `monitoring.grafana: false`。
 
-# Configure Grafana
+# 配置 Grafana
 
-You can configure the requested and limited CPU and memory for Grafana in the Pulsar cluster configuration YAML file. Then, you can use the `helm upgrade` command to restart the StreamNative Platform to make updates effective.
+可以在 Pulsar 集群的 YAML 配置文件中配置 Grafana 对 CPU 和内存的要求和限制。然后，使用 `helm upgrade` 命令来重启 StreamNative Platform 使更新生效。
 
 ```
 grafana:
@@ -24,11 +24,11 @@ grafana:
       memory: 
 ```
 
-# Expose Grafana service
+# 暴露 Grafana 服务
 
-StreamNative Platform supports exposing the Grafana service using the [LoadBalancer](/operator-guides/configure/networking.md#loadbalancer) or [NodePort](/operator-guides/configure/networking.md#nodeport). 
+StreamNative Platform 支持使用 [LoadBalancer](/operator-guides/configure/networking.md#loadbalancer) 或 [NodePort](/operator-guides/configure/networking.md#nodeport) 来暴露 Granfana 服务。
 
-1. Enable Grafana and configure the external domain in the Pulsar cluster configuration YAML file.
+1. 启用 Grafana 并在 Pulsar 集群的 YAML 配置文件中配置外部域。
 
     ```
     Ingress:
@@ -41,14 +41,14 @@ StreamNative Platform supports exposing the Grafana service using the [LoadBalan
         # external_domain_scheme: https://
     ```
 
-2. Execute the following command to get the external IP address of the Grafana service.
+2. 执行以下命令以获得 Grafana 服务的外部 IP 地址。
 
     ```
     kubectl get svc/RELEASE_NAME-sn-platform-nginx-ingress-controller -n KUBERNETES_NAMESPACE
-    ``` 
+    ```
 
-3. Visit `http://EXTERNAL_IP/grafana` in your browser and log in to it by using the username and password. By default, both the username and password are `pulsar`. 
+3. 在浏览器中访问 `http://EXTERNAL_IP/grafana`，并使用用户名和密码登录。默认情况下，用户名和密码都是 `pulsar`。
 
-> **Note**
+> **注意**
 > 
-> Ensure to change the password once you log in to the Grafana Dashboard.
+> 登录 Grafana 仪表板后，请确保更改密码。
