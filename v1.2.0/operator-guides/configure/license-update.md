@@ -45,5 +45,4 @@ StreamNative Platform 提供 30 天的试用许可证让用户体验。30 天后
     ```
     active
     ```
-    
     输出为 `active` 表示许可证已成功更新。
