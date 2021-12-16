@@ -6,7 +6,7 @@ category: operator-guides
 
 [Alertmanager](https://prometheus.io/docs/alerting/alertmanager/) 是 StreamNative Platform 的组件，也是 Prometheus 的组件。Alertmanager 处理由 StreamNative 组件发送的告警，例如 Prometheus 服务器。它负责去重、分组，并将它们路由到正确的接收集成端，如电子邮件、PagerDuty 或 OpsGenie。它还负责处理告警静默和抑制。
 
-默认情况下，Alertmanager 与 StreamNative Platform 一起启用。 如果要禁用 Alertmanager，你可以在 Pulsar 集群的 YAML 配置文件中设置 `monitoring.alert_manager: false`。
+默认情况下，Alertmanager 在 StreamNative Platform 中是自动启用的。 如果要禁用 Alertmanager，你可以在 Pulsar 集群的 YAML 配置文件中设置 `monitoring.alert_manager: false`。
 
 # 配置 Alertmanager
 
@@ -29,11 +29,11 @@ alert_manager:
 
 # 配置告警规则
 
-告警规则允许你根据表达式（ Prometheus 表达式语言）定义告警条件，并将有关触发告警的通知发送到外部服务。一旦告警表达式在给定时间点产生一个或多个向量元素时，告警就将为这些元素标签集激活。
+告警规则允许你根据表达式（Prometheus 表达式语言）定义告警条件，并将有关触发告警的通知发送到外部服务。一旦告警表达式在给定时间点产生一个或多个向量元素时，告警就会因为这些元素标签集而激活。
 
 关于告警规则的更多信息，参见[这里](https://prometheus.io/docs/prometheus/latest/configuration/alerting_rules/)。
 
-如下示例显示了如何用 ZooKeeper 配置告警规则。
+如下示例显示了如何为 ZooKeeper 配置告警规则。
 
 ```shell
 - name: zookeeper
