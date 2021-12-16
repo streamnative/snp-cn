@@ -146,46 +146,46 @@ category: operator-guides
           # You can manage a registry with
           # registry: quay.io
           # repository: jetstack/cert-manager-controller
-        
+
           # Override the image tag to deploy by setting this variable.
           # If no value is set, the chart's appVersion will be used.
           tag: v1.4.0
-        
+
           # Setting a digest will override any tag
           # digest: sha256:0e072dddd1f7f8fc8909a2ca6f65e76c5f0d2fcfb8be47935ae3457e8bbceb20
           pullPolicy: IfNotPresent
-        
+
           image:
             repository: streamnative/cert-manager-webhook
             # You can manage a registry with
             # registry: quay.io
             # repository: jetstack/cert-manager-webhook
-        
+
             # Override the image tag to deploy by setting this variable.
             # If no value is set, the chart's appVersion will be used.
             tag: v1.4.0
-        
+
             # Setting a digest will override any tag
             # digest: sha256:0e072dddd1f7f8fc8909a2ca6f65e76c5f0d2fcfb8be47935ae3457e8bbceb20
-        
+
             pullPolicy: IfNotPresent
-        
+
           image:
             repository: streamnative/cert-manager-cainjector
             # You can manage a registry with
             # registry: quay.io
             # repository: jetstack/cert-manager-cainjector
-        
+
             # Override the image tag to deploy by setting this variable.
             # If no value is set, the chart's appVersion will be used.
             tag: v1.4.0
-        
+
             # Setting a digest will override any tag
             # digest: sha256:0e072dddd1f7f8fc8909a2ca6f65e76c5f0d2fcfb8be47935ae3457e8bbceb20
-        
+
             pullPolicy: IfNotPresent
         ```
-        
+
     3. 使用自定义镜像安装 cert-manager。
 
         ```
