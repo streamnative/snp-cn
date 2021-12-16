@@ -132,15 +132,13 @@ category: operator-guides
 
        本示例将 `values.yaml` 文件保存为 `value_cert-manager.yaml` 文件。
 
-       ```
-       helm inspect values jetstack/cert-manager  > value_cert-manager.yaml
-       ```
+        ```
+        helm inspect values jetstack/cert-manager  > value_cert-manager.yaml
+        ```
 
-   2. 更新 `value_cert-manager.yaml` 文件中的镜像设置。 
+   2. 更新 `value_cert-manager.yaml` 文件中的镜像设置。
 
         可以使用 `image.repository` 和 `image.tag` 参数指定镜像的位置和版本。StreamNative 将 cert-manager 镜像创建到 [Docker Hub](https://hub.docker.com/) 上。本示例指定了使用 StreamNative 发布到 [Docker Hub](https://hub.docker.com/) 的 cert-manager 镜像。
-
-        
 
         ```yaml
         image:
@@ -187,13 +185,13 @@ category: operator-guides
         
             pullPolicy: IfNotPresent
         ```
-
+        
     3. 使用自定义镜像安装 cert-manager。
 
         ```
         helm upgrade --install -f value_cert-manager.yaml  cert-manager jetstack/cert-manager -n $NAMESPACE --set installCRDs=true
         ```
-
+   
 5. 安装 Pulsar operator。
 
    1. 检查用于安装 Pulsar operator 的 chart 并将 `values.yaml` 文件的内容保存为本地 YAML 文件。
