@@ -9,7 +9,7 @@ category: operator-guides
 
 本节介绍了如何在在线和离线模式下安装 StreamNative Platform。
 
-## 在互联网条件下安装 StreamNative Platform  
+## 在互联网条件下安装 StreamNative Platform
 
 本节介绍了在接入互联网条件下，如何安装 StreamNative Platform。
 
@@ -95,10 +95,6 @@ category: operator-guides
    
     Vault operator 用于在 Kubernetes 上创建和维护高可用的 Vault 集群，使用户可以轻松地为其应用程序部署和管理 Vault 集群。
 
-   ```
-   helm upgrade --install vault-operator banzaicloud-stable/vault-operator -n $NAMESPACE
-   ```
-
    1. 检查用于安装 Vault operator 的 chart 并将 `values.yaml` 文件的内容保存为本地 YAML 文件。
    
       本示例将 `values.yaml` 文件保存为 `value_vault-operator.yaml` 文件。
@@ -110,7 +106,7 @@ category: operator-guides
    2. 更新 `value_vault-operator.yaml` 文件中的镜像设置。 
    
       可以使用 `image.bankVaultsRepository` 和 `image.tag` 参数指定镜像的位置和版本。本示例指定了 Banzai Cloud 发布到 [Docker Hub](https://hub.docker.com/) 的 Vault 镜像。
-   
+
       ```yaml
       image:
         bankVaultsRepository: banzaicloud/bank-vaults
@@ -121,11 +117,11 @@ category: operator-guides
       ```
    
     3. 使用自定义镜像安装 Vault operator。
-
+   
         ```
         helm upgrade --install -f value_vault-operator.yaml vault-operator banzaicloud-stable/vault-operator -n $NAMESPACE
         ```
-   
+
 4. 安装 cert-manager。
 
    Cert-manager 是原生的 [Kubernetes](https://kubernetes.io/) 证书管理控制器。用于从 [HashiCorp Vault](https://www.vaultproject.io/) 签发证书。Cert-manager 可以确保证书有效且是最新版本。在设定的时间，cert-manager 会更新证书，以免证书过期。
