@@ -194,34 +194,34 @@ category: operator-guides
 
 5. 安装 Pulsar operator。
 
-   1. 检查用于安装 Pulsar operator 的 chart 并将 `values.yaml` 文件的内容保存为本地 YAML 文件。
+    1. 检查用于安装 Pulsar operator 的 chart 并将 `values.yaml` 文件的内容保存为本地 YAML 文件。
 
        本示例将 `values.yaml` 文件保存为 `value_pulsar-operator.yaml` 文件。
 
-       ```
-       helm inspect values streamnative/pulsar-operator  > value_pulsar-operator.yaml
-       ```
+        ```
+        helm inspect values streamnative/pulsar-operator  > value_pulsar-operator.yaml
+        ```
 
-   2. 更新 `value_pulsar-operator.yaml` 文件中的镜像设置。
+    2. 更新 `value_pulsar-operator.yaml` 文件中的镜像设置。
 
        可以使用 `images.repository` 和 `images.tag` 参数指定镜像的位置和版本。本示例中指定了由 StreamNative 发布到 [Docker Hub](https://hub.docker.com/) 的 ZooKeeper、BookKeeper 和 Pulsar 的镜像。
 
-       ```yaml
-       images:
-         zookeeper:
-           repository: streamnative/zookeeper-operator
-           tag: v0.7.0-rc5
-           pullPolicy: IfNotPresent
-         bookkeeper:
-           repository: streamnative/bookkeeper-operator
-           tag: v0.6.12
-           pullPolicy: IfNotPresent
-         pulsar:
-           repository: streamnative/pulsar-operator
-           tag: 0.7.0-rc6
-           pullPolicy: IfNotPresent
-       ```
-       
+        ```yaml
+        images:
+          zookeeper:
+            repository: streamnative/zookeeper-operator
+            tag: v0.7.0-rc5
+            pullPolicy: IfNotPresent
+          bookkeeper:
+            repository: streamnative/bookkeeper-operator
+            tag: v0.6.12
+            pullPolicy: IfNotPresent
+          pulsar:
+            repository: streamnative/pulsar-operator
+            tag: 0.7.0-rc6
+            pullPolicy: IfNotPresent
+        ```
+        
    3. 使用定制的 YAML 文件安装 Pulsar operator。
 
         ```
