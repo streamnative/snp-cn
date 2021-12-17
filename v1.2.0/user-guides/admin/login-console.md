@@ -1,28 +1,28 @@
 ---
-title: Log in to StreamNative Console
+title: 登录 StreamNative 控制台
 id: login-console
 category: user-guides
 ---
 
-StreamNative Console is a web-based GUI management and monitoring tool that helps Pulsar users manage tenants, namespaces, topics, subscriptions, and so on.
+StreamNative 控制台是基于 Web 的 GUI 管理和监控工具，可帮助 Pulsar 用户管理租户、命名空间、主题、订阅等。
 
-After [deploying StreamNative Platform](/operator-guides/deploy/sn-deploy.md) and a [Pulsar cluster](/operator-guides/deploy/sn-deploy.md#deploy-pulsar-clusters), you can log in to StreamNative Console to manage and monitor Pulsar resources.
+在[部署 StreamNative Platform](/operator-guides/deploy/sn-deploy.md) 和 [部署 Pulsar 集群](/operator-guides/deploy/sn-deploy.md#部署-pulsar-集群)之后，可以登录 StreamNative 控制台来管理和监控 Pulsar 资源。
 
-# Log in to StreamNative Console using usernames and passwords
+# 使用用户名和密码登录 StreamNative 控制台
 
-To log in to StreamNative Console, follow these steps.
+按照如下步骤登陆 StreamNative 控制台：
 
-1. Execute the following command to expose the StreamNative Console service to a localhost address.
+1. 执行以下命令将 StreamNative 控制台服务暴露给 localhost 地址。
 
    ```
    kubectl port-forward RELEASE_NAME-pulsar-streamnative-console-0 9527:9527 -n KUBERNETES_NAMESPACE
    ```
 
-2. Visit the StreamNative Console at http://localhost:9527.
+2. 访问 StreamNative 控制台：http://localhost:9527。
 
-3. Enter the username and user password and then click **Login** to log in to StreamNative Console. 
+3. 输入用户名和用户密码，然后点击 **登录** 以登录 StreamNative 控制台。
 
-   By default, an `admin` user is created for StreamNative Console. You can execute the following command to get the password.
+   默认情况下，StreamNative 控制台创建了一个 `admin` 用户。可以执行以下命令来获取密码。
 
    ```
    kubectl get secret RELEASE_NAME-sn-platform-vault-console-admin-passwd -o=jsonpath='{.data.password}' -n KUBERNETES_NAMESPACE | base64 --decode; echo
@@ -30,40 +30,40 @@ To log in to StreamNative Console, follow these steps.
 
    ![](../../image/log-in-console.png)
 
-# Log in to StreamNative Console using Google accounts
+# 使用谷歌帐户登录 StreamNative 控制台
 
-This section describes how to log in to StreamNative Console using a Google accounts.
+本节介绍如何使用谷歌帐户登录 StreamNative 控制台。
 
-## Prerequisites
+## 前提条件
 
-To log in to StreamNative Console using a Google account, you need to enable Google OAuth2 login and configure related parameters. For details, see [configure StreamNative Console](/operator-guides/configure/streamnative-console.md).
+使用谷歌帐户登录 StreamNative 控制台，需要开启谷歌 OAuth2 登录并配置相关参数。具体参见[配置 StreamNative 控制台](/operator-guides/configure/streamnative-console.md)。
 
-To log in to StreamNative Console using a Google account, follow these steps.
+要使用谷歌帐户登录 StreamNative 控制台，请按照以下步骤操作：
 
-1. Execute the following command to expose the StreamNative Console service to a localhost address.
+1. 执行以下命令将 StreamNative 控制台服务暴露给 localhost 地址。 
 
    ```
    kubectl port-forward RELEASE_NAME-pulsar-streamnative-console-0 9527:9527 -n KUBERNETES_NAMESPACE
    ```
 
-2. Visit the StreamNative Console at http://localhost:9527.
+2. 访问 StreamNative 控制台：http://localhost:9527。
 
-3. Click **Log in With Google**.
+3. 点击**用谷歌登录**。
 
    ![](../../image/google-login.png)
 
-4. Enter your Email and then click **Next**.
+4. 输入你的邮箱，然后点击**下一步**。
 
-5. Enter your password and then click **Next**.
+5. 输入你的密码，然后点击**下一步**。
 
-6. (Optional) If Two-Factor Authentication (2FA) is enabled, enter the verification code and then click **Next**.
+6. （可选）如果启用了双因素身份验证（2FA），则要输入验证码，然后单击**下一步**。
 
    ![](../../image/verification-code.png)
 
-Then, you will be directed to the StreamNative Console GUI. And, you can manage the following resources:
+然后，你将看到 StreamNative 控制台 GUI，并且可以管理以下资源：
 
-- [Service accounts](/user-guides/admin/work-with-service-accounts.md)
-- [Users](/user-guides/admin/work-with-users.md)
-- [Tenants](/user-guides/admin/work-with-tenants.md)
-- [Namespaces](/user-guides/admin/work-with-namespaces.md)
-- [Topics](/user-guides/admin/work-with-topics.md)
+- [服务帐号](/user-guides/admin/work-with-service-accounts.md)
+- [用户](/user-guides/admin/work-with-users.md)
+- [租户](/user-guides/admin/work-with-tenants.md)
+- [命名空间](/user-guides/admin/work-with-namespaces.md)
+- [主题](/user-guides/admin/work-with-topics.md)
