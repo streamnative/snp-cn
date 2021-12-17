@@ -1,16 +1,16 @@
 ---
-title: Configure Alertmanager
+title: 配置 Alertmanager
 id: alertmanager
 category: operator-guides
 ---
 
-[Alertmanager](https://prometheus.io/docs/alerting/alertmanager/) is a component in StreamNative Platform and a component of Prometheus. Alertmanager handles alerts sent by StreamNnative components, such as the Prometheus server. It takes care of deduplicating, grouping, and routing them to the correct receiver integration, such as email, PagerDuty, or OpsGenie. It also takes care of silencing and inhibition of alerts.
+[Alertmanager](https://prometheus.io/docs/alerting/alertmanager/) 是 StreamNative Platform 的组件，也是 Prometheus 的组件。Alertmanager 处理由 StreamNative 组件发送的告警，例如 Prometheus 服务器。它负责去重、分组，并将它们路由到正确的接收集成端，如电子邮件、PagerDuty 或 OpsGenie。它还负责处理告警静默和抑制。
 
-By default, Alertmanager is enabled with StreamNative Platform. To disable it, you can set `monitoring.alert_manager: false` in the Pulsar cluster configuration YAML file.
+默认情况下，Alertmanager 在 StreamNative Platform 中是自动启用的。 如果要禁用 Alertmanager，你可以在 Pulsar 集群的 YAML 配置文件中设置 `monitoring.alert_manager: false`。
 
-# Configure Alertmanager
+# 配置 Alertmanager
 
-You can configure the requested CPU and memory, resolve time, and alert rules for the Alertmanager in the Pulsar cluster configuration YAML file. Then, you can use the `helm upgrade` command to restart the StreamNative Platform to make updates effective.
+可以在 Pulsar 集群的 YAML 配置文件中为 Alertmanager 配置需要的 CPU 和内存、解析时间和告警规则。然后，使用 `helm upgrade` 命令重新启动 StreamNative Platform 使变更生效。
 
 ```
 alert_manager:
@@ -27,13 +27,13 @@ alert_manager:
         rules:
 ```
 
-# Configure alerting rules
+# 配置告警规则
 
-Alerting rules allow you to define alert conditions based on Prometheus expression language expressions and to send notifications about firing alerts to an external service. Whenever the alert expression results in one or more vector elements at a given point in time, the alert counts as active for these elements label sets.
+告警规则允许你根据表达式（Prometheus 表达式语言）定义告警条件，并将有关触发告警的通知发送到外部服务。一旦告警表达式在给定时间点产生一个或多个向量元素时，告警就会因为这些元素标签集而激活。
 
-For more information about alert rules, see [here](https://prometheus.io/docs/prometheus/latest/configuration/alerting_rules/).
+关于告警规则的更多信息，参见[这里](https://prometheus.io/docs/prometheus/latest/configuration/alerting_rules/)。
 
-This example shows how to configure alert rules with ZooKeeper.
+如下示例显示了如何为 ZooKeeper 配置告警规则。
 
 ```shell
 - name: zookeeper
