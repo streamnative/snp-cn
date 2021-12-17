@@ -1,24 +1,24 @@
 ---
-title: Connect to Pulsar cluster using Python client
+title: 使用 Python 客户端连接 Pulsar 集群
 id: connect-python
 category: user-guides
 ---
 
-This example shows how to use the Python client to connect to a Pulsar cluster and then produce and consume messages to and from the Pulsar cluster.
+本示例介绍了如何使用 Python 客户端连接到 Pulsar 集群，然后向 Pulsar 集群生产和从 Pulsar 集群消费消息。
 
-1. Connect to the Pulsar cluster.
+1. 连接到 Pulsar 集群。
 
     ```python
     import os
     from pulsar import Client, AuthenticationToken
     client = Client(os.environ.get('SERVICE_URL'), authentication=AuthenticationToken(os.environ.get('AUTH_PARAMS')))
-
+    
     client.close()
     ```
 
-    Set the `SERVICE_URL` and `AUTH_PARAMS` parameters based on the descriptions in the [prepare to connect to a Pulsar cluster](/user-guides/connect/connect-pulsar-cluster/connect-prepare.md).
+    按照[准备连接 Pulsar 集群](/user-guides/connect/connect-pulsar-cluster/connect-prepare.md)中的描述，设置 `SERVICE_URL` 和 `AUTH_PARAMS` 参数。
 
-2. Create a Python consumer and use the Python consumer to consume messages.
+2. 创建 Python 消费者并使用 Python 消费者来消费消息。
 
     ```python
     import os
@@ -39,19 +39,19 @@ This example shows how to use the Python client to connect to a Pulsar cluster a
             consumer.negative_acknowledge(msg)
     ```
 
-3. Create a Python producer and use the Python producer to produce messages.
+3. 创建 Python 生产者并使用 Python 生产者来生产消息。
 
     ```python
     import os
     from pulsar import Client, AuthenticationToken
-
+    
     client = Client(os.environ.get('SERVICE_URL'), authentication=AuthenticationToken(os.environ.get('AUTH_PARAMS')))
-
+    
     producer = client.create_producer('my-topic')
-
+    
     for i in range(10):
         producer.send(('Hello-%d' % i).encode('utf-8'))
         print('send msg "hello-%d"' % i)
-
+    
     client.close()
     ```

@@ -1,38 +1,38 @@
 ---
-title: Connect to Pulsar cluster using Node.js client
+title: 使用 Node.js 客户端连接 Pulsar 集群
 id: connect-nodejs
 category: user-guides
 ---
 
-This example shows how to use the Node.js client to connect to a Pulsar cluster and then produce and consume messages to and from the Pulsar cluster.
+本示例介绍了如何使用 Node.js 客户端连接到 Pulsar 集群，然后向 Pulsar 集群生产和从 Pulsar 集群消费消息。
 
-1. Connect to the Pulsar cluster.
+1. 连接到 Pulsar 集群。
 
     ```
     const Pulsar = require('pulsar-client');
-
+    
     const auth_params = process.env.AUTH_PARAMS;
     const service_url = process.env.SERVICE_URL;
-
+    
     (async () => {
         const auth = new Pulsar.AuthenticationToken({
             token: AUTH_PARAMS,
         });
-
+    
         // Create a client
         const client = new Pulsar.Client({
             serviceUrl: service_url,
             authentication: auth,
             operationTimeoutSeconds: 30,
         });
-
+    
         await client.close();
     })();
     ```
 
-    Set the `SERVICE_URL` and `AUTH_PARAMS` parameters based on the descriptions in the [prepare to connect to a Pulsar cluster](/user-guides/connect/connect-pulsar-cluster/connect-prepare.md).
+    按照[准备连接 Pulsar 集群](/user-guides/connect/connect-pulsar-cluster/connect-prepare.md)中的描述，设置 `SERVICE_URL` 和 `AUTH_PARAMS` 参数。
 
-2. Create a Node.js consumer and use the Java consumer to consume messages.
+2. 创建 Node.js 消费者并使用 Java 消费者来消费消息。
 
     ```
     const Pulsar = require('pulsar-client');
@@ -72,33 +72,33 @@ This example shows how to use the Node.js client to connect to a Pulsar cluster 
     })();
     ```
 
-3. Create a Node.js producer and use the Java producer to produce messages.
+3. 创建 Node.js 生产者并使用 Java 生产者来生产消息。
 
     ```
     const Pulsar = require('pulsar-client');
-
+    
     const auth_params = process.env.AUTH_PARAMS;
     const service_url = process.env.SERVICE_URL;
-
+    
     (async () => {
     const auth = new Pulsar.AuthenticationToken({
         token: auth_params,
     });
-
+    
     // Create a client
     const client = new Pulsar.Client({
         serviceUrl: service_url,
         authentication: auth,
         operationTimeoutSeconds: 30,
     });
-
+    
     // Create a producer
     const producer = await client.createProducer({
         topic: 'persistent://public/default/my-topic',
         sendTimeoutMs: 30000,
         batchingEnabled: true,
     });
-
+    
     // Send messages
     for (let i = 0; i < 10; i += 1) {
         const msg = `my-message-${i}`;
@@ -108,7 +108,7 @@ This example shows how to use the Node.js client to connect to a Pulsar cluster 
         console.log(`Sent message: ${msg}`);
     }
     await producer.flush();
-
+    
     await producer.close();
     await client.close();
     })();
