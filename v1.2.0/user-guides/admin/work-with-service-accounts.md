@@ -39,7 +39,7 @@ category: user-guides
     <tr>
     <td>名称
     </td>
-    <td>该服务账户的名称。 
+    <td>该服务账户的名称。
     </td>
     </tr>
     <tr>
