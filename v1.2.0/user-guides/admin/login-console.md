@@ -28,7 +28,7 @@ StreamNative 控制台是基于 Web 的 GUI 管理和监控工具，可帮助 Pu
    kubectl get secret RELEASE_NAME-sn-platform-vault-console-admin-passwd -o=jsonpath='{.data.password}' -n KUBERNETES_NAMESPACE | base64 --decode; echo
    ```
 
-   ![](../../image/log-in-console.png)
+   ![](../../../image/log-in-console.png)
 
 # 使用谷歌帐户登录 StreamNative 控制台
 
@@ -50,7 +50,7 @@ StreamNative 控制台是基于 Web 的 GUI 管理和监控工具，可帮助 Pu
 
 3. 点击**用谷歌登录**。
 
-   ![](../../image/google-login.png)
+   ![](../../../image/google-login.png)
 
 4. 输入你的邮箱，然后点击**下一步**。
 
@@ -58,7 +58,7 @@ StreamNative 控制台是基于 Web 的 GUI 管理和监控工具，可帮助 Pu
 
 6. （可选）如果启用了双因素身份验证（2FA），则要输入验证码，然后单击**下一步**。
 
-   ![](../../image/verification-code.png)
+   ![](../../../image/verification-code.png)
 
 然后，你将看到 StreamNative 控制台 GUI，并且可以管理以下资源：
 
