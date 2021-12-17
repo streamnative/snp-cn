@@ -6,7 +6,7 @@ category: user-guides
 
 StreamNative 控制台是基于 Web 的 GUI 管理和监控工具，可帮助 Pulsar 用户管理租户、命名空间、主题、订阅等。
 
-在[部署 StreamNative Platform](/operator-guides/deploy/sn-deploy.md) 和 [部署 Pulsar 集群](/operator-guides/deploy/sn-deploy.md#部署-pulsar-集群)之后，可以登录 StreamNative 控制台来管理和监控 Pulsar 资源。
+在[部署 StreamNative Platform](/operator-guides/deploy/sn-deploy.md) 和[部署 Pulsar 集群](/operator-guides/deploy/sn-deploy.md#部署-pulsar-集群)之后，可以登录 StreamNative 控制台来管理和监控 Pulsar 资源。
 
 # 使用用户名和密码登录 StreamNative 控制台
 
@@ -40,7 +40,7 @@ StreamNative 控制台是基于 Web 的 GUI 管理和监控工具，可帮助 Pu
 
 要使用谷歌帐户登录 StreamNative 控制台，请按照以下步骤操作：
 
-1. 执行以下命令将 StreamNative 控制台服务暴露给 localhost 地址。 
+1. 执行以下命令将 StreamNative 控制台服务暴露给 localhost 地址。
 
    ```
    kubectl port-forward RELEASE_NAME-pulsar-streamnative-console-0 9527:9527 -n KUBERNETES_NAMESPACE
