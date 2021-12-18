@@ -6,7 +6,7 @@ category: operator-guides
 
 本文介绍了如何升级 StreamNative Platform。
 
-# 在互联网条件下升级 StreamNative Platform
+# 联网升级 StreamNative Platform
 
 在有互联网连接的条件下，按照如下步骤升级 StreamNative Platform：
 
@@ -42,7 +42,7 @@ category: operator-guides
     helm upgrade --install function-mesh streamnative/function-mesh-operator -n $K8S_NAMESPACE_NAME
     ```
 
-# 在无互联网条件下升级 StreamNative Platform
+# 离线升级 StreamNative Platform
 
 当有新版本的 StreamNative Platform 可用时，可以对 StreamNative Platform 进行升级。
 
