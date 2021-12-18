@@ -32,7 +32,7 @@ category: user-guides
 
     按照[准备连接 Pulsar 集群](/user-guides/connect/connect-pulsar-cluster/connect-prepare.md)中的描述，设置 `SERVICE_URL` 和 `AUTH_PARAMS` 参数。
 
-2. 创建 Node.js 消费者并使用 Java 消费者来消费消息。
+2. 创建 Node.js 消费者并使用 Node.js 消费者来消费消息。
 
     ```
     const Pulsar = require('pulsar-client');
@@ -72,7 +72,7 @@ category: user-guides
     })();
     ```
 
-3. 创建 Node.js 生产者并使用 Java 生产者来生产消息。
+3. 创建 Node.js 生产者并使用 Node.js 生产者来生产消息。
 
     ```
     const Pulsar = require('pulsar-client');
