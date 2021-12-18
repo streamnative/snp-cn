@@ -14,13 +14,13 @@ category: user-guides
 
 2. 点击**创建服务账户**，会出现一个对话框。
    
-   ![](../../image/create-service-account.png)
+   ![](../../../image/create-service-account.png)
 
 3. 配置是否授予服务账户访问命名空间或租户的 Admin 角色。
 
 4. 输入服务帐户的名称，然后点击**确定**。
 
-# 查看服务账户信息 
+# 查看服务账户信息
 
 按照如下步骤操作，查看服务账户的详细信息：
 
@@ -88,7 +88,7 @@ category: user-guides
 
 2. 选择 **TOKEN** 选项卡，然后点击 token 的**下载**链接，或点击**复制**图标，将服务账户的 token 下载或复制到本地目录。
 
-   ![](../../image/download-token.png)
+   ![](../../../image/download-token.png)
 
 然后，可以在连接到 Pulsar 集群时使用 token 对服务帐户进行身份验证。
 
@@ -100,7 +100,7 @@ category: user-guides
 
 2. 点击**操作**栏的**删除**图标。出现对话框显示：*“确认删除服务账户？”*
 
-   ![](../../image/delete-service-accounts.png)
+   ![](../../../image/delete-service-accounts.png)
 
 3. 点击**确定**。
 
