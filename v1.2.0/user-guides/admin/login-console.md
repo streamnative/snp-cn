@@ -4,7 +4,7 @@ id: login-console
 category: user-guides
 ---
 
-StreamNative 控制台是基于 Web 的 GUI 管理和监控工具，可帮助 Pulsar 用户管理租户、命名空间、主题、订阅等。
+StreamNative 控制台是基于 Web 的图形界面管理和监控工具，可帮助 Pulsar 用户管理租户、命名空间、主题、订阅等。
 
 在[部署 StreamNative Platform](/operator-guides/deploy/sn-deploy.md) 和[部署 Pulsar 集群](/operator-guides/deploy/sn-deploy.md#部署-pulsar-集群)之后，可以登录 StreamNative 控制台来管理和监控 Pulsar 资源。
 
@@ -20,7 +20,7 @@ StreamNative 控制台是基于 Web 的 GUI 管理和监控工具，可帮助 Pu
 
 2. 访问 StreamNative 控制台：http://localhost:9527。
 
-3. 输入用户名和用户密码，然后点击 **登录** 以登录 StreamNative 控制台。
+3. 输入用户名和用户密码，然后点击**登录**以登录 StreamNative 控制台。
 
    默认情况下，StreamNative 控制台创建了一个 `admin` 用户。可以执行以下命令来获取密码。
 
