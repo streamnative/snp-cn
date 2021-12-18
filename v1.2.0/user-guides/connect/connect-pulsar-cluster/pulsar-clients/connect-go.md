@@ -42,7 +42,6 @@ category: user-guides
         log.Fatal(err)
     }
     defer client.Close()
-    ```
 
 
     consumer, err := client.Subscribe(pulsar.ConsumerOptions{

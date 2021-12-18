@@ -48,7 +48,6 @@ category: user-guides
                 .subscriptionName("sub")
                 .subscriptionInitialPosition(SubscriptionInitialPosition.Earliest)
                 .subscribe();
-    ```
 
 
             for (int i = 0; i < 10; i++) {
@@ -79,7 +78,6 @@ category: user-guides
     
         Producer<byte[]> producer = client.newProducer().topic(token).create();
         
-    ```
 
 
             for (int i = 0; i < 10; i++) {
