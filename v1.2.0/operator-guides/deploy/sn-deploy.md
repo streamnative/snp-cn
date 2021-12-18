@@ -9,7 +9,7 @@ category: operator-guides
 
 本节介绍了如何在在线和离线模式下安装 StreamNative Platform。
 
-## 在互联网条件下安装 StreamNative Platform
+## 联网安装 StreamNative Platform
 
 本节介绍了在接入互联网条件下，如何安装 StreamNative Platform。
 
@@ -59,7 +59,7 @@ category: operator-guides
 
 6. 安装 Function Mesh operator。
 
-   [Function Mesh](/concepts/functionmesh-concepts.md) 作为无服务器（Serverless）框架，协调多个 [Pulsar Functions](/concepts/pulsar-function-concepts.md) 和 [Pulsar IO 连接器](/concepts /pulsar-io-concepts.md)，以支持流处理应用程序。
+   [Function Mesh](/concepts/functionmesh-concepts.md) 作为无服务器（Serverless）框架，协调多个 [Pulsar Functions](/concepts/pulsar-function-concepts.md) 和 [Pulsar IO 连接器](/concepts/pulsar-io-concepts.md)，以支持流处理应用程序。
 
     ```
     helm upgrade --install function-mesh streamnative/function-mesh-operator -n $NAMESPACE 
@@ -221,18 +221,18 @@ category: operator-guides
             tag: 0.7.0-rc6
             pullPolicy: IfNotPresent
         ```
-        
+       
    3. 使用定制的 YAML 文件安装 Pulsar operator。
 
         ```
         helm upgrade --install pulsar-operator -f value_pulsar-operator.yaml streamnative/pulsar-operator -n $NAMESPACE
         ```
 
-6. 安装 FunctionMesh operator。
+6. 安装 Function Mesh operator。
 
-   [Function Mesh](/concepts/functionmesh-concepts.md) 作为无服务器（Serverless）框架，协调多个 [Pulsar Functions](/concepts/pulsar-function-concepts.md) 和 [Pulsar IO 连接器](/concepts /pulsar-io-concepts.md)，以支持流处理应用程序。
+   [Function Mesh](/concepts/functionmesh-concepts.md) 作为无服务器（Serverless）框架，协调多个 [Pulsar Functions](/concepts/pulsar-function-concepts.md) 和 [Pulsar IO 连接器](/concepts/pulsar-io-concepts.md)，以支持流处理应用程序。
 
-    1. 检查用于安装 FunctionMesh operator 的 chart 并将 `values.yaml` 文件的内容保存为本地 YAML 文件。
+    1. 检查用于安装 Function Mesh operator 的 chart 并将 `values.yaml` 文件的内容保存为本地 YAML 文件。
 
         本示例将 `values.yaml` 文件保存为 `value_function-mesh-operator.yaml` 文件。
 
@@ -263,13 +263,13 @@ category: operator-guides
     export PULSAR_CHART=streamnative/sn-platform
     ```
 
-## 在无互联网条件下安装 StreamNative Platform
+## 离线安装 StreamNative Platform
 
-本节介绍了在无互联网条件下，如何安装 StreamNative Platform。
+本节介绍了在无法访问互联网时，如何安装 StreamNative Platform。
 
 > **注意**
 > 
-> 在无互联网条件下安装 StreamNative Platform ，需要预加载所需的 Docker 镜像。预加载 Docker 镜像的方法请参见[预加载 Docker 镜像](/operator-guides/sn-plan.md#preload-docker-images)。
+> 离线安装 StreamNative Platform ，需要预加载所需的 Docker 镜像。预加载 Docker 镜像的方法请参见[预加载 Docker 镜像](/operator-guides/sn-plan.md#预加载-docker-镜像)。
 
 ### 使用 `install.sh` 脚本安装 StreamNative Platform
 
