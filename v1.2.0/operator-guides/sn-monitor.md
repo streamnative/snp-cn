@@ -8,9 +8,9 @@ category: operator-guides
 
 本文介绍了如何用 Grafana 仪表板监控 StreamNative Platform。
 
-# 在浏览器中打开 Grafana 
+# 在浏览器中打开 Grafana
 
-StreamNative Platform 支持[暴露 Grafana 服务](/operator-guides/configure/monitoring/grafana.md#expose-grafana-service)。可以通过以下 URL 访问 Grafana 仪表板。
+StreamNative Platform 支持[暴露 Grafana 服务](/operator-guides/configure/monitoring/grafana.md#暴露-grafana-服务)。可以通过以下 URL 访问 Grafana 仪表板。
 
 ![](../../image/login-grafana.png)
 
