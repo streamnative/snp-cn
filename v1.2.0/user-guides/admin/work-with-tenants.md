@@ -8,9 +8,9 @@ Pulsar 从诞生开始就是按照多租户系统设计的。为了支持多租�
 
 本文介绍了如何使用 pulsarctl CLI（命令行工具）或 StreamNative 控制台为集群创建和管理租户。
 
-# 使用 pulsarctl CLI 操作租户  
+# 使用 pulsarctl CLI 操作租户
 
-使用 pulsarctl CLI （命令行工具）可以创建、更新和删除租户。有关租户操作的完整列表请参见  [pulsarctl 命令参考](https://docs.streamnative.io/pulsarctl/v2.7.0.7/#-em-update-em--32)
+使用 pulsarctl CLI （命令行工具）可以创建、更新和删除租户。有关租户操作的完整列表请参见 [pulsarctl 命令参考](https://docs.streamnative.io/pulsarctl/v2.7.0.7/#-em-update-em--32)。
 
 在使用 pulsarctl CLI（命令行工具）前，需要先连接到 Pulsar 集群。详细信息请参见[此处](/user-guides/connect/connect-pulsar-cluster/cli-tools/connect-pulsarctl.md)。
 
