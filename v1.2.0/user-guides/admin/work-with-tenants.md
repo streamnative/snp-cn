@@ -1,152 +1,150 @@
 ---
-title: Work with tenants
+title: 关于租户的操作
 id: work-with-tenants
 category: user-guides
 ---
 
-Pulsar was created from the ground up as a multi-tenant system. To support multi-tenancy, Pulsar has a concept of tenants. Tenants can be spread across clusters and can each have their own authentication and authorization scheme applied to them.
+Pulsar 是从头开始创建的多租户系统。为了支持多租户，Pulsar 提出了租户的概念。租户可以分布在多个集群中，并且每个租户都可以应用自己的身份验证和授权方案。
 
-This document describes how to create and manage tenants for a cluster using the pulsarctl CLI tool or the StreamNative Console.
+本文介绍如何使用 pulsarctl CLI 工具或 StreamNative 控制台为集群创建和管理租户。
 
-# Work with tenants using pulsarctl CLI tool
+# 使用 pulsarctl CLI 工具操作租户  
 
-You can create, update, and delete tenants using the pulsarctl CLI tool. For a full list of supported operations on tenants, see [pulsarctl command reference](https://docs.streamnative.io/pulsarctl/v2.7.0.7/#-em-update-em--32).
+可以使用 pulsarctl CLI 工具新建、更新和删除租户。 有关租户支持的操作的完整列表可参阅 [pulsarctl 命令参考](https://docs.streamnative.io/pulsarctl/v2.7.0.7/#-em-update-em--32)。
 
-Before using the pulsarctl CLI tool, you need to connect to a Pulsar cluster. For details, see [here](/user-guides/connect/connect-pulsar-cluster/cli-tools/connect-pulsarctl.md).
+使用 pulsarctl CLI 工具前，需要首先连接到 Pulsar 集群。详细信息可参考[此处](/user-guides/connect/connect-pulsar-cluster/cli-tools/connect-pulsarctl.md)。
 
-## Create tenants
+## 新建租户
 
-After creating a Pulsar cluster, you can create tenants for the Pulsar cluster. When creating a tenant, you need to use `-cluster` or `-c` option to specify the target cluster for the tenant.
+创建 Pulsar 集群后，可以为 Pulsar 集群创建租户。创建租户时，需要使用 `-cluster` 或 `-c` 选项为租户指定目标集群。
 
-This example shows how to create a tenant named `example-tenant` for the `example-cluster` cluster with the admin role. If you do not configure the admin role when creating the tenant, you cannot perform follow-up operations on the target tenant, such as updating or deleting tenants.
+如下示例介绍如何为具有管理员角色的 `example-cluster` 集群创建名为 `example-tenant` 的租户。如果在创建租户时未配置 admin 角色，则无法对目标租户进行后续操作，如更新或删除租户。
 
-**Input**
+**输入**
 
 ```bash
 pulsarctl tenants create example-tenant -r bot@matrix.auth.streamnative -c example-cluster
 ```
 
-**Output**
+**输出**
 
 ```shell
 Create tenant example-tenant successfully
 ```
 
-## Update tenants
+## 更新租户
 
-When you want to add more admin roles for a tenant, you can use the `pulsarctl tenants update` command to update the target tenant.
+当需要为租户添加更多管理员角色时，可以使用 `pulsarctl tenants update` 命令来更新目标租户。 
 
-This example shows how to update the admin role for `example-tenant`.
+如下示例显示如何更新 `example-tenant`的管理员角色。 
 
-**Input**
+**输入**
 
 ```bash
 pulsarctl tenants update --admin-roles (bot) --admin-roles (bot1) example-tenant -c example-cluster
 ```
 
-**Output**
+**输出**
 
 ```bash
 Update tenant example-tenant successfully
 ```
 
-## Delete tenants
+## 删除租户
 
-When you want to remove a tenant from a Pulsar cluster, you can delete it. If a tenant is associated with any resources, you cannot delete the tenant. In this case, you must delete its associated resources first.
+当需要从 Pulsar 集群中移除租户时，可以将其删除。但如果租户与任何资源存在关联，则无法删除该租户。在这种情况下，必须首先删除与其关联的资源。
 
-This example shows how to delete `example-tenant`.
+如下示例显示如何删除 `example-tenant`。
 
-**Input**
+**输入**
 
 ```
 pulsarctl tenants delete example-tenant
 ```
 
-**Output**
+**输出**
 
 ```
 Delete tenant example-tenant successfully
 ```
 
-# Work with tenants using StreamNative Console
+# 使用 StreamNative 控制台操作租户
 
-You can create, update, and delete tenants using the StreamNative Console.
+可以使用 StreamNative 控制台新建、更新和删除租户。 
 
-## Create tenants
+## 新建租户
 
-To create a tenant using the StreamNative Console, follow these steps.
+按照如下步骤使用 StreamNative 控制台新建租户。 
 
-1. From the left navigation pane, click **Tenants**.
+1. 从左侧导航窗格中，点击**租户**。 
 
-2. Click **New Tenant** and a dialog box is displayed.
-   
-   ![](../../image/create-tenant.png)
+2. 点击**新建租户**。出现一个对话框。
 
-3. Configure the tenant, as listed below.
+    ![](../../image/create-tenant.png)
+
+3. 如下表所列来配置租户。 
 
     <table>
     <tr>
     <td>
-    Field
+    字段
     </td>
-    <td>Descrption
-    </td>
-    </tr>
-    <tr>
-    <td>Tenants
-    </td>
-    <td>
-    Enter a name for the tenant. The tenant name is a string of characters, supporting lowercase letters (a-z), numeric characters (0-9), and the special character hyphen (_).
+    <td>描述
     </td>
     </tr>
     <tr>
-    <td>Allowed Clusters
+    <td>租户
     </td>
     <td>
-    Select the cluster (from the list) to which the tenant belongs.
+    输入租户的名称。租户名称为字符串，支持小写字母 (a-z)、数字字符 (0-9) 和特殊字符连字符 (_)。
     </td>
     </tr>
     <tr>
-    <td>Admin Roles
+    <td>所属集群
     </td>
     <td>
-    Select one or more users or service accounts as the administrators for the tenant. 
+    从列表中选择租户所属的集群。
+    </td>
+    </tr>
+    <tr>
+    <td>Admin 角色
+    </td>
+    <td>
+    选择一个或多个用户或服务帐户作为租户的管理员。
     </td>
     </tr>
     </table>
 
-4. Click **Confirm**.
+## 更新租户
 
-## Update tenants
+如果要为租户创建命名空间或为租户添加或删除管理员角色时，可以更新租户。按照如下操作来使用 StreamNative 控制台更新租户。
 
-When you want to create namespaces for a tenant or add or delete admin roles for a tenant, you can update the tenant. To update a tenant using the StreamNative Console, follow these steps.
+1. 从左侧导航窗格中，点击**租户**。 
 
-1. From the left navigation pane, click **Tenants**.
+2. 要进入租户编辑页面，可执行以下操作之一。 
 
-2. To enter the page for editing the tenant, do one of the followings.
-
-   - Click the **Edit** icon in the **Actions** column.
-   - Click the link of the tenant name.
+   - 点击**操作**列中的**编辑** 图标。 
+   - 点击租户名称的链接。
 
    ![](../../image/edit-tenant.png)
 
-3. Select the **NAMESPACES** tab and then click **New Namespace** to add more namespaces for the tenant. For details about how to create a namespace, see [create namespace](/user-guides/admin/work-with-namespaces.md#create-namespaces).
+3. 选择**命名空间**选项卡，然后点击**创建命名空间**，为租户添加更多的命名空间。关于如何新建命名空间的详细操作，参见[新建命名空间](/user-guides/admin/work-with-namespaces.md#create-namespaces)。
 
-4. Select the **CONFIGURATION** tab to update tenant configurations.
+4. 选择**配置**选项卡，更新租户的配置。 
 
-   * To delete administrators, click the **Delete** icon of an existing administrator.
-   * To add administrators, click **New Role** and then select one or more users or service accounts from the drop-down list.
+   * 要删除管理员，请点击现有管理员的**删除**图标。 
+   * 要添加管理员，请单击**新角色**，然后从下拉列表中选择一个或多个用户或服务帐户。
 
-## Delete tenants
+## 删除租户
 
-To delete a tenant using the StreamNative Console, follow these steps.
+按照如下步骤操作，使用 StreamNative 控制台删除租户。 
 
-1. From the left navigation pane, click **Tenants**.
+1. 从左侧导航窗格中，点击**租户**。 
 
-2. the **Edit** icon in the **Actions** column or click the link of the tenant name and a page is displayed.
+2. 点击**操作**列中的**编辑** 图标，或点击租户名称的链接，然后出现一个新页面。 
 
-3. Click **Delete Tenant** and a dialog box is displayed, asking “_Are you sure you want to delete this?_”
+3. 点击**删除租户**，出现对话框显示*“您是否确认希望删除？”*
 
    ![](../../image/delete-tenant.png)
 
-4. Enter the tenant name and then click **Confirm**.
+4. 输入租户名称，点击**确定**。
