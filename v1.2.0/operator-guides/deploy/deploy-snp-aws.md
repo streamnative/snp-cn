@@ -24,7 +24,7 @@ Amazon Elastic Kubernetes Service（EKS）是 AWS 的服务，用于部署、管
 
 本节介绍了如何使用 Terraform 在 Amazon EKS 集群上部署 StreamNative Platform。
 
-1. 定义一个 EKS 集群配置文件，用于部署预定义的 StreamNative Platform。
+1. 定义一个 EKS 集群配置文件，包含预定义的 StreamNative Platform。
 
     [此处](https://github.com/streamnative/terraform-aws-cloud/blob/master/examples/root-example/main.tf)是一个用于配置 EKS 集群的 `main.tf` 文件示例。
 
