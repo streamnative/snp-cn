@@ -1,105 +1,106 @@
 ---
-title: Work with service accounts
+title: 关于服务账户的操作
 id: work-with-service-accounts
 category: user-guides
 ---
 
-Service accounts are created for automation purposes, such as to authenticate service accounts which operate on your clusters. This document describes how to create, check, authenticate, and delete service accounts using the StreamNative Console.
+服务帐户是为自动化目的而创建的，比如对在集群上运行的服务帐户进行身份验证。本文介绍了如何使用 StreamNative 控制台创建、检查、验证和删除服务帐户。
 
-# Create service accounts
+# 创建服务账户
 
-To create a service account, follow these steps.
+按照如下步骤创建服务账号：
 
-1. From the left navigation pane, click **Manage** > **Service Accounts**.
+1. 从左侧导航窗格中，点击**管理** > **服务账户**。
 
-2. Click **Create Service Account** and a dialog box is displayed.
+2. 点击**创建服务账户**，会出现一个对话框。
    
-   ![](../../image/create-service-account.png)
+   ![](../../../image/create-service-account.png)
 
-3. Configure whether to grant the service account the Admin role for accessing to a namespace or tenant.
+3. 配置是否授予服务账户访问命名空间或租户的 Admin 角色。
 
-4. Enter a name for the service account and then click **Confirm**.
+4. 输入服务帐户的名称，然后点击**确定**。
 
-# View service account information
+# 查看服务账户信息
 
-To view details about the service account, follow these steps.
+按照如下步骤操作，查看服务账户的详细信息：
 
-1. From the left navigation pane, click **Manage** > **Service Accounts**.
+1. 从左侧导航窗格中，单击**管理** > **服务账户**。
 
-2. Select the **TOKEN** tab to see details about the service account.
+2. 选择 **TOKEN** 选项卡，查看关于该服务账户的详细信息。
 
     <table>
     <tr>
     <td>
-    Field
+    字段
     </td>
-    <td>Description
-    </td>
-    </tr>
-    <tr>
-    <td>Name
-    </td>
-    <td>The name of the service account.
+    <td>描述
     </td>
     </tr>
     <tr>
-    <td>Pulsar Role Name 
+    <td>名称
     </td>
-    <td>The email address of the service account. 
+    <td>该服务账户的名称。
+    </td>
+    </tr>
+    <tr>
+    <td>Pulsar 角色名 
+    </td>
+    <td>该服务账户的邮箱地址。 
     </td>
     </tr>
     <tr>
     <td>Token
     </td>
-    <td>The token for the service account. This field is only available on the <strong>TOKEN</strong> tab.
+    <td>该服务账户的 token。此字段仅在 <strong>TOKEN</strong> 选项卡上可用。
     </td>
     </tr>
     <tr>
-    <td>Organization
+    <td>组织
     </td>
-    <td>The organization where the service account is created.
+    <td>创建该服务账户的组织。
     </td>
     </tr>
     <tr>
-    <td>Status
+    <td>状态
     </td>
-    <td>The status of the service account.
+    <td>该服务账户的状态。
     </td>
     </tr>
     <tr>
     <td>Admin
     </td>
-    <td>Whether the service account is an administrator of a namespace or tenant.
+    <td>该服务帐户是否是命名空间或租户的管理员。
     </td>
     </tr>
     <tr>
-    <td>Actions
+    <td>操作
     </td>
-    <td>The actions that can be performed on the service account. Currently, it only supports deleting the service account.
+    <td>可对服务帐户执行的操作。目前仅支持删除服务账户。
     </td>
     </tr>
     </table>
 
-# Authenticate service accounts
+# 验证服务帐户
 
-You can use a token to authenticate a service account. To authenticate service accounts, follow these steps.
+可以使用 token 来验证服务账户。按照如下步骤验证服务账户：
 
-1. From the left navigation pane, click **Manage** > **Service Accounts**.
+1. 从左侧导航窗格中，点击**管理** > **服务账户**。
 
-2. Select the **TOKEN** tab and then click the **Download** link of the token or click the **Copy** icon to download or copy the token of the service account to your local directory.
+2. 选择 **TOKEN** 选项卡，然后点击 token 的**下载**链接，或点击**复制**图标，将服务账户的 token 下载或复制到本地目录。
 
-   ![](../../image/download-token.png)
+   ![](../../../image/download-token.png)
 
-Then, you can use the token to authenticate the service account when connecting to a Pulsar cluster.
+然后，可以在连接到 Pulsar 集群时使用 token 对服务帐户进行身份验证。
 
-# Delete service accounts
+# 删除服务账户
 
-To delete a service account, follow these steps.
+按照如下步骤删除服务账户：
 
-1. From the left navigation pane, click **Manage** > **Service Accounts**.
+1. 从左侧导航窗格中，点击**管理** > **服务账户**。
 
-2. Click the **Delete** icon in the **Actions** column. A dialog box is displayed, asking _Are you sure you want to delete this service account?_
+2. 点击**操作**栏的**删除**图标。出现对话框显示：*“确认删除服务账户？”*
 
-   ![](../../image/delete-service-accounts.png)
+   ![](../../../image/delete-service-accounts.png)
 
-3. Click **Confirm**.
+3. 点击**确定**。
+
