@@ -1,42 +1,42 @@
 ---
-title: Monitor StreamNative Platform with Grafana Dashboard
+title: 使用 Grafana 仪表板监控 StreamNative Platform 
 id: sn-monitor
 category: operator-guides
 ---
 
-All StreamNative Platform components expose metrics that can be scraped by Prometheus. You can configure Grafana to visualize those metrics in a dashboard.
+所有 StreamNative Platform 组件都暴露了可被 Prometheus 抓取的指标。通过配置 Grafana，就可以将这些指标在仪表板中可视化。
 
-This document describes how to monitor the StreamNative Platform with the Grafana dashboard.
+本文介绍了如何用 Grafana 仪表板监控 StreamNative Platform。
 
-# Open Grafana in your browser
+# 在浏览器中打开 Grafana
 
-StreamNative Platform supports [exposing the Grafana service](/operator-guides/configure/monitoring/grafana.md#expose-grafana-service). You can access the Grafana Dashboard through the following URL.
+StreamNative Platform 支持[暴露 Grafana 服务](/operator-guides/configure/monitoring/grafana.md#暴露-grafana-服务)。可以通过以下 URL 访问 Grafana 仪表板。
 
 ![](../../image/login-grafana.png)
 
-# Use Grafana Dashboard
+# 使用 Grafana 仪表板
 
-Grafana provides the following dashboards including brokers, bookies, ZooKeeper, proxy, topic, messages, and so on.
+Grafana 提供了以下仪表板，包括 broker、bookie、ZooKeeper、代理（proxy）、主题、消息等。 
 
-- *Overview*: Displays the overview health of a Pulsar cluster.
-- *Messaging Metrics*: Displays the metrics related to Pulsar messaging (such as producers, consumers, message backlog and so on).
-- *Proxy Metrics*: Displays the metrics related to Pulsar proxies if you have run proxies in your Pulsar cluster. 
-- *Bookie Metrics*: Displays the metrics related to Bookies.
-- *ZooKeeper*: Displays the metrics related to ZooKeeper cluster.
-- *JVM Metrics*: Displays the JVM related metrics of all the components in a Pulsar cluster (such as proxies, brokers, bookies, and so on).
-- *Functions metrics*: Displays the metrics related to Pulsar Functions.
-- *Auto Recovery*: Displays the metrics related to auto-recovery.
-- *Container*: Displays the metrics related to the container.
+- *概览*：显示 Pulsar 集群的总体健康状况。
+- *消息指标*：显示与 Pulsar 消息相关的指标（如生产者、消费者、消息 backlog 等）。
+- *代理（proxy）指标*：如果在 Pulsar 集群中运行了代理（proxy），则会显示与 Pulsar proxy 相关的指标。
+- *Bookie 指标*：显示与 Bookie 相关的指标。
+- *ZooKeeper*：显示与 ZooKeeper 集群相关的指标。
+- *JVM 指标*：显示 Pulsar 集群中所有组件（如 proxy、broker、bookie 等）的 JVM 相关指标。
+- *Functions 指标*：显示与 Pulsar Functions 相关的指标。
+- *自动恢复*：显示与自动恢复相关的指标。
+- *容器*：显示与容器相关的指标。 
 
-*System metrics* are displayed in the *Node Metrics* dashboard and some portions in *Overview* dashboard. 
+*系统指标*显示在*节点指标*仪表板中，某些部分显示在*概览*仪表板中。
 
-This figure shows how to monitor the Pulsar broker using the Grafana Dashboards.
+下图显示了如何使用 Grafana 仪表板监控 Pulsar broker。
 
 ![](../../image/broker-dashboard.png)
 
-| No. | Action |
+| 编号 | 动作 |
 | --- | --- |
-| 1 | Select a Broker Dashboard from the drop-down list. |
-| 2 | Select to monitor all brokers or a specific broker. |
-| 3 | Configure the time period for collecting the metrics. |
-| 4 | Configure the interval for refreshing the dashboard. |
+| 1 | 从下拉列表中选择一个 Broker 仪表板。    |
+| 2 | 选择监控所有 broker 或某个特定的 broker。 |
+| 3 | 配置收集指标的时间段。                  |
+| 4 | 配置刷新仪表板的时间间隔。 |
