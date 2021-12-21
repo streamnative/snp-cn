@@ -1,22 +1,22 @@
 ---
-title: Upgrade StreamNative Platform
+title: 升级 StreamNative Platform
 id: sn-upgrade
 category: operator-guides
 ---
 
-This document describes how to upgrade StreamNative Platform.
+本文介绍了如何升级 StreamNative Platform。
 
-# Upgrade StreamNative Platform with Internet access
+# 联网升级 StreamNative Platform
 
-To upgrade StreamNative Platform with Internet access, follow these steps.
+在有互联网连接的条件下，按照如下步骤升级 StreamNative Platform：
 
-1. Get the latest version of the Vault operator, cert-manager operator, Pulsar operator, and FunctionMesh operators.
+1. 获取最新版本的 Vault operator、cert-manager operator、Pulsar operator 和 Function Mesh operator。
 
     ```
     helm repo update
     ```
 
-2. Use the `helm upgrade` command to upgrade these operators one by one.
+2. 使用 `helm upgrade` 命令将这些 operator 逐一升级。
 
 - Vault operator
 
@@ -28,7 +28,7 @@ To upgrade StreamNative Platform with Internet access, follow these steps.
 
     ```
     helm upgrade --install cert-manager jetstack/cert-manager -n K8S_NAMESPACE_NAME --set installCRDs=true
-    ```	
+    ```
 
 - Pulsar operator
 
@@ -36,17 +36,17 @@ To upgrade StreamNative Platform with Internet access, follow these steps.
     helm upgrade --install pulsar-operator streamnative/pulsar-operator -n $K8S_NAMESPACE_NAME
     ```
 
-- FunctionMesh operator
- 
+- Function Mesh operator
+
     ```
     helm upgrade --install function-mesh streamnative/function-mesh-operator -n $K8S_NAMESPACE_NAME
     ```
 
-# Upgrade streamNative Platform without Internet access
+# 离线升级 StreamNative Platform
 
-When a new version of StreamNative Platform is available, you can upgrade the StreamNative Platform.
+当有新版本的 StreamNative Platform 可用时，可以对 StreamNative Platform 进行升级。
 
-1. Use the `wget` command to download the latest StreamNative Platform installation package.
+1. 使用 `wget` 命令下载最新的 StreamNative Platform 安装包。
 
     - AWS S3
 
@@ -54,26 +54,26 @@ When a new version of StreamNative Platform is available, you can upgrade the St
         wget https://sn-products.s3.amazonaws.com/snp/v1.2.0/streamnative_platform-v1.2.0.tar.gz
         ```
 
-    - Alibaba Cloud
+    - 阿里云
 
         ```
         wget https://downloads-streamnative-cloud.oss-cn-beijing.aliyuncs.com/sn-products/snp/v1.2.0/streamnative_platform-v1.2.0.tar.gz
         ```
 
-2. Extract the package and use the `cd` command to switch to the target directory.
+2. 将压缩包解压并使用 `cd` 命令切换到目标目录。
 
     ```
     tar zxvf streamnative_platform-v1.2.0.tar.gz
     cd streamnative-platform
     ```
 
-3. Add the environment variable for the Kubernetes namespace of StreamNative Platform.
+3. 为 StreamNative Platform 的 Kubernetes 命名空间添加环境变量。
 
     ```
     export NAMESPACE=KUBERNETES_NAMESPACE
     ```
 
-4. Install StreamNative Platform.
+4. 安装 StreamNative Platform。
 
     ```
     sh install.sh
