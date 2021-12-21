@@ -1,12 +1,12 @@
 ---
-title: Connect to Pulsar cluster using pulsar-client CLI tool
+title: 使用 pulsar-client CLI 连接到 Pulsar 集群
 id: connect-pulsar-client
 category: user-guides
 ---
 
-`pulsar-client` is a CLI tool that is used to produce and consume messages to and from pulsar topics.
+`pulsar-client` 是一个 CLI（命令行工具），用于在 Pulsar 主题中生产和消费消息。
 
- This example shows how to connect to a Pulsar cluster using the pulsar-client CLI tool and produce 10 messages to the `test-topic` topic.
+如下示例显示了如何使用 pulsar-client CLI（命令行工具）连接到 Pulsar 集群，并为 `test-topic` 主题生成 10 条消息。
 
     ```shell script
     ./bin/pulsar-client \
@@ -16,4 +16,4 @@ category: user-guides
         produce test-topic -m "test-message" -n 10
     ```
 
-Set the `--url` and `--auth-params` parameters based on descriptions in the [prepare to connect to a Pulsar cluster](/user-guides/connect/connect-pulsar-cluster/connect-prepare.md).
+按照[准备连接 Pulsar 集群](/user-guides/connect/connect-pulsar-cluster/connect-prepare.md)中的描述设置 `--url` 和 `--auth-params` 参数。
