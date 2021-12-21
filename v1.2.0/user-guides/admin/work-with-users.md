@@ -1,73 +1,73 @@
 ---
-title: Work with users
+title: 关于用户的操作
 id: work-with-users
 category: user-guides
 ---
 
-StreamNative Platform allows you to create one or more users for your organizations. After being authorized, these users can perform operations on Pulsar tenants, namespace, topics, and so on. This document describes how to create, view status, and delete users using the StreamNative Console.
+StreamNative Platform 支持为组织创建一个或多个用户。获得授权后，这些用户可以对 Pulsar 租户、命名空间、主题等进行操作。本文介绍了如何使用 StreamNative 控制台创建用户、查看用户状态和删除用户。
 
-# Create users
+# 创建用户
 
-To create a user, follow these steps.
+按照如下步骤创建用户：
 
-1. In the upper-right corner of the StreamNative Console, select **Users** from the drop-down list of your account.
+1. 在 StreamNative 控制台的右上角，从帐户下拉列表中选择**用户**。
 
-2. Click **Create a user** and a dialog box is displayed.
+2. 点击**创建用户**，弹出如下对话框。
 
-   ![](../../image/create-user.png)
+   ![](../../../image/create-user.png)
 
-3. Configure the user, as listed below.
+3. 按如下表格配置用户。
 
     <table>
     <tr>
     <td>
-    Field
+    字段
     </td>
-    <td>Description
-    </td>
-    </tr>
-    <tr>
-    <td>Name
-    </td>
-    <td>Enter the user name. The user name is a string of characters, supporting lowercase letters (a-z), numeric characters (0-9), and the special character hyphen (_).
+    <td>描述
     </td>
     </tr>
     <tr>
-    <td>User Password
+    <td>名称
     </td>
-    <td>Configure the password for the user.
+    <td>输入用户名。用户名为一串字符，支持小写字母（a-z）、数字字符（0-9）和特殊字符连字符（_）。
     </td>
     </tr>
     <tr>
-    <td>Confirm User Password
+    <td>用户密码
     </td>
-    <td>Confirm the password for the user.
+    <td>为用户配置密码。
+    </td>
+    </tr>
+    <tr>
+    <td>确认用户密码
+    </td>
+    <td>确认用户的密码。
     </td>
     </tr>
     </table>
 
-4. Click **Confirm**.
+4. 点击**确定**。
 
-# View user status
+# 查看用户状态
 
-In the upper-right corner of the StreamNative Console, select **Users** from the drop-down list of your account to view users available for an organization, including the name and status of a user.
+在 StreamNative 控制台右上角，从帐户下拉列表中选择**用户**后，可以查看组织可用的用户，包括用户的名称和状态。
 
-   ![](../../image/view-user.png)
+   ![](../../../image/view-user.png)
 
-# Delete users
+# 删除用户
 
-> **Note**  
+> **注意**
 > 
-> As an administrator, you can delete a user.
+> 作为管理员，可以删除用户。
 
-To delete a user, follow these steps.
+按照如下步骤删除用户：
 
-1. In the upper-right corner of the StreamNative Console, select **Users** from the drop-down list of your account.
+1. 在 StreamNative 控制台的右上角，从帐户下拉列表中选择**用户**。
 
-2. Click the **Delete** icon in the **Actions** column.
+2. 点击**操作**列中的**删除**图标。
 
-3. A dialog box is displayed, asking “_Are you sure you want to delete this user?_”
+3. 出现对话框，询问*“确认删除该用户？”* 
 
-   ![](../../image/delete-user.png)
+   ![](../../../image/delete-user.png)
 
-4. Click **Confirm**.
+4. 点击**确定**。
