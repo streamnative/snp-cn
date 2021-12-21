@@ -1,5 +1,5 @@
 ---
-title: 在 AWS 上部署 StreamNative 平台
+title: 在 AWS 上部署 StreamNative Platform
 id: deploy-snp-aws
 category: operator-guides
 ---
