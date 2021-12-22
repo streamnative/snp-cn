@@ -1,67 +1,68 @@
 ---
-title: Deploy StreamNative Platform on AWS
+title: 在 AWS 上部署 StreamNative Platform
 id: deploy-snp-aws
 category: operator-guides
 ---
 
 
-The Amazon Elastic Kubernetes Service (EKS) is the AWS service for deploying, managing, and scaling containerized applications with Kubernetes. This document describes how to deploy StreamNative Platform on an Amazon EKS cluster using [Terraform](https://www.terraform.io/). 
+Amazon Elastic Kubernetes Service（EKS）是 AWS 的服务，用于部署、管理和扩展 Kubernetes 的容器化应用程序。本文介绍了如何使用 [Terraform](https://www.terraform.io/) 在 Amazon EKS 集群上部署 StreamNative Platform。
 
-# Prerequisites
+# 前提条件
 
-The tutorial assumes some basic familiarity with Kubernetes and `kubectl` but does not assume any pre-existing deployment.
+本教程假定用户已经基本了解 Kubernetes 和 `kubectl`，但不假定有任何提前部署。
 
-It also assumes that you are familiar with the usual Terraform plan/apply workflow.
+此外，教程假定用户熟悉日常的 Terraform 计划/应用流程。
 
-For this tutorial, you need to perform the following operations before deploying StreamNative Platform on an EKS cluster:
+在使用本教程在 EKS 集群上部署 StreamNative Platform 之前，需要执行以下操作：
 
-- Install [Terraform](https://learn.hashicorp.com/tutorials/terraform/install-cli?in=terraform/aws-get-started).
-- Install [AWS CLI version 2](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html).  
-- Install [kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl) v1.16 or higher.
-- Install [Helm](https://helm.sh/docs/intro/install/) 3.0 or higher.
+- 安装 [Terraform](https://learn.hashicorp.com/tutorials/terraform/install-cli?in=terraform/aws-get-started)。
+- 安装 [AWS CLI version 2](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html)。
+- 安装 [kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl) v1.16 或更高版本。
+- 安装 [Helm](https://helm.sh/docs/intro/install/) 3.0 或更高版本。
 
-# Install StreamNative Platform on AWS 
+# 在 AWS 上安装 StreamNative Platform
 
-This section describes how to deploy StreamNative Platform on an Amazon EKS cluster using Terraform.
+本节介绍了如何使用 Terraform 在 Amazon EKS 集群上部署 StreamNative Platform。
 
-1. Define an EKS cluster configuration file with pre-defined StreamNative Platform.
+1. 定义一个 EKS 集群配置文件，包含预定义的 StreamNative Platform。
 
-    [Here](https://github.com/streamnative/terraform-aws-cloud/blob/master/examples/root-example/main.tf) is an example of the `main.tf` file used for configuring the EKS cluster.
+    [此处](https://github.com/streamnative/terraform-aws-cloud/blob/master/examples/root-example/main.tf)是一个用于配置 EKS 集群的 `main.tf` 文件示例。
 
-2. Get AWS credentials.
+2. 获取 AWS 凭证。
 
-    Terraform uses the AWS provider to interact with the many resources supported by AWS. You must configure the AWS provider with the proper credentials for authentication before you can use it. For detailed information, see [here](https://registry.terraform.io/providers/hashicorp/aws/latest/docs#authentication).
+    Terraform 使用 AWS provider 与 AWS 支持的多种资源进行交互。要使用 AWS provider，必须先用适当的认证凭证对其进行配置。相关详细信息，请参见[此处](https://registry.terraform.io/providers/hashicorp/aws/latest/docs#authentication)。
 
-3. Deploy an EKS cluster with the predefined StreamNative Platform.
+3. 为预定义的 StreamNative Platform 部署一个 EKS 集群。
 
-   1. Initialize the Terraform module in the directory containing your own version of the `main.tf` file.
+   1. 在包含你自定义版本的 `main.tf` 文件的目录下，初始化 Terraform 模块。
 
 		```
 		terraform init
 		```
 
-	2. Review the planned actions.
+	2. 检查已计划的操作。
 
 		```
 		terraform plan
 		```
-	3. Apply the configuration.
+	3. 使配置生效。
 
 		```
 		terraform apply
 		```
-    
-		Your terminal output should indicate the plan is running and what resources will be created. Confirm the apply with a `yes`. This process should take approximately 15-20 minutes.
+   
+		终端输出应该显示计划正在运行，以及将创建哪些资源。使用 `yes` 进行确认。这个过程应该需要大约 15-20 分钟。
 
-4. Verify that StreamNative Platform is deployed successfully.
+4. 验证 StreamNative Platform 是否部署成功。
 
-   - Verify that the BookKeeper Controller Manager, Pulsar Controller Manage, ZooKeeper Controller Manage, and the Vault Controller Manage run properly.
+   - 验证 BookKeeper Controller Manager、Pulsar Controller Manager、ZooKeeper Controller Manager 和 Vault Controller Manager 是否正常运行。
 
        ```
        kubectl --kubeconfig /path/to/sn-platform-cluster-config get po -n sn-system
        ```
 
-       **Output**
+       **输出**
+   
        ```
        NAME                                                            READY   STATUS    RESTARTS   AGE
        prometheus-operator-987955d64-4wq67                             1/1     Running   0          3d5h
@@ -70,14 +71,15 @@ This section describes how to deploy StreamNative Platform on an Amazon EKS clus
        pulsar-operator-zookeeper-controller-manager-6cff55bfb7-bngtf   1/1     Running   0          30h
        vault-operator-5655985464-hjlmv                                 1/1     Running   0          3d5h
        ```
-
-   - Verify that the cert-manager and ExternalDNS run properly.
-
+   
+   - 验证 cert-manager 和 ExternalDNS 是否正常运行。
+   
        ```
        kubectl --kubeconfig ~/.kube/sn-ibex-test-config get po -n kube-system
        ```
-
-       **Output**
+   
+       **输出**
+       
        ```
        NAME                                                        READY   STATUS    RESTARTS   AGE
        cert-manager-7b95979bb-7vgth                                1/1     Running   0          2d1h
@@ -85,14 +87,14 @@ This section describes how to deploy StreamNative Platform on an Amazon EKS clus
        cert-manager-webhook-7d8f545f9b-p5jpg                       1/1     Running   0          2d1h
        external-dns-795b8cf977-v8h6t                               1/1     Running   0          23h
        ```
+   
+   基于以上输出，可以确认所有组件均正常运行，表明 StreamNative Platform 已经安装成功。
 
-   From the above outputs, you can see that all components are running well, it indicates that StreamNative Platform has been installed successfully.
+# 部署 Pulsar 集群
 
-# Deploy Pulsar clusters
+按照如下步骤部署 Pulsar 集群：
 
-To deploy a Pulsar cluster, follow these steps.
-
-1. Add the environment variables for the Pulsar Chart directory, Pulsar cluster name, and Kubernetes namespace.
+1. 为 Pulsar Chart 目录、Pulsar 集群名称和 Kubernetes 命名空间添加环境变量。
 
     ```
     # Define your pulsar cluster name
@@ -101,11 +103,11 @@ To deploy a Pulsar cluster, follow these steps.
     export NAMESPACE=KUBERNETES_NAMESPACE
     ```
 
-2. Define a Pulsar cluster configuration file.
+2. 定义一个 Pulsar 集群配置文件。
 
-    [Here](https://github.com/streamnative/examples/blob/master/platform/values_cluster.yaml) is an example of the YAML file used for configuring the Pulsar cluster on StreamNative Platform.
+    [此处](https://github.com/streamnative/examples/blob/master/platform/values_cluster.yaml)是一个 YAML 文件的示例，用于配置 StreamNative Platform 上的 Pulsar 集群。
 
-3. Use the `helm install` command to deploy a Pulsar cluster.
+3. 使用 `helm install` 命令来部署一个 Pulsar 集群。
 
     ```
     helm install \
@@ -117,26 +119,26 @@ To deploy a Pulsar cluster, follow these steps.
     --kubeconfig=/path/to/sn-platform-cluster-config
     ```
 
-    This table lists options used for deploying a Pulsar cluster.
-    | Option | Description |
+    本表列出了用于部署 Pulsar 集群的选项。
+    | 选项 | 描述 |
     | --- | --- |
-    | `namespace` | The Kubernetes namespace. |
-    | `repo` | The URL of the StreamNative Platform Pulsar chart. |
-    | `values` | The URL of the YAML file used for configuring the Pulsar cluster. |
-    | `kubeconfig` | The URL of the file that is used to configure access to the EKS cluster. |
+    | `namespace` | Kubernetes 命名空间。 |
+    | `repo` | StreamNative Platform 的 Pulsar chart 的 URL。 |
+    | `values` | 用于配置 Pulsar 集群的 YAML 文件的 URL。     |
+    | `kubeconfig` | 用于配置访问 EKS 集群的文件的 URL。 |
 
-    > **Note**
+    > **注意**
     >
-    > If this is your first time installing the Helm chart, you must override the initialized values to `true` (setting the `--set initialize=true` option).
+    > 如果这是你第一次安装 Helm chart，必须将初始化参数值设为 `true`（设置 `--set initialize=true` 选项）。
 
-# Clean up resources
+# 清理资源 
 
-Remember to destroy any resources you create once you do not need the StreamNative Platform and Pulsar cluster. Execute the `terraform destroy` command and confirm with `yes` in your terminal.
+当你不再需要 StreamNative Platform 和 Pulsar 集群，记得要销毁所创建的任何资源。执行 `terraform destroy` 命令，并在终端上用 `yes` 确认。
 
 ```
 terraform destroy
 ```
 
-> **Note**
-> 
-> If some resources (like the authentication ConfigMap and namespaces) cannot be removed, you can use the `terraform state rm ` command to remove them from the `terraform.tfstate` file and then use the `terraform destroy` command to remove all resources.
+> **注意**
+>
+> 如果一些资源（如用于认证的 ConfigMap 和命名空间）不能被删除，则可以使用 `terraform state rm` 命令从 `terraform.tfstate` 文件中将它们删除，然后再使用 `terraform destroy ` 命令删除所有资源。
