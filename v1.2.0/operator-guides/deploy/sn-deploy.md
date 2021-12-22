@@ -1,23 +1,23 @@
 ---
-title: Deploy StreamNative Platform on native Kubernetes clusters
+title: 在原生 Kubernetes 集群上部署 StreamNative Platform
 id: sn-deploy
 category: operator-guides
 ---
-After creating a Kubernetes cluster, you can deploy the StreamNative Platform.
+创建 Kubernetes 集群后，便可以部署 StreamNative Platform。
 
-# Install StreamNative Platform
+# 安装 StreamNative Platform
 
-This section describes how to install StreamNative Platform in online and offline mode.
+本节介绍了如何在在线和离线模式下安装 StreamNative Platform。
 
-## Install StreamNative Platform with Internet access
+## 联网安装 StreamNative Platform
 
-This section describes how to install StreamNative Platform online.
+本节介绍了在接入互联网条件下，如何安装 StreamNative Platform。
 
-### Install StreamNative Platform using original images within operators
+### 使用 operator 内的原始镜像安装 StreamNative Platform
 
-This section describes how to install StreamNative Platform using original images within the operators.
+本节介绍了如何使用 operator 内的原始镜像安装 StreamNative Platform。
 
-1. Install the StreamNative repositories.
+1. 安装 StreamNative 仓库。
 
     ```
     helm repo add streamnative https://charts.streamnative.io
@@ -26,56 +26,56 @@ This section describes how to install StreamNative Platform using original image
     helm repo update
     ```
 
-2. Create a Kubernetes namespace and add the environment variable for the Kubernetes namespace.
+2. 创建 Kubernetes 命名空间，并为其添加环境变量。
 
     ```
     kubectl create namespace KUBERNETES_NAMESPACE
     export NAMESPACE=KUBERNETES_NAMESPACE
     ```
 
-3. Install the Vault operator.
+3. 安装 Vault operator。
    
-    The Vault operator creates and maintains highly-available Vault clusters on Kubernetes, allowing users to easily deploy and manage Vault clusters for their applications.
+    Vault operator 用于在 Kubernetes 上创建和维护高可用的 Vault 集群，使用户可以轻松地为其应用程序部署和管理 Vault 集群。
 
     ```
     helm upgrade --install vault-operator banzaicloud-stable/vault-operator -n $NAMESPACE
     ```
 
-4. Install the cert-manager.
+4. 安装 cert-manager。
 
-    The cert-manager is a native [Kubernetes](https://kubernetes.io/) certificate management controller. It helps issue certificates from [HashiCorp Vault](https://www.vaultproject.io/). The cert-manager ensures that certificates are valid and up-to-date, and attempts to renew certificates at a configured time before expiry.
+    Cert-manager 是原生的 [Kubernetes](https://kubernetes.io/) 证书管理控制器。用于从 [HashiCorp Vault](https://www.vaultproject.io/) 签发证书。Cert-manager 可以确保证书有效且是最新版本。在设定的时间，cert-manager 会更新证书，以免证书过期。
 
-    The cert-manager requires a number of CRD resources to be installed into your cluster as part of installation. To automatically install and manage the CRDs as part of your Helm release, you must add the `--set installCRDs=true` flag to your Helm installation command.
+    在安装 cert-manager 时，需要在 Helm 安装命令中添加 `--set installCRDs=true` 参数，从而将 cert-manager 所需的 CRD 资源一并安装到集群中。
 
     ```
     helm upgrade --install cert-manager jetstack/cert-manager -n $NAMESPACE --set installCRDs=true
     ```
 
-5. Install the Pulsar operator.
+5. 安装 Pulsar operator。
 
     ```
     helm upgrade --install pulsar-operator streamnative/pulsar-operator -n $NAMESPACE
     ```
 
-6. Install the FunctionMesh operator.
+6. 安装 Function Mesh operator。
 
-   [Function Mesh](/concepts/functionmesh-concepts.md) is a serverless and purpose-built framework for orchestrating multiple [Pulsar Functions](/concepts/pulsar-function-concepts.md) and [Pulsar IO connectors](/concepts/pulsar-io-concepts.md) for stream processing applications.
+   [Function Mesh](/concepts/functionmesh-concepts.md) 作为无服务器（Serverless）框架，协调多个 [Pulsar Function](/concepts/pulsar-function-concepts.md) 和 [Pulsar IO 连接器](/concepts/pulsar-io-concepts.md)，以支持流处理应用程序。
 
     ```
     helm upgrade --install function-mesh streamnative/function-mesh-operator -n $NAMESPACE 
     ```
 
-7. Set the environment variable `PULSAR_CHART`.
+7. 设置环境变量 `PULSAR_CHART`。
 
     ```
     export PULSAR_CHART=streamnative/sn-platform
     ```
 
-### Install StreamNative Platform using customized images
+### 使用自定义镜像安装 StreamNative Platform
 
-This section describes how to install StreamNative Platform using customized images.
+本节介绍了如何使用自定义镜像安装 StreamNative Platform。
 
-1. Install the StreamNative repositories.
+1. 安装 StreamNative 仓库。
 
     ```
     helm repo add streamnative https://charts.streamnative.io
@@ -84,28 +84,28 @@ This section describes how to install StreamNative Platform using customized ima
     helm repo update
     ```
 
-2. Create a Kubernetes namespace and add the environment variable for the Kubernetes namespace.
+2. 创建 Kubernetes 命名空间，并为其添加环境变量。
 
     ```
     kubectl create namespace KUBERNETES_NAMESPACE
     export NAMESPACE=KUBERNETES_NAMESPACE
     ```
 
-3. Install the Vault operator.
+3. 安装 Vault operator。
    
-    The Vault operator creates and maintains highly-available Vault clusters on Kubernetes, allowing users to easily deploy and manage Vault clusters for their applications.
+    Vault operator 用于在 Kubernetes 上创建和维护高可用的 Vault 集群，使用户可以轻松地为其应用程序部署和管理 Vault 集群。
 
-   1. Inspect the chart used for installing the Vault operator and save the contents of `values.yaml` file as a local YAML file.
-
-      This example saves the `values.yaml` file as `value_vault-operator.yaml` file.
+   1. 检查用于安装 Vault operator 的 chart 并将 `values.yaml` 文件的内容保存为本地 YAML 文件。
+   
+      本示例将 `values.yaml` 文件保存为 `value_vault-operator.yaml` 文件。
 
         ```
         helm inspect values banzaicloud-stable/vault-operator  > value_vault-operator.yaml
         ```
 
-   2. Update the image setting in the `value_vault-operator.yaml` file.
-
-      You can specify the location and version of the image using the `image.bankVaultsRepository` and `image.tag` parameters. This example specifies the Vault image published to the [Docker Hub](https://hub.docker.com/) by Banzai Cloud.
+   2. 更新 `value_vault-operator.yaml` 文件中的镜像设置。 
+   
+      可以使用 `image.bankVaultsRepository` 和 `image.tag` 参数指定镜像的位置和版本。本示例指定了 Banzai Cloud 发布到 [Docker Hub](https://hub.docker.com/) 的 Vault 镜像。
 
       ```yaml
       image:
@@ -115,30 +115,30 @@ This section describes how to install StreamNative Platform using customized ima
         pullPolicy: IfNotPresent
         imagePullSecrets: []  # global.imagePullSecrets is also supported
       ```
-
-    3. Install the Vault operator with the customized image.
-
+   
+    3. 使用自定义镜像安装 Vault operator。
+   
         ```
         helm upgrade --install -f value_vault-operator.yaml vault-operator banzaicloud-stable/vault-operator -n $NAMESPACE
         ```
 
-4. Install the cert-manager.
+4. 安装 cert-manager。
 
-    The cert-manager is a native [Kubernetes](https://kubernetes.io/) certificate management controller. It helps issue certificates from [HashiCorp Vault](https://www.vaultproject.io/). The cert-manager ensures that certificates are valid and up-to-date, and attempts to renew certificates at a configured time before expiry.
+   Cert-manager 是原生的 [Kubernetes](https://kubernetes.io/) 证书管理控制器。用于从 [HashiCorp Vault](https://www.vaultproject.io/) 签发证书。Cert-manager 可以确保证书有效且是最新版本。在设定的时间，cert-manager 会更新证书，以免证书过期。
 
-    The cert-manager requires a number of CRD resources to be installed into your cluster as part of installation. To automatically install and manage the CRDs as part of your Helm release, you must add the `--set installCRDs=true` flag to your Helm installation command.
+   在安装 cert-manager 时，需要在 Helm 安装命令中添加 `--set installCRDs=true` 参数，从而将 cert-manager 所需的 CRD 资源一并安装到集群中。
 
-    1. Inspect the chart used for installing the cert-manager and save the contents of `values.yaml` file as a local YAML file.
+   1. 检查用于安装 cert-manager 的 chart 并将 `values.yaml` 文件的内容保存为本地 YAML 文件。
 
-        This example saves the `values.yaml` file as `value_cert-manager.yaml` file.
+       本示例将 `values.yaml` 文件保存为 `value_cert-manager.yaml` 文件。
 
         ```
         helm inspect values jetstack/cert-manager  > value_cert-manager.yaml
         ```
 
-   2. Update the image settings in the `value_cert-manager.yaml` file.
+   2. 更新 `value_cert-manager.yaml` 文件中的镜像设置。
 
-        You can specify the location and version of images using the `image.repository` and `image.tag` parameters. StreamNative mirrors the cert-manager images to the [Docker Hub](https://hub.docker.com/). This example specifies the cert-manager images published to the [Docker Hub](https://hub.docker.com/) by StreamNative.
+        可以使用 `image.repository` 和 `image.tag` 参数指定镜像的位置和版本。StreamNative 将 cert-manager 镜像创建到 [Docker Hub](https://hub.docker.com/) 上。本示例指定了使用 StreamNative 发布到 [Docker Hub](https://hub.docker.com/) 的 cert-manager 镜像。
 
         ```yaml
         image:
@@ -186,25 +186,25 @@ This section describes how to install StreamNative Platform using customized ima
             pullPolicy: IfNotPresent
         ```
 
-    3. Install the cert-manager with the customized images.
+    3. 使用自定义镜像安装 cert-manager。
 
         ```
         helm upgrade --install -f value_cert-manager.yaml  cert-manager jetstack/cert-manager -n $NAMESPACE --set installCRDs=true
         ```
 
-5. Install the Pulsar operator.
+5. 安装 Pulsar operator。
 
-    1. Inspect the chart used for installing the Pulsar operator and save the contents of `values.yaml` file as a local YAML file.
+    1. 检查用于安装 Pulsar operator 的 chart 并将 `values.yaml` 文件的内容保存为本地 YAML 文件。
 
-        This example saves the `values.yaml` file as `value_pulsar-operator.yaml` file.
+       本示例将 `values.yaml` 文件保存为 `value_pulsar-operator.yaml` 文件。
 
         ```
         helm inspect values streamnative/pulsar-operator  > value_pulsar-operator.yaml
         ```
 
-    2. Update the image setting in the `value_pulsar-operator.yaml` file.
+    2. 更新 `value_pulsar-operator.yaml` 文件中的镜像设置。
 
-        You can specify the location and version of images using the `images.repository` and `images.tag` parameters. This example specifies the images for ZooKeeper, BookKeeper, and Pulsar published to the [Docker Hub](https://hub.docker.com/) by StreamNative.
+       可以使用 `images.repository` 和 `images.tag` 参数指定镜像的位置和版本。本示例中指定了由 StreamNative 发布到 [Docker Hub](https://hub.docker.com/) 的 ZooKeeper、BookKeeper 和 Pulsar 的镜像。
 
         ```yaml
         images:
@@ -221,28 +221,28 @@ This section describes how to install StreamNative Platform using customized ima
             tag: 0.7.0-rc6
             pullPolicy: IfNotPresent
         ```
-        
-   3. Install the Pulsar operator with the customized YAML file.
+       
+   3. 使用定制的 YAML 文件安装 Pulsar operator。
 
         ```
         helm upgrade --install pulsar-operator -f value_pulsar-operator.yaml streamnative/pulsar-operator -n $NAMESPACE
         ```
 
-6. Install the FunctionMesh operator.
+6. 安装 Function Mesh operator。
 
-   [Function Mesh](/concepts/functionmesh-concepts.md) is a serverless and purpose-built framework for orchestrating multiple [Pulsar Functions](/concepts/pulsar-function-concepts.md) and [Pulsar IO connectors](/concepts/pulsar-io-concepts.md) for stream processing applications.
+   [Function Mesh](/concepts/functionmesh-concepts.md) 作为无服务器（Serverless）框架，协调多个 [Pulsar Function](/concepts/pulsar-function-concepts.md) 和 [Pulsar IO 连接器](/concepts/pulsar-io-concepts.md)，以支持流处理应用程序。
 
-    1. Inspect the chart used for installing the FunctionMesh operator and save the contents of `values.yaml` file as a local YAML file.
+    1. 检查用于安装 Function Mesh operator 的 chart 并将 `values.yaml` 文件的内容保存为本地 YAML 文件。
 
-        This example saves the `values.yaml` file as `value_function-mesh-operator.yaml` file.
+        本示例将 `values.yaml` 文件保存为 `value_function-mesh-operator.yaml` 文件。
 
         ```
         helm inspect values streamnative/function-mesh-operator  > value_function-mesh-operator.yaml
         ```
 
-   2. Update the image setting in the `value_function-mesh-operator.yaml` file.
+   2. 更新 `value_function-mesh-operator.yaml` 文件中的镜像设置。
 
-        You can specify the location and version of the image using the `operatorImage` parameter. This example specifies the FunctionMesh image published to the [Docker Hub](https://hub.docker.com/) by StreamNative.
+        可以使用 `operatorImage` 参数指定镜像的位置和版本。本示例指定了 StreamNative 发布到 [Docker Hub](https://hub.docker.com/) 的 Function Mesh 镜像。
 
         ```yaml
         # operatorImage is Function Mesh Operator image
@@ -251,31 +251,31 @@ This section describes how to install StreamNative Platform using customized ima
         imagePullSecrets: []
         ```
       
-    3. Install the FunctionMesh operator with the customized YAML file.
+    3. 使用自定义的 YAML 文件安装 Function Mesh operator。
 
         ```
         helm upgrade --install function-mesh -f value_function-mesh-operator.yaml streamnative/function-mesh-operator -n $NAMESPACE
         ```
 
-7. Set the environment variable `PULSAR_CHART`.
+7. 设置环境变量 `PULSAR_CHART`。
 
     ```
     export PULSAR_CHART=streamnative/sn-platform
     ```
 
-## Install StreamNative Platform without Internet access
+## 离线安装 StreamNative Platform
 
-This section describes how to install StreamNative Platform offline.
+本节介绍了在无法访问互联网时，如何安装 StreamNative Platform。
 
-> **Note**
+> **注意**
 > 
-> When installing StreamNative Platform without Internet access, you need to preload required Docker images. For details about how to preload Docker images, see [preload Docker images](/operator-guides/sn-plan.md#preload-docker-images).
+> 离线安装 StreamNative Platform ，需要预加载所需的 Docker 镜像。预加载 Docker 镜像的方法请参见[预加载 Docker 镜像](/operator-guides/sn-plan.md#预加载-docker-镜像)。
 
-### Install StreamNative Platform using `install.sh` scripts
+### 使用 `install.sh` 脚本安装 StreamNative Platform
 
-To install StreamNative Platform using scripts, follow these steps.
+要使用脚本来安装 StreamNative Platform，请完成如下步骤：
 
-1. Use the `wget` command to download the `.tar.gz` package of StreamNative Platform.
+1. 使用 `wget` 命令下载 StreamNative Platform 的 `.tar.gz` 包。
 
     - AWS S3
 
@@ -283,98 +283,98 @@ To install StreamNative Platform using scripts, follow these steps.
         wget https://sn-products.s3.amazonaws.com/snp/v1.2.0/streamnative_platform-v1.2.0.tar.gz
         ```
 
-    - Alibaba Cloud
+    - 阿里云
 
         ```
         wget https://downloads-streamnative-cloud.oss-cn-beijing.aliyuncs.com/sn-products/snp/v1.2.0/streamnative_platform-v1.2.0.tar.gz
         ```
 
-2. Extract the package and use the `cd` command to switch to the target directory.
+2. 解压包并使用 `cd` 命令切换到目标目录。
 
     ```
     tar zxvf streamnative_platform-v1.2.0.tar.gz
     cd streamnative-platform
     ```
 
-3. Add the environment variable for the Kubernetes namespace of StreamNative Platform.
+3. 为 StreamNative Platform 的 Kubernetes 命名空间添加环境变量。
 
     ```
     export NAMESPACE=KUBERNETES_NAMESPACE
     ```
 
-4. Install StreamNative Platform.
+4. 安装 StreamNative Platform。
 
     ```
     sh install.sh
     ```
 
-5. Set the environment variable `PULSAR_CHART`.
+5. 设置环境变量 `PULSAR_CHART`。
 
     ```
     export PULSAR_CHART=[PATH_TO_PULSAR_CHART]
     ```
 
-### Install StreamNative Platform manually
+### 手动安装 StreamNative Platform
 
-To install StreamNative Platform manually, follow these steps.
+按照如下步骤来手动安装 StreamNative Platform：
 
-1. Create a Kubernetes namespace.
+1. 创建一个 Kubernetes 命名空间。
 
     ```
     kubectl create namespace KUBERNETES_NAMESPACE
     ```
 
-2. Install the Vault operator.
+2. 安装 Vault operator。
 
     ```
     helm upgrade --install vault-operator VAULT_OPERATOR_NAME/ -n KUBERNETES_NAMESPACE
     ```
 
-3. Install the cert-manager.
+3. 安装 cert-manager。
 
     ```
     helm upgrade --install cert-manager CERT_MANAGER_NAME/ -n KUBERNETES_NAMESPACE --set installCRDs=true
     ```
 
-4. Install the Pulsar operator.
+4. 安装 Pulsar operator。
 
-   1. Define a YAML file and apply the CRDs to deploy the Pulsar resources.
+   1. 定义一个 YAML 文件并应用 CRD 来部署 Pulsar 资源。
 
        ```
        kubectl apply -f /path/to/pulsar-operator/file.yaml -n KUBERNETES_NAMESPACE 
        ```
 
-   2. Install the Pulsar operator.
+   2. 安装 Pulsar operator。
 
        ```
        helm upgrade --install pulsar-operators PULSAR_OPERATOR_NAME/ -n KUBERNETES_NAMESPACE
        ```
 
-5. Install the FunctionMesh operator.
+5. 安装 Function Mesh operator。
 
-    1. Define a YAML file and apply the CRDs to deploy the Pulsar resources.
+    1. 定义一个 YAML 文件并应用 CRD 来部署 Pulsar 资源。
 
         ```
         kubectl apply -f /path/to/functionmesh-operator/file.yaml -n KUBERNETES_NAMESPACE
         ```
 
-    2. Install the FunctionMesh operator.
+    2. 安装 Function Mesh operator。
 
         ```
         helm upgrade --install function-mesh FUNCTIONMESH_OPERATOR_NAME/ -n KUBERNETES_NAMESPACE
         ```
 
-6. Set the environment variable `PULSAR_CHART`.
+6. 设置环境变量 `PULSAR_CHART`。
 
     ```
     export PULSAR_CHART=[PATH_TO_PULSAR_CHART]
     ```
 
-# Deploy Pulsar clusters
+# 部署 Pulsar 集群
 
-To deploy a Pulsar cluster, follow these steps.
+按照如下步骤来部署 Pulsar 集群：
 
-1. Add the environment variables for the Pulsar Chart directory, Pulsar cluster name, and Kubernetes namespace.
+1. 为 Pulsar Chart 目录、Pulsar 集群名称和 Kubernetes 命名空间添加环境变量。
 
     ```
     # If you use offline version, export PULSAR_CHART first.
@@ -385,49 +385,49 @@ To deploy a Pulsar cluster, follow these steps.
     export NAMESPACE=KUBERNETES_NAMESPACE
     ```
 
-2. Create a Kubernetes namespace for your Pulsar cluster.
+2. 为 Pulsar 集群创建 Kubernetes 命名空间。
 
     ```
     kubectl create namespace $NAMESPACE
     ```
 
-3. Define a Pulsar cluster configuration file.
+3. 定义一个 Pulsar 集群配置文件。
 
-    [Here](https://raw.githubusercontent.com/streamnative/examples/master/platform/values_cluster.yaml) is an example of the YAML file used for configuring the Pulsar cluster.
+    参看[此处](https://raw.githubusercontent.com/streamnative/examples/master/platform/values_cluster.yaml) YAML 文件示例，该 YAML 文件用于配置 Pulsar 集群。
 
-4. Apply the YAML file to create a Pulsar cluster.
+4. 使用 YAML 文件来创建 Pulsar 集群。
 
     ```
     helm install -f /path/to/pulsar/file.yaml $RELEASE_NAME $PULSAR_CHART --set initialize=true --set namespace=$NAMESPACE
     ```
 
-5. (Optional) Update your Pulsar cluster.
+5. （可选）更新 Pulsar 集群。
 
-    You can update your Pulsar cluster by updating the YAML file and then execute the `helm upgrade` command.
+    要更新 Pulsar 集群，可以更新 YAML 文件，然后执行 `helm upgrade` 命令。
 
     ```
     helm upgrade -f /path/to/pulsar/file.yaml $RELEASE_NAME $PULSAR_CHART
     ```
 
-# Uninstallation
+# 卸载
 
-This section describes how to uninstall Pulsar cluster and StreamNative Platform.
+本节介绍了如何卸载 Pulsar 集群和 StreamNative Platform。
 
-- Execute the following command to uninstall the Pulsar cluster.
+- 执行以下命令卸载 Pulsar 集群：
 
     ```
     helm uninstall $PULSAR_CLUSTER
     ```
 
-- Execute the following command to uninstall the StreamNative Platform.
+- 执行以下命令卸载 StreamNative Platform：
 
-    - If you install StreamNative Platform in an offline way, you can run the following command.
+    - 如果你是通过离线方式安装的 StreamNative Platform，运行以下命令：
 
         ```
         sh [StreamNative_HOME]/uninstall.sh
         ```
 
-    - If you install StreamNative Platform in an online way, you can run the following commands.
+    - 如果你是通过在线方式安装的 StreamNative Platform，运行以下命令：
 
         ```
         export NAMESPACE=KUBERNETES_NAMESPACE
@@ -437,6 +437,6 @@ This section describes how to uninstall Pulsar cluster and StreamNative Platform
         helm uninstall function-mesh -n $NAMESPACE
         ```
 
->**Note**
+>**注意**
 >
-> If you want to delete the PVCs or the Secret, you need to delete them together. Otherwise, you will fail to reinstall the StreamNative Platform. It is recommended that you exercise caution when deleting the PVCs or the Secret because some of your significant information cannot be restored once you have deleted them.
+> 如想删除 PVC 或 Secret，需要将它们同时删除。否则，你将无法重新安装 StreamNative Platform。建议谨慎删除 PVC 或 Secret，因为一旦删除，一些重要信息将无法恢复。
