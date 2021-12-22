@@ -59,7 +59,7 @@ category: operator-guides
 
 6. 安装 Function Mesh operator。
 
-   [Function Mesh](/concepts/functionmesh-concepts.md) 作为无服务器（Serverless）框架，协调多个 [Pulsar Functions](/concepts/pulsar-function-concepts.md) 和 [Pulsar IO 连接器](/concepts/pulsar-io-concepts.md)，以支持流处理应用程序。
+   [Function Mesh](/concepts/functionmesh-concepts.md) 作为无服务器（Serverless）框架，协调多个 [Pulsar Function](/concepts/pulsar-function-concepts.md) 和 [Pulsar IO 连接器](/concepts/pulsar-io-concepts.md)，以支持流处理应用程序。
 
     ```
     helm upgrade --install function-mesh streamnative/function-mesh-operator -n $NAMESPACE 
@@ -230,7 +230,7 @@ category: operator-guides
 
 6. 安装 Function Mesh operator。
 
-   [Function Mesh](/concepts/functionmesh-concepts.md) 作为无服务器（Serverless）框架，协调多个 [Pulsar Functions](/concepts/pulsar-function-concepts.md) 和 [Pulsar IO 连接器](/concepts/pulsar-io-concepts.md)，以支持流处理应用程序。
+   [Function Mesh](/concepts/functionmesh-concepts.md) 作为无服务器（Serverless）框架，协调多个 [Pulsar Function](/concepts/pulsar-function-concepts.md) 和 [Pulsar IO 连接器](/concepts/pulsar-io-concepts.md)，以支持流处理应用程序。
 
     1. 检查用于安装 Function Mesh operator 的 chart 并将 `values.yaml` 文件的内容保存为本地 YAML 文件。
 
