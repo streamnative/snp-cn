@@ -1,7 +1,7 @@
 ---
 title: 关于主题的操作
 id: work-with-topics
-category: user-guides 
+category: user-guides
 ---
 
 在 Pulsar 中，主题是有命名的通道，将消息从生产者传递给消费者。Pulsar 支持持久化和非持久化主题。默认情况下，如果不指定主题类型，就会创建一个持久化的主题。
