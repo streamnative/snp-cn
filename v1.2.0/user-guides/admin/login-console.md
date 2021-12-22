@@ -60,7 +60,7 @@ StreamNative 控制台是基于 Web 的图形界面管理和监控工具，可�
 
    ![](../../../image/verification-code.png)
 
-然后，你将看到 StreamNative 控制台 GUI，并且可以管理以下资源：
+然后，你将看到 StreamNative 控制台的图形界面，并且可以管理以下资源：
 
 - [服务帐号](/user-guides/admin/work-with-service-accounts.md)
 - [用户](/user-guides/admin/work-with-users.md)
