@@ -1,16 +1,16 @@
 ---
-title: Connect to Pulsar cluster using WebSocket API
+title: 使用 WebSocket API 连接 Pulsar 集群
 id: connect-websocket
 category: user-guides
 ---
 
-This example shows how to use the WebSocket API to connect to a Pulsar cluster and then produce and consume messages to and from the Pulsar cluster.
+本示例介绍了如何使用 WebSocket API 连接到 Pulsar 集群，然后向 Pulsar 集群生产和从 Pulsar 集群消费消息。
 
-> **Note**
+> **注意**
 > 
-> To use the WebSocket API to connect to a Pulsar cluster, you need to enable the WebSocket service in advance.
+> 要使用 WebSocket API 连接 Pulsar 集群，需要提前开启 WebSocket 服务。
 
-1. Connect to the Pulsar cluster.
+1. 连接到 Pulsar 集群。
 
     ```python
     import websocket, base64, json
@@ -29,9 +29,9 @@ This example shows how to use the WebSocket API to connect to a Pulsar cluster a
         
     ws.close()
     ```
-    Replace the `CLUSTER_HOST` parameter with the domain name of the cluster.
+    将 `CLUSTER_HOST` 参数替换为集群的域名。
 
-2. Create a consumer and use the consumer to consume messages.
+2. 创建消费者并使用消费者来消费消息。
 
     ```python
     import websocket, base64, json
@@ -51,20 +51,20 @@ This example shows how to use the WebSocket API to connect to a Pulsar cluster a
     ws.close()
     ```
 
-3. Create a producer and use the producer to produce messages.
+3. 创建生产者并使用生产者来生产消息。
 
     ```python
     import websocket, base64, json
-
+    
     # TOPIC = 'ws://CLUSTER_HOST:9090/ws/v2/producer/persistent/public/default/test'
     TOPIC = 'wss://CLUSTER_HOST:9443/ws/v2/producer/persistent/public/default/test'
-
+    
     token = "YOUR_TOKEN"
-
+    
     header = ["Authorization:Bearer " + token]
-
+    
     ws = websocket.create_connection(TOPIC, header=header)
-
+    
     # Send one message as JSON
     ws.send(json.dumps({
     'payload' : base64.b64encode('Hello World'),
@@ -74,7 +74,7 @@ This example shows how to use the WebSocket API to connect to a Pulsar cluster a
     },
     'context' : 5
     }))
-
+    
     response =  json.loads(ws.recv())
     if response['result'] == 'ok':
         print('Message published successfully')
@@ -83,6 +83,6 @@ This example shows how to use the WebSocket API to connect to a Pulsar cluster a
     ws.close()
     ```
 
-> **Note**
+> **注意**
 > 
-> If Web Socket Secure (WSS) protocol is used, you should use the port `9443`.
+> 如使用 Web Socket Secure（WSS）协议，应使用端口 `9443`。
