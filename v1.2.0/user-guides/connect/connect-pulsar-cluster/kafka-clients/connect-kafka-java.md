@@ -13,7 +13,7 @@ StreamNative Platform 通过使用 Kafka on Pulsar（KoP），实现了  Pulsar 
 # 先决条件
 
 - 安装 Java 1.8.0 或更高版本。
-- 安装 Istio。详情参见[安装 Istio 以实现 KoP 访问](/operator-guides/configure/kop.md##安装-istio-以实现-kop-访问)。
+- 安装 Istio。详情参见[安装 Istio 以实现 KoP 访问](/operator-guides/configure/kop.md#安装-istio-以实现-kop-访问)。
 
 # 步骤
 
