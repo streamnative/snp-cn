@@ -4,7 +4,7 @@ id: connect-websocket
 category: user-guides
 ---
 
-本示例介绍了如何使用 WebSocket API 客户端连接到 Pulsar 集群，然后向 Pulsar 集群生产和从 Pulsar 集群消费消息。
+本示例介绍了如何使用 WebSocket API 连接到 Pulsar 集群，然后向 Pulsar 集群生产和从 Pulsar 集群消费消息。
 
 > **注意**
 > 
