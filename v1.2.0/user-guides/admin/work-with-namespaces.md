@@ -1,50 +1,50 @@
 ---
-title: Work with namespaces
+title: 关于命名空间的操作
 id: work-with-namespaces
 category: user-guides
 ---
 
-In Pulsar, a namespace is the administrative unit nomenclature within a tenant. This document describes how to create and manage namespaces for a cluster using the pulsarctl CLI tool or the StreamNative Console.
+在 Pulsar 中，租户内的管理单元称为命名空间。本文介绍了如何使用 pulsarctl CLI（命令行工具）或 StreamNative 控制台为集群创建和管理命名空间。
 
-# Work with namespaces using the pulsarctl CLI tool
+# 使用 pulsarctl CLI 操作命名空间
 
-You can create and manage namespaces using the pulsarctl CLI tool. For a full list of supported operations on namespaces, see the [pulsarctl command reference](https://docs.streamnative.io/pulsarctl/v2.7.0.7/#-em-update-em--32).
+可以使用 pulsarctl CLI（命令行工具）创建和管理命名空间。有关命名空间支持操作的完整列表，参见 [pulsarctl 命令参考](https://docs.streamnative.io/pulsarctl/v2.7.0.7/#-em-update-em--32)。
 
-> **Note**
+> **注意**
 > 
-> This section uses a tenant named `example-tenant` as an example. For details about how to create a tenant, see [work with tenants](/user-guides/admin/work-with-tenants.md).
+> 本节使用名为 `example-tenant` 的租户作为示例。关于如何创建租户的详细内容，参见[关于租户的操作](/user-guides/admin/work-with-tenants.md)。
 
-## Create namespaces
+## 创建命名空间
 
-After creating and authorizing a tenant, you can create and manage namespaces and topics.
+在创建和授权租户后，就可以创建和管理命名空间和主题。
 
-This example shows how to create a namespace named `example-ns` for `example-tenant`.
+如下示例显示了如何为 `example-tenant` 创建一个名为 `example-ns` 的命名空间。
 
-**Input**
+**输入**
 
 ```
 pulsarctl namespaces create example-tenant/example-ns
 ```
 
-**Output**
+**输出**
 
 ```
 Created example-tenant/example-ns successfully
 ```
 
-## Clear namespace backlog
+## 清空命名空间 backlog
 
-Pulsar stores all unacknowledged messages in backlogs until they are processed and acknowledged. You can clear backlogs of messages for a specific namespace to release more backlog quota for the namespace.
+Pulsar 将所有未确认的消息存储在 backlog 中，直到它们被处理和确认。可以清除特定命名空间的 backlog，以释放更多命名空间的 backlog quota。
 
-This example shows how to clear the backlog for all topics of `example-tenant/example-ns`.
+如下示例显示了如何清除 `example-tenant/example-ns` 的所有主题的 backlog。
 
-**Input**
+**输入**
 
 ```
 pulsarctl namespaces clear-backlog example-tenant/example-ns
 ```
 
-**Output**
+**输出**
 
 ```
 Are you sure you want to clear the backlog? (Y or N)
@@ -54,336 +54,340 @@ y
 Successfully clear backlog for all topics of the example-tenant/example-ns
 ```
 
-## Unload namespaces
+## 卸载命名空间
 
-This example shows how to unload `example-tenant/example-ns` from the current serving broker.
+如下示例显示了如何从当前服务中的 broker 卸载 `example-tenant/example-ns`。
 
-**Input**
+**输入**
 
 ```
 pulsarctl namespaces unload example-tenant/example-ns
 ```
 
-**Output**
+**输出**
 
 ```
 Unload namespace example-tenant/example-ns successfully
 ```
 
-## Delete namespaces
+## 删除命名空间
 
-> **Note**
+> **注意**
 > 
-> You cannot delete a namespace until no resource is associated with the namespace.
+> 只有在没有资源和命名空间关联时，才能将命名空间删除。
 
-This example shows how to delete `example-tenant/example-ns`.
+如下示例显示了如何删除 `example-tenant/example-ns`。
 
-**Input**
+**输入**
 
 ```
 pulsarctl namespaces delete example-tenant/example-ns
 ```
 
-**Output**
+**输出**
 
 ```
 Deleted example-tenant/example-ns successfully
 ```
 
-# Work with namespaces using StreamNative Console
+# 使用 StreamNative 控制台操作命名空间
 
-This section describes how to create and manage namespaces using the StreamNative Console. Before using the StreamNative Console to create and manage namespaces, you need to create a tenant. For details, see [work with tenants](/user-guides/admin/work-with-tenants.md).
+本节介绍了如何使用 StreamNative 控制台来创建和管理命名空间。在使用 StreamNative 控制台创建和管理命名空间之前，需要先创建一个租户。详细信息参见[关于租户的操作](/user-guides/admin/work-with-tenants.md)。
 
-## Create namespaces
+## 创建命名空间
 
-To create a namespace, follow these steps.
+按照如下步骤创建命名空间：
 
-1. From the left navigation pane, click **Namespaces**.
+1. 从左侧导航窗格中，点击**命名空间**。
 
-2. Click **Create Namespace**. A dialog box is displayed.
+2. 点击**创建命名空间**。出现一个对话框。
 
-   ![](../../image/create-namespace.png)
+   ![](../../../image/create-namespace.png)
 
-3. Enter a name for the namespace and then click **Confirm**. The namespace name is a string of up to 40 characters, supporting lowercase letters (a-z), numeric characters (0-9), and the special character hyphen (-).
+3. 输入命名空间的名称，然后点击**确定**。命名空间名称为最多 40 个字符的字符串，支持小写字母（a-z）、数字字符（0-9）和特殊字符连字符（-）。
 
-## View namespace statistics
+## 查看命名空间统计信息
 
-To view statistics about a namespace, follow these steps.
+按照如下步骤操作，查看命名空间的统计信息：
 
-1. From the left navigation pane, click the **Namespaces**.
+1. 从左侧导航窗格中，单击**命名空间**。
 
-2. Select the **OVERVIEW** tab.
+2. 选择**概况**选项卡。
 
-3. Select the target tenant and namespace from the drop-down lists respectively. The following table lists statistics about the namespace.
+3. 分别从下拉列表中选择目标租户和命名空间。下表列出了有关命名空间的统计信息。
 
-   ![](../../image/check-ns-1.png)
+   ![](../../../image/check-ns-1.png)
 
     <table>
     <tr>
     <td>
-    Item
+    项目
     </td>
-    <td>Description
-    </td>
-    </tr>
-    <tr>
-    <td>In Rate
-    </td>
-    <td>The ingress rate of the namespace. 
+    <td>描述
     </td>
     </tr>
     <tr>
-    <td>Out Rate
+    <td>输入速率
     </td>
-    <td>The egress rate of the namespace.
-    </td>
-    </tr>
-    <tr>
-    <td>In Throughput 
-    </td>
-    <td>The ingress throughput of the namespace.
+    <td>命名空间的入口速率。 
     </td>
     </tr>
     <tr>
-    <td>Out Throughput
+    <td>输出速率
     </td>
-    <td>The egress throughput of the namespace.
+    <td>命名空间的出口速率。
+    </td>
+    </tr>
+    <tr>
+    <td>输入吞吐量
+    </td>
+    <td>命名空间的入口吞吐量。
+    </td>
+    </tr>
+    <tr>
+    <td>输出吞吐量
+    </td>
+    <td>命名空间的出口吞吐量。
     </td>
     </tr>
     </table>
 
-4. Select the **TOPICS** tab to check the number of topics available for the namespace and statistics about topics. In addition, you can create new topics and update specific topics.
+4. 选择**主题**选项卡，查看该命名空间可用主题的数量和有关主题的统计信息。此外，还可以创建新主题并更新特定主题。
 
-## Unload namespace bundles
+## 卸载命名空间的 bundle
 
-For assignment, a namespace is sharded into a list of bundles, with each bundle comprising a portion of the overall hash range of the namespace. By default, four bundles are supported for each namespace.
+为了进行分配，命名空间被分成多个 bundle，每个 bundle 包括命名空间整体哈希范围的一部分。默认情况下，每个命名空间支持 4 个 bundle。
 
-To unload bundles for a namespace, follow these steps.
+按照以下步骤，卸载命名空间的 bundle：
 
-1. From the left navigation pane, click **Namespaces**.
+1. 在左侧导航窗格中，点击**命名空间**。
 
-2. Select the **OVERVIEW** tab.
+2. 选择**概况**选项卡。
 
-3. Select the target tenant and namespace from the drop-down lists respectively.
+3. 分别从下拉列表中选择目标租户和命名空间。
 
-4. At the **Bundle** section, select the target cluster from the **Cluster** drop-down list, and then click **Unload All** to unload all namespace bundles from the cluster.
+4. 在 **Bundle** 部分，从**集群**下拉列表中选择目标集群，然后点击**全部卸载**，即可从集群中卸载命名空间的所有 bundle。
 
-5. At the **Bundle** section, click **Unload** next to a specific bundle to unload the bundle for the namespace.
+5. 在 **Bundle** 部分，点击特定 bundle 旁边的**卸载**，即可卸载该 bundle。
 
-## Split namespace bundles
+## 拆分命名空间的 bundle
 
-Since the load for topics in a bundle might change over time, one bundle can be split in two bundles by brokers. Then, the new smaller bundles are reassigned to different brokers. By default, the newly split bundles are immediately offloaded to other brokers to facilitate the traffic distribution.
+由于 bundle 中主题的负载可能会随时间变化，因此 broker 可以将一个 bundle 拆分成两个 bundle。然后，新的较小的 bundle 会被重新分配给不同的 broker。默认情况下，新拆分的 bundle 会立即卸载给其他的 broker 以促进流量分配。
 
-To split bundles for a namespace, follow these steps.
+按照如下步骤，拆分命名空间的 bundle：
 
-1. From the left navigation pane, click **Namespaces**.
+1. 在左侧导航窗格中，点击**命名空间**。
 
-2. Select the **OVERVIEW** tab.
+2. 选择**概况**选项卡。
 
-3. Select the target tenant and namespace from the drop-down lists respectively.
+3. 分别从下拉列表中选择目标租户和命名空间。
 
-4. At the **Bundle** section, click **Split** next to a specific bundle to split the bundle for the namespace.
+4. 在 **Bundle** 部分，点击特定 bundle 旁边的**拆分**，即可拆分命名空间的 bundle。
 
-## Clear namespace backlog
+## 清除命名空间 backlog
 
-You can clear backlog for bundles of a namespace.
+按照如下步骤，可以清除命名空间 bundle 的 backlog：
 
-1. From the left navigation pane, click **Namespaces**.
+1. 在左侧导航窗格中，点击**命名空间**。
 
-2. Select the **OVERVIEW** tab.
+2. 选择**概况**选项卡。
 
-3. Select the target tenant and namespace from the drop-down lists respectively.
+3. 分别从下拉列表中选择目标租户和命名空间。
 
-4. At the **Bundle** section, select the target cluster from the **Cluster** drop-down list, and then click **Clean All Backlog** to clear the backlog for all topics of the namespace.
+4. 在 **Bundle** 部分，从**集群**下拉列表中选择目标集群，点击**清除全部 Backlog** ，即可清除命名空间中所有主题的 backlog。
 
-5. At the **Bundle** section, click **Clear Backlog** next to a specific bundle to clear the backlog for all topics of the namespace bundle.
+5. 在 **Bundle** 部分，点击特定 bundle 旁边的**清除 Backlog**，即可清除命名空间中该 bundle 所有主题的 backlog。
 
-## Configure namespace policies
+## 配置命名空间策略
 
-The policies set on a namespace apply to all the topics created in that namespace.
+在命名空间上设置的策略，适用于在该命名空间中创建的所有主题。
 
-To configure policies for a namespace, follow these steps.
+按照如下步骤，配置命名空间的策略：
 
-1. From the left navigation pane, click **Namespaces**.
+1. 在左侧导航窗格中，点击**命名空间**。
 
-2. Select the **POLICY** tab.
+2. 选择**策略**选项卡。
 
-3. Select the target tenant and namespace from the drop-down lists respectively.
+3. 分别从下拉列表中选择目标租户和命名空间。
 
-4. Configure policies for the namespace, as listed in the following table.
+4. 按照如下表格，为命名空间配置策略。
 
-   ![](../../image/configure-ns-policy.png)
+   ![](../../../image/configure-ns-policy.png)
 
     <table>
     <tr>
     <td>
-    Field
+    字段
     </td>
-    <td>Description
-    </td>
-    </tr>
-    <tr>
-    <td>Clusters
-    </td>
-    <td>Select a replication cluster. Messages of the topics in this namespace are asynchronically replicated between the configured replication clusters. In this release, the replication cluster is the same with the cluster you created because there is only one cluster available for an instance.
+    <td>描述
     </td>
     </tr>
     <tr>
-    <td>Authorization
+    <td>集群
     </td>
-    <td>Grant/Revoke permissions to other client roles in this namespace.
+    <td>选择集群副本。在该命名空间，主题中的消息将被异步复制到配置的集群副本中。此版本中，集群副本与你创建的集群相同，因为一个实例只有一个集群可用。
+    </td>
+    </tr>
+    <tr>
+    <td>授权
+    </td>
+    <td>授予/撤销其他客户端角色在此命名空间中的权限。
     <ul>
 
-    <li>consume: grant/revoke the consuming action. 
-
-    <li>produce: grant/revoke the producing action. 
-
-    <li>functions: grant/revoke the Pulsar functions action.
-
+    <li>consume：授予/撤销消费操作。
+   
+    <li>produce：授予/撤销生产操作。
+   
+    <li>functions：授予/撤销 Pulsar Functions 操作。
+   
     <p>
-    Click <strong>Add Role</strong> to set one or more service accounts as the administrator of the namespace.
+    点击<strong>添加角色</strong>将一个或多个服务账号添加为命名空间的管理员。
     <p>
-    Click <strong>Delete Role</strong> to remove a specific service account from the administrator list of the namespace.
+    点击<strong>删除角色</strong>将某个特定的服务账号从命名空间的管理员列表中删除。
     </li>
     </ul>
     </td>
     </tr>
     <tr>
-    <td>Subscription Authentication
+    <td>订阅认证
     </td>
-    <td>Configure the subscription authentication mode to limit the naming convention for subscriptions when authentication is enabled. 
+    <td>配置订阅认证模式，以在认证启用时限制订阅的命名规则。
     <ul>
 
-    <li>None: Pulsar clients can use any allowed subscription name to connect to the cluster. 
-
-    <li>Prefix: Pulsar clients can only use subscription names that are prefixed with their role names to subscribe messages. 
-
+    <li>None：Pulsar 客户端可以使用任何允许的订阅名称连接到集群。
+   
+    <li>Prefix：Pulsar 客户端只能使用以角色名称为前缀的订阅名称来订阅消息。
+   
     <p>
-    By default, it is set to <em>None</em>.
+    默认设置为 <em>None</em>。
     </li>
     </ul>
     </td>
     </tr>
     <tr>
-    <td>Storage
+    <td>储存
     </td>
-    <td>Configure the storage policy for the namespace.
-
-    **Replication Factor**: configure the storage replication settings. <ul><li> Ensemble size: configure the number of bookies to be used when creating a ledger. <li> Write Quorum Size: configure the number of replicas to be stored for each message. <li> Ack Quorum Size: configure the number of responses to wait before claiming a message is guaranteed to be stored. </ul>
-**Mark-Delete Rate**: configure the number of mark-deletion calls that are allowed for each second. When the value is set to 0, the rate limiter is disabled. By default, the value is set to 0. </p>
-**Encryption Required**: enable/disable message encryption for the namespace. <ul><li> Enabled: enable message encryption for the namespace. <li> Disabled: disable message encryption for the namespace. </ul>
-**Deduplication**: enable/disable deduplication for the namespace. <ul><li> Enabled: enable deduplication for the namespace. <li> Disabled: disable deduplication for the namespace.</ul>
+    <td>配置命名空间的储存策略。 
+    **副本因子**：配置存储副本的设置。<ul><li> Ensemble size：创建 ledger 时要使用的 bookie 的数量。<li> Write Quorum Size：每条消息存储的副本数。<li> Ack Quorum Size：确认消息保证被存储前需等待的响应次数。</ul>
+   **Mark-Delete Rate**：每秒允许的 mark-deletion 的调用次数。当该值设置为 0 时，则禁用速率限制器。默认值为 0。</p>
+   **需要加密**：为命名空间启用/禁用消息加密。<ul><li> 启用：为命名空间启用消息加密。<li> 禁用：为命名空间禁用消息加密。</ul>
+   **消息去重**：为命名空间启用/禁用消息去重。<ul><li> 启用：为命名空间启用消息去重。<li>  禁用：为命名空间禁用消息去重。</ul>
     </td>
     </tr>
     <tr>
     <td>Backlog
     </td>
-    <td>Configure the backlog policy for the namespace. 
-    
-    **Backlog Quota Size**: configure the maximum backlog quota (in bytes) allowed for the namespace. The backlog quota size must be smaller than 1000000000 bytes. By default, it is set to -1073741824 bytes.</p> **Backlog Retention Policy**: configure the backlog retention policy. <ul><li> consumer_backlog_eviction: the broker starts discarding backlog messages. <li>producer_exception: the broker disconnects with the client by giving an exception. <li>producer_request_hold: the broker holds but does not persist producer request payload.</ul>
+    <td>为命名空间配置 backlog 策略。
+   
+    **Backlog 堆积量**：命名空间允许的最大 backlog 堆积量（以字节为单位）。Backlog 堆积量必须小于 1000000000 字节。默认设置为 -1073741824 字节。</p> **Backlog 保留策略**：backlog 的保留策略。<ul><li> consumer_backlog_eviction：broker 开始移除 backlog 消息。<li>producer_exception：broker 抛出异常，与客户端断开连接。<li>producer_request_hold：broker 保持但不保留生产者请求的有效载荷。</ul>
     </td>
     </tr>
     <tr>
     <td>Schema
     </td>
-    <td>Configure the schema policy for the namespace. 
+    <td>为命名空间配置 schema 策略。
+   
     <ul>
-
-    <li>AutoUpdate Strategy: configure the automatic update strategy of the schema for the namespace. 
-
-    <li>Schema Validation Enforced: enable/disable schema validation for producers without schema. If it is disabled, producers without schema are disallowed to produce messages to topics with schema.
+   
+    <li>AutoUpdate 策略：为命名空间配置 schema 的自动更新策略。
+   
+    <li>Schema 有效性：为没有 schema 的生产者启用/禁用验证。如果禁用，则不允许没有 schema 的生产者向具有 schema 的主题生产消息。
     </li>
     </ul>
     </td>
     </tr>
     <tr>
-    <td>Cleanup Policy
+    <td>Cleanup 策略
     </td>
-    <td>Configure the cleanup policy for the namespace. 
+    <td>为命名空间配置 cleanup 策略。
+   
     <ul>
-
-    <li>Message TTL (seconds): configure the message TTL in seconds. If messages are not consumed by any consumer of a subscription, they are marked as "consumed" after the configured TTL period expires. 
-
-    <li>Retention Size (bytes): configure the retention size. This field is only applied to the messages that are acknowledged by all subscriptions. The retention size must be smaller than 1000 MB. By default, it is set to 0. 
-
-    <li>Retention Period (minutes): configure the retention period. This field is only applied to the messages that are acknowledged by all subscriptions. By default, it is set to 0. 
-
-    <li>Compaction Threshold (bytes): configure the threshold to compact topics. The compaction is automatically triggered when the threshold is reached. By default, it is set to 0. 
-
-    <li>Offload Threshold (bytes): configure the threshold to offload messages. Messages are automatically offloaded to the tiered storage when the threshold is reached. By default, it is set to -1. 
-
+   
+    <li>消息 TTL（秒）：配置消息 TTL（秒）。如果消息未被订阅的任何消费者消费，则在 TTL 周期结束后，消息被标记为“已消费”。
+   
+    <li>保留大小（字节）：配置保留大小。该字段仅适用于被所有订阅确认的消息。保留大小必须小于 1000 MB。 默认值为 0。
+   
+    <li>保留周期（分钟）：配置保留周期。该字段仅适用于被所有订阅确认的消息。默认值为 0。
+   
+    <li>压缩阈值（字节）：配置压缩主题的阈值。当达到阈值时自动触发压缩。默认值为 0。
+   
+    <li>卸载阈值（字节）：配置卸载消息的阈值。当达到阈值时，消息会自动卸载到层级存储。默认值为 -1。
+   
     <p>
-    Offload Deletion Lag (milliseconds): configure the time (in milliseconds) to wait before deleting a ledger offloaded from the BookKeeper. When the value is set to a negative value, offloading deletion is disabled.
+    卸载删除延迟（毫秒）：从 BookKeeper 卸载的 ledger 被删除前的等待时间（以毫秒为单位）。当该值设置为负值时，禁用卸载删除。
     </li>
     </ul>
     </td>
     </tr>
     <tr>
-    <td>Throttling
+    <td>限流
     </td>
-    <td>Configure the throttling policy for the namespace. 
+    <td>配置命名空间的限流策略。
     <ul>
-
-    <li>Max Producers Per Topic: configure the maximum number of producers allowed for each topic.
-
-    <li>Max Consumers Per Topic: configure the maximum number of consumers allowed for each topic. 
-
-    <li>Max Consumers Per Subscription: configure the maximum number of consumers allowed for each subscription.
+   
+    <li>最大生产者数量（基于主题）：配置每个主题支持的最大生产者的数量。
+   
+    <li>最大消费者数量（基于主题）：配置每个主题支持的最大消费者的数量。 
+   
+    <li>最大消费者数量（基于订阅）：配置每个订阅支持的最大消费者的数量。
     </li>
     </ul>
     </td>
     </tr>
     <tr>
-    <td rowspan="3" >Dispatch Rate
+    <td rowspan="3" >调度速率
     </td>
-    <td>Dispatch Rate Per Topic: configure the dispatch rate based on the topic. 
+    <td>调度速率（基于主题）：配置基于主题的调度速率。  
+   
     <ul>
-
-    <li>Throughput (bytes/second): configure the dispatch rate of bytes in a topic. 
-
-    <li>Rate (messages/second): configure the dispatch rate of messages in a topic. Time Period (seconds): configure the dispatch rate period. 
+   
+    <li>吞吐量（字节/秒）：配置主题中字节的调度速率。
+   
+    <li>速率（消息/秒）：配置主题中消息的调度速率。时间周期（秒）：调度速率的周期。
     </li>
     </ul>
     </td>
     </tr>
     <tr>
-    <td>Dispatch Rate Per Subscription: configure the dispatch rate based on the subscription mode. 
+    <td>调度速率（基于订阅）：配置基于订阅模式的调度速率。 
+   
     <ul>
-
-    <li>Throughput (bytes/second): configure the dispatch rate of bytes for a subscription.
-
-    <li>Rate (messages/second): configure the dispatch rate of messages for a subscription.
-
-    <li>Time Period (seconds): configure the dispatch rate period. 
+   
+    <li>吞吐量（字节/秒）：配置订阅中字节的的调度速率。
+   
+    <li>速率（消息/秒）：配置订阅消息的调度速率。 
+   
+    <li>时间周期（秒）：配置调度速率的周期。 
     </li>
     </ul>
     </td>
     </tr>
     <tr>
-    <td>Dispatch Rate Per Consumer: configure the rate at which a consumer subscribes to a topic. 
+    <td>调度速率（基于消费者）：配置消费者订阅主题的速率。 
+   
     <ul>
-
-    <li>Throughput (bytes/second): configure the throughput for a topic that a consumer subscribes to. 
-
-    <li>Rate (messages/second): configure the rate for a topic that a consumer subscribes to.
+   
+    <li>吞吐量（字节/秒）：配置消费者订阅的主题的吞吐量。
+   
+    <li>速率（消息/秒）：配置消费者订阅的主题的速率。
     </li>
     </ul>
     </td>
     </tr>
     </table>
 
-## Delete namespaces
+## 删除命名空间
 
-To delete a namespace, follow these steps.
+按照如下步骤删除命名空间：
 
-1. From the left navigation pane, click **Namespaces**.
+1. 在左侧导航窗格中，点击**命名空间**。
 
-2. Select the **POLICY** tab.
+2. 选择**策略**选项卡。
 
-3. Select the target tenant and namespace from the drop-down lists respectively.
+3. 分别从下拉列表中选择目标租户和命名空间。
 
-4. Scroll down the page and then click **Delete** **Namespace**. A dialog box is displayed, asking “_Are you sure you want to delete this?_”
+4. 向下滚动页面，然后点击**删除命名空间**。出现对话框显示：*“删除命名空间”*
 
-   ![](../../image/delete-ns.png)
+   ![](../../../image/delete-ns.png)
 
-5. Enter the namespace name and then click **Confirm**.
+5. 输入命名空间的名称，然后点击**确定**。
