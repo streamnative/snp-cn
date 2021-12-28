@@ -56,7 +56,7 @@ Successfully clear backlog for all topics of the example-tenant/example-ns
 
 ## 卸载命名空间
 
-如下示例显示了如何从当前的服务中的 broker 卸载 `example-tenant/example-ns`。
+如下示例显示了如何从当前服务中的 broker 卸载 `example-tenant/example-ns`。
 
 **输入**
 
@@ -231,7 +231,7 @@ Deleted example-tenant/example-ns successfully
     <tr>
     <td>授权
     </td>
-    <td>授予/撤消其他客户端角色在此命名空间中的权限。
+    <td>授予/撤销其他客户端角色在此命名空间中的权限。
     <ul>
 
     <li>consume：授予/撤销消费操作。
@@ -268,25 +268,25 @@ Deleted example-tenant/example-ns successfully
     <td>储存
     </td>
     <td>配置命名空间的储存策略。 
-   
     **副本因子**：配置存储副本的设置。<ul><li> Ensemble size：创建 ledger 时要使用的 bookie 的数量。<li> Write Quorum Size：每条消息存储的副本数。<li> Ack Quorum Size：确认消息保证被存储前需等待的响应次数。</ul>
    **Mark-Delete Rate**：每秒允许的 mark-deletion 的调用次数。当该值设置为 0 时，则禁用速率限制器。默认值为 0。</p>
-   **需要加密**：为命名空间启用/禁用消息加密。<ul><li> 使能：为命名空间启用消息加密。<li> 禁用：为命名空间禁用消息加密。</ul>
-   **消息去重**：为命名空间启用/禁用消息去重。<ul><li> 使能：为命名空间启用消息去重。<li>  禁用：为命名空间禁用消息去重。</ul>
+   **需要加密**：为命名空间启用/禁用消息加密。<ul><li> 启用：为命名空间启用消息加密。<li> 禁用：为命名空间禁用消息加密。</ul>
+   **消息去重**：为命名空间启用/禁用消息去重。<ul><li> 启用：为命名空间启用消息去重。<li>  禁用：为命名空间禁用消息去重。</ul>
     </td>
     </tr>
     <tr>
     <td>Backlog
     </td>
     <td>为命名空间配置 backlog 策略。
-
-    **堆积量**：命名空间允许的最大堆积量（以字节为单位）。堆积量必须小于 1000000000 字节。默认设置为 -1073741824 字节。</p> **Backlog 保留策略**：backlog 的保留策略。<ul><li> consumer_backlog_eviction：broker 开始移除 backlog 消息。<li>producer_exception：broker 抛出异常，与客户端断开连接。<li>producer_request_hold：broker 保持但不保留生产者请求的有效载荷。</ul>
+   
+    **Backlog 堆积量**：命名空间允许的最大 backlog 堆积量（以字节为单位）。Backlog 堆积量必须小于 1000000000 字节。默认设置为 -1073741824 字节。</p> **Backlog 保留策略**：backlog 的保留策略。<ul><li> consumer_backlog_eviction：broker 开始移除 backlog 消息。<li>producer_exception：broker 抛出异常，与客户端断开连接。<li>producer_request_hold：broker 保持但不保留生产者请求的有效载荷。</ul>
     </td>
     </tr>
     <tr>
     <td>Schema
     </td>
     <td>为命名空间配置 schema 策略。
+   
     <ul>
    
     <li>AutoUpdate 策略：为命名空间配置 schema 的自动更新策略。
@@ -303,7 +303,7 @@ Deleted example-tenant/example-ns successfully
    
     <ul>
    
-    <li>消息 TTL（秒）：配置消息 TTL（秒）。在 TTL 周期内，如果没有任何消费者消费该消息，当 TTL 周期结束后，该消息被标记为“已消费”。
+    <li>消息 TTL（秒）：配置消息 TTL（秒）。如果消息未被订阅的任何消费者消费，则在 TTL 周期结束后，消息被标记为“已消费”。
    
     <li>保留大小（字节）：配置保留大小。该字段仅适用于被所有订阅确认的消息。保留大小必须小于 1000 MB。 默认值为 0。
    
@@ -311,7 +311,7 @@ Deleted example-tenant/example-ns successfully
    
     <li>压缩阈值（字节）：配置压缩主题的阈值。当达到阈值时自动触发压缩。默认值为 0。
    
-    <li>卸载阈值（字节）：配置阈值以卸载消息。当达到阈值时，消息会自动卸载到层级存储。默认值为 -1。
+    <li>卸载阈值（字节）：配置卸载消息的阈值。当达到阈值时，消息会自动卸载到层级存储。默认值为 -1。
    
     <p>
     卸载删除延迟（毫秒）：从 BookKeeper 卸载的 ledger 被删除前的等待时间（以毫秒为单位）。当该值设置为负值时，禁用卸载删除。
