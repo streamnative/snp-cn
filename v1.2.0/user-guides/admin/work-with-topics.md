@@ -6,7 +6,7 @@ category: user-guides
 
 在 Pulsar 中，主题是有命名的通道，将消息从生产者传递给消费者。Pulsar 支持持久化和非持久化主题。默认情况下，如果不指定主题类型，就会创建一个持久化的主题。
 
-本文介绍如何了使用 pulsarctl CLI （命令行工具）或 StreamNative 控制台为集群创建和管理主题。
+本文介绍如何了使用 pulsarctl CLI（命令行工具）或 StreamNative 控制台为集群创建和管理主题。
 
 # 使用 pulsarctl CLI 工具操作主题
 
@@ -315,9 +315,9 @@ category: user-guides
     </tr>
     </table>
 
-## 消息 schema
+## 管理 schema
 
-启用 schema 后，Pulsar 在解析数据时将字节作为输入并发送字节作为输出。
+启用 schema 后，Pulsar 在解析数据时接受字节作为输入并发送字节作为输出。
 
 > **注意**
 > 
@@ -367,7 +367,7 @@ category: user-guides
     <tr>
     <td>存储大小
     </td>
-    <td>表示存储的大小。
+    <td>存储的大小。
     </td>
     </tr>
     <tr>
@@ -388,15 +388,16 @@ category: user-guides
     <td>查看关于 ledger 的信息。
     <ul>
 
+   
     <li>Ledger ID：ledger 的 ID。
    
     <li>Entry：属于 ledger 的 entry 的总数。
    
-    <li>Ledger 大小：写入 ledge 消息的大小（单位为字节）。
+    <li>Ledger 大小：写入 ledger 消息的大小（单位为字节）。
    
     <li>状态：用于写消息的 ledger 的状态。如果设置为 `Opening`，则 ledger 将打开以保存已发布的消息。
    
-    <li>卸载：ledge 是否可以被卸载。
+    <li>卸载：ledger 是否可以被卸载。
     </li>
     </ul>
     </td>
@@ -416,7 +417,7 @@ category: user-guides
    
     <li>等待读取操作：当订阅已读取发布到主题的最新消息，并等待新消息发布时，被设置为 `True`。
    
-    <li>挂起读取操作：正在进行的对 BookKeeper 的读取请求的数量。
+    <li>挂起读取操作：对正在进行的 BookKeeper 读取请求的数量。
    
     <li>未签收的 Entry：未确认的 entry。
     </li>
