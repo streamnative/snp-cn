@@ -46,16 +46,16 @@ Pulsar Function 的输出主题。下表列出了 `Output` 的可用选项。
 |名称 | 描述 |
 | --- | --- |
 | `Topics` | Pulsar Function 的输出主题（如未指定，则不写入输出）。     |
-| `SinkSerdeClassName` | 输出主题到 SerDe 类名称的映射（ JSON 字符串）。          |
-| `SinkSchemaType` | 内置 schema 类型或自定义 schema 类名称，用于 function 发送的消息。 |
+| `SinkSerdeClassName` | 输出主题到 SerDe 类名称的映射（为  JSON 字符串）。        |
+| `SinkSchemaType` | 内置 schema 类型或自定义 schema 类名称，用于函数发送的消息。 |
 | `ProducerConf` | 生产者的具体配置。可用选项如下： <br />- `MaxPendingMessages`：待处理消息的最大数量。 <br />- `MaxPendingMessagesAcrossPartitions`：跨分区待处理消息的最大数量。<br />- `UseThreadLocalProducers`：配置生产者是否使用一个线程。 <br />- `CryptoConfig`：生产者的加密配置。 <br />- `BatchBuilder`：支持基于 key 的批处理器。 |
-| `CustomSchemaSinks` | 输出主题到 Schema 类名称的映射（ JSON 字符串）。 |
+| `CustomSchemaSinks` | 输出主题到 Schema 类名称的映射（为  JSON 字符串）。 |
 
 ## 资源
 
-在指定 function 或连接器时，可以选择指定它们需要多少资源。可指定的资源包括 CPU 和内存（RAM）。
+在指定函数或连接器时，可以选择指定它们需要多少资源。可指定的资源包括 CPU 和内存（RAM）。
 
-如果运行 Pod 的节点有足够的可用资源，则 Pod 可能使用高于 `request ` 的更多资源，这是允许的。但是 Pod 使用的资源不得超过该资源的 `limit`。
+如果运行 Pod 的节点有足够的可用资源，则 Pod 可能、也被允许使用高于 `request ` 的更多资源。但是 Pod 使用的资源不得超过该资源的 `limit`。
 
 ## Secret
 
@@ -64,7 +64,7 @@ Pulsar Function 的输出主题。下表列出了 `Output` 的可用选项。
 要在 Pod 的环境变量中使用 secret， 需按照如下步骤操作：
 
 1. 创建一个 secret 或使用一个现有的 secret。多个 Pod 可以引用相同的 secret。
-2. 修改每个容器中的 Pod 定义，如果要使用密钥的值，则需要为每个密钥添加环境变量。
+2. 对于需要使用密钥的值的容器，需要为其修改的 Pod 定义，为每个要使用的密钥添加环境变量。
 3. 修改镜像和/或命令行，以便程序查找指定的环境变量的值。
 
 Pulsar 集群支持使用 TLS 或其他身份验证插件进行身份验证。
@@ -114,11 +114,11 @@ Function Mesh 支持自定义 Pod 运行连接器。下表列出了可用于 `po
 | `Tolerations` | 指定 Pod 的容忍度。                                          |
 | `Annotations`| 指定附加到 Pod 的注解。                                    |
 | `SecurityContext` | 指定 Pod 的安全上下文。                                      |
-| `TerminationGracePeriodSeconds` | Kubernetes 终止 Pod 前的时间。                        |
+| `TerminationGracePeriodSeconds` | Kubernetes 终止 Pod 前的时长。                      |
 | `Volumes` | 可以由属于 Pod 的容器所挂载的卷（volume）的列表。              |
 | `ImagePullSecrets` | 可选列表，用于引用同一命名空间中的 secret，以拉取 Pod 使用的任何镜像。 |
 | `InitContainers` | 属于 Pod 的初始化容器。典型的用例为使用初始化容器来下载远程 JAR 到本地路径。 |
-| `Sidecars` | Sidecar 容器与 Pod 中的主要 function 容器一起运行。 |
+| `Sidecars` | Sidecar 容器与 Pod 中的主要函数容器一起运行。 |
 
 # Sink CRD 配置
 
@@ -136,14 +136,14 @@ Function Mesh 支持自定义 Pod 运行连接器。下表列出了可用于 `po
 | `Replicas`| 要运行此 sink 连接器的 Pulsar 实例数。                       |
 | `MaxReplicas`| Sink 连接器运行的 Pulsar 实例的最大值。当 `maxReplicas` 参数的值大于 `replicas` 的值时，表明 sink 控制器根据 CPU 的使用情况自动扩展源连接器。默认情况下，`maxReplicas` 设置为 0，表明自动调节功能被禁用。 |
 | `LogTopic` | 生成 sink 连接器日志的主题。                                 |
-| `SinkConfig                    | 指定 sink 连接器配置的 ConfigMap 映射。                      |
+| `SinkConfig`                  | 指定 sink 连接器配置的 ConfigMap 映射。                      |
 | `Timeout` | 消息超时（以毫秒为单位）。                                   |
 | `NegativeAckRedeliveryDelayMs`| 由于否定确认而重新传递的消息数。                             |
 | `AutoAck` | 框架是否自动确认消息。                                       |
 | `MaxMessageRetry` | 放弃前尝试处理消息的次数。                                   |
 | `ProcessingGuarantee` | 应用于 sink 连接器的处理保证（传递语义）。可用值：`ATLEAST_ONCE`、`ATOST_ONCE`、`EFFECTIVELY_ONCE`。 |
 | `RetainOrdering` | Sink 连接器按顺序消费和处理消息。                            |
-| `DeadLetterTopic` | 所有发送消息均未成功处理的主题。                             |
+| `DeadLetterTopic` | 所有未成功处理的消息被发送到的主题。                    |
 | `SubscriptionName` | 当要为输入主题消费者提供特定订阅名称时，指定的 sink 连接器的订阅名称。 |
 | `CleanupSubscription` | 配置是否清除订阅。                                         |
 | `SubscriptionPosition` | 订阅位置。 |
@@ -168,16 +168,16 @@ Pulsar Function 的输入主题。下表列出了 `Input` 的可用选项。
 
 | 字段 | 描述 |
 | --- | --- |
-| `Topics` | 消息来源的主题。                                |
-| `CustomSerdeSources` | 输入主题到 SerDe 类名称的映射（ JSON 字符串）。 |
-| `CustomSchemaSources` | 输入主题到 Schema 类名称的映射（ JSON 字符串）。 |
+| `Topics` | 消息来源主题的配置。                             |
+| `CustomSerdeSources` | 输入主题到 SerDe 类名称的映射（为  JSON 字符串）。 |
+| `CustomSchemaSources` | 输入主题到 Schema 类名称的映射（为  JSON 字符串）。 |
 | `SourceSpecs` | Source 具体配置到消费者具体配置的映射。消费者具体配置包括以下选项：<br />- `SchemaType`：连接器获取的消息可使用的内置 schema 类型或自定义 schema 类名称。<br />- `SerdeClassName`：连接器获取的消息所使用的 SerDe 类。<br />- `IsRegexPattern`：配置输入主题是否采用 Regex 模式。 <br />- `SchemaProperties`：连接器获取的消息的架构属性。<br />- `ConsumerProperties`：连接器获取的消息的消费者属性。<br />- `ReceiverQueueSize`：消费者接收队列的大小。 <br /> - `CryptoConfig`：消费者的加密配置。 |
 
 ## 资源
 
-在指定 function 或连接器时，可以选择指定它们需要多少资源。可指定的资源包括 CPU 和内存（RAM）。
+在指定函数或连接器时，可以选择指定它们需要多少资源。可指定的资源包括 CPU 和内存（RAM）。
 
-如果运行 Pod 的节点有足够的可用资源，则 Pod 可能使用高于 `request` 的更多资源，这是允许的。但是 Pod 使用的资源不得超过该资源的 `limit`。
+如果运行 Pod 的节点有足够的可用资源，则 Pod 可能、也被允许使用高于 `request` 的更多资源。但是 Pod 使用的资源不得超过该资源的 `limit`。
 
 ## Secret
 
@@ -236,8 +236,8 @@ Function Mesh 支持自定义 Pod 运行连接器。下表列出了可用于 `po
 | `Tolerations` | 指定 Pod 的容忍度。                                          |
 | `Annotations`| 指定附加到 Pod 的注解。                                    |
 | `SecurityContext` | 指定 Pod 的安全上下文。                                      |
-| `TerminationGracePeriodSeconds` | Kubernetes 终止 Pod 前的时间。                         |
+| `TerminationGracePeriodSeconds` | Kubernetes 终止 Pod 前的时长。                     |
 | `Volumes` | 可以由属于 Pod 的容器挂载的卷（volume）的列表。 |
 | `ImagePullSecrets` | 可选列表，用于引用同一命名空间中的 secret，以拉取 Pod 使用的任何镜像。 |
 | `InitContainers` | 属于 Pod 的初始化容器。典型的用例为使用初始化容器来下载远程 JAR 到本地路径。 |
-| `Sidecars` | Sidecar 容器与 Pod 中的主要 function 容器一起运行。 |
+| `Sidecars` | Sidecar 容器与 Pod 中的主要函数容器一起运行。 |
