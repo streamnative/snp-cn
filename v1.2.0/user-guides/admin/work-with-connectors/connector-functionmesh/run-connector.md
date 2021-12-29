@@ -95,5 +95,4 @@ category: user-guides
 	NAME                                READY   STATUS      RESTARTS   AGE
 	pod/my-sink-sample              1/1     Running     0          77s
 	```
-	
 	从输出可以看到，sink 连接器处于 `Running` 状态，表明 sink 连接器已成功创建。
