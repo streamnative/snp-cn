@@ -20,7 +20,7 @@ category: user-guides
 | `classname` | Source 连接器的类名。 |
 | `tenant` | Source 连接器的租户。 |
 | `Replicas`| 运行此 source 连接器的 Pulsar 实例数。                     |
-| `MaxReplicas`| 运行此 source 连接器的 Pulsar 实例的最大值。当  `maxReplicas` 参数的值大于 `replicas` 的值时，表明 source 控制器根据 CPU 的使用情况自动扩展 source 连接器。默认情况下，`maxReplicas` 设置为 0，表明自动调节功能被禁用。 |
+| `MaxReplicas`| 运行此 source 连接器的 Pulsar 实例的最大值。当  `maxReplicas` 参数的值大于 `replicas` 的值时，表示 source 控制器根据 CPU 的使用情况自动扩展 source 连接器。默认情况下，`maxReplicas` 设置为 0，表示自动调节功能被禁用。 |
 | `LogTopic` | 生成的 source 连接器日志的主题。                             |
 | `SourceConfig` | 指定 source 连接器配置的 ConfigMap 的映射。                  |
 | `ProcessingGuarantee` | 应用于 source 连接器的处理保证（传递语义）。可选值：`ATLEAST_ONCE`、`ATOST_ONCE`、`EFFECTIVELY_ONCE`。 |
@@ -146,7 +146,7 @@ Function Mesh 支持自定义 Pod 运行连接器。下表列出了可用于 `po
 | `DeadLetterTopic` | 所有未成功处理的消息被发送到的主题。                    |
 | `SubscriptionName` | 当要为输入主题消费者提供特定订阅名称时，指定的 sink 连接器的订阅名称。 |
 | `CleanupSubscription` | 配置是否清除订阅。                                         |
-| `SubscriptionPosition` | 订阅位置。 |
+| `SubscriptionPosition` | 订阅的位置。 |
 
 ## 镜像
 
@@ -171,7 +171,7 @@ Pulsar Function 的输入主题。下表列出了 `Input` 的可用选项。
 | `Topics` | 消息来源主题的配置。                             |
 | `CustomSerdeSources` | 输入主题到 SerDe 类名称的映射（为  JSON 字符串）。 |
 | `CustomSchemaSources` | 输入主题到 Schema 类名称的映射（为  JSON 字符串）。 |
-| `SourceSpecs` | Source 具体配置到消费者具体配置的映射。消费者具体配置包括以下选项：<br />- `SchemaType`：连接器获取的消息可使用的内置 schema 类型或自定义 schema 类名称。<br />- `SerdeClassName`：连接器获取的消息所使用的 SerDe 类。<br />- `IsRegexPattern`：配置输入主题是否采用 Regex 模式。 <br />- `SchemaProperties`：连接器获取的消息的架构属性。<br />- `ConsumerProperties`：连接器获取的消息的消费者属性。<br />- `ReceiverQueueSize`：消费者接收队列的大小。 <br /> - `CryptoConfig`：消费者的加密配置。 |
+| `SourceSpecs` | Source 具体配置到消费者具体配置的映射。消费者具体配置包括以下选项：<br />- `SchemaType`：连接器获取的消息可使用的内置 schema 类型或自定义 schema 类的名称。<br />- `SerdeClassName`：连接器获取的消息所使用的 SerDe 类。<br />- `IsRegexPattern`：配置输入主题是否采用 Regex 模式。 <br />- `SchemaProperties`：连接器获取的消息的架构属性。<br />- `ConsumerProperties`：连接器获取的消息的消费者属性。<br />- `ReceiverQueueSize`：消费者接收队列的大小。 <br /> - `CryptoConfig`：消费者的加密配置。 |
 
 ## 资源
 
