@@ -65,7 +65,7 @@ Pulsar Function 的输入主题。下表列出了 `Input` 的可用选项。
 | `Topics` | 消息来源主题的配置。 |
 | `CustomSerdeSources` | 输入主题到 SerDe 类名称的映射（作为 JSON 字符串）。 |
 | `CustomSchemaSources` | 输入主题到 Schema 类名称的映射（作为 JSON 字符串）。 |
-| `SourceSpecs` | Source 具体配置到消费者具体配置的映射。消费者具体配置包括以下选项：<br />- `SchemaType`：function 获取消息使用的内置 schema 类型或自定义 schema 类的名称。<br />- `SerdeClassName`：function 获取的消息的 SerDe 类。<br />- `IsRegexPattern`：配置输入主题是否采用 Regex 模式。<br />- `SchemaProperties`：function 获取消息的架构属性。<br />- `ConsumerProperties`：function 获取的消息的消费者属性。<br />- `ReceiverQueueSize`：消费者接收队列的大小。<br /> - `CryptoConfig`：消费者的加密配置。 |
+| `SourceSpecs` | Source 具体配置到消费者具体配置的映射。消费者具体配置包括以下选项：<br />- `SchemaType`：function 获取的消息使用的内置 schema 类型或自定义 schema 类的名称。<br />- `SerdeClassName`：function 获取的消息的 SerDe 类。<br />- `IsRegexPattern`：配置输入主题是否采用 Regex 模式。<br />- `SchemaProperties`：function 获取消息的架构属性。<br />- `ConsumerProperties`：function 获取的消息的消费者属性。<br />- `ReceiverQueueSize`：消费者接收队列的大小。<br /> - `CryptoConfig`：消费者的加密配置。 |
 
 # 输出
 
