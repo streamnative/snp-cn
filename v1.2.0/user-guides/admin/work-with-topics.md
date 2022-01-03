@@ -1,63 +1,63 @@
 ---
-title: Work with topics
+title: 关于主题的操作
 id: work-with-topics
 category: user-guides
 ---
 
-In Pulsar, topics are named channels for transmitting messages from producers to consumers. Pulsar supports persistent and non-persistent topics. By default, a persistent topic is created if you do not specify the topic type.
+在 Pulsar 中，主题是有命名的通道，将消息从生产者传递给消费者。Pulsar 支持持久化和非持久化主题。默认情况下，如果不指定主题类型，就会创建一个持久化的主题。
 
-This document describes how to create and manage topics for a cluster using the pulsarctl CLI tool or the StreamNative Console.
+本文介绍如何了使用 pulsarctl CLI（命令行工具）或 StreamNative 控制台为集群创建和管理主题。
 
-# Work with topics using the pulsarctl CLI tool
+# 使用 pulsarctl CLI 工具操作主题
 
-This section describes how to create and manage topics using the pulsarctl CLI tool. For a full list of supported operations on topics, see [pulsarctl command reference](https://docs.streamnative.io/pulsarctl/v2.7.0.7/#-em-update-em--32).
+本节介绍了如何使用 pulsarctl CLI（命令行工具）创建和管理主题。有关主题支持操作的完整列表，参见 [pulsarctl 命令参考](https://docs.streamnative.io/pulsarctl/v2.7.0.7/#-em-update-em--32)。
 
-Before using the pulsarctl CLI tool to create and manage topics, you need to create a [tenant](/user-guides/admin/work-with-tenants.md#create-tenants) and a [namespace](/user-guides/admin/work-with-namespaces.md#create-namespaces).
+在使用 pulsarctl CLI（命令行工具）创建和管理主题之前，需要先创建[租户](/user-guides/admin/work-with-tenants.md#创建租户)和[命名空间](/user-guides/admin/work-with-namespaces.md#创建命名空间)。
 
-## Create topics
+## 创建主题
 
-You can use the `pulsarctl topics create TOPIC_NAME` command to create a topic. 
+可以使用  `pulsarctl topics create TOPIC_NAME` 命令来创建主题。
 
-* If you want to create a non-partitioned topic, you need to set the number of partitions to `0`.
+* 如果要创建非分区主题，则需要将分区数设置为 `0`。
 
-    This example shows how to create a non-partitioned topic in the `example-tenant/example-ns` namespace.
+    如下示例显示了如何在 `example-tenant/example-ns` 命名空间中创建非分区主题。
 
-    **Input**
+    **输入**
     ```
     pulsarctl topics create example-tenant/example-ns/topic-test 0
     ```
 
-    **Output**
+    **输出**
     ```
     Create topic persistent://example-tenant/example-ns/topic-test with 0 partitions successfully
     ```
 
-* If you want to create a partitioned topic, you need to set the number of partitions to a specific number.
+* 如果要创建分区主题，则需要将分区数设置为特定的数值。
 
-    This example shows how to create a topic with 5 partitions in the `example-tenant/example-ns` namespace.
+    如下示例显示了如何在 `example-tenant/example-ns` 命名空间中创建具有 5 个分区的主题。
 
-    **Input**
+    **输入**
     ```
     pulsarctl topics create example-tenant/example-ns/test-topic 5
     ```
-
-    **Output**
+    
+    **输出**
     ```
     Create topic persistent://example-tenant/example-ns/test-topic with 5 partitions successfully
     ```
 
-## Get topic status
+## 获取主题状态
 
-You can use the `pulsarctl topics get TOPIC_NAME` command to get information about a specific topic.
+可以使用 `pulsarctl topics get TOPIC_NAME` 命令获得关于某个主题的信息。
 
-* This example shows how to list all topics available for the `example-tenant/example-ns` namespace. 
+* 如下示例显示了如何列出 `example-tenant/example-ns` 命名空间的所有可用主题。
 
-    **Input**
+    **输入**
     ```
     pulsarctl topics list example-tenant/example-ns/
     ```
 
-    **Output**
+    **输出**
     ```
     +--------------------------------------------------------------------------------+-----------------------+
     |                 TOPIC NAME                                                          | PARTITIONED ? |
@@ -72,216 +72,216 @@ You can use the `pulsarctl topics get TOPIC_NAME` command to get information abo
     +--------------------------------------------------------------------------------+-----------------------+
     ```
 
-* This example shows how to get detailed information about the `topic-test` topic.
+* 如下示例显示了如何获取 `topic-test` 主题的详细信息。 
 
-    **Input** 
+    **输入** 
     ```
     pulsarctl topics get topic-test
     ```
-    **Output**
+    **输出**
     ```shell
     {
     "partitions": 0
     }
     ```
 
-## Delete topics
+## 删除主题
 
-You can use the `pulsarctl topics delete TOPIC_NAME` command to delete a partitioned topic. To delete a non-partitioned topic, you need to set the `--non-partitioned` parameter.
+可以使用 `pulsarctl topics delete TOPIC_NAME` 命令删除分区主题。要删除未分区主题需要设置`--non-partitioned` 参数。
 
-* This example shows how to delete the `test-topic` partitioned topic.
+* 如下示例显示了如何删除 `test-topic` 分区主题。
 
-    **Input**
+    **输入**
     ```
     pulsarctl topics delete topic-test
     ```
 
-    **Output**
+    **输出**
     ```
     Delete topic persistent://example-tenant/example-ns/test-topic  successfully
     ```
 
-* This example shows how to delete the `topic-test` non-partitioned topic.
+* 如下示例显示了如何删除 `topic-test` 非分区主题。
 
-    **Input**
+    **输入**
     ```
     pulsarctl topics delete --non-partitioned topic-test
     ```
-
-    **Output**
+    
+    **输出**
     ```
     Delete topic persistent://example-tenant/example-ns/topic-test  successfully
     ```
 
-# Work with topics using StreamNative Console
+# 使用 StreamNative 控制台操作主题
 
-You can create and manage topics using the StreamNative Console. Before using the StreamNative Console to create and manage topics, you need to create a [tenant](/user-guides/admin/work-with-tenants.md#create-tenants) and a [namespace](/user-guides/admin/work-with-namespaces.md#create-namespaces).
+可以使用 StreamNative 控制台来创建和管理主题。在使用 StreamNative 控制台创建和管理主题之前，需要先创建[租户](/user-guides/admin/work-with-tenants.md#创建租户)和[命名空间](/user-guides/admin/work-with-namespaces.md#创建命名空间)。
 
-## Create topics
+## 创建主题
 
-To create a topic, follow these steps.
+按照如下步骤来新建主题：
 
-1. From the left navigation pane, click **Topics**.
+1. 从左侧导航窗格中，点击**主题**。
 
-2. Click **New Topic** and a dialog box is displayed.
+2. 点击**添加主题**，出现对话框。
 
-   ![](../../image/create-topic.png)
+    ![](../../../image/create-topic.png)
 
-3. Configure the topic, as listed in the following table.
+3. 按下表配置主题。
 
     <table>
     <tr>
     <td>
-    Item
+    项目
     </td>
-    <td>Description
+    <td>描述
     </td>
     </tr>
     <tr>
-    <td>Domain
+    <td>域
     </td>
-    <td>You can configure one of the following types of the topics. 
+    <td>可以将主题配置成以下类型之一：
     <ul>
 
-    <li>Persistent: These topics are durably persisted and messages are stored on the storage disk.
+    <li>持久性主题：这类主题将被持久保存，消息存储在存储磁盘上。
 
-    <li>Non-persistent: These topics are never persisted to disk and live only in memory. 
+    <li>非持久性主题：这类主题不会持久化到磁盘上，只存储在内存中。
 
     <p>
-    By default, it is set to <em>Persistent</em>.
+    默认情况下设为<em>持久性主题</em>。
     </li>
     </ul>
     </td>
     </tr>
     <tr>
-    <td>Topic Name
+    <td>主题名称
     </td>
-    <td>Enter a name for the topic. It is a string of characters, supporting lowercase letters (a-z), numeric characters (0-9), and the special character hyphen (_).
+    <td>输入主题的名称。主题名称为一串字符，支持小写字母（a-z）、数字字符（0-9）和特殊字符连字符（_）。
     </td>
     </tr>
     <tr>
-    <td>Partitions
+    <td>分区
     </td>
-    <td>Configure the number of partitions for a partitioned topic. If this value is set to 0, it means that this is a non-partitioned topic. Up to 16 partitions are available for a partitioned topic.
+    <td>为分区主题配置分区数。如果此值设置为 0，则表示是一个未分区的主题。一个分区主题最多可设 16 个分区。
     </td>
     </tr>
     </table>
 
-4. Click **Confirm**.
+4. 点击**确定**。
 
-## Manage topics
+## 管理主题
 
-You can view detailed information about the target topic, configure the subscription name of the topics, and unload, terminate, compact, and offload topics.
+可以查看目标主题的详细信息，配置主题的订阅名称，以及卸载、终止和压缩主题。
 
-To perform basic operations for a topic, follow these steps.
+按照如下步骤对主题进行基本操作：
 
-1. From the left navigation pane, click **Topics**.
+1. 从左侧导航窗格中，点击**主题**。
 
-2. Click the link of the topic name to display detailed information about the topic.
+2. 点击主题名称链接可显示该主题的详细信息。
 
-3. (Only for partitioned topics) click the link of a specific partition on atopic.
+3. （仅适用于分区主题）点击特定主题上具体分区的链接。
 
-4. Select the **OVERVIEW** tab. You can perform the following operations.
+4. 选择**概况**选项卡。可以执行以下操作：
 
-    ![](../../image/view-topic-details.png)
+    ![](../../../image/view-topic-details.png)
 
-   * Unload the topic: click **Unload** to unload the topic.
-   * Terminate the topic: click **Terminate** to terminate the topic.
-   * Compact the topic: click **Compact** to compact the topic.
-   * View detailed information about the topic.
+   * 卸载主题：点击**卸载**来卸载主题。
+   * 终止主题：点击**终止**来终止主题。
+   * 压缩主题：点击**压缩**来压缩主题。
+   * 查看关于该主题的详细信息。
 
-## View detailed topic information
+## 查看主题详细信息
 
-To view detailed information about a topic, follow these steps.
+按照如下步骤，查看关于主题的详细信息：
 
-1. From the left navigation pane, click **Topics**.
+1. 从左侧导航窗格中，点击**主题**。
 
-2. Click the link of the topic name to display detailed information about the topic.
+2. 点击主题名称链接，可以显示该主题的详细信息。
 
-3. (Only for partitioned topics) click the link of a specific partition on atopic.
+3. （仅适用于分区主题）点击特定主题上具体分区的链接。
 
-4. Select the **OVERVIEW** tab to view detailed information about the topic.
+4. 选择**概况**选项卡，查看主题相关的详细信息。
 
 
     <table>
     <tr>
-    <td>Item
+    <td>项目
     </td>
-    <td>Description
+    <td>描述
     </td>
     </tr>
     <tr>
-    <td>Info
+    <td>信息
     </td>
-    <td>View basic information about the topic.
+    <td>查看关于主题的基本信息。
     <ul>
-
-    <li>In Rate: the ingress rate of the topic.
-
-    <li>Out Rate: the egress rate of the topic.
-
-    <li>In Throughput: the ingress throughput of the topic.
-
-    <li>Out Throughput: the egress throughput of the topic.
+    
+    <li>输入速率：主题的输入速率。
+    
+    <li>输出速率：主题的输出速率。 
+    
+    <li>输入吞吐量：主题的输入吞吐量。 
+    
+    <li>输出吞吐量：主题的输出吞吐量。
     </li>
     </ul>
     </td>
     </tr>
     <tr>
-    <td>Producers
+    <td>生产者
     </td>
-    <td>View information about the producers.
+    <td>查看关于该生产者的信息。
     <ul>
-
-    <li>Producer ID: the producer ID of the topic. 
-
-    <li>Producer Name: the producer name of the topic.
-
-    <li>Out Throughput: the egress throughput of the topic.
-
-    <li>In Rate: the ingress rate of the topic.
-
-    <li>Avg Msg Size: the average message size of the topic. 
-
-    <li>Address: the address of the topic.
-
-    <li>Since: The time when the producer is created.
+    
+    <li>生产者 ID：主题的生产者 ID。
+    
+    <li>生产者名称：主题的生产者名称。
+    
+    <li>输出吞吐量：主题的输出吞吐量。
+    
+    <li>输入速率：主题的输入速率。
+    
+    <li>平均消息大小：主题的平均消息大小。
+    
+    <li>地址：消息的地址。
+    
+    <li>创建时间：创建生产者的时间。
     </li>
     </ul>
     </td>
     </tr>
     <tr>
-    <td>Subscription
+    <td>订阅
     </td>
-    <td>View information about the subscription.
-    <ul>
-
-    <li>Subscription Name: the subscription name of the topic. Click <strong>New Subscription</strong> to create a new subscription name for the target topic.
-
-    <li>Type: the subscription type of the topic. Currently, the StreamNative Console does not support configuring the subscription type for a topic. You can configure the subscription type using the pulsarctl CLI tool. 
-
-    <li>Out Rate: the egress rate of the topic. 
-
-    <li>Out Throughput: the egress throughput of the topic. 
-
-    <li>Msg Expired: the expired messages for the topic. 
-
-    <li>Backlog: configure the backlog for the subscription.  
+    <td>查看订阅相关的信息。
     <ul>
     
-    <li>SKIP: skip some messages for the subscription. 
+    <li>订阅名称：主题的订阅名称。点击<strong>添加订阅</strong>，为目标主题创建新的订阅名称。
     
-    <li>EXPIRE: expire messages that are older than the given expiry time (in seconds) for the subscription. 
+    <li>类型：主题的订阅类型。目前 StreamNative 控制台不支持为主题配置订阅类型。可以使用 pulsarctl CLI（命令行工具）配置订阅类型。
     
-    <li>CLEAR: clear the backlog for the subscription. 
+    <li>输入速率：主题的输入速率。
     
-    <li>RESET BY ID: reset the ID of the message at which the subscription is created. 
+    <li>输出速率：主题的输出速率。
     
-    <li>RESET BY TIME: reset the time when the subscription is created. 
+    <li>过期消息：主题的过期消息。
     
-    <li>PEEK: peek some messages for the subscription. 
+    <li>Backlog：配置订阅的 backlog。
+    <ul>
     
-    <li>UNSUBSCRIBE: delete the subscription. |
+    <li>SKIP：为订阅跳过一些消息。
+    
+    <li>过期：为订阅将到期时间（以秒为单位）前的旧消息进行过期处理。
+    
+    <li>清除：为订阅清除 backlog。
+    
+    <li>RESET BY ID：重置基于订阅的消息 ID。
+    
+    <li>RESET BY TIME：订阅创建时，重置时间。 
+    
+    <li>PEEK：查看订阅的一些消息。
+    
+    <li>取消订阅：删除订阅。
     </li> 
     </ul>
     </li> 
@@ -289,193 +289,196 @@ To view detailed information about a topic, follow these steps.
     </td>
     </tr>
     <tr>
-    <td>Partitions
+    <td>分区
     </td>
-    <td>View the information about partitions of a partitioned topic.
+    <td>查看分区主题的分区信息。
     <ul>
-
-    <li>Partition: the partition ID.
-
-    <li>Producers: the number of the producers of the partition.
-
-    <li>Subscriptions: the number of subscriptions of the partition.
-
-    <li>In Rate: the ingress rate of the partition.
-
-    <li>Out Rate: the egress rate of the partition.
-
-    <li>In Throughput: the ingress throughput of the partition.
-
-    <li>Out Throughput: the egress throughput of the partition.
-
-    <li>Storage Size: the storage size of the partition.
+    
+    <li>分区：分区ID。
+    
+    <li>生产者：该分区的生产者数量。
+    
+    <li>订阅：该分区的订阅数。
+    
+    <li>输入速率：该分区的输入速率。
+    
+    <li>输出速率：该分区的输出速率。
+    
+    <li>输入吞吐量：该分区的输入吞吐量。
+    
+    <li>输出吞吐量：该分区的输出吞吐量。
+    
+    <li>存储大小：分区的存储大小。
     </li>
     </ul>
     </td>
     </tr>
     </table>
 
-## Manage schemas
+## 管理 schema
 
-When a schema is enabled, Pulsar takes bytes as inputs and sends bytes as outputs when parsing data. 
+启用 schema 后，Pulsar 在解析数据时接受字节作为输入并发送字节作为输出。
 
-> **Note**
+> **注意**
 > 
-> Currently, only Avro-type and JSON-type schemas are supported on StreamNative Console.
+> 目前，StreamNative 控制台仅支持 Avro 类型和 JSON 类的 schema。
 
-To configure schema for topics, follow these steps.
+按照如下步骤为主题配置 schema：
 
-1. From the left navigation pane, click **Topics**.
+1. 从左侧导航窗格中，点击**主题**。
 
-2. Click the link of the topic name.
+2. 点击主题名称链接。
 
-3. (Only for partitioned topics) click the link of a partition of a partitioned topic. 
+3. （仅适用于分区主题）点击分区主题的分区链接。
 
-4. Select the **SCHEMA** tab.
+4. 选择 **SCHEMA**  选项卡。
 
-5. Click **Create schema** to switch to the page for configuring schema for the target topic.
+5. 点击**创建 Schema**，切换到为目标主题配置 schema 的页面。
 
-   * Select a schema type from the **Schema Type** drop-down list. 
-   * At the **Schema Definition** area, define the schema. In addition, you can click **Format Code** to format your code.
-   * At the **Properties** area,  Click the plus (+) icon and a dialog box is displayed, where you can configure the key and value for the schema. Then, click **Confirm**.
+   * 从 **Schema 类型**下拉列表中选择一种 schema 类型。 
+   * 在 **Schema 定义** 区域定义 schema。此外，可以点击**格式代码**格式化代码。
+   * 在**属性**区域，点击加号（+），出现对话框，可以为 schema 配置键和值。然后点击**确定**。 
 
-        ![](../../image/create-topic-schema.png)
+        ![](../../../image/create-topic-schema.png)
 
-6. Click **Create schema**.
+6. 点击**创建 Schema**。
 
-## View topic storage
+## 查看主题存储
 
-To view topic storage, follow these steps.
+按照如下步骤，查看主题的存储：
 
-1. From the left navigation pane, click **Topics**.
+1. 从左侧导航窗格中，点击**主题**。
 
-2. Click the link of the topic name.
+2. 点击主题名称链接。
 
-3. (Only for partitioned topics) click the link of a partition of a partitioned topic. 
+3. （仅适用于分区主题）点击分区主题的分区链接。
 
-4. Select the **Storage** tab and view storage information for this topic.
+4. 选择**存储**选项卡，查看主题的存储信息。
 
-   ![](../../image/view-topic-storage.png)
+   ![](../../../image/view-topic-storage.png)
 
     <table>
     <tr>
-    <td>Item
+    <td>项目
     </td>
-    <td>Description
-    </td>
-    </tr>
-    <tr>
-    <td>Storage size
-    </td>
-    <td>The storage size.
+    <td>描述
     </td>
     </tr>
     <tr>
-    <td>Entries
+    <td>存储大小
     </td>
-    <td>The number of entries.
+    <td>存储的大小。
     </td>
     </tr>
     <tr>
-    <td>Segments
+    <td>Entry
     </td>
-    <td>The number of segments.
+    <td>Entry 的数量。
     </td>
     </tr>
     <tr>
     <td>Segment
     </td>
-    <td>View information about the ledger.
+    <td>Segment 的数量。
+    </td>
+    </tr>
+    <tr>
+    <td>Segment
+    </td>
+    <td>查看关于 ledger 的信息。
     <ul>
 
-    <li>Ledger ID: the ledger ID.
-
-    <li>Entries: the total number of entries that belong to the ledger.
-
-    <li> Size: the size of messages written to the ledger (in bytes). 
-
-    <li>Status: the state of the ledger for writing messages. If it is set to `Opening`, the ledger is open for saving published messages.
-
-    <li>Offload: whether the ledger can be offloaded or not. 
+   
+    <li>Ledger ID：ledger 的 ID。
+   
+    <li>Entry：属于 ledger 的 entry 的总数。
+   
+    <li>Ledger 大小：写入 ledger 消息的大小（单位为字节）。
+   
+    <li>状态：用于写消息的 ledger 的状态。如果设置为 `Opening`，则 ledger 将打开以保存已发布的消息。
+   
+    <li>卸载：ledger 是否可以被卸载。
     </li>
     </ul>
     </td>
     </tr>
     <tr>
-    <td>Cursors
+    <td>游标
     </td>
-    <td>View information about the cursor.
+    <td>查看关于游标的信息。
+   
     <ul>
-
-    <li>Cursor: the cursor ID. 
-
-    <li>Mark Delete Position: all messages before the `markDeletePosition` are acknowledged by the subscriber. 
-
-    <li>Read Position: the latest position for the subscriber to read messages. 
-
-    <li>Waiting Read Op: it is set to `True` when the subscription has read the latest message published to the topic and is waiting for new messages to be published. 
-
-    <li>Pending Read Op: the number of read requests to the BookKeepers in progress. 
-
-    <li>Entries Since First Not AckedMessage: entries that are not acknowledged.
+   
+    <li>游标：游标的 ID。
+   
+    <li>标记删除位置：在 `markDeletePosition` 之前的所有消息都被订阅者确认。
+   
+    <li>读取位置：订阅者读取消息的最新位置。
+   
+    <li>等待读取操作：当订阅已读取发布到主题的最新消息，并等待新消息发布时，被设置为 `True`。
+   
+    <li>挂起读取操作：对正在进行的 BookKeeper 读取请求的数量。
+   
+    <li>未签收的 Entry：未确认的 entry。
     </li>
     </ul>
     </td>
     </tr>
     </table>
 
-## Configure topic policies
+## 配置主题策略
 
-You can configure policies for a topic. To configure policies for topics, follow these steps.
+可以为主题配置策略。按照如下步骤，配置主题策略：
 
-1. From the left navigation pane, click **Topics**.
+1. 从左侧导航窗格中，点击**主题**。
 
-2. Click the link of the topic name.
+2. 点击主题名称链接。
 
-3. (Only for partitioned topics) click the link of a partition of a partitioned topic. 
+3. （仅适用于分区主题）点击分区主题的分区链接。
 
-4. Select the **POLICIES** tab and configure authorization policies for the topic.
+4. 选择**策略**选项卡，配置主题的授权策略。
 
-   ![](../../image/configure-topic-policy.png)
+   ![](../../../image/configure-topic-policy.png)
 
     <table>
     <tr>
-    <td>Item
+    <td>项目
     </td>
-    <td>Description
+    <td>描述
     </td>
     </tr>
     <tr>
-    <td>Authorization
+    <td>授权
     </td>
-    <td>Grant/Revoke permissions to other client roles. If you have granted or revoked permissions to a namespace, all topics in this namespace are granted or revoked the same permissions.
+    <td>授予/撤销其他客户端角色的权限。如果已授予或撤销对某个命名空间的权限，则该命名空间中的所有主题都将被授予或撤销相同的权限。
     <ul>
 
-    <li>consume: grant/revoke the consuming action.
 
-    <li>produce: grant/revoke the producing action.
-
-    <li>functions: grant/revoke the Pulsar functions action.
+    <li>consume：授予/撤销消费操作。
+    
+    <li>produce：授予/撤销生产操作。
+    
+    <li>functions：授予/撤销 Pulsar Function 操作。
     </li>
     </ul>
     </td>
     </tr>
     </table>
 
-5. (Optional) Click **Add Role** to add more permissions for the topic.
+5. （可选）点击**添加角色**为主题添加更多权限。
 
-## Delete topics
+## 删除主题
 
-If you do not want to subscribe to a topic, you can remove that topic. To delete a topic, follow these steps.
+如果不希望再订阅某个主题，可以移除该主题。按照如下步骤删除主题：
 
-1. From the left navigation pane, click **Topics**.
+1. 从左侧导航窗格中，点击**主题**。
 
-2. Click the link of the topic name.
+2. 点击主题名称链接。
 
-3. (Only for partitioned topics) click the link of a partition of a partitioned topic.
+3. （仅适用于分区主题）点击分区主题的分区链接。
 
-4. Select the **POLICIES** tab and then click **Delete Topic**. A dialog box is displayed, asking _Are you sure you want to delete this topic?_
+4. 选择**策略**选项卡，点击**删除主题**。出现对话框，询问*“删除主题”*  。
 
-   ![](../../image/delete-topic.png)
+   ![](../../../image/delete-topic.png)
 
-5. Click **Confirm**.
+5. 点击**确定**。
