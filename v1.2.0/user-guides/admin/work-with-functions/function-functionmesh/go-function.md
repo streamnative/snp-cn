@@ -1,25 +1,25 @@
 ---
-title: Run Go Functions
+title: 运行 Go 函数
 id: go-function
 category: user-guides
 ---
 
 
-This document describes how to create a Go Function using Function Mesh.
+本文介绍了如何使用 Function Mesh 来创建 Go 函数。
 
-# Prerequisites
+# 先决条件
 
-- Apache Pulsar 2.8.0 or higher
+- Apache Pulsar 2.8.0 或更高版本
 
-- Function Mesh v0.1.3 or higher
+- Function Mesh v0.1.3 或更高版本
 
-# Procedures
+# 步骤
 
-To create a Go Function using Function Mesh, follow these steps.
+按照如下步骤操作，使用 Function Mesh 创建 Go 函数：
 
-1. Define a Go Functions by using a YAML file and save the YAML file.
+1. 使用 YAML 文件定义 Go 函数，并保存 YAML 文件。
 
-   - This example shows how to publish a `go-function-sample` Functions to a Pulsar cluster by using a JAR package called `function://my-tenant/my-ns/my-function@0.1`.
+   - 如下示例显示了如何使用名为 `function://my-tenant/my-ns/my-function@0.1` 的 JAR 包将 `go-function-sample` 函数发布到 Pulsar 集群。
 
         ```yaml
         apiVersion: compute.functionmesh.io/v1alpha1
@@ -52,7 +52,7 @@ To create a Go Function using Function Mesh, follow these steps.
             # to be delete & use admission hook
         ```
 
-   - This example shows how to publish a `go-function-sample` Functions to a Pulsar cluster by using a Docker image.
+   - 如下示例显示了如何使用 Docker 镜像将 `go-function-sample` 函数发布到 Pulsar 集群。
 
       ```yaml
       apiVersion: compute.functionmesh.io/v1alpha1
@@ -85,13 +85,13 @@ To create a Go Function using Function Mesh, follow these steps.
           # to be delete & use admission hook
       ```
 
-2. Apply the YAML file to create the Go Functions.
+2. 使用 YAML 文件来创建 Go 函数。
 
     ```bash
     kubectl apply -f /path/to/YAML/file
     ```
 
-3. Check whether the Go Functions are created successfully.
+3. 检查 Go 函数是否创建成功。
 
     ```bash
     kubectl get all
