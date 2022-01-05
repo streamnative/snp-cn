@@ -1,24 +1,24 @@
 ---
-title: Run connectors
+title: 运行连接器
 id: run-connector
 category: user-guides
 ---
 
-This document describes how to create a connector using Fuction Mesh. 
+本文介绍了如何使用 Function Mesh 创建连接器。
 
-# Prerequisites
+# 先决条件
 
-- Deploy and connect to a [Kubernetes cluster](https://kubernetes.io/).
-- Deploy a [Pulsar cluster](/operator-guides/deploy/sn-deploy.md#deploy-pulsar-clusters) in the Kubernetes cluster.
-- Install the Function Mesh Operator and CRD into the Kubernetes cluster.
+- 部署并连接到 [Kubernetes 集群](https://kubernetes.io/)。
+- 在 Kubernetes 集群中部署 [Pulsar 集群](/operator-guides/deploy/sn-deploy.md#部署-pulsar-集群)。
+- 将 Function Mesh Operator 和 CRD 安装到 Kubernetes 集群中。
 
-# Procedures
+# 步骤
 
-You can create them based on how you package them.
+可以根据打包方式来创建连接器。
 
-1. Define a connector by using a YAML file and save the YAML file.
+1. 使用 YAML 文件定义一个连接器，并保存 YAML 文件。
 
-   - This example defines a YAML file for a sink connector named `my-sink-sample` connector by specifying the connector package URL and the YAML file is saved as `sink-sample.yaml`.
+   - 以下的 YAML 文件示例，通过指定连接器包的 URL，定义了一个名为 `my-sink-package-sample` 的 sink 连接器。YAML 文件被保存为 `sink-sample.yaml`。
 
        ```yaml
       apiVersion: compute.functionmesh.io/v1alpha1
@@ -46,9 +46,9 @@ You can create them based on how you package them.
           extraDependenciesDir: random-dir/
           jar: /pulsar/connectors/pulsar-io-my-sink.nar # the package will download as this filename.
           jarLocation: sink://public/default/my-sink@1.0 # connector package URL
-       ```
+      ```
 
-   - This example defines a YAML file for a sink connector named `my-sink-package-sample` connector by specifying the connector Docker image URL and the YAML file is saved as `sink-sample.yaml`.
+   - 以下的 YAML 文件示例，通过指定连接器的 Docker 镜像 URL，定义了名为 `my-sink-sample` 的 sink 连接器。YAML 文件被保存为 `sink-sample.yaml`。
 
      ```yaml
       apiVersion: compute.functionmesh.io/v1alpha1
@@ -77,22 +77,22 @@ You can create them based on how you package them.
           jarLocation: "" # leave empty since we will not download package from Pulsar Packages
      ```
 
-2. Apply the YAML file to create the sink connector.
+2. 使用 YAML 文件来新建 sink 连接器。
 
 	```bash
 	kubectl apply -f /path/to/sink-sample.yaml
 	```
 
-3. Verify that  the sink connector is created successfully.
+3. 验证 sink 连接器是否被成功创建。
 
 	```bash
 	kubectl get all
 	```
 
-	**Output**
+	**输出**
 	```
 	NAME                                READY   STATUS      RESTARTS   AGE
 	pod/my-sink-sample              1/1     Running     0          77s
 	```
-
-	From the output you can see that the sink connector is in `Running` status, which indicates that the sink connector is created successfully.
+	
+	从输出可以看到，sink 连接器处于 `Running` 状态，表明 sink 连接器已成功创建。
