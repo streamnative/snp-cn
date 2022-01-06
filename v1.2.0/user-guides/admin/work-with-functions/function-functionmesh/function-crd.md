@@ -1,44 +1,44 @@
 ---
-title: Pulsar Function CRD 配置
+title: Pulsar Functions CRD 配置
 id: function-crd
 category: user-guides
 ---
 
-打包 Pulsar Function 后，可以将 Pulsar Function 提交到 Pulsar 集群。本文介绍了如何使用 Function CRD 提交 Pulsar Function。可以使用 `image` 字段来指定用于创建 Pulsar Function 的运行器镜像。你也可以指定软件包或 Docker 镜像的存储位置。
-Pulsar Function CRD 配置
+打包 Pulsar Functions 后，可以将 Pulsar Functions 提交到 Pulsar 集群。本文介绍了如何使用 Function CRD 提交 Pulsar Functions。可以使用 `image` 字段来指定用于创建 Pulsar Functions 的运行器镜像。你也可以指定软件包或 Docker 镜像的存储位置。
+Pulsar Functions CRD 配置
 
-Pulsar Function 是一种简洁的计算抽象，Apache Pulsar 通过它可以让用户能够表达简单的 ETL 和流任务。目前 Function Mesh 支持使用 Java、Python 或 Go 编程语言来定义 Function 的 YAML 文件。
+Pulsar Functions 是一种简洁的计算抽象，Apache Pulsar 通过它可以让用户能够处理简单的 ETL 和流任务。目前 Function Mesh 支持使用 Java、Python 或 Go 编程语言来定义 Function 的 YAML 文件。
 
-本节列出了可用于 Pulsar Function 的 CRD 配置。Pulsar Function 的 CRD 配置包括 Function 配置和通用 CRD 配置。
+本节列出了可用于 Pulsar Functions 的 CRD 配置。Pulsar Functions 的 CRD 配置包括 Function 配置和通用 CRD 配置。
 
 # Function 配置
 
-下表列出了 Pulsar Function 的相关配置。
+下表列出了 Pulsar Functions 的相关配置。
 
 | 字段 | 描述 |
 | ---|---|
-| `name` | Pulsar Function 的名称。 |
-| `classname` | Pulsar Function 的类名。 |
-| `tenant` | Pulsar Function 的租户。 |
-| `namespace` | Pulsar Function 的命名空间。 |
-| `Replicas`| 运行此 Pulsar Function 的 Pulsar 实例数。                    |
-| `MaxReplicas`| 运行此 Pulsar Function 的最大 Pulsar 实例数。当 `maxReplicas` 参数的值大于 `replicas` 的值时，表示 Function 控制器根据 CPU 的使用情况对 Pulsar Function 进行自动扩展。默认情况下，`maxReplicas` 设置为 0，表示禁用自动调节。 |
+| `name` | Pulsar Functions 的名称。 |
+| `classname` | Pulsar Functions 的类名。 |
+| `tenant` | Pulsar Functions 的租户。 |
+| `namespace` | Pulsar Functions 的命名空间。 |
+| `Replicas`| 运行此 Pulsar Functions 的 Pulsar 实例数。                   |
+| `MaxReplicas`| 运行此 Pulsar Functions 的最大 Pulsar 实例数。当 `maxReplicas` 参数的值大于 `replicas` 的值时，表示 Function 控制器根据 CPU 的使用情况对 Pulsar Functions 进行自动扩展。默认情况下，`maxReplicas` 设置为 0，表示禁用自动调节。 |
 | `Timeout` | 消息超时时间（以毫秒为单位）。                        |
 | `DeadLetterTopic` | 所有未处理成功的消息被发送到的主题。Python 函数不支持这一参数。 |
 | `FuncConfig` | 到 ConfigMap 的映射，指定 Pulsar 函数的配置。            |
-| `LogTopic` | 产生 Pulsar Function 日志的主题。                            |
+| `LogTopic` | 生产 Pulsar Functions 日志的主题。                         |
 | `AutoAck` | 框架是否自动确认消息。                                       |
 | `MaxMessageRetry` | 放弃前尝试处理消息的次数。                       |
 | `ProcessingGuarantee` | 用于 function 的处理保证（传递语义）。可用值：`ATLEAST_ONCE`、`ATOST_ONCE`、`EFFECTIVELY_ONCE`。 |
 | `RetainOrdering` | Function 按顺序消费和处理消息。 |
 | `RetainKeyOrdering`| 配置是否保留消息的 key 顺序。                             |
-| `SubscriptionName` | 如果要给输入主题消费者设定特定的订阅名称，可使用此参数设定 Pulsar Function 的订阅名称。 |
+| `SubscriptionName` | 如果要给输入主题消费者设定特定的订阅名称，可使用此参数设定 Pulsar Functions 的订阅名称。 |
 | `CleanupSubscription` | 配置是否清除订阅。 |
 | `SubscriptionPosition` | 订阅的位置。 |
 
 # 镜像
 
-本节介绍了可用于 Pulsar Function、source、sink 和 Function Mesh CRD 的镜像选项。
+本节介绍了可用于 Pulsar Functions、source、sink 和 Function Mesh CRD 的镜像选项。
 
 ## 基础运行器
 
@@ -46,7 +46,7 @@ Pulsar Function 是一种简洁的计算抽象，Apache Pulsar 通过它可以�
 
 ## 运行器镜像
 
-Function Mesh 使用运行器镜像作为 Pulsar Function 和连接器的镜像。每个运行器镜像仅包含指定运行时所需的工具链和库。
+Function Mesh 使用运行器镜像作为 Pulsar Functions 和连接器的镜像。每个运行器镜像仅包含指定运行时所需的工具链和库。
 
 下表列出了 Function 运行时可用的运行器镜像。
 
@@ -58,22 +58,22 @@ Function Mesh 使用运行器镜像作为 Pulsar Function 和连接器的镜像�
 
 # 输入
 
-Pulsar Function 的输入主题。下表列出了 `Input` 的可用选项。
+Pulsar Functions 的输入主题。下表列出了 `Input` 的可用选项。
 
 | 字段 | 描述 |
 | --- | --- |
 | `Topics` | 消息来源主题的配置。 |
 | `CustomSerdeSources` | 输入主题到 SerDe 类名称的映射（作为 JSON 字符串）。 |
 | `CustomSchemaSources` | 输入主题到 Schema 类名称的映射（作为 JSON 字符串）。 |
-| `SourceSpecs` | Source 具体配置到消费者具体配置的映射。消费者具体配置包括以下选项：<br />- `SchemaType`：function 获取的消息使用的内置 schema 类型或自定义 schema 类的名称。<br />- `SerdeClassName`：function 获取的消息的 SerDe 类。<br />- `IsRegexPattern`：配置输入主题是否采用 Regex 模式。<br />- `SchemaProperties`：function 获取消息的架构属性。<br />- `ConsumerProperties`：function 获取的消息的消费者属性。<br />- `ReceiverQueueSize`：消费者接收队列的大小。<br /> - `CryptoConfig`：消费者的加密配置。 |
+| `SourceSpecs` | Source 具体配置到消费者具体配置的映射。消费者具体配置包括以下选项：<br />- `SchemaType`：function 获取的消息使用的内置 schema 类型或自定义 schema 类的名称。<br />- `SerdeClassName`：function 获取的消息的 SerDe 类。<br />- `IsRegexPattern`：配置输入主题是否采用正则表达式模式。<br />- `SchemaProperties`：function 获取的消息的 schema 属性。<br />- `ConsumerProperties`：function 获取的消息的消费者属性。<br />- `ReceiverQueueSize`：消费者接收队列的大小。<br /> - `CryptoConfig`：消费者的加密配置。 |
 
 # 输出
 
-Pulsar Function 的输出主题。下表列出 `Output` 的可用选项。
+Pulsar Functions 的输出主题。下表列出 `Output` 的可用选项。
 
 |名称 | 描述 |
 | --- | --- |
-| `Topics` | Pulsar Function 的输出主题（如果未指定，则不写入输出）。 |
+| `Topics` | Pulsar Functions 的输出主题（如果未指定，则不写入输出）。 |
 | `SinkSerdeClassName` | 输出主题到 SerDe 类名称的映射（作为 JSON 字符串）。 |
 | `SinkSchemaType` | 内置 schema 类型或自定义 schema 类名称，用于函数发送的消息。 |
 | `ProducerConf` | 生产者的具体配置。可用的选项：<br />- `MaxPendingMessages`：待处理消息的最大数量。<br />- `MaxPendingMessagesAcrossPartitions`：跨分区待处理消息的最大数量。<br />- `UseThreadLocalProducers`：配置生产者是否使用一个线程。<br />- `CryptoConfig`：生产者的加密配置。<br />- `BatchBuilder`：支持基于 key 的批处理器。 |
@@ -92,8 +92,8 @@ Pulsar Function 的输出主题。下表列出 `Output` 的可用选项。
 要在 Pod 的环境变量中使用 secret，需按照以下步骤操作：
 
 1. 新建一个 secret 或使用一个现有的 secret。多个 Pod 可以引用相同的 secret。
-1. 对于需要使用密钥的值的容器，需要为其修改的 Pod 定义，为每个要使用的密钥添加环境变量。
-1. 修改镜像和/或命令行，以便程序查找指定的环境变量的值。
+2. 对于需要使用密钥的值的容器，需要为其修改的 Pod 定义，为每个要使用的密钥添加环境变量。
+3. 修改镜像和/或命令行，以便程序查找指定的环境变量的值。
 
 Pulsar 集群支持使用 TLS 或其他身份验证插件进行身份验证。
 
@@ -114,13 +114,13 @@ Pulsar 集群支持使用 TLS 或其他身份验证插件进行身份验证。
 
 # 包
 
-Function Mesh 支持在 Java、Python 和 Go 中运行 Pulsar Function。下表列出了在不同语言运行环境中可用的 Pulsar Function 字段。
+Function Mesh 支持在 Java、Python 和 Go 中运行 Pulsar Functions。下表列出了在不同语言运行环境中可用的 Pulsar Functions 字段。
 
 | 字段 | 描述 |
 | --- | --- |
-| `jarLocation` | Function 的 JAR 文件的路径。仅适用于用 Java 编写的 Pulsar function。 |
-| `goLocation` | Function 的 JAR 文件的路径。仅适用于用 Go 编写的 Pulsar function。 |
-| `pyLocation` | Function 的 JAR 文件的路径。仅适用于用 Python 编写的 Pulsar function。 |
+| `jarLocation` | Function 的 JAR 文件的路径。仅适用于用 Java 编写的 Pulsar Functions。 |
+| `goLocation` | Function 的 JAR 文件的路径。仅适用于用 Go 编写的 Pulsar Functions。 |
+| `pyLocation` | Function 的 JAR 文件的路径。仅适用于用 Python 编写的 Pulsar Functions。 |
 | `extraDependenciesDir` | 指定 JAR 包的依赖目录。 |
 
 # 集群位置
