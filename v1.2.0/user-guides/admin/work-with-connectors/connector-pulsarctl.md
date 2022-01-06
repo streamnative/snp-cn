@@ -211,4 +211,4 @@ Reason: Sink activemq-sink doesn't exist
 | `--subs-name` | 当用户想要为输入主题的消费者指定特定的订阅名称，表示 Pulsar source 订阅名称。 |
 | `--tenant` | Sink 的租户。 |
 | `--timeout-ms` | 消息超时时间（以毫秒为单位）。 |
-| `--topics-pattern` | 定义主题列表的主题模式。命名空间下与主题模式匹配的主题将被消费。<br/>`--input` 和 `--topics-Pattern` 是互斥的。<br/>可在 `--customSerdeInputs` 中为模式添加 SerDe 类名（仅支持 Java 函数）。 |
+| `--topics-pattern` | 主题模式，命名空间主题列表中与该主题模式匹配的主题将被消费。<br/>`--input` 和 `--topics-Pattern` 是互斥的。<br/>可在 `--customSerdeInputs` 中为模式添加 SerDe 类名（仅支持 Java 函数）。 |
