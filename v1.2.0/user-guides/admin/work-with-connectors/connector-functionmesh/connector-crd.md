@@ -134,7 +134,7 @@ Function Mesh 支持自定义 Pod 运行连接器。下表列出了可用于 `po
 | `classname` | Sink 连接器的类名。                                          |
 | `tenant` | Sink 连接器的租户。                                          |
 | `Replicas`| 要运行此 sink 连接器的 Pulsar 实例数。                       |
-| `MaxReplicas`| Sink 连接器运行的 Pulsar 最大实例数。当 `maxReplicas` 参数的值大于 `replicas` 的值时，表明 sink 控制器根据 CPU 的使用情况自动扩展 sink 连接器。默认情况下，`maxReplicas` 设置为 0，表明自动扩展功能被禁用。 |
+| `MaxReplicas`| Sink 连接器运行的最大 Pulsar 实例数。当 `maxReplicas` 参数的值大于 `replicas` 的值时，表明 sink 控制器根据 CPU 的使用情况自动扩展 sink 连接器。默认情况下，`maxReplicas` 设置为 0，表明自动扩展功能被禁用。 |
 | `LogTopic` | Sink 连接器日志被发送到的主题。       |
 | `SinkConfig`                  | 指定 sink 连接器配置的 ConfigMap 映射。                      |
 | `Timeout` | 消息超时（以毫秒为单位）。                                   |
