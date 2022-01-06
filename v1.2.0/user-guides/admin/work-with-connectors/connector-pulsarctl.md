@@ -169,7 +169,7 @@ Reason: Sink activemq-sink doesn't exist
 |----|---|
 | `-a`, `--archive` | Source 的 NAR 存档的路径。<br/>同样支持 url-path（http/https/file [文件协议，假定文件已经存在于 worker 主机上]），worker 可以从该路径下载包。 |
 | `--classname` | 在 `archive` 为 file-url-path（file://）情况下，source 的类名。 |
-| `--cpu` | 需要为每个 source 实例分配的 CPU（以核为单位）（仅适用于 Docker 运行时）。 |
+| `--cpu` | 需要为每个 source 实例分配的 CPU（核数）（仅适用于 Docker 运行时）。 |
 | `--deserialization-classname` | Source 的 SerDe 类名。 |
 | `--destination-topic-name` | 作为数据发送对象的 Pulsar 主题。 |
 | `--disk` | 需要为每个 source 实例分配的磁盘数（以字节为单位）（仅适用于 Docker 运行时）。 |
