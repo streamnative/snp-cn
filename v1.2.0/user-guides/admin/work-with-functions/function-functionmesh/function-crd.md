@@ -5,7 +5,7 @@ category: user-guides
 ---
 
 打包 Pulsar Functions 后，可以将 Pulsar Functions 提交到 Pulsar 集群。本文介绍了如何使用 Function CRD 提交 Pulsar Functions。可以使用 `image` 字段来指定用于创建 Pulsar Functions 的运行器镜像。你也可以指定软件包或 Docker 镜像的存储位置。
-Pulsar Functions CRD 配置
+
 
 Pulsar Functions 是一种简洁的计算抽象，Apache Pulsar 通过它可以让用户能够处理简单的 ETL 和流任务。目前 Function Mesh 支持使用 Java、Python 或 Go 编程语言来定义 Function 的 YAML 文件。
 
@@ -13,20 +13,20 @@ Pulsar Functions 是一种简洁的计算抽象，Apache Pulsar 通过它可以�
 
 # Function 配置
 
-下表列出了 Pulsar Functions 的相关配置。
+下表列出了一条 Pulsar Function 的相关配置。
 
 | 字段 | 描述 |
 | ---|---|
-| `name` | Pulsar Functions 的名称。 |
-| `classname` | Pulsar Functions 的类名。 |
-| `tenant` | Pulsar Functions 的租户。 |
-| `namespace` | Pulsar Functions 的命名空间。 |
-| `Replicas`| 运行此 Pulsar Functions 的 Pulsar 实例数。                   |
-| `MaxReplicas`| 运行此 Pulsar Functions 的最大 Pulsar 实例数。当 `maxReplicas` 参数的值大于 `replicas` 的值时，表示 Function 控制器根据 CPU 的使用情况对 Pulsar Functions 进行自动扩展。默认情况下，`maxReplicas` 设置为 0，表示禁用自动调节。 |
+| `name` | Pulsar Function 的名称。 |
+| `classname` | Pulsar Function 的类名。 |
+| `tenant` | Pulsar Function 的租户。 |
+| `namespace` | Pulsar Function 的命名空间。 |
+| `Replicas`| 运行此 Pulsar Function 的 Pulsar 实例数。                   |
+| `MaxReplicas`| 运行此 Pulsar Function 的最大 Pulsar 实例数。当 `maxReplicas` 参数的值大于 `replicas` 的值时，表示 Function 控制器根据 CPU 的使用情况对 Pulsar Functions 进行自动扩展。默认情况下，`maxReplicas` 设置为 0，表示禁用自动调节。 |
 | `Timeout` | 消息超时时间（以毫秒为单位）。                        |
 | `DeadLetterTopic` | 所有未处理成功的消息被发送到的主题。Python 函数不支持这一参数。 |
 | `FuncConfig` | 到 ConfigMap 的映射，指定 Pulsar 函数的配置。            |
-| `LogTopic` | 生产 Pulsar Functions 日志的主题。                         |
+| `LogTopic` | 生产 Pulsar Function 日志的主题。                         |
 | `AutoAck` | 框架是否自动确认消息。                                       |
 | `MaxMessageRetry` | 放弃前尝试处理消息的次数。                       |
 | `ProcessingGuarantee` | 用于 function 的处理保证（传递语义）。可用值：`ATLEAST_ONCE`、`ATOST_ONCE`、`EFFECTIVELY_ONCE`。 |
@@ -81,7 +81,7 @@ Pulsar Functions 的输出主题。下表列出 `Output` 的可用选项。
 
 # 资源
 
-在指定 function 或连接器时，可以选择指定它们需要多少资源。可指定的资源包括 CPU 和内存（RAM）。
+在指定 Pulsar Function 或连接器时，可以选择指定它们需要多少资源。可指定的资源包括 CPU 和内存（RAM）。
 
 如果运行 Pod 的节点有足够的可用资源，则 Pod 可能、也被允许使用高于 `request` 的更多资源。但 Pod 使用的资源不得超过该资源的 `limit`。
 
