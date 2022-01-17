@@ -1,243 +1,243 @@
 ---
-title: Connector CRD configurations
+title: 连接器 CRD 配置
 id: connector-crd
 category: user-guides
 ---
 
-This document lists Custom Resource Definitions (CRD) configurations of source and sink connectors.
+本文列出了 source 和 sink 连接器的 Custom Resource Definition（CRD）配置。
 
-# Source CRD configurations
+# Source CRD 配置
 
-This section lists CRD configurations available for Pulsar source connectors. The source CRD configurations consist of source connector configurations and the common CRD configurations.
+本节列出了可用于 Pulsar source 连接器的 CRD 配置。Source CRD 配置包括 source 连接器配置和通用 CRD 配置。
 
-## Source configurations
+## Source 配置
 
-This table lists source configurations.
+下表列出了 source 配置。
 
-| Field | Description |
+| 字段 | 描述 |
 | --- | --- |
-| `name` | The name of a source connector. |
-| `classname` | The class name of a source connector. |
-| `tenant` | The tenant of a source connector. |
-| `Replicas`| The number of Pulsar instances that you want to run this source connector. |
-| `MaxReplicas`| The maximum number of Pulsar instances that you want to run for this source connector. When the value of the `maxReplicas` parameter is greater than the value of `replicas`, it indicates that the source controller automatically scales the source connector based on the CPU usage. By default, `maxReplicas` is set to 0, which indicates that auto-scaling is disabled. |
-| `LogTopic` | The topic to which the logs of a source connector are produced. |
-| `SourceConfig` | The map to a ConfigMap specifying the configuration of a source connector. |
-| `ProcessingGuarantee` | The processing guarantees (delivery semantics) applied to the source connector. Available values: `ATLEAST_ONCE`, `ATMOST_ONCE`, `EFFECTIVELY_ONCE`.|
+| `name` | Source 连接器的名称。 |
+| `classname` | Source 连接器的类名。 |
+| `tenant` | Source 连接器的租户。 |
+| `Replicas`| 运行此 source 连接器的 Pulsar 实例数。                     |
+| `MaxReplicas`| 运行此 source 连接器的最大 Pulsar 实例数。当 `maxReplicas` 参数的值大于 `replicas` 的值时，表示 source 控制器根据 CPU 的使用情况自动扩展 source 连接器。默认情况下，`maxReplicas` 设置为 0，表示自动扩展功能被禁用。 |
+| `LogTopic` | 生产 source 连接器日志的主题。 |
+| `SourceConfig` | 指定 source 连接器配置的 ConfigMap 的映射。                  |
+| `ProcessingGuarantee` | 应用于 source 连接器的处理保证（传递语义）。可选值：`ATLEAST_ONCE`、`ATOST_ONCE`、`EFFECTIVELY_ONCE`。 |
 
-## Images
+## 镜像
 
-This section describes image options available for Pulsar source CRDs.
+本节介绍了可用于 Pulsar source CRD 的镜像选项。
 
-### Base runner
+### 基础运行器（Runner）
 
-The base runner is an image base for other runners. The base runner is located at `./pulsar-functions-base-runner`. The base runner image contains basic tool-chains like `/pulsar/bin`, `/pulsar/conf` and `/pulsar/lib` to ensure that the `pulsar-admin` CLI tool works properly to support [Apache Pulsar Packages](http://pulsar.apache.org/docs/en/next/admin-api-packages/).
+基础运行器是其他运行器的镜像基础。基础运行器位于`./pulsar-functions-base-runner`。基础运行器镜像包含基本的工具链，如 `/pulsar/bin`、`/pulsar/conf` 和 `/pulsar/lib`，用于确保 `pulsar-admin` CLI（命令行工具）能正常工作，以支持 [Apache Pulsar Packages](http://pulsar.apache.org/docs/en/next/admin-api-packages/)。
 
-### Runner images
+### 运行器（Runner）镜像
 
-Function Mesh uses runner images as images of Pulsar connectors. Each runner image only contains necessary tool-chains and libraries for specified runtime.
+Function Mesh 使用运行器镜像作为 Pulsar 连接器的镜像。每个运行器镜像仅包含指定运行时所需的工具链和库。
 
-Pulsar connectors support using the Java runner images as their images. The Java runner is based on the base runner and contains the Java function instance to run Java functions or connectors. The `streamnative/pulsar-functions-java-runner` Java runner is stored at the [Docker Hub](https://hub.docker.com/r/streamnative/pulsar-functions-java-runner) and is automatically updated to align with Apache Pulsar release.
+Pulsar 连接器支持使用 Java 运行器镜像作为它们的镜像。Java 运行器基于基础运行器，包含运行 Java 函数或连接器的 Java 函数实例。`streamnative/pulsar-functions-java-runner` Java 运行器存储在 [Docker Hub](https://hub.docker.com/r/streamnative/pulsar-functions-java-runner)，可自动更新以与 Apache Pulsar 版本保持一致。
 
-## Output
+## 输出
 
-The output topics of a Pulsar Function. This table lists options available for the `Output`.
+Pulsar Function 的输出主题。下表列出了 `Output` 的可用选项。
 
-|Name | Description |
+|名称 | 描述 |
 | --- | --- |
-| `Topics` | The output topic of a Pulsar Function (If none is specified, no output is written). | 
-| `SinkSerdeClassName` | The map of output topics to SerDe class names (as a JSON string). |
-| `SinkSchemaType` | The built-in schema type or custom schema class name to be used for messages sent by the function.|
-| `ProducerConf` | The producer specifications. Available options: <br />- `MaxPendingMessages`: the maximum number of pending messages. <br />- `MaxPendingMessagesAcrossPartitions`: the maximum number of pending messages across partitions. <br />- `UseThreadLocalProducers`: configure whether the producer uses a thread. <br />- `CryptoConfig`: cryptography configurations of the producer. <br />- `BatchBuilder`: support key-based batcher. 
-| `CustomSchemaSinks` | The map of output topics to Schema class names (as a JSON string). |
+| `Topics` | Pulsar Function 的输出主题（如未指定，则不写入输出）。     |
+| `SinkSerdeClassName` | 输出主题到 SerDe 类名称的映射（为 JSON 字符串）。        |
+| `SinkSchemaType` | 内置 schema 类型或自定义 schema 类名称，用于函数发送的消息。 |
+| `ProducerConf` | 生产者的具体配置。可用选项如下： <br />- `MaxPendingMessages`：待处理消息的最大数量。<br />- `MaxPendingMessagesAcrossPartitions`：跨分区待处理消息的最大数量。<br />- `UseThreadLocalProducers`：配置生产者是否使用一个线程。<br />- `CryptoConfig`：生产者的加密配置。<br />- `BatchBuilder`：支持基于 key 的批处理器。 |
+| `CustomSchemaSinks` | 输出主题到 Schema 类名称的映射（为 JSON 字符串）。 |
 
-## Resources
+## 资源
 
-When you specify a function or connector, you can optionally specify how much of each resource they need. The resources available to specify are CPU and memory (RAM).
+在指定函数或连接器时，可以选择指定它们需要多少资源。可指定的资源包括 CPU 和内存（RAM）。
 
-If the node where a Pod is running has enough of a resource available, it's possible (and allowed) for a Pod to use more resources than its `request` for that resource. However, a Pod is not allowed to use more than its resource `limit`.
+如果运行 Pod 的节点有足够的可用资源，则 Pod 可能、也被允许使用高于 `request ` 的更多资源。但是 Pod 使用的资源不得超过该资源的 `limit`。
 
-## Secrets
+## Secret
 
-In Function Mesh, the secret is defined through a secretsMap. To use a secret, a Pod needs to reference the secret. Pods can consume secretsMaps as environment variables in a volume. You can specify the `data` field when creating a configuration file for a secret.
+在 Function Mesh 中，secret 是通过 secretsMap 来定义的。要使用 secret，Pod 需要引用 secret。Pod 可以使用 secretsMap 作为卷（volume）的环境变量。可以在为 secret 创建配置文件时指定 `data` 字段。
 
-To use a secret in an environment variable in a Pod, follow these steps.
+要在 Pod 的环境变量中使用 secret， 需按照如下步骤操作：
 
-1. Create a secret or use an existing one. Multiple Pods can reference the same secret.
-2. Modify your Pod definition in each container, which you want to consume the value of a secret key, to add an environment variable for each secret key that you want to consume.
-3. Modify your image and/or command line so that the program looks for values in the specified environment variables.
+1. 创建一个 secret 或使用一个现有的 secret。多个 Pod 可以引用相同的 secret。
+2. 对于需要使用密钥的值的容器，需要为其修改 Pod 定义，为每个要使用的密钥添加环境变量。
+3. 修改镜像和/或命令行，以便程序查找指定的环境变量的值。
 
-Pulsar clusters support using TLS or other authentication plugin for authentication.
+Pulsar 集群支持使用 TLS 或其他身份验证插件进行身份验证。
 
 - TLS Secret
 
-    | Field | Description |
+    | 字段 | 描述 |
     | --- | --- |
-    | tlsAllowInsecureConnection | Allow insecure TLS connection. |
-    | tlsHostnameVerificationEnable | Enable hostname verification. |
-    | tlsTrustCertsFilePath | The path of the TLS trust certificate file. |
+    | tlsAllowInsecureConnection | 允许不安全的 TLS 连接。  |
+    | tlsHostnameVerificationEnable | 启用 hostname 验证。     |
+    | tlsTrustCertsFilePath | TLS 信任证书文件的路径。 |
 
 - Auth Secret
 
-    | Field | Description |
+    | 字段 | 描述 |
     | --- | --- |
-    | clientAuthenticationPlugin | Client authentication plugin. |
-    | clientAuthenticationParameters | Client authentication parameters. |
+    | clientAuthenticationPlugin | 客户端身份验证插件。 |
+    | clientAuthenticationParameters | 客户端身份验证参数。 |
 
-## Packages
+## 包
 
-Function Mesh supports running Pulsar connectors in Java.
+Function Mesh 支持在 Java 中运行 Pulsar 连接器。
 
-| Field | Description |
+| 字段 | 描述 |
 | --- | --- |
-| `jarLocation` | Path to the JAR file for the connector. |
-| `extraDependenciesDir` | It specifies the dependent directory for the JAR package. |
+| `jarLocation` | 连接器的 JAR 文件的路径。 |
+| `extraDependenciesDir` | 指定 JAR 包的依赖目录。 |
 
-## Cluster location
+## 集群位置
 
-In Function Mesh, the Pulsar cluster is defined through a ConfigMap. Pods can consume ConfigMaps as environment variables in a volume. The Pulsar cluster ConfigMap defines the Pulsar cluster URLs.
+Function Mesh 中，Pulsar 集群是通过 ConfigMap 定义的。Pod 可以使用 ConfigMap 作为卷（volume）的环境变量。Pulsar 集群 ConfigMap 定义了 Pulsar 集群 URL。
 
-| Field | Description |
+| 字段 | 描述 |
 | --- | --- |
-| `webServiceURL` | The Web service URL of the Pulsar cluster. |
-| `brokerServiceURL` | The broker service URL of the Pulsar cluster. |
+| `webServiceURL` | Pulsar 集群的 Web 服务 URL。    |
+| `brokerServiceURL` | Pulsar 集群的 broker 服务 URL。 |
 
-## Pod specifications
+## Pod 具体配置
 
-Function Mesh supports customizing the Pod running connectors. This table lists sub-fields available for the `pod` field.
+Function Mesh 支持自定义 Pod 运行连接器。下表列出了可用于 `pod` 字段的子字段。
 
-| Field | Description |
+| 字段 | 描述 |
 | --- | --- |
-| `Labels` | Specify labels attached to a Pod. |
-| `NodeSelector` | Specify a map of key-value pairs. For a Pod running on a node, the node must have each of the indicated key-value pairs as labels. |
-| `Affinity` | Specify the scheduling constraints of a Pod. |
-| `Tolerations` | Specify the tolerations of a Pod. |
-| `Annotations`| Specify the annotations attached to a Pod. |
-| `SecurityContext` | Specify the security context for a Pod. |
-| `TerminationGracePeriodSeconds` | It is the amount of time that Kubernetes gives for a Pod before terminating it. |
-| `Volumes` | It is a list of volumes that can be mounted by containers belonging to a Pod. |
-| `ImagePullSecrets` | It is an optional list of references to secrets in the same namespace for pulling any of the images used by a Pod. |
-| `InitContainers` | Initialization containers belonging to a Pod. A typical use case could be using an Initialization container to download a remote JAR to a local path. |
-| `Sidecars` | Sidecar containers run together with the main function container in a Pod. |
+| `Labels` | 指定附加到 Pod 的标签。                                      |
+| `NodeSelector` | 指定键值对的映射。对于在节点上运行的 Pod，节点必须将每个指定的键值对作为标签。 |
+| `Affinity` | 指定 Pod 的调度约束。                                        |
+| `Tolerations` | 指定 Pod 的容忍度。                                          |
+| `Annotations`| 指定附加到 Pod 的注解。                                    |
+| `SecurityContext` | 指定 Pod 的安全上下文。                                      |
+| `TerminationGracePeriodSeconds` | Kubernetes 终止 Pod 前的时长。                      |
+| `Volumes` | 可以由属于 Pod 的容器所挂载的卷（volume）的列表。              |
+| `ImagePullSecrets` | 可选列表，用于引用同一命名空间中的 secret，以拉取 Pod 使用的任何镜像。 |
+| `InitContainers` | 属于 Pod 的初始化容器。典型的用例为使用初始化容器来下载远程 JAR 到本地路径。 |
+| `Sidecars` | Sidecar 容器与 Pod 中的主要函数容器一起运行。 |
 
-# Sink CRD configuration
+# Sink CRD 配置
 
-This section lists CRD configurations available for Pulsar sink connectors. The sink CRD configurations consist of sink connector configurations and the common CRD configurations.
+本节列出了可用于 Pulsar sink 连接器的 CRD 配置。Sink CRD 配置包括 sink 连接器配置和通用 CRD 配置。
 
-## Sink configurations
+## Sink 配置
 
-This table lists sink configurations.
+下表列出了 sink 的配置。
 
-| Field | Description |
+| 字段 | 描述 |
 | --- | --- |
-| `name` | The name of a sink connector. |
-| `classname` | The class name of a sink connector. |
-| `tenant` | The tenant of a sink connector. |
-| `Replicas`| The number of Pulsar instances that you want to run this sink connector. |
-| `MaxReplicas`| The maximum number of Pulsar instances that you want to run for this sink connector. When the value of the `maxReplicas` parameter is greater than the value of `replicas`, it indicates that the sink controller automatically scales the sink connector based on the CPU usage. By default, `maxReplicas` is set to 0, which indicates that auto-scaling is disabled. |
-| `LogTopic` | The topic to which the logs of a sink connector are produced. |
-| `SinkConfig` | The map to a ConfigMap specifying the configuration of a sink connector. |
-| `Timeout` | The message timeout in milliseconds. |
-| `NegativeAckRedeliveryDelayMs`| The number of redelivered messages due to negative acknowledgement. |
-| `AutoAck` | Whether or not the framework acknowledges messages automatically. |
-| `MaxMessageRetry` | How many times to process a message before giving up. |
-| `ProcessingGuarantee` | The processing guarantees (delivery semantics) applied to the sink connector. Available values: `ATLEAST_ONCE`, `ATMOST_ONCE`, `EFFECTIVELY_ONCE`.|
-| `RetainOrdering` | The sink connector consumes and processes messages in order. |
-| `DeadLetterTopic` | The topic where all messages that were not processed successfully are sent. |
-| `SubscriptionName` | The subscription name of the sink connector if you want a specific subscription-name for the input-topic consumer. |
-| `CleanupSubscription` | Configure whether to clean up subscriptions. |
-| `SubscriptionPosition` | The subscription position. |
+| `name` | Sink 连接器的名称。                                          |
+| `classname` | Sink 连接器的类名。                                          |
+| `tenant` | Sink 连接器的租户。                                          |
+| `Replicas`| 要运行此 sink 连接器的 Pulsar 实例数。                       |
+| `MaxReplicas`| Sink 连接器运行的最大 Pulsar 实例数。当 `maxReplicas` 参数的值大于 `replicas` 的值时，表明 sink 控制器根据 CPU 的使用情况自动扩展 sink 连接器。默认情况下，`maxReplicas` 设置为 0，表明自动扩展功能被禁用。 |
+| `LogTopic` | 生产 sink 连接器日志的主题。   |
+| `SinkConfig`                  | 指定 sink 连接器配置的 ConfigMap 映射。                      |
+| `Timeout` | 消息超时（以毫秒为单位）。                                   |
+| `NegativeAckRedeliveryDelayMs`| 由于否定确认而重新传递的消息数。                             |
+| `AutoAck` | 框架是否自动确认消息。                                       |
+| `MaxMessageRetry` | 放弃前尝试处理消息的次数。                                   |
+| `ProcessingGuarantee` | 应用于 sink 连接器的处理保证（传递语义）。可用值：`ATLEAST_ONCE`、`ATOST_ONCE`、`EFFECTIVELY_ONCE`。 |
+| `RetainOrdering` | Sink 连接器按顺序消费和处理消息。                            |
+| `DeadLetterTopic` | 所有未成功处理的消息被发送到的主题。                    |
+| `SubscriptionName` | 当要为输入主题消费者提供特定订阅名称时，指定的 sink 连接器的订阅名称。 |
+| `CleanupSubscription` | 配置是否清除订阅。                                         |
+| `SubscriptionPosition` | 订阅的位置。 |
 
-## Images
+## 镜像
 
-This section describes image options available for Pulsar sink CRDs.
+本节介绍了 Pulsar sink CRD 可用的镜像选项。
 
-### Base runner
+### 基础运行器（Runner）
 
-The base runner is an image base for other runners. The base runner is located at `./pulsar-functions-base-runner`. The base runner image contains basic tool-chains like `/pulsar/bin`, `/pulsar/conf` and `/pulsar/lib` to ensure that the `pulsar-admin` CLI tool works properly to support [Apache Pulsar Packages](http://pulsar.apache.org/docs/en/next/admin-api-packages/).
+基础运行器是其他运行器的镜像基础。基础运行器位于 `./pulsar-functions-base-runner`。基础运行器镜像包含基本的工具链，如 `/pulsar/bin`、`/pulsar/conf` 和 `/pulsar/lib`，用于确保 `pulsar-admin` CLI（命令行工具）能正常工作，以支持 [Apache Pulsar Packages](http://pulsar.apache.org/docs/en/next/admin-api-packages/)。
 
-### Runner images
+### 运行器（Runner）镜像
 
-Function Mesh uses runner images as images of Pulsar connectors. Each runner image only contains necessary tool-chains and libraries for specified runtime.
+Function Mesh 使用运行器镜像作为 Pulsar 连接器的镜像。每个运行器镜像仅包含指定运行时所需的工具链和库。
 
-Pulsar connectors support using the Java runner images as their images. The Java runner is based on the base runner and contains the Java function instance to run Java functions or connectors. The `streamnative/pulsar-functions-java-runner` Java runner is stored at the [Docker Hub](https://hub.docker.com/r/streamnative/pulsar-functions-java-runner) and is automatically updated to align with Apache Pulsar release.
+Pulsar 连接器支持使用 Java 运行器镜像作为它们的镜像。Java 运行器基于基础运行器，包含运行 Java 函数或连接器的 Java 函数实例。`streamnative/pulsar-functions-java-runner` Java 运行器存储在 [Docker Hub](https://hub.docker.com/r/streamnative/pulsar-functions-java-runner)，可自动更新以与 Apache Pulsar 版本保持一致。
 
-## Input
+## 输入
 
-The input topics of a Pulsar Function. The following table lists options available for the `Input`.
+Pulsar Function 的输入主题。下表列出了 `Input` 的可用选项。
 
-| Field | Description |
+| 字段 | 描述 |
 | --- | --- |
-| `Topics` | The configuration of the topic from which messages are fetched. |
-| `CustomSerdeSources` | The map of input topics to SerDe class names (as a JSON string). |
-| `CustomSchemaSources` | The map of input topics to Schema class names (as a JSON string). |
-| `SourceSpecs` | The map of source specifications to consumer specifications. Consumer specifications include these options: <br />- `SchemaType`: the built-in schema type or custom schema class name to be used for messages fetched by the connector. <br />- `SerdeClassName`: the SerDe class to be used for messages fetched by the connector. <br />- `IsRegexPattern`: configure whether the input topic adopts a Regex pattern. <br />- `SchemaProperties`: the schema properties for messages fetched by the connector. <br />- `ConsumerProperties`: the consumer properties for messages fetched by the connector. <br />- `ReceiverQueueSize`: the size of the consumer receive queue. <br /> - `CryptoConfig`: cryptography configurations of the consumer. |
+| `Topics` | 消息来源主题的配置。                             |
+| `CustomSerdeSources` | 输入主题到 SerDe 类名称的映射（为 JSON 字符串）。 |
+| `CustomSchemaSources` | 输入主题到 Schema 类名称的映射（为 JSON 字符串）。 |
+| `SourceSpecs` | Source 具体配置到消费者具体配置的映射。消费者具体配置包括以下选项：<br />- `SchemaType`：连接器获取的消息可使用的内置 schema 类型或自定义 schema 类的名称。<br />- `SerdeClassName`：连接器获取的消息所使用的 SerDe 类。<br />- `IsRegexPattern`：配置输入主题是否采用正则表达式模式。<br />- `SchemaProperties`：连接器获取的消息的 schema 属性。<br />- `ConsumerProperties`：连接器获取的消息的消费者属性。<br />- `ReceiverQueueSize`：消费者接收队列的大小。<br /> - `CryptoConfig`：消费者的加密配置。 |
 
-## Resources
+## 资源
 
-When you specify a function or connector, you can optionally specify how much of each resource they need. The resources available to specify are CPU and memory (RAM).
+在指定函数或连接器时，可以选择指定它们需要多少资源。可指定的资源包括 CPU 和内存（RAM）。
 
-If the node where a Pod is running has enough of a resource available, it is possible (and allowed) for a Pod to use more resources than its `request` for that resource. However, a Pod is not allowed to use more than its resource `limit`.
+如果运行 Pod 的节点有足够的可用资源，则 Pod 可能、也被允许使用高于 `request` 的更多资源。但是 Pod 使用的资源不得超过该资源的 `limit`。
 
-## Secrets
+## Secret
 
-In Function Mesh, the secret is defined through a secretsMap. To use a secret, a Pod needs to reference the secret. Pods can consume secretsMaps as environment variables in a volume. You can specify the `data` field when creating a configuration file for a secret.
+在 Function Mesh 中，secret 是通过 secretsMap 定义的。要使用 secret，Pod 需要引用 secret。Pod 可以使用 secretsMap 作为卷（volume）中的环境变量。可以在为 secret 创建配置文件时指定 `data` 字段。
 
-To use a secret in an environment variable in a Pod, follow these steps.
+要在 Pod 的环境变量中使用 secret，需按照以下步骤操作： 
 
-1. Create a secret or use an existing one. Multiple Pods can reference the same secret.
-2. Modify your Pod definition in each container, which you want to consume the value of a secret key, to add an environment variable for each secret key that you want to consume.
-3. Modify your image and or command line so that the program looks for values in the specified environment variables.
+1. 创建一个 secret 或使用一个现有的 secret。多个 Pod 可以引用相同的 secret。
+2. 对于需要使用密钥的值的容器，需要为其修改 Pod 定义，为每个要使用的密钥添加环境变量。
+3. 修改镜像和/或命令行，以便程序查找指定的环境变量的值。
 
-Pulsar clusters support using TLS or other authentication plugin for authentication.
+Pulsar 集群支持使用 TLS 或其他身份验证插件进行身份验证。
 
 - TLS Secret
 
-    | Field | Description |
+    | 字段 | 描述 |
     | --- | --- |
-    | tlsAllowInsecureConnection | Allow insecure TLS connection. |
-    | tlsHostnameVerificationEnable | Enable hostname verification. |
-    | tlsTrustCertsFilePath | The path of the TLS trust certificate file. |
+    | tlsAllowInsecureConnection | 允许不安全的 TLS 连接。  |
+    | tlsHostnameVerificationEnable | 启用 hostname 验证。    |
+    | tlsTrustCertsFilePath | TLS 信任证书文件的路径。 |
 
 - Auth Secret
 
-    | Field | Description |
+    | 字段 | 描述 |
     | --- | --- |
-    | clientAuthenticationPlugin | Client authentication plugin. |
-    | clientAuthenticationParameters | Client authentication parameters. |
+    | clientAuthenticationPlugin | 客户端身份验证插件。 |
+    | clientAuthenticationParameters | 客户端身份验证参数。 |
 
-## Packages
+## 包
 
-Function Mesh supports running Pulsar connectors in Java.
+Function Mesh 支持在 Java 中运行 Pulsar 连接器。
 
-| Field | Description |
+| 字段 | 描述 |
 | --- | --- |
-| `jarLocation` | Path to the JAR file for the connector.|
-| `extraDependenciesDir` | It specifies the dependent directory for the JAR package. |
+| `jarLocation` | 连接器的 JAR 文件的路径。 |
+| `extraDependenciesDir` | 指定 JAR 包的依赖目录。 |
 
-## Cluster location
+## 集群位置
 
-In Function Mesh, the Pulsar cluster is defined through a ConfigMap. Pods can consume ConfigMaps as environment variables in a volume. The Pulsar cluster ConfigMap defines the Pulsar cluster URLs.
+Function Mesh 中，Pulsar 集群是通过 ConfigMap 定义的。Pod 可以使用 ConfigMap 作为卷（volume）的环境变量。Pulsar 集群 ConfigMap 定义了 Pulsar 集群 URL。
 
-| Field | Description |
+| 字段 | 描述 |
 | --- | --- |
-| `webServiceURL` | The Web service URL of the Pulsar cluster. |
-| `brokerServiceURL` | The broker service URL of the Pulsar cluster. |
+| `webServiceURL` | Pulsar 集群的 Web 服务 URL。 |
+| `brokerServiceURL` | Pulsar 集群的 broker 服务 URL。 |
 
-## Pod specifications
+## Pod 具体配置
 
-Function Mesh supports customizing the Pod running Pulsar connectors. This table lists sub-fields available for the `pod` field.
+Function Mesh 支持自定义 Pod 运行连接器。下表列出了可用于 `pod` 字段的子字段。
 
-| Field | Description |
+| 字段 | 描述 |
 | --- | --- |
-| `Labels` | Specify labels attached to a Pod. |
-| `NodeSelector` | Specify a map of key-value pairs. For a Pod running on a node, the node must have each of the indicated key-value pairs as labels. |
-| `Affinity` | Specify the scheduling constraints of a Pod. |
-| `Tolerations` | Specify the tolerations of a Pod. |
-| `Annotations`| Specify the annotations attached to a Pod. |
-| `SecurityContext` | Specify the security context for a Pod. |
-| `TerminationGracePeriodSeconds` | It is the amount of time that Kubernetes gives for a Pod before terminating it. |
-| `Volumes` | It is a list of volumes that can be mounted by containers belonging to a Pod. |
-| `ImagePullSecrets` | It is an optional list of references to secrets in the same namespace for pulling any of the images used by a Pod. |
-| `InitContainers` | The initialization containers belonging to a Pod. A typical use case could be using an initialization container to download a remote JAR to a local path. |
-| `Sidecars` | Sidecar containers run together with the main function container in a Pod. |
+| `Labels` | 指定附加到 Pod 的标签。                                      |
+| `NodeSelector` | 指定键值对的映射。对于在节点上运行的 Pod，节点必须将每个指定的键值对作为标签。 |
+| `Affinity` | 指定 Pod 的调度约束。                                        |
+| `Tolerations` | 指定 Pod 的容忍度。                                          |
+| `Annotations`| 指定附加到 Pod 的注解。                                    |
+| `SecurityContext` | 指定 Pod 的安全上下文。                                      |
+| `TerminationGracePeriodSeconds` | Kubernetes 终止 Pod 前的时长。                     |
+| `Volumes` | 可以由属于 Pod 的容器挂载的卷（volume）的列表。 |
+| `ImagePullSecrets` | 可选列表，用于引用同一命名空间中的 secret，以拉取 Pod 使用的任何镜像。 |
+| `InitContainers` | 属于 Pod 的初始化容器。典型的用例为使用初始化容器来下载远程 JAR 到本地路径。 |
+| `Sidecars` | Sidecar 容器与 Pod 中的主要函数容器一起运行。 |
