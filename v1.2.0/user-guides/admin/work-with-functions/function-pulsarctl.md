@@ -1,17 +1,17 @@
 ---
-title: Work with Pulsar Functions using pulsarctl CLI tool
+title: 通过 pulsarctl 使用 Pulsar Functions
 id: function-pulsarctl
 category: user-guides
 ---
 
-After creating a Pulsar Function for a Pulsar cluster, you can update and remove it based on your requirements. This document describes how to update and delete Pulsar Functions using the pulsarctl CLI tool. For a full list of operations supported by the pulsarctl CLI tool, see [pulsarctl command reference](https://docs.streamnative.io/pulsarctl/v2.7.0.7/).
+为 Pulsar 集群创建一条 Pulsar Function 后，可以根据需要更新或删除这条 Pulsar Function。本文介绍了如何使用 pulsarctl CLI （命令行工具）来更新和删除一条 Pulsar Function。有关 pulsarctl CLI（命令行工具）支持操作的完整列表，参见 [pulsarctl 命令参考](https://docs.streamnative.io/pulsarctl/v2.7.0.7/)。
 
-# Create Pulsar Functions
+# 创建 Pulsar Functions
 
-After creating a cluster, you can use the `pulsarctl functions create` command to deploy a Pulsar Function to the cluster.
-This example shows how to create a Function for the `public` tenant and `default` namespace by specifying the JAR package.
+创建集群后，可以使用 `pulsarctl functions create` 命令将 Pulsar Functions 部署到集群中。
+如下示例显示了如何通过指定 JAR 包来为 `public` 租户和 `default` 命名空间来创建一条 Pulsar Function。
 
-**Input**
+**输入**
 
 ```
 pulsarctl functions create
@@ -25,60 +25,60 @@ pulsarctl functions create
 
 ```
 
-**Output**
+**输出**
 
 ```
 Created function1 successfully
 ```
 
-This table lists all fields available for creating a Pulsar function.
+下表列出了用于创建一条 Pulsar Function 的所有可用字段。
 
-This table lists all fields available for creating a Pulsar function.
 
-Field | Description | Default
+
+字段 | 描述 | 默认值 
 ---|---|---
-auto-ack | Whether or not the framework acknowledges messages automatically. | true |
-classname | The class name of a Pulsar Function. |  |
-CPU | The CPU in cores that need to be allocated per function instance (applicable only to docker runtime).| |
-custom-runtime-options | A string that encodes options to customize the runtime. | |
-custom-schema-inputs | The map of input topics to Schema class names (as a JSON string). | |
-custom-serde-inputs | The map of input topics to SerDe class names (as a JSON string). | |
-dead-letter-topic | The topic where all messages that were not processed successfully are sent. This parameter is not supported in Python Functions. | |
-disk | The disk in bytes that need to be allocated per function instance (applicable only to docker runtime). | |
-fqfn | The Fully Qualified Function Name (FQFN) for the function. |  |
-function-config-file | The path to a YAML config file specifying the configuration of a Pulsar Function. |  |
-go | Path to the main Go executable binary for the function (if the function is written in Go). |  |
-inputs | The input topic or topics of a Pulsar Function (multiple topics can be specified as a comma-separated list). | |
-jar | Path to the jar file for the function (if the function is written in Java). It also supports URL-path [http/https/file (file protocol assumes that file already exists on worker host)] from which worker can download the package. |  |
-log-topic | The topic to which the logs of a Pulsar Function are produced. |  |
-max-message-retries | How many times should we try to process a message before giving up. |  |
-name | The name of a Pulsar Function. |  |
-namespace | The namespace of a Pulsar Function. |  |
-output | The output topic of a Pulsar Function (If none is specified, no output is written). |  |
-output-serde-classname | The SerDe class to be used for messages output by the function. |  |
-parallelism | The parallelism factor of a Pulsar Function (i.e. the number of function instances to run). |  |
-processing-guarantees | The processing guarantees (delivery semantics) applied to the function. Available values: [ATLEAST_ONCE, ATMOST_ONCE, EFFECTIVELY_ONCE]. | ATLEAST_ONCE
-py | Path to the main Python file/Python Wheel file for the function (if the function is written in Python). |  |
-ram | The ram in bytes that need to be allocated per function instance (applicable only to process/docker runtime). |  |
-retain-ordering | Function consumes and processes messages in order. |  |
-schema-type | The builtin schema type or custom schema class name to be used for messages output by the function. | <empty string>
-sliding-interval-count | The number of messages after which the window slides. |  |
-sliding-interval-duration-ms | The time duration after which the window slides. |  |
-subs-name | Pulsar source subscription name if user wants a specific subscription-name for the input-topic consumer. |  |
-tenant | The tenant of a Pulsar Function. |  |
-timeout-ms | The message timeout in milliseconds. |  |
-topics-pattern | The topic pattern to consume from a list of topics under a namespace that matches the pattern. [--input] and [--topic-pattern] are mutually exclusive. Add SerDe class name for a pattern in --custom-serde-inputs (only supported in Java Function). |  |
-user-config | User-defined config key/values. |  |
-window-length-count | The number of messages per window. |  |
-window-length-duration-ms | The time duration of the window is milliseconds. | |
+auto-ack | 框架是否自动确认消息。                                       | true 
+classname | Pulsar Function 的类名。 | 
+CPU | 每个 function 实例需要分配的 CPU 核数（仅适用于 docker 运行时）。 | 
+custom-runtime-options | 对选项进行编码以自定义运行时的字符串。 | 
+custom-schema-inputs | 输入主题到 Schema 类名的映射（为 JSON 字符串）。 | 
+custom-serde-inputs | 输入主题到 SerDe 类名称的映射（为 JSON 字符串）。 | 
+dead-letter-topic | 所有未成功处理的消息被发送到的主题。Python Functions 不支持这一参数。 |  
+disk | 每个 function 实例需要分配的磁盘（以字节为单位）（仅适用于 docker 运行时）。 | 
+fqfn | Function 的全限定函数名（FQFN）。 | 
+function-config-file | 配置 Pulsar Function 的 YAML 配置文件的路径。 | 
+go | Function 的主要 Go 可执行二进制文件的路径（如果 function 是用 Go 编写的）。 | 
+inputs | Pulsar Function 的输入主题（多个主题可以用逗号分隔的列表来表示）。 | 
+jar | Function 的 jar 文件的路径（如果 function 是用 Java 编写的）。同时还支持 URL 路径 [http/https/file（文件协议，假定文件已经存在于 worker 主机上）]，worker 可以从中下载包。 | 
+log-topic | 生产 Pulsar Function 日志的主题。                        | 
+max-message-retries | 放弃前尝试处理消息的次数。                                   | 
+name | Pulsar Function 的名称。 | 
+namespace | Pulsar Function 的命名空间。 | 
+output | Pulsar Function 的输出主题（如未指定，则不写入输出）。      | 
+output-serde-classname | 用于 function 输出消息的 SerDe 类。                          | 
+parallelism | Pulsar Function 的并行度（即运行 function 的实例数）。 | 
+processing-guarantees | 应用于 function 的处理保证（传递语义）。可用值：[ATLEAST_ONCE、ATMOST_ONCE、EFFECTIVELY_ONCE]。 | ATLEAST_ONCE
+py | Function 的主 Python 文件/Python Wheel 文件的路径（如果 function 是使用 Python 编写的）。 |
+ram | 每个 function 实例需要分配的 ram 字节数（仅适用于进程/docker 运行时）。 | 
+retain-ordering | Function 按顺序消费和处理消息。                              | 
+schema-type | 内置 schema 类型或自定义 schema 类名称，用于函数输出消息。 | <empty string> 
+sliding-interval-count | 窗口滑动后的消息数。                                         | 
+sliding-interval-duration-ms | 窗口滑动的持续时间。                                         | 
+subs-name | 用于用户想要为输入主题消费者指定特定的订阅名称时，表示 Pulsar source 订阅名称。 | 
+tenant | Pulsar Function 的租户。 | 
+timeout-ms | 消息超时时间（以毫秒为单位）。 | 
+topics-pattern | 主题模式，命名空间主题列表中与该主题模式匹配的主题将被消费。`--input` 和 `--topics-Pattern` 是互斥的。<br/>可在 `--custom-serde-inputs` 中为模式添加 SerDe 类名（仅支持 Java 函数）。 | 
+user-config | 用户定义的 config 键/值。 | 
+window-length-count | 每个窗口的消息数。 | 
+window-length-duration-ms | 窗口的持续时间（以毫秒为单位）。                             | 
 
-# Update Pulsar Functions
+# 更新 Pulsar Functions
 
-When you want to update the configuration options of a Pulsar Function, you can use the `pulsarctl functions update` command to delete it. 
+要更新 Pulsar Functions 的配置项，可以使用 `pulsarctl functions update` 命令来进行更新。
 
-* This example shows how to update the output topic of `function1` for the `default` namespace under the `public` tenant.
+* 如下示例显示了如何为 `public` 租户下的 `default` 命名空间更新 `function1` 的输出主题。
 
-    **Input**
+    **输入**
 
     ```
     pulsarctl functions update
@@ -88,15 +88,15 @@ When you want to update the configuration options of a Pulsar Function, you can 
     --output test-output-topic
     ```
 
-    **Output**
+    **输出**
 
     ```
     Updated function1 successfully
     ```
 
-* This example shows how to update the log topic of `function1` for the `default` namespace under the `public` tenant.
+* 如下示例显示了如何为 `public` 租户下的 `default` 命名空间更新 `function1` 的日志主题。
 
-    **Input**
+    **输入**
 
     ```
     pulsarctl functions update
@@ -104,17 +104,17 @@ When you want to update the configuration options of a Pulsar Function, you can 
     // other function parameters
     ```
 
-    **Output**
+    **输出**
 
     ```
     Updated function1 successfully
     ```
 
-# Delete Pulsar Functions
+# 删除 Pulsar Functions
 
-When you want to remove a Function, you can use the `pulsarctl functions delete` command to delete it. This example shows how to delete `function1` from the `default` namespace under the `public` tenant.
+要删除 function，可以使用 `pulsarctl functions delete` 命令来进行删除。如下示例显示了如何从 `public` 租户下 `default` 命名空间删除 `function1`。
 
-**Input**
+**输入**
 
 ```
 pulsarctl functions delete
@@ -123,7 +123,7 @@ pulsarctl functions delete
 --name function1
 ```
 
-**Output**
+**输出**
 
 ```
 Deleted successfully
