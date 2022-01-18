@@ -25,7 +25,7 @@ Pulsar Functions 是一种简洁的计算抽象，Apache Pulsar 通过它可以�
 | `MaxReplicas`| 运行此 Pulsar Function 的最大 Pulsar 实例数。当 `maxReplicas` 参数的值大于 `replicas` 的值时，表示 Function 控制器根据 CPU 的使用情况对 Pulsar Functions 进行自动扩展。默认情况下，`maxReplicas` 设置为 0，表示禁用自动调节。 |
 | `Timeout` | 消息超时时间（以毫秒为单位）。                        |
 | `DeadLetterTopic` | 所有未处理成功的消息被发送到的主题。Python 函数不支持这一参数。 |
-| `FuncConfig` | 到 ConfigMap 的映射，指定 Pulsar 函数的配置。            |
+| `FuncConfig` | 到 ConfigMap 的映射，指定 Pulsar Function 的配置。  |
 | `LogTopic` | 生产 Pulsar Function 日志的主题。                         |
 | `AutoAck` | 框架是否自动确认消息。                                       |
 | `MaxMessageRetry` | 放弃前尝试处理消息的次数。                       |
