@@ -8,7 +8,7 @@ category: user-guides
 
 本文介绍了如何通过 StreamNative 控制台来使用连接器。
 
-当前 StreamNative 控制台支持以下连接器： 
+目前，StreamNative 控制台支持以下连接器： 
 
 * AMQP1_0 [source](https://hub.streamnative.io/connectors/amqp-1-0-source/v2.7.1.1) 和 [sink](https://hub.streamnative.io/connectors/amqp-1-0-sink/v2.7.1.1) 连接器
 * AWS SQS [source](https://hub.streamnative.io/connectors/sqs-source/2.7.0) 和 [sink](https://hub.streamnative.io/connectors/sqs-sink/2.7.0) 连接器
@@ -94,7 +94,6 @@ category: user-guides
   </tr>
 </table>
 
-
 4. 点击**创建**。
 
 ## 创建 sink 连接器
@@ -166,7 +165,6 @@ category: user-guides
    </td>
   </tr>
 </table>
-
 
 4. 点击**创建**。
 
@@ -274,7 +272,6 @@ category: user-guides
    </td>
   </tr>
 </table>
-
 
 4. 点击**创建**。
 
