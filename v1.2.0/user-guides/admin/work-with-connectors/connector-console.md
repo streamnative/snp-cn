@@ -1,376 +1,378 @@
 ---
-title: Work with connectors using StreamNative Console
+title: 通过 StreamNative 控制台使用连接器
 id: connector-console
 category: user-guides
 ---
 
-# Work with connectors using StreamNative Console
+# 通过 StreamNative 控制台使用连接器
 
-This document describes how to work with connectors through StreamNative Console. 
+本文介绍了如何通过 StreamNative 控制台来使用连接器。
 
-Currently, StreamNative Console supports the following connectors: 
+当前 StreamNative 控制台支持以下连接器： 
 
-* AMQP1_0 [source](https://hub.streamnative.io/connectors/amqp-1-0-source/v2.7.1.1) and [sink](https://hub.streamnative.io/connectors/amqp-1-0-sink/v2.7.1.1) connectors
-* AWS SQS [source](https://hub.streamnative.io/connectors/sqs-source/2.7.0) and [sink](https://hub.streamnative.io/connectors/sqs-sink/2.7.0) connector 
-* [Cloud Storage [sink](https://hub.streamnative.io/connectors/cloud-storage-sink/2.5.1) connector]([https://hub.streamnative.io/connectors/cloud-storage-sink/2.5.1](https://hub.streamnative.io/connectors/cloud-storage-sink/2.5.1))
-* Kinesis source and [sink](https://hub.streamnative.io/connectors/kinesis-sink/2.5.1) connectors [source](https://hub.streamnative.io/connectors/kinesis-source/2.5.1) and [sink]([https://hub.streamnative.io/connectors/kinesis-sink/2.5.1](https://hub.streamnative.io/connectors/kinesis-sink/2.5.1))
-* Data generator source and sink connectors (only for internal test purpose)
+* AMQP1_0 [source](https://hub.streamnative.io/connectors/amqp-1-0-source/v2.7.1.1) 和 [sink](https://hub.streamnative.io/connectors/amqp-1-0-sink/v2.7.1.1) 连接器
+* AWS SQS [source](https://hub.streamnative.io/connectors/sqs-source/2.7.0) 和 [sink](https://hub.streamnative.io/connectors/sqs-sink/2.7.0) 连接器
+* Cloud Storage [sink](https://hub.streamnative.io/connectors/cloud-storage-sink/2.5.1) 连接器
+* Kinesis [source](https://hub.streamnative.io/connectors/kinesis-source/2.5.1) 和 [sink](https://hub.streamnative.io/connectors/kinesis-sink/2.5.1) 连接器
+* 数据生成器的 source 和 sink 连接器（仅用于内部测试）
 
->**Note**
+>**注意**
 >
-> Currently, the Cloud Storage sink connector is only available for the AWS platform.
+> 目前，Cloud Storage sink 连接器仅可用于 AWS 平台。
 
-# Create connectors
+# 创建连接器
 
-This section describes how to create source and sink connectors.
+本节介绍了如何创建 source 和 sink 连接器。
 
-## Create source connectors
+## 创建 source 连接器
 
-To create a source connector, follow these steps.
+按照如下步骤创建 source 连接器：
 
-1. From the left navigation pane, click **Connector** > **Source**.
+1. 从左侧导航窗格中，点击**连接器** > **Source**。
 
-2. Click the icon of the source connector type that you want to create to enter the page where you can configure the source connector.
+2. 点击想要创建的 source 连接器类型的图标，进入 source 连接器的配置页面。
 
-   ![](../../image/create-source.png)
+   ![](../../../../image/create-source.png)
 
-3. Configure items about the source connector, as listed in the following table.
+3. 如下表所列，配置 source 连接器的相关选项。
 
 <table>
   <tr>
    <td>
-Field
+字段
    </td>
-   <td>Description
-   </td>
-  </tr>
-  <tr>
-   <td>Source Type
-   </td>
-   <td>(Read-only) the type of the source connector.
+   <td>描述
    </td>
   </tr>
   <tr>
-   <td>Source Name
+   <td>Source 类别
    </td>
-   <td>Enter a name for the source connector. It is a string of characters, supporting lowercase characters, numeric characters, and the special character hyphen (-)
-   </td>
-  </tr>
-  <tr>
-   <td>Tenant
-   </td>
-   <td>Select the tenant for the source connector.
+   <td>（只读）Source 连接器的类型。
    </td>
   </tr>
   <tr>
-   <td>Namespace
+   <td>Source 名
    </td>
-   <td>Select the namespace for the source connector.
-   </td>
-  </tr>
-  <tr>
-   <td>Output Topic
-   </td>
-   <td>Select the Pulsar topic into which the messages are ingested.
+   <td>为 source 连接器输入一个名称。它是一串字符，支持小写字符、数字字符和特殊字符连字符（-）。
    </td>
   </tr>
   <tr>
-   <td>Replicas
+   <td>租户
    </td>
-   <td>Set the number of instances for running the source connector.
+   <td>为 source 连接器选择租户。
    </td>
   </tr>
   <tr>
-   <td>Enable auto scaling
+   <td>命名空间
    </td>
-   <td>Enable or disable auto-scaling. If enabled, you should set the maximum number of the instances for running the source connector. The maximum number of the instances must be greater than the value of the `Replicas` and equal to or smaller than `10`.
+   <td>为 source 连接器选择命名空间。
+   </td>
+  </tr>
+  <tr>
+   <td>输出主题
+   </td>
+   <td>选择接收消息的 Pulsar 主题。
+   </td>
+  </tr>
+  <tr>
+   <td>副本
+   </td>
+   <td>设置运行 source 连接器的实例数量。
+   </td>
+  </tr>
+  <tr>
+   <td>启用自动扩缩
+   </td>
+   <td>启用或禁用自动扩缩。如果启用，则应该设置运行 source 连接器的最大实例数。最大实例数必须大于”副本“的值，并且等于或小于 10。
    </td>
   </tr>
   <tr>
    <td>Config
    </td>
-   <td>(Optional) Configure the source connector. For detailed descriptions about configurations of the supported source connectors, see [StreamNative Hub](<a href="https://hub.streamnative.io/">https://hub.streamnative.io/</a>). If you do not configure the source connector, the connector is created with default configurations. 
+   <td>（可选）配置 source 连接器。支持的 source 连接器的配置的详细描述，参阅 [StreamNative Hub](<a href="https://hub.streamnative.io/">https://hub.streamnative.io/</a>)。如果不对 source 连接器进行配置，则连接器将按照默认配置创建。
    </td>
   </tr>
 </table>
 
-4. Click **Create**.
 
-## Create sink connectors
+4. 点击**创建**。
 
-To create a sink connector, follow these steps.
+## 创建 sink 连接器
 
-1. From the left navigation pane, click **Connector** > **Sink**. 
+按照如下步骤创建 sink 连接器：
 
-2. Click the icon of the sink connector that you want to create to enter the page where you can configure the sink connector.
+1. 从左侧导航窗格中，点击 **连接器** > **Sink**。
 
-   ![](../../image/create-sink.png)
+2. 点击想要新建的 sink 连接器类型的图标，进入 sink 连接器的配置页面。
 
-3. Configure items about the sink connector, as listed in the following table.
+   ![](../../../../image/create-sink.png)
+
+3. 如下表所列，配置有关 sink 连接器的选项。
 
 <table>
   <tr>
    <td>
-Field
+字段
    </td>
-   <td>Description
-   </td>
-  </tr>
-  <tr>
-   <td>Sink Type
-   </td>
-   <td>(Read-only) the type of the sink connector.
+   <td>描述
    </td>
   </tr>
   <tr>
-   <td>Sink Name
+   <td>Sink 类别
    </td>
-   <td>Enter a name for the sink connector.
-   </td>
-  </tr>
-  <tr>
-   <td>Tenant
-   </td>
-   <td>Select the tenant for the sink connector.
+   <td>（只读）Sink 连接器的类型。
    </td>
   </tr>
   <tr>
-   <td>Namespace
+   <td>Sink 名
    </td>
-   <td>Select the namespace for the sink connector.
-   </td>
-  </tr>
-  <tr>
-   <td>Input Topic
-   </td>
-   <td>Click <strong>Add</strong> to add one more Pulsar topics from which the messages are exported.
+   <td>输入 sink 连接器的名称。
    </td>
   </tr>
   <tr>
-   <td>Replicas
+   <td>租户
    </td>
-   <td>Configure the number of instances for running the sink connector.
+   <td>为 sink 连接器选择租户。
    </td>
   </tr>
   <tr>
-   <td>Enable auto scaling
+   <td>命名空间
    </td>
-   <td>Enable or disable auto-scaling. If enabled, you should set the maximum number of the instances for running the sink connector. The maximum number of the instances must be greater than the value of the `Replicas` and equal to or smaller than `10`.
+   <td>为 sink 连接器选择命名空间。
+   </td>
+  </tr>
+  <tr>
+   <td>输入主题
+   </td>
+   <td>点击<strong>添加</strong>，添加更多输出消息的 Pulsar 主题。
+   </td>
+  </tr>
+  <tr>
+   <td>副本
+   </td>
+   <td>设置运行 sink 连接器的实例数量。
+   </td>
+  </tr>
+  <tr>
+   <td>启用自动扩缩
+   </td>
+   <td>启用或禁用自动扩缩。如果启用，则应该设置运行 sink 连接器的最大实例数。最大实例数必须大于”副本“的值，并且等于或小于 10。
    </td>
   </tr>
   <tr>
    <td>Config
    </td>
-   <td>(Optional) Configure the sink connector. For detailed descriptions about configurations of the supported sink connectors, see [StreamNative Hub](<a href="https://hub.streamnative.io/">https://hub.streamnative.io/</a>). If you do not configure the source connector, the connector is created with default configurations. 
+   <td>（可选）配置 sink 连接器。支持的 sink 连接器的配置的详细描述，参阅[StreamNative Hub](<a href="https://hub.streamnative.io/">https://hub.streamnative.io/</a>)。如果不对 sink 连接器进行配置，则连接器将按照默认配置创建。
    </td>
   </tr>
 </table>
 
-4. Click **Create**.
 
-# Update connectors
+4. 点击**创建**。
 
-After a connector is created, you can update some of its fields. This section describes how to update source and sink connectors.
+# 更新连接器 
 
-## Update source connectors
+创建连接器后，可以对连接器的一些字段进行更新。本节介绍了如何对 source 和 sink 连接器进行更新。
 
-To update a source connector, follow these steps.
+## 更新 source 连接器
 
-1. From the left navigation pane, click **Connector** > **Source**. 
+按照如下步骤更新 source 连接器：
 
-2. Click the target source connector and you can check information about the source connector.
+1. 从左侧导航窗格中，点击 **连接器** > **Source**。
 
-3. Update the following items about the source connector. 
+2. 点击目标 source 连接器，可以查看 source 连接器相关信息。
 
-    * Tenant: configure the target tenant for the source connector.
-    * Namespace: configure the target namespace for the source connector.
-    * Output Topic: update the Pulsar topic into which the messages are ingested.
-    * Replicas: update the number of instances for running the source connector.
-    * Auto-scaling: when auto-scaling is enabled, update the maximum number of the instances for running the source connector.
-    * Config: update configurations about the source connector.
-4. Click **Update**.
+3. 更新如下有关 source 连接器的项目：
 
-## Update sink connectors
+    * 租户：为 source 连接器配置目标租户。
+    * 命名空间：为 source 连接器配置目标命名空间。
+    * 输出主题：更新接收消息的 Pulsar 主题。
+    * 副本：更新运行 source 连接器的实例数。
+    * 自动扩缩：启用自动扩缩时，更新运行 source 连接器的最大实例数。
+    * Config：更新 source 连接器的配置。
+4. 点击**更新**。
 
-To update a sink connector, follow these steps.
+## 更新 sink 连接器
 
-1. From the left navigation pane, click **Connector** > **Sink**. 
-2. Click the target sink connector and you can check information about the sink connector.
-3. Update the following items about the sink connector.
-    * Tenant: configure the target tenant for the sink connector.
-    * Namespace: configure the target namespace for the sink connector.
-    * Input Topic: 
-        * Click **Add** to add one or more Pulsar topics for the sink connector. 
-        * Click **Delete** to delete one or more Pulsar topics for the sink connector.
-    * Replicas: update the number of instances for running the sink connector.
-    * Auto-scaling: when auto-scaling is enabled, update the maximum number of the instances for running the sink connector.
-    * Config: update configurations about the sink connector.
-4. Click **Update**.
+按照如下步骤更新 sink 连接器：
 
-# Clone connectors
+1. 从左侧导航窗格中，点击 **连接器** > **Sink**。
+2. 点击目标 sink 连接器，可以查看 sink 连接器相关信息。
+3. 更新如下有关 sink 连接器的项目：
+    * 租户：为 sink 连接器配置目标租户。
+    * 命名空间：为 sink 连接器配置目标命名空间。
+    * 输入主题：
+        * 点击**添加**为 sink 连接器添加一个或多个 Pulsar 主题。
+        * 点击**删除**为 sink 连接器删除一个或多个 Pulsar 主题。
+    * 副本：更新运行 sink 连接器的实例数。
+    * 自动扩缩：启用自动扩缩时，更新运行 sink 连接器的最大实例数。
+    * Config：更新 sink 连接器的配置。
+4. 点击**更新**。
 
-If you want to create a new connector without modifying too many configurations, you can clone an existing connector and then update some of the configurations based on your requirements.
+# 克隆连接器
 
-## Clone source connectors
+如果想要创建连接器，并且无需修改太多的配置，则可以克隆一个现有的连接器，然后根据需求更新配置。
 
-To clone a source connector, follow these steps.
+## 克隆 source 连接器
 
-1. From the left navigation pane, click **Connector** > **Source**. 
-2. Click the target source connector.
-3. Scroll down the page and then click **Clone**. A page is displayed, where you can configure the source connector based on your requirements.
+按照如下步骤克隆 source 连接器：
 
-   ![](../../image/clone-source.png)
+1. 从左侧导航窗格中，点击 **连接器** > **Source**。
+2. 点击目标 source 连接器。
+3. 向下滚动页面，然后单击**克隆**。在显示的页面中，根据需求配置 source 连接器。
+
+   ![](../../../../image/clone-source.png)
 
 <table>
   <tr>
    <td>
-Field
+字段
    </td>
-   <td>Description
-   </td>
-  </tr>
-  <tr>
-   <td>Source Name
-   </td>
-   <td>Enter a name for the source connector. It is a string of characters, supporting lowercase characters, numeric characters, and the special character hyphen (-)
+   <td>描述
    </td>
   </tr>
   <tr>
-   <td>Tenant
+   <td>Source 名
    </td>
-   <td>Select the tenant for the source connector.
-   </td>
-  </tr>
-  <tr>
-   <td>Namespace
-   </td>
-   <td>Select the namespace for the source connector.
+   <td>输入 source 连接器的名称。它是一串字符，支持小写字符、数字字符和特殊字符连字符（-）。
    </td>
   </tr>
   <tr>
-   <td>Output Topic
+   <td>租户
    </td>
-   <td>Select the Pulsar topic into which the messages are ingested.
-   </td>
-  </tr>
-  <tr>
-   <td>Replicas
-   </td>
-   <td>Set the number of instances for running the source connector.
+   <td>为 source 连接器选择租户。  
    </td>
   </tr>
   <tr>
-   <td>Enable auto scaling
+   <td>命名空间
    </td>
-   <td>Enable or disable auto-scaling. If enabled, you should set the maximum number of the instances for running the source connector. The maximum number of the instances must be greater than the value of the `Replicas` and equal to or smaller than `10`.
+   <td>为 source 连接器选择命名空间。
+   </td>
+  </tr>
+  <tr>
+   <td>输出主题
+   </td>
+   <td>选择接收消息的 Pulsar 主题。
+   </td>
+  </tr>
+  <tr>
+   <td>副本
+   </td>
+   <td>设置运行 source 连接器的实例数量。
+   </td>
+  </tr>
+  <tr>
+   <td>启用自动扩缩
+   </td>
+   <td>启用或禁用自动扩缩。如果启用，则应该设置运行 source 连接器的最大实例数。最大实例数必须大于”副本“的值，并且等于或小于 10。
    </td>
   </tr>
   <tr>
    <td>Config
    </td>
-   <td>(Optional) Configure the source connector. For detailed descriptions about configurations of the supported source connectors, see [StreamNative Hub](<a href="https://hub.streamnative.io/">https://hub.streamnative.io/</a>). If you do not configure the source connector, the connector is created with default configurations. 
+   <td>（可选）配置 source 连接器。支持的 source 连接器的配置的详细说明，参阅 [StreamNative Hub](<a href="https://hub.streamnative.io/">https://hub.streamnative.io/</a>)。如果不对 source 连接器进行配置，则将使用默认配置创建连接器。
    </td>
   </tr>
 </table>
 
-4. Click **Create**.
 
-## Clone sink connectors
+4. 点击**创建**。
 
-To clone a sink connector, follow these steps.
+## 克隆 sink 连接器
 
-1. From the left navigation pane, click **Connector** > **Sink**. 
-2. Click the target sink connector.
-3. Scroll down the page and then click **Clone**. A page is displayed, where you can configure the connector based on your requirements.
+按照如下步骤克隆 sink 连接器：
 
-   ![](../../image/clone-sink.png)
+1. 从左侧导航窗格中，点击 **连接器** > **Sink**。
+2. 点击目标 sink 连接器。
+3. 向下滚动页面，然后单击**克隆**。在显示的页面中，根据需求配置 sink 连接器。
+
+   ![](../../../../image/clone-sink.png)
 
 
 <table>
   <tr>
-   <td>Field
+   <td>字段
    </td>
-   <td>Description
-   </td>
-  </tr>
-  <tr>
-   <td>Sink Name
-   </td>
-   <td>Enter a name for the sink connector.
+   <td>描述
    </td>
   </tr>
   <tr>
-   <td>Tenant
+   <td>Sink 名
    </td>
-   <td>Select the tenant for the source connector.
-   </td>
-  </tr>
-  <tr>
-   <td>Namespace
-   </td>
-   <td>Select the namespace for the source connector.
+   <td>输入 sink 连接器的名称。
    </td>
   </tr>
   <tr>
-   <td>Input Topic
+   <td>租户
+   </td>
+   <td>为 sink 连接器选择租户。
+   </td>
+  </tr>
+  <tr>
+   <td>命名空间
+   </td>
+   <td>为 sink 连接器选择命名空间。
+   </td>
+  </tr>
+  <tr>
+   <td>输入主题
    </td>
    <td>
 <ul>
 
-<li>Click <strong>Add</strong> to add one or more Pulsar topics for the sink connector.
+<li>点击<strong>添加</strong>为 sink 连接器添加一个或多个 Pulsar 主题。
 
-<li>Click <strong>Delete</strong> to delete one or more Pulsar topics for the sink connector.
+<li>点击<strong>删除</strong>删除一个或多个 sink 连接器的 Pulsar 主题。
 </li>
 </ul>
    </td>
   </tr>
   <tr>
-   <td>Replicas
+   <td>副本
    </td>
-   <td>Configure the number of instances for running the sink connector.
+   <td>设置运行 sink 连接器的实例量。
    </td>
   </tr>
   <tr>
-   <td>Enable auto scaling
+   <td>启用自动扩缩 
    </td>
-   <td>Enable or disable auto-scaling. If enabled, you should set the maximum number of the instances for running the sink connector. The maximum number of the instances must be greater than the value of the `Replicas` and equal to or smaller than `10`.
+   <td>启用或禁用自动扩缩。如果启用，则应该设置运行 sink 连接器的最大实例数。最大实例数必须大于”副本“的值，并且等于或小于 10。
    </td>
   </tr>
   <tr>
    <td>Config
    </td>
-   <td>(Optional) Configure the sink connector. For detailed descriptions about configurations of the supported sink connectors, see [StreamNative Hub](<a href="https://hub.streamnative.io/">https://hub.streamnative.io/</a>). If you do not configure the source connector, the connector is created with default configurations. 
+   <td>（可选）配置 sink 连接器。支持的 sink 连接器的配置的详细描述，参阅 [StreamNative Hub](<a href="https://hub.streamnative.io/">https://hub.streamnative.io/</a>)。如果不对 sink 连接器进行配置，则将使用默认配置创建连接器。
    </td>
   </tr>
 </table>
 
-4. Click **Create**.
+4. 点击**创建**。
 
-# Delete connectors
+# 删除连接器
 
-This section describes how to delete source and sink connectors.
+本节介绍了如何删除 source 和 sink 连接器。
 
-## Delete source connectors
+## 删除 source 连接器
 
-To delete a source connector, follow these steps.
+按照如下步骤删除 source 连接器：
 
-1. From the left navigation pane, click **Connector** > **Source**. 
-2. Click the target source connector and then scroll down the page.
-3. Click **Delete Source**. 
+1. 从左侧导航窗格中，点击 **连接器** > **Source**。
+2. 点击目标 source 连接器，然后向下滚动页面。
+3. 点击**删除 Source**。
   
-   ![](../../image/delete-source.png)
+   ![](../../../../image/delete-source.png)
 
-4. Enter the source connector name and then click **Confirm**.
+4. 输入 source 连接器名，点击**确认**。
 
-## Delete sink connectors
+## 删除 sink 连接器
 
-To delete a sink connector, follow these steps.
+按照如下步骤删除 sink 连接器：
 
-1. From the left navigation pane, click **Connector** > **Sink**. 
-2. Click the target sink connector and then scroll down the page. 
-3. Click **Delete Sink**. A dialog box is displayed.
+1. 从左侧导航窗格中，点击 **连接器** > **Sink**。
+2. 点击目标 sink 连接器，然后向下滚动页面。
+3. 点击**删除 Sink**，出现对话框。
 
-   ![](../../image/delete-sink.png)
+   ![](../../../../image/delete-sink.png)
 
-4. Enter the sink connector name and then click **Confirm**.
-
+4. 输入 sink 连接器名，点击**确认**。
