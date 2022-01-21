@@ -1,87 +1,87 @@
 ---
-title: Package Pulsar Functions
+title: 打包 Pulsar Functions
 id: function-package
 category: user-guides
 ---
 
-After developing and testing your Pulsar Functions , you need to package it so that it can be submitted to a Pulsar cluster. This document describes how to package Java, Python, and Go Functions.
+对 Pulsar Functions 进行开发和测试后，需要将其打包，以便将其提交到 Pulsar 集群。本文介绍了如何打包 Java、Python 和 Go 函数。
 
-# Prerequisites
+# 先决条件
 
-- Apache Pulsar 2.8.0 or higher
+- Apache Pulsar 2.8.0 或更高版本
 
-- Function Mesh v0.1.3 or higher
+- Function Mesh v0.1.3 或更高版本
 
-# Package Java Functions
+# 打包 Java 函数
 
-You can package Java Functions to NAR/JAR packages or Docker images.
+可以将 Java 函数打包到 NAR/JAR 包或 Docker 镜像。
 
-## Build Java Functions packages
+## 构建 Java 函数包
 
-To package a Function in Java, follow these steps.
+按照如下步骤操作，构建 Java 的函数包：
 
-1. Create a new Maven project with a `pom.xml` file. In the following code sample, the value of `mainClass` is your package name.
+1. 使用 `pom.xml` 文件创建一个新的 Maven 项目。下面的代码示例中，`mainClass` 的值是包的名字。
 
     ```Java
-    &lt;?xml version="1.0" encoding="UTF-8"?>
-    &lt;project xmlns="http://maven.apache.org/POM/4.0.0"
+    <?xml version="1.0" encoding="UTF-8"?>
+    <project xmlns="http://maven.apache.org/POM/4.0.0"
             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
             xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-        &lt;modelVersion>4.0.0&lt;/modelVersion>
-        &lt;groupId>java-function&lt;/groupId>
-        &lt;artifactId>java-function&lt;/artifactId>
-        &lt;version>1.0-SNAPSHOT&lt;/version>
-        &lt;dependencies>
-            &lt;dependency>
-                &lt;groupId>org.apache.pulsar&lt;/groupId>
-                &lt;artifactId>pulsar-functions-api&lt;/artifactId>
-                &lt;version>2.6.0&lt;/version>
-            &lt;/dependency>
-        &lt;/dependencies>
-        &lt;build>
-            &lt;plugins>
-                &lt;plugin>
-                    &lt;artifactId>maven-assembly-plugin&lt;/artifactId>
-                    &lt;configuration>
-                        &lt;appendAssemblyId>false&lt;/appendAssemblyId>
-                        &lt;descriptorRefs>
-                            &lt;descriptorRef>jar-with-dependencies&lt;/descriptorRef>
-                        &lt;/descriptorRefs>
-                        &lt;archive>
-                        &lt;manifest>
-                            &lt;mainClass>org.example.test.ExclamationFunction&lt;/mainClass>
-                        &lt;/manifest>
-                    &lt;/archive>
-                    &lt;/configuration>
-                    &lt;executions>
-                        &lt;execution>
-                            &lt;id>make-assembly&lt;/id>
-                            &lt;phase>package&lt;/phase>
-                            &lt;goals>
-                                &lt;goal>assembly&lt;/goal>
-                            &lt;/goals>
-                        &lt;/execution>
-                    &lt;/executions>
-                &lt;/plugin>
-                &lt;plugin>
-                    &lt;groupId>org.apache.maven.plugins&lt;/groupId>
-                    &lt;artifactId>maven-compiler-plugin&lt;/artifactId>
-                    &lt;configuration>
-                        &lt;source>8&lt;/source>
-                        &lt;target>8&lt;/target>
-                    &lt;/configuration>
-                &lt;/plugin>
-            &lt;/plugins>
-        &lt;/build>
-    &lt;/project>
+        <modelVersion>4.0.0</modelVersion>
+        <groupId>java-function</groupId>
+        <artifactId>java-function</artifactId>
+        <version>1.0-SNAPSHOT</version>
+        <dependencies>
+            <dependency>
+                <groupId>org.apache.pulsar</groupId>
+                <artifactId>pulsar-functions-api</artifactId>
+                <version>2.6.0</version>
+            </dependency>
+        </dependencies>
+        <build>
+            <plugins>
+                <plugin>
+                    <artifactId>maven-assembly-plugin</artifactId>
+                    <configuration>
+                        <appendAssemblyId>false</appendAssemblyId>
+                        <descriptorRefs>
+                            <descriptorRef>jar-with-dependencies</descriptorRef>
+                        </descriptorRefs>
+                        <archive>
+                        <manifest>
+                            <mainClass>org.example.test.ExclamationFunction</mainClass>
+                        </manifest>
+                    </archive>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <id>make-assembly</id>
+                            <phase>package</phase>
+                            <goals>
+                                <goal>assembly</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <configuration>
+                        <source>8</source>
+                        <target>8</target>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </build>
+    </project>
     ```
 
-2. Write a Java Functions.
+2. 编写 Java 函数。
 
     ```java
     package org.example.test;
     import java.util.function.Function;
-    public class ExclamationFunction implements Function&lt;String, String> {
+    public class ExclamationFunction implements Function<String, String> {
         @Override
         public String apply(String s) {
             return "This is my function!";
@@ -89,25 +89,25 @@ To package a Function in Java, follow these steps.
     }
     ```
 
-3. Package the Java Functions.
+3. 打包 Java 函数。
 
     ```bash
     mvn package
     ```
 
-    After the Java Function is packaged, a `target` directory is created automatically. Open the `target` directory to check if there is a JAR package similar to `java-function-1.0-SNAPSHOT.jar`.
+    Java 函数打包后，会自动创建一个 `target`  目录。打开 `target` 目录，查看是否有类似 `java-function-1.0-SNAPSHOT.jar` 的 JAR 包。
 
-Then, you can push the package into a package management system, define Functions CRDs by specifying the uploaded Functions package and submit the Functions to a Pulsar cluster.
+然后，将包推送到包管理系统中，通过指定上传的函数包来定义函数 CRD，并将这些函数提交到 Pulsar 集群。
 
-## Build Docker images
+## 构建 Docker 镜像
 
-To build a Docker image, follow these steps.
+按照如下步骤，创建 Docker 镜像：
 
-1. Package your Pulsar function. For details, see [package Pulsar functions](#package-java-functions).
+1. 打包 Java 函数。详细信息参见[打包 Java 函数](#打包-java-函数)。
 
-2. Define a `Dockerfile`.
+2. 定义 `Dockerfile`。
 
-    This example shows how to define a `Dockerfile` with a JAR package (`example-function.jar`) of the Java Functions.
+    下面的例子显示了如何使用 Java 函数的 JAR 包 (`example-function.jar`) 来定义 `Dockerfile`。
 
     ```dockerfile
     # Use pulsar-functions-java-runner since we pack Java function
@@ -116,50 +116,51 @@ To build a Docker image, follow these steps.
     COPY example-function.jar /pulsar/
     ```
 
-Then, you can push the Functions Docker image into an image registry (such as the [Docker Hub](https://hub.docker.com/), or any private registry) and use the Functions Docker image to configure and submit the Functions to a Pulsar cluster.
+然后，将函数 Docker 镜像推送到镜像 registry（如 [Docker Hub](https://hub.docker.com/)，或任意私有的 registry），并使用函数 Docker 镜像来配置和提交函数提交到 Pulsar 集群。
 
-# Package Python Functions
+# 打包 Python 函数 
 
-You can package Python Functions to external packages (one Python file or ZIP file) or Docker images.
+可以将 Python 函数打包成外部包（Python 文件或 ZIP 文件）或 Docker 镜像。
 
-## Build Python Functions packages
+## 构建 Python 函数包
 
-This section describes how to build packages for Python Functions.
+本节介绍了如何为 Python 函数构建包。
 
-Python Function supports One Python file or ZIP file.
+Python 函数支持 Python 文件或 ZIP 文件。
 
-- One Python file
+- Python 文件
 
-- ZIP file
+- ZIP 文件
 
-### One Python file
+### Python 文件
 
-   This example shows how to package a Python Functions with the **one Python file**.
+如下示例介绍了如何使用 **Python 文件**打包 Python 函数：
 
-    ```python
-    from pulsar import Function //  import the Function module from Pulsar
-    # The classic ExclamationFunction that appends an exclamation at the end
-    # of the input
-    class ExclamationFunction(Function):
-      def __init__(self):
-        pass
-      def process(self, input, context):
-        return input + '!'
-    ```
+```python
+from pulsar import Function //  import the Function module from Pulsar
+# The classic ExclamationFunction that appends an exclamation at the end
+# of the input
+class ExclamationFunction(Function):
+  def __init__(self):
+    pass
+  def process(self, input, context):
+    return input + '!'
+```
 
-    In this example, when you write a Python Functions, you need to inherit the Function class and implement the `process()` method.
+在这个示例中，在编写 Python 函数时，需要继承函数类，并使用 `process()` 方法。
 
-    The `process()` method mainly has two parameters:
+这个 `process()` 方法主要有两个参数：
+    
+- `input` 表示输入。
+  
+- `context` 表示 Pulsar Function 暴露的接口。可以基于提供的上下文对象获取 Python 函数的属性。
 
-    - `input` represents your input.
+### ZIP 文件
 
-    - `context` represents an interface exposed by the Pulsar Function. You can get the attributes in the Python Functions based on the provided context object.
+要在 Python 中使用 **ZIP 文件**来打包 Python 函数，需要准备一个 ZIP 文件。打包 Python 函数的 ZIP 文件，需要满足下面的要求。
 
-### ZIP file
-
-    To package a Python Functions with the **ZIP file** in Python, you need to prepare a ZIP file. The following is required when packaging the ZIP file of the Python Function.
-
-    Assume the zip file is named as `func.zip`, unzip the `func.zip` folder:
+假设 ZIP 文件的文件名是 `func.zip`，将它解压到 `func.zip` 文件夹：
+    
 
     ```text
         "func/src"
@@ -167,8 +168,7 @@ Python Function supports One Python file or ZIP file.
         "func/deps"
     ```
 
-    Take [exclamation.zip](https://github.com/apache/pulsar/tree/master/tests/docker-images/latest-version-image/python-examples) as an example. The internal structure of the example is as follows.
-
+可以使用 [exclamation.zip](https://github.com/apache/pulsar/tree/master/tests/docker-images/latest-version-image/python-examples) 作为示例。示例文件的内部结构如下：
     ```text
     .
     ├── deps
@@ -177,43 +177,43 @@ Python Function supports One Python file or ZIP file.
         └── exclamation.py
     ```
 
-Then, you can push the package into a package management system, define Functions CRDs by specifying the uploaded Functions package and submit the Functions to a Pulsar cluster.
+然后，将包推送到包管理系统中，通过指定上传的函数包来定义函数 CRD，并将这些函数提交到 Pulsar 集群。
 
-## Build Docker images
+## 构建 Docker 镜像
 
-To build a Docker image, follow these steps.
+按照如下步骤操作构建 Docker 镜像。
 
-1. Package your Python Functions. For details, see [package Pulsar functions](#package-python-functions).
+1. 打包 Python 函数。细节参见[打包 Python 函数](#打包-python-函数)。
 
-2. Define a `Dockerfile`.
+2. 定义 `Dockerfile`。
 
-    This example shows how to define a `Dockerfile` with a JAR package (`example-function.jar`) of the Python Functions.
+    下面的例子显示了如何使用 Python 函数的 JAR 包 (`example-function.jar`) 来定义 `Dockerfile`。
 
     ```dockerfile
-
+    
     # Use pulsar-functions-python-runner since we pack python function
-
+    
     FROM streamnative/pulsar-functions-python-runner:2.7.1
-
+    
     # Copy function JAR package into /pulsar directory  
-
+    
     COPY example-function.jar /pulsar/
-
+    
     ```
 
-Then, you can push the Functions Docker image into an image registry (such as the [Docker Hub](https://hub.docker.com/), or any private registry) and use the Functions Docker image to configure and submit the Functions to a Pulsar cluster.
+然后，将函数 Docker 镜像推送到镜像 registry（如 [Docker Hub](https://hub.docker.com/)，或任意私有的 registry），并使用函数 Docker 镜像来配置和提交函数提交到 Pulsar 集群。
 
-# Package Go Functions
+# 打包 Go 函数
 
-You can package Go Functions to external packages or Docker images.
+可以将 Go 函数打包到外部包或者 Docker 镜像。
 
-## Build Go Functions packages
+## 构建 Go 函数包
 
-To package Go Functions in Go, follow these steps.
+按照如下步骤，在 Go 中打包 Go 函数：
 
-1. Write a Go Functions.
+1. 编写 Go 函数。
 
-    Currently, Go Functions can be **only** implemented using SDK and the interface of the Functions is exposed in the form of SDK. Before using the Go Functions, you need to import `github.com/apache/pulsar/pulsar-function-go/pf`. 
+    目前 Go 函数**仅**可使用 SDK 实现，并且函数的接口以 SDK 的形式公开。使用 Go 函数前，需要先导入 `github.com/apache/pulsar/pulsar-function-go/pf`。
 
     ```go
     import (
@@ -230,11 +230,11 @@ To package Go Functions in Go, follow these steps.
     }
     ```
 
-    When writing a Go Functions, remember that
+    在编写 Go 函数时，需要注意如下几点： 
 
-    - In `main()`, you **only** need to register the Functions name to `Start()`. **Only** one Functions name is received in `Start()`. 
+    - 在 `main()` 中，**只**需要将函数名称注册到 `Start()`。在 `Start()`  中**只**接收函数名。
 
-    - Go Functions use Go reflection, which is based on the received Functions name, to verify whether the parameter list and returned value list are correct. The parameter list and returned value list **must be** one of the following sample Functions:
+    - Go 函数使用 Go 反射，根据接收到的函数名，来验证参数列表和返回值列表是否正确。参数列表和返回值列表**必须**是以下示例函数之一：
 
       ```go
        func ()
@@ -246,9 +246,9 @@ To package Go Functions in Go, follow these steps.
        func (context.Context, input) error
        func (context.Context) (output, error)
        func (context.Context, input) (output, error)
-       ```
+      ```
 
-    You can use the context to connect to the Go Functions.
+    可以使用上下文连接到 Go 函数。
 
     ```go
     if fc, ok := pf.FromContext(ctx); ok {
@@ -257,23 +257,23 @@ To package Go Functions in Go, follow these steps.
     }
     ```
 
-2. Build the Go Functions.
+2. 构建 Go 函数。
 
     ```bash
-    go build &lt;your Go Function filename>.go 
+    go build <your Go Function filename>.go 
     ```
 
-Then, you can push the package into a package management system, define Functions CRDs by specifying the uploaded Functions package and submit the Functions to a Pulsar cluster.
+然后，将包推送到包管理系统中，通过指定上传的函数包来定义函数 CRD，并将这些函数提交到 Pulsar 集群。
 
-## Build Docker images
+## 构建 Docker 镜像
 
-To build a Docker image, follow these steps.
+按照如下步骤，构建 Docker 镜像：
 
-1. Package your Go Functions. For details, see [package Pulsar functions](#package-go-functions).
+1. 打包 Go 函数。详情参见[打包 Go 函数](#打包-go-函数)。
 
-2. Define a `Dockerfile`.
+2. 定义 `Dockerfile`。
 
-    This example shows how to define a `Dockerfile` with a JAR package (`example-function.jar`) of the Go function.
+    如下示例显示了如何使用 Go 函数的 JAR 包（`example-function.jar`）定义 `Dockerfile`。
 
     ```dockerfile
     # Use pulsar-functions-go-runner since we pack Go function
@@ -282,4 +282,4 @@ To build a Docker image, follow these steps.
     COPY example-function.jar /pulsar/
     ```
 
-Then, you can push the Functions Docker image into an image registry (such as the [Docker Hub](https://hub.docker.com/), or any private registry) and use the Functions Docker image to configure and submit the Go functions to a Pulsar cluster.
+然后，将函数 Docker 镜像推送到镜像 registry（如 [Docker Hub](https://hub.docker.com/)，或任意私有的 registry），并使用函数 Docker 镜像来配置和提交函数提交到 Pulsar 集群。
