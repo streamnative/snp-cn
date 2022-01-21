@@ -11,4 +11,3 @@ StreamNative Platform 1.2 现已发布。
 
     在 StreamNative Platform 的 YAML 文件（`values.yaml`文件）中启用 Google  OAuth2 登录并配置相关参数后，即可通过谷歌账号登录 StreamNative 控制台。详情参见[配置 StreamNative 控制台](/operator-guides/configure/streamnative-console.md)。
 - 更新了 StreamNative Platform 许可证的更新流程。详情参见[更新许可证](/operator-guides/configure/license-update.md)。
-
