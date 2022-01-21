@@ -72,7 +72,7 @@ sinkClass: fully qualified class name (only if sink connector)
 
 按照如下步骤，构建 Docker 镜像：
 
-1. 将连接器打包成 [NAR 包](#nar-package) 或 [JAR 包](#uber-jar-package)。
+1. 将连接器打包成 [NAR 包](#构建-nar-包) 或 [JAR 包](#构建-uber-jar-包 )。
 
 2. 定义一个 `Dockerfile`。
 
