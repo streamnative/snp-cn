@@ -120,21 +120,21 @@ category: user-guides
 
 # 打包 Python 函数 
 
-可以将 Python 函数打包成外部包（Python 文件或 ZIP 文件）或 Docker 镜像。
+可以将 Python 函数打包成外部包（单个 Python 文件或 ZIP 文件）或 Docker 镜像。
 
 ## 构建 Python 函数包
 
 本节介绍了如何为 Python 函数构建包。
 
-Python 函数支持 Python 文件或 ZIP 文件。
+Python 函数支持单个 Python 文件或 ZIP 文件。
 
-- Python 文件
+- 单个 Python 文件
 
 - ZIP 文件
 
-### Python 文件
+### 单个 Python 文件
 
-如下示例介绍了如何使用 **Python 文件**打包 Python 函数：
+如下示例介绍了如何使用 **单个 Python 文件**打包 Python 函数：
 
 ```python
 from pulsar import Function //  import the Function module from Pulsar
