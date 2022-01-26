@@ -76,7 +76,7 @@ sinkClass: fully qualified class name (only if sink connector)
 
 2. 定义一个 `Dockerfile`。
 
-    如下示例显示了如何使一个用名为 `pulsar-io-example.nar` 的 NAR 包定义  `Dockerfile` 。
+    如下示例显示了如何使一个用名为 `pulsar-io-example.nar` 的 NAR 包定义 `Dockerfile` 。
 
     ```dockerfile
     # Use pulsar-functions-java-runner since we pack Pulsar Connector written in Java
