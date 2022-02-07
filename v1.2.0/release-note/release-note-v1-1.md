@@ -1,13 +1,13 @@
 ---
-title: Release note V1.1
+title: 版本说明 V1.1
 id: release-note-v1-1
 category: release-note
 ---
-StreamNative Platform 1.1 is now available.
+StreamNative Platform 1.1 现已发布。
 
-# General Changes
+# 一般变更
 
-- Support deploying StreamNative Platform on AWS using [Terraform](https://www.terraform.io/). With this terraform module, you can provision an eks cluster with StreamNative Platform installed. For details,see [Deploy StreamNative Platform on AWS](/operator-guides/deploy/deploy-snp-aws.md).
-- Support generating self-signed or public-signed certificates automatically using [cert-manager](https://cert-manager.io/docs/). For details, see [Enable TLS on StreamNative Platform components](/operator-guides/configure/security/network-encryption/tls-proxy.md).
-- Support enabling TLS with certificates managed by the AWS Certificate Manager (ACM) on the AWS Load Balancer. For details, see [enable TLS on load balancer](/operator-guides/configure/security/network-encryption/tls-load-balancer.md)
-- Support provisioning the domain name to AWS Route53 with the [ExternalDNS](https://github.com/kubernetes-sigs/external-dns).
+- 支持使用 [Terraform](https://www.terraform.io/) 在 AWS 上部署 StreamNative Platform。使用 terraform 模块，可以提供安装了 StreamNative Platform 的 EKS 集群。详情参见[在 AWS 上部署 StreamNative Platform](/operator-guides/deploy/deploy-snp-aws.md)。
+- 支持使用 [cert-manager](https://cert-manager.io/docs/) 自动生成自签名或公共签名证书。详情参见[在 StreamNative Platform 组件上启用 TLS](/operator-guides/configure/security/network-encryption/tls-proxy.md)。
+- 支持在 AWS 负载均衡器上使用由 AWS Certificate Manager（ACM）管理的证书启用 TLS。详情参见[在负载均衡器上启用 TLS](/operator-guides/configure/security/network-encryption/tls-load-balancer.md)。
+- 支持使用 [ExternalDNS](https://github.com/kubernetes-sigs/external-dns) 向 AWS Route53 配置域名。
