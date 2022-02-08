@@ -201,7 +201,7 @@ class ExclamationFunction(Function):
     
     ```
 
-然后，将函数 Docker 镜像推送到镜像 registry（如 [Docker Hub](https://hub.docker.com/)，或任意私有的 registry），并使用函数 Docker 镜像来配置和提交函数提交到 Pulsar 集群。
+然后，将函数 Docker 镜像推送到镜像 registry（如 [Docker Hub](https://hub.docker.com/)，或任意私有的 registry），并使用函数 Docker 镜像来配置和提交函数到 Pulsar 集群。
 
 # 打包 Go 函数
 
