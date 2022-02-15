@@ -409,7 +409,7 @@ Kubernetes Secret 用于存储和管理敏感信息，如密码、token 和密�
 1. 在 Pulsar 的 YAML 配置文件中设置 KoP 参数。
 
     ```
-    # The domain name for accessing KoP outside from the Kuberbetes cluster.
+    # The domain name for accessing KoP outside from the Kubernetes cluster.
     advertisedDomain: "kop.sn.dev"
     kop:
       enabled: true

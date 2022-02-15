@@ -287,7 +287,7 @@ Broker 保存消息而不做任何检查。当消费者消费消息时，如果�
 
 订阅是命名好的配置规则，决定了消息将被如何交付给消费者。在 Pulsar 中，有四种订阅模式可用：[独占（exclusive）](#独占exclusive)、 [共享（shared）](#共享shared)、[灾备（failover）](#灾备failover) 和[键共享（key_shared）](#键共享key_shared)。 
 
-### 独占（exclusive）
+### 独占模式（exclusive）
 
 *独占（exclusive）*模式只允许订阅中有一个消费者。如果多个消费者使用相同的订阅来订阅同一个主题，就会发生错误。
 
@@ -297,7 +297,7 @@ Broker 保存消息而不做任何检查。当消费者消费消息时，如果�
 
 ![Exclusive subscriptions](../../image/pulsar-exclusive-subscriptions.png)
 
-### 灾备（failover）
+### 灾备模式（failover）
 
 在*灾备（failover）*模式下，多个消费者可以共同使用同一个订阅。系统会为非分区主题或每个分区主题选择一个主消费者并接收消息。当主消费者断开连接时，所有（未确认和后续的）消息都被发送给排在主消费者随后的消费者。
 
@@ -309,7 +309,7 @@ Broker 保存消息而不做任何检查。当消费者消费消息时，如果�
 
 ![Failover subscriptions](../../image/pulsar-failover-subscriptions.png)
 
-### 共享（shared）
+### 共享模式（shared）
 
 在*共享（shared）*或*轮询（round robin）*模式下，多个消费者可以附加到同一个订阅上。消息通过轮询（round robin）机制分发给不同的消费者，并且每条消息仅会被分发给一个消费者。当消费者断开连接，所有已经发送给该消费者的未确认消息将被重新分发给剩下的消费者。
 
@@ -323,7 +323,7 @@ Broker 保存消息而不做任何检查。当消费者消费消息时，如果�
 
 ![Shared subscriptions](../../image/pulsar-shared-subscriptions.png)
 
-### 键共享（key_shared）
+### 键共享模式（key_shared）
 
 在*键共享（key_shared）*模式下，多个消费者可以被加到同一个订阅中。消息被分发给多个消费者，有相同 key 的消息、或者有相同排序 key 的消息将只被交付给一个消费者。无论消息被重新传递多少次，它都只能交付给同一个消费者。当消费者进行连接或断开连接时，对于一些消息的 key，消费者将发生改变。
 

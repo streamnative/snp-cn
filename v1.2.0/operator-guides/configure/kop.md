@@ -39,7 +39,7 @@ Kafka on Pulsar（KoP）通过在 Pulsar broker 上引入 Kafka 协议处理程�
 2. 在 Pulsar 的 YAML 配置文件中设置以下内容：
 
     ```
-    # The domain name for accessing KoP outside from the Kuberbetes cluster.
+    # The domain name for accessing KoP outside from the Kubernetes cluster.
     advertisedDomain: "kop.sn.dev"
     kop:
       enabled: true

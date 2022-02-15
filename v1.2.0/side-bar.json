@@ -285,7 +285,7 @@
             {   
               "level": 3,
               "key": "/operator-guides/deploy/sn-deploy.md",
-              "label": "Deploy StreamNative Platform on native Kuberbetes clusters",
+              "label": "Deploy StreamNative Platform on native Kubernetes clusters",
               "path": "/docs/v1.2.0/operator-guides/deploy/sn-deploy",
               "children": [],
               "active": false,

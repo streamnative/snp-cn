@@ -4,7 +4,7 @@ id: connect-kafka-java
 category: user-guides
 ---
 
-StreamNative Platform 通过使用 Kafka on Pulsar（KoP），实现了  Pulsar broker 对原生 Kafka 协议的支持。因此，无需修改代码，就可以直接将现有的 Kafka 应用程序和服务迁移到 Apache Pulsar。
+StreamNative Platform 支持 Kafka on Pulsar（KoP），实现了  Pulsar broker 对原生 Kafka 协议的支持。因此，用户无需修改代码，就可以直接将现有的 Kafka 应用程序和服务迁移到 Apache Pulsar。
 
 本示例说明了如何使用 Kafka Java 客户端连接到 Pulsar 集群，然后向 Pulsar 集群生产和从 Pulsar 集群消费消息。
 

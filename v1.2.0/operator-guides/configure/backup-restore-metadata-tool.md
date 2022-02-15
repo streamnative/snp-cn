@@ -23,21 +23,20 @@ StreamNative Platform 是具有多层架构的分布式消息系统，使用 Apa
 4. 在 `values.yaml` 文件的 ZooKeeper customTools 部分启用备份服务。
 
 	```yaml
-
  	backup:
- 	  component: "backup"
- 	  enable: true
- 	  webServerPort: "8088"
- 	  backupInterval: "600"
- 	  bucket: "s3a://<your-bucket-name>"
- 	  backupPrefix: "pulsar-backup"
- 	  managedLedgerPath: "/managed-ledgers"
- 	  configData:
- 	  secrets:
- 	   	use: true
- 	     aws:
- 	       secretName: "aws-secret"
- 	```
+   	  component: "backup"
+      enable: true
+   	  webServerPort: "8088"
+	  backupInterval: "600"
+      bucket: "s3a://<your-bucket-name>"
+      backupPrefix: "pulsar-backup"
+      managedLedgerPath: "/managed-ledgers"
+      configData:
+      secrets:
+       	use: true
+         aws:
+           secretName: "aws-secret"
+	```
 
 5. 用 `values.yaml` 文件创建集群。
 
@@ -64,19 +63,18 @@ StreamNative Platform 是具有多层架构的分布式消息系统，使用 Apa
 2. 在用于部署集群的 `values.yaml` 文件中的 ZooKeeper customTools 部分启用还原服务。
 
 	```yaml
-
  	restore:
- 	   component: "restore"
- 	   enable: true
- 	   restorePoint: "s3a://<your-bucket-name>/<backup-file>"
- 	   restoreVersion: "1"
- 	   bucket: "s3a://<your-bucket-name>"
- 	   configData:
- 	   secrets:
- 	   	use: true
- 	     aws:
- 	       secretName: "aws-secret"
- 	```
+  	   component: "restore"
+  	   enable: true
+  	   restorePoint: "s3a://<your-bucket-name>/<backup-file>"
+   	   restoreVersion: "1"
+   	   bucket: "s3a://<your-bucket-name>"
+       configData:
+       secrets:
+       	use: true
+         aws:
+           secretName: "aws-secret"
+	```
 
 3. 使用  `values.yaml`  还原集群。
 
