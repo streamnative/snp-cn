@@ -120,10 +120,10 @@ StreamNative Platform 是具有多层架构的分布式消息系统，使用 Apa
 | ---- | ---- | ----------- |
 | backup_count | 计数器 | 正在运行的备份的数量。   |
 | backup_failure_count | 计数器 | 失败的备份数量。|
-| backup_size_non_compressed | 标尺 | 备份文件的大小。|
-| backup_size_compressed | 标尺 | 备份压缩文件的大小。|
-| backup_size_total | 标尺 | 所有备份压缩文件的大小。|
-| backup_execution_time_total | 标尺 | 备份执行过程的时间。|
-| backup_execution_time_prepare | 标尺 | 备份准备过程的时间。|
-| backup_execution_time_compression | 标尺 | 压缩备份文件的时间。|
-| backup_execution_time_upload | 标尺 | 上传备份文件的时间。|
+| backup_size_non_compressed | 仪表盘 | 备份文件的大小。|
+| backup_size_compressed | 仪表盘 | 备份压缩文件的大小。|
+| backup_size_total | 仪表盘 | 所有备份压缩文件的大小。|
+| backup_execution_time_total | 仪表盘 | 备份执行过程的时间。|
+| backup_execution_time_prepare | 仪表盘 | 备份准备过程的时间。|
+| backup_execution_time_compression | 仪表盘 | 压缩备份文件的时间。|
+| backup_execution_time_upload | 仪表盘 | 上传备份文件的时间。|
