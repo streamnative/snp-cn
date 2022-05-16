@@ -84,13 +84,53 @@ category: quickstart
 
     1. 定义 Pulsar 集群的配置文件。
 
-        [点此查看](https://raw.githubusercontent.com/streamnative/examples/master/platform/values_cluster.yaml)配置 Pulsar 集群的 YAML 文件示例。
+        - [点此查看](https://raw.githubusercontent.com/streamnative/examples/master/platform/values_cluster.yaml)配置 Pulsar 集群的 YAML 文件示例。
 
+        - 初次部署，建议使用默认的 `values.yaml`配置，并更改存储部分，其余可保持不变。以最小改动，让集群在当前环境运行起来，稍后可方便的通过 `upgrade` 命令，再根据需求快速扩容。
+        - 在配置存储时，对于公有云可参考对应 StorageClass 创建手册，对于简单测试，可使用 [local-path-provisioner](https://github.com/rancher/local-path-provisioner/tree/master) 实现一个本地的 StorageClass。注意，如果使用了StorageClass，`local_storage`配置需要注释掉，这两个存储配置，只能同时存在一个。
+        - 默认镜像仓库如果在本地因网络限制下载速度较慢，可寻找本地代理源下载。如果阻塞在镜像下载，可反复多次下载。
+    
     2. 使用 YAML 文件部署 Pulsar 集群。
-
+    
         ```
         helm install -f /path/to/pulsar-cluster/file.yaml $RELEASE_NAME streamnative/sn-platform --set initialize=true
+        
+        helm install -f /path/to/pulsar-cluster/file.yaml $RELEASE_NAME streamnative/sn-platform --set initialize=true -n $NAMESPACE --version 1.4.1
         ```
+        - 建议每次安装和升级都显示的增加上版本号，放置误操作升级到最新版本。
+    
+8.  检查 Pulsar 集群
+    
+    使用 `helm list` 查看 chart 信息。
+    
+    ```shell
+     helm list -n $NAMESPACE
+    ```
+    
+    使用 `kubectl get pods` 查看 pods 运行情况。
+    
+    ```shell
+    kubectl get pods -n $NAMESPACE
+    ```
+    
+    使用 `kubectl describe pod` 查看 pod 描述（以其中一个 Zookeeper 节点为例）。
+    
+    ```shell
+    kubectl describe pod $RELEASE_NAME-zookeeper-0 -n $NAMESPACE
+    ```
+
+9.  更新 Pulsar 集群     
+
+    当有新的参数和配置需要应用到集群，可以使用 `helm upgrade` 升级。建议每次更新前先使用 `diff upgrade` 检查更改的配置是否符合预期，待确认且无报错后，再执行 `upgrade` 命令，在集群中生效配置。
+    
+    ```shell
+    # diff upgrade
+    helm diff upgrade -f /path/to/pulsar-cluster/file.yaml $RELEASE_NAME streamnative/sn-platform --set initialize=true -n $NAMESPACE --version 1.4.1 --debug
+    
+    # upgrade
+    helm upgrade -f /path/to/pulsar-cluster/file.yaml $RELEASE_NAME streamnative/sn-platform --set initialize=true -n $NAMESPACE --version 1.4.1 --debug
+    ```
+    
 
 # 步骤 2：创建 Pulsar 租户/命名空间/主题
 
