@@ -18,7 +18,7 @@ category: quickstart
 
 - 安装 Kubernetes 服务器 v1.16 或更高版本。
 - 安装 [kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl) v1.16 或更高版本。
-- 安装 [Helm](https://helm.sh/docs/intro/install/) 3.0 或更高版本。
+- 安装 [Helm](https://helm.sh/docs/intro/install/) 3.0 或更高版本，请注意 Helm 和 Kubernetes 的版本需要强对应，可[参考Helm版本对应策略](https://helm.sh/docs/topics/version_skew/)。
 - 安装 [pulsarctl](https://github.com/streamnative/pulsarctl#install) 2.8.0 或更高版本。
 - 部署一个 Kubernetes 集群。
 
