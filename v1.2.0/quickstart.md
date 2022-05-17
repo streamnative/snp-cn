@@ -18,7 +18,7 @@ category: quickstart
 
 - 安装 Kubernetes 服务器 v1.16 或更高版本。
 - 安装 [kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl) v1.16 或更高版本。
-- 安装 [Helm](https://helm.sh/docs/intro/install/) 3.0 或更高版本。
+- 安装 [Helm](https://helm.sh/docs/intro/install/) 3.0 或更高版本，请注意 Helm 和 Kubernetes 的版本需要强对应，可[参考Helm版本对应策略](https://helm.sh/docs/topics/version_skew/)。
 - 安装 [pulsarctl](https://github.com/streamnative/pulsarctl#install) 2.8.0 或更高版本。
 - 部署一个 Kubernetes 集群。
 
@@ -44,15 +44,21 @@ category: quickstart
     export NAMESPACE=KUBERNETES_NAMESPACE
     ```
 
-3. 安装 Vault operator。
-   
+3. 定义 StreamNative Platform 本次发布的版本名称。后续步骤均会使用这些变量代替真实值，请注意在执行命令时，始终保持环境变量是存在的。
+
+    ```
+    export RELEASE_NAME="sn-platform-poc"
+    ```
+    
+1. 安装 Vault operator。
+
     Vault operator 用于在 Kubernetes 上创建和维护高可用的 Vault 集群。通过使用 Vault operator，用户可以轻松地为应用程序部署和管理 Vault 集群。
 
     ```
     helm upgrade --install vault-operator banzaicloud-stable/vault-operator -n $NAMESPACE
     ```
 
-4. 安装 cert-manager。
+2. 安装 cert-manager。
 
    cert-manager 是本地 [Kubernetes](https://kubernetes.io/) 证书管理控制器。用于从 [HashiCorp Vault](https://www.vaultproject.io/) 发布证书。cert-manager 可以确保证书是有效的和最新的。在设定的时间，cert-manager 会更新证书，以免证书过期。
 
@@ -62,17 +68,17 @@ category: quickstart
     helm upgrade --install cert-manager jetstack/cert-manager -n $NAMESPACE --set installCRDs=true
     ```
 
-5. 安装 Pulsar operator。
-   
+3. 安装 Pulsar operator。
+
    Pulsar operator 用于管理 Pulsar 组件，包括 Pulsar broker、BookKeeper、ZooKeeper 和 Pular proxy。
 
     ```
     helm upgrade --install pulsar-operator streamnative/pulsar-operator -n $NAMESPACE
     ```
 
-6. 安装 Function Mesh operator。
+4. 安装 Function Mesh operator。
 
-    Function Mesh operator 用于配置和管理 Pulsar IO 连接器和 Pulsar Functions。
+   Function Mesh operator 用于配置和管理 Pulsar IO 连接器和 Pulsar Functions。
 
    [Function Mesh](/concepts/functionmesh-concepts.md) 作为无服务器（Serverless）框架，协调多个 [Pulsar Functions](/concepts/pulsar-function-concepts.md) 和 [Pulsar IO 连接器](/concepts/pulsar-io-concepts.md)，以支持流处理应用程序。
 
@@ -80,7 +86,7 @@ category: quickstart
     helm upgrade --install function-mesh streamnative/function-mesh-operator -n $NAMESPACE 
     ```
 
-7.  部署 Pulsar 集群。
+5. 部署 Pulsar 集群。
 
     1. 定义 Pulsar 集群的配置文件。
 
