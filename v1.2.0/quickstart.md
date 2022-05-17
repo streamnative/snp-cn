@@ -44,13 +44,13 @@ category: quickstart
     export NAMESPACE=KUBERNETES_NAMESPACE
     ```
 
-3. 定义 StreamNative Platform 本次发布的版本名称。后续步骤均会使用这些变量代替真实值，请注意在执行命令时，始终保持环境变量是存在的。
+3. 定义 StreamNative Platform 本次发布的版本名称，例如 "sn-platform-poc"。后续步骤均会使用这些变量代替真实值，请注意在执行命令时，始终保持环境变量是存在的。
 
     ```
-    export RELEASE_NAME="sn-platform-poc"
+    export RELEASE_NAME=YOUR_RELEASE_NAME
     ```
-    
-1. 安装 Vault operator。
+
+4. 安装 Vault operator。
 
     Vault operator 用于在 Kubernetes 上创建和维护高可用的 Vault 集群。通过使用 Vault operator，用户可以轻松地为应用程序部署和管理 Vault 集群。
 
@@ -58,7 +58,7 @@ category: quickstart
     helm upgrade --install vault-operator banzaicloud-stable/vault-operator -n $NAMESPACE
     ```
 
-2. 安装 cert-manager。
+5. 安装 cert-manager。
 
    cert-manager 是本地 [Kubernetes](https://kubernetes.io/) 证书管理控制器。用于从 [HashiCorp Vault](https://www.vaultproject.io/) 发布证书。cert-manager 可以确保证书是有效的和最新的。在设定的时间，cert-manager 会更新证书，以免证书过期。
 
@@ -68,7 +68,7 @@ category: quickstart
     helm upgrade --install cert-manager jetstack/cert-manager -n $NAMESPACE --set installCRDs=true
     ```
 
-3. 安装 Pulsar operator。
+6. 安装 Pulsar operator。
 
    Pulsar operator 用于管理 Pulsar 组件，包括 Pulsar broker、BookKeeper、ZooKeeper 和 Pular proxy。
 
@@ -76,7 +76,7 @@ category: quickstart
     helm upgrade --install pulsar-operator streamnative/pulsar-operator -n $NAMESPACE
     ```
 
-4. 安装 Function Mesh operator。
+7. 安装 Function Mesh operator。
 
    Function Mesh operator 用于配置和管理 Pulsar IO 连接器和 Pulsar Functions。
 
@@ -86,17 +86,56 @@ category: quickstart
     helm upgrade --install function-mesh streamnative/function-mesh-operator -n $NAMESPACE 
     ```
 
-5. 部署 Pulsar 集群。
+8. 定义 Pulsar 集群的配置文件。
 
-    1. 定义 Pulsar 集群的配置文件。
+    - Pulsar 使用一个 `values.yaml`文件来配置集群，[点此查看](https://raw.githubusercontent.com/streamnative/examples/master/platform/values_cluster.yaml)官方的示例文件。
 
-        [点此查看](https://raw.githubusercontent.com/streamnative/examples/master/platform/values_cluster.yaml)配置 Pulsar 集群的 YAML 文件示例。
+    - 推荐将官方完整的 repo 下载到项目环境，防止因为网络因素，无法在线下载对应的 helm charts。
+    - 首次部署，推荐先仅修改配置文件中 StorageClass 存储部分，让集群最小化启动起来。之后可根据需求，做对应扩缩容。
+    - 在配置存储时，对于公有云可参考对应 StorageClass 创建手册，对于简单测试，可使用 [local-path-provisioner](https://github.com/rancher/local-path-provisioner/tree/master) 实现一个本地的 StorageClass。注意，如果使用了StorageClass，`local_storage`配置需要设置为 `false`，这两个存储配置，只能同时存在一个。
+    - 官方镜像托管于 Docker Hub，可能会有较大的网络延迟，可尝试反复多次下载。也可从本地化私服仓库中下载。
 
-    2. 使用 YAML 文件部署 Pulsar 集群。
+9. 部署 Pulsar 集群。
 
-        ```
-        helm install -f /path/to/pulsar-cluster/file.yaml $RELEASE_NAME streamnative/sn-platform --set initialize=true
-        ```
+    - 使用 `helm install` 安装集群，如果安装受阻，可能需要使用 `helm uninstall` 彻底清理集群（参考步骤 8）。
+    - 建议每次安装和升级都显示的增加上版本号，防止误操作升级到最新版本。
+
+    ```shell
+    helm install -f /path/to/pulsar-cluster/file.yaml $RELEASE_NAME streamnative/sn-platform --set initialize=true -n $NAMESPACE --version 1.4.1
+    ```
+
+10. 检查 Pulsar 集群
+
+    使用 `helm list` 查看 chart 信息。
+
+    ```shell
+     helm list -n $NAMESPACE
+    ```
+
+    使用 `kubectl get pods` 查看 pods 运行情况。
+
+    ```shell
+    kubectl get pods -n $NAMESPACE
+    ```
+
+    使用 `kubectl describe pod` 查看 pod 描述（以其中一个 Zookeeper 节点为例）。
+
+    ```shell
+    kubectl describe pod $RELEASE_NAME-zookeeper-0 -n $NAMESPACE
+    ```
+
+11. 更新 Pulsar 集群     
+
+     当有新的参数和配置需要应用到集群，可以使用 `helm upgrade` 升级。建议每次升级前，先使用 `diff upgrade` 检查所更改的配置是否符合预期，待确认配置且无报错后，再执行 `upgrade` 命令升级集群。
+
+     ```shell
+     # diff upgrade
+     helm diff upgrade -f /path/to/pulsar-cluster/file.yaml $RELEASE_NAME streamnative/sn-platform --set initialize=true -n $NAMESPACE --version 1.4.1 --debug
+     
+     # upgrade
+     helm upgrade -f /path/to/pulsar-cluster/file.yaml $RELEASE_NAME streamnative/sn-platform --set initialize=true -n $NAMESPACE --version 1.4.1 --debug
+     ```
+
 
 # 步骤 2：创建 Pulsar 租户/命名空间/主题
 
