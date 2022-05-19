@@ -69,9 +69,9 @@ Function Mesh 的 API 建立在现有的 Kubernetes API 之上，因此 Function
 
 可用的 Function Mesh CRD 有：
 
-- [**Function**](/user-guides/admin/work-with-functions/function-functionmesh.md#function-crd)：`Function`  资源对 Pulsar Functions 的整个生命周期进行自动管理。
-- [**Source**](/user-guides/admin/work-with-connectors/connector-functionmesh/connector-crd.md#source-crd-configurations)：`Source`  资源对 Pulsar Source 连接器的整个生命周期进行自动管理。 
-- [**Sink**](/user-guides/admin/work-with-connectors/connector-functionmesh/connector-crd.md#sink-crd-configurations)：`Sink` 资源对 Pulsar Sink 连接器的整个生命周期进行自动管理。 
+- [**Function**](/user-guides/admin/work-with-functions/function-crd.md)：`Function`  资源对 Pulsar Functions 的整个生命周期进行自动管理。
+- [**Source**](/user-guides/admin/work-with-connectors/connector-functionmesh/connector-crd.md#source-crd-配置)：`Source`  资源对 Pulsar Source 连接器的整个生命周期进行自动管理。 
+- [**Sink**](/user-guides/admin/work-with-connectors/connector-functionmesh/connector-crd.md#sink-crd-配置)：`Sink` 资源对 Pulsar Sink 连接器的整个生命周期进行自动管理。 
 - **FunctionMesh**：`FunctionMesh` 资源自动管理事件流应用程序的整个生命周期。**Function Mesh** 自动控制其他对象的创建，确保 Mesh 中定义的 **Function** 和**连接器**正常运行，并且由定义的**流**进行连接。 
 
 # Function Mesh 如何运行

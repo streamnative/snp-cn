@@ -78,7 +78,7 @@ category: operator-guides
 
 ## 配置本地 PV 和存储类
 
-如果你部署了一个本地的 Kubernetes 集群，则需要配置本地 PV 和存储类，实现数据持久化本地存储。详情参见[本地 PV 和存储类](/operator-guides/configure/storage.md#local-pvs-and-storage-classes)。
+如果你部署了一个本地的 Kubernetes 集群，则需要配置本地 PV 和存储类，实现数据持久化本地存储。详情参见[本地 PV 和存储类](/operator-guides/configure/storage.md#本地-pv-和存储类)。
 
 # Docker Registry
 
