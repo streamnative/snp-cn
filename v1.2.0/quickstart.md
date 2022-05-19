@@ -26,7 +26,7 @@ category: quickstart
 
 > **注意**
 >
-> 本步骤使用 operator 的原始镜像。如要使用自定义镜像安装 StreamNative Platform，请参阅[使用自定义镜像安装 StreamNative Platform]（/operator-guides/deploy/sn-deploy.md#使用自定义镜像安装-streamnative-platform）。
+> 本步骤使用 operator 的原始镜像。如要使用自定义镜像安装 StreamNative Platform，请参阅[使用自定义镜像安装 StreamNative Platform](/operator-guides/deploy/sn-deploy.md#使用自定义镜像安装-streamnative-platform)。
 
 1. 安装 StreamNative 仓库。
 
