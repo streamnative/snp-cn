@@ -12,7 +12,7 @@ StreamNative Platform 不会向你的 Pulsar 集群暴露任何外部 IP 地址�
 
 * 获取服务帐户的 token。
 
-  1. 在 StreamNative 控制台的左侧导航窗格中，单击**服务账户**。
+  1. 在 StreamNative 控制台的左侧导航窗格中，点击**服务账户**。
 
   2. 点击 **Token** 列中的**复制**图标，将 token 复制到本地目录。
 

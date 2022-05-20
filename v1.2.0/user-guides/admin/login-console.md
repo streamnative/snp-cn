@@ -10,7 +10,7 @@ StreamNative 控制台是基于 Web 的图形界面管理和监控工具，可�
 
 # 使用用户名和密码登录 StreamNative 控制台
 
-按照如下步骤登陆 StreamNative 控制台：
+按照如下步骤登录 StreamNative 控制台：
 
 1. 执行以下命令将 StreamNative 控制台服务暴露给 localhost 地址。
 
@@ -56,7 +56,7 @@ StreamNative 控制台是基于 Web 的图形界面管理和监控工具，可�
 
 5. 输入你的密码，然后点击**下一步**。
 
-6. （可选）如果启用了双因素身份验证（2FA），则要输入验证码，然后单击**下一步**。
+6. （可选）如果启用了双因素身份验证（2FA），则要输入验证码，然后点击**下一步**。
 
    ![](../../../image/verification-code.png)
 

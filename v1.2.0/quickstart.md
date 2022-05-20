@@ -26,7 +26,7 @@ category: quickstart
 
 > **注意**
 >
-> 本步骤使用 operator 的原始镜像。如要使用自定义镜像安装 StreamNative Platform，请参阅[使用自定义镜像安装 StreamNative Platform]（/operator-guides/deploy/sn-deploy.md#install-streamnative-platform-using-customized-images）。
+> 本步骤使用 operator 的原始镜像。如要使用自定义镜像安装 StreamNative Platform，请参阅[使用自定义镜像安装 StreamNative Platform](/operator-guides/deploy/sn-deploy.md#使用自定义镜像安装-streamnative-platform)。
 
 1. 安装 StreamNative 仓库。
 
@@ -88,23 +88,23 @@ category: quickstart
 
 8. 定义 Pulsar 集群的配置文件。
 
-    - Pulsar 使用一个 `values.yaml`文件来配置集群，[点此查看](https://raw.githubusercontent.com/streamnative/examples/master/platform/values_cluster.yaml)官方的示例文件。
+    - Pulsar 使用一个 `values.yaml` 文件来配置集群，[点此查看](https://raw.githubusercontent.com/streamnative/examples/master/platform/values_cluster.yaml)官方的示例文件。
 
     - 推荐将官方完整的 repo 下载到项目环境，防止因为网络因素，无法在线下载对应的 helm charts。
     - 首次部署，推荐先仅修改配置文件中 StorageClass 存储部分，让集群最小化启动起来。之后可根据需求，做对应扩缩容。
-    - 在配置存储时，对于公有云可参考对应 StorageClass 创建手册，对于简单测试，可使用 [local-path-provisioner](https://github.com/rancher/local-path-provisioner/tree/master) 实现一个本地的 StorageClass。注意，如果使用了StorageClass，`local_storage`配置需要设置为 `false`，这两个存储配置，只能同时存在一个。
+    - 在配置存储时，对于公有云可参考对应 StorageClass 创建手册，对于简单测试，可使用 [local-path-provisioner](https://github.com/rancher/local-path-provisioner/tree/master) 实现一个本地的 StorageClass。注意，如果使用了StorageClass，`local_storage` 配置需要设置为 `false`，这两个存储配置，只能同时存在一个。
     - 官方镜像托管于 Docker Hub，可能会有较大的网络延迟，可尝试反复多次下载。也可从本地化私服仓库中下载。
 
 9. 部署 Pulsar 集群。
 
-    - 使用 `helm install` 安装集群，如果安装受阻，可能需要使用 `helm uninstall` 彻底清理集群（参考步骤 8）。
+    - 使用 `helm install` 安装集群，如果安装受阻，可能需要使用 `helm uninstall` 彻底清理集群（参考[步骤 8](#步骤-8卸载)）。
     - 建议每次安装和升级都显示的增加上版本号，防止误操作升级到最新版本。
 
     ```shell
     helm install -f /path/to/pulsar-cluster/file.yaml $RELEASE_NAME streamnative/sn-platform --set initialize=true -n $NAMESPACE --version 1.4.1
     ```
 
-10. 检查 Pulsar 集群
+10. 检查 Pulsar 集群。
 
     使用 `helm list` 查看 chart 信息。
 
@@ -118,13 +118,13 @@ category: quickstart
     kubectl get pods -n $NAMESPACE
     ```
 
-    使用 `kubectl describe pod` 查看 pod 描述（以其中一个 Zookeeper 节点为例）。
+    使用 `kubectl describe pod` 查看 pod 描述（以其中一个 ZooKeeper 节点为例）。
 
     ```shell
     kubectl describe pod $RELEASE_NAME-zookeeper-0 -n $NAMESPACE
     ```
 
-11. 更新 Pulsar 集群     
+11. 更新 Pulsar 集群。     
 
      当有新的参数和配置需要应用到集群，可以使用 `helm upgrade` 升级。建议每次升级前，先使用 `diff upgrade` 检查所更改的配置是否符合预期，待确认配置且无报错后，再执行 `upgrade` 命令升级集群。
 
@@ -383,7 +383,7 @@ StreamNative 控制台是基于 Web 的图形化界面（GUI）管理工具，�
 
 1. 登录 StreamNative 控制台。详情请参见[此处](/user-guides/admin/login-console.md)。
 
-2. 创建租户。关于 StreamNative 控制台中租户相关操作的完整列表，请参见[此处](/user-guides/admin/work-with-tenants.md#work-with-tenants-using-streamnative-console)。
+2. 创建租户。关于 StreamNative 控制台中租户相关操作的完整列表，请参见[此处](/user-guides/admin/work-with-tenants.md#使用-streamnative-控制台操作租户)。
 
    1. 从左边的导航窗格，点击**租户**。
 
@@ -391,7 +391,7 @@ StreamNative 控制台是基于 Web 的图形化界面（GUI）管理工具，�
 
    3. 配置租户，然后点击**确定**。
 
-3. 创建命名空间。关于 StreamNative 控制台中命名空间相关操作的完整列表，请参见[此处](/user-guides/admin/work-with-namespaces.md#work-with-namespaces-using-streamnative-console)。
+3. 创建命名空间。关于 StreamNative 控制台中命名空间相关操作的完整列表，请参见[此处](/user-guides/admin/work-with-namespaces.md#使用-streamnative-控制台操作命名空间)。
 
    1. 从左边的导航窗格，点击**命名空间**。
 
@@ -399,7 +399,7 @@ StreamNative 控制台是基于 Web 的图形化界面（GUI）管理工具，�
 
    3. 为命名空间输入一个名称，然后点击**确定**。命名空间的名称最多包含 40 个字符，支持小写字母（a-z），数字字符（0-9），以及特殊字符连字符（-）。
 
-4. 创建主题。关于 StreamNative 控制台中主题相关操作的完整列表，请参见[此处](/user-guides/admin/work-with-topics.md#work-with-topics-using-streamnative-console)。
+4. 创建主题。关于 StreamNative 控制台中主题相关操作的完整列表，请参见[此处](/user-guides/admin/work-with-topics.md#使用-streamnative-控制台操作主题)。
 
    1. 从左边的导航窗格，点击**主题**。
 
